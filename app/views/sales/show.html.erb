@@ -84,8 +84,8 @@
                   </table>
                 </div>
                 <div class="button-list pull-right">
-                  <%=link_to "Cancel", sales_path, class: "btn btn-orange mr-10"%>
-                  <button type="button" class="btn btn-default btn-outline btn-icon left-icon" onclick="javascript:window.print();">
+                  <%=link_to "Cancel", sales_path, class: "btn btn-orange mr-10", id: "cancel"%>
+                  <button type="button" id="print" class="btn btn-default btn-outline btn-icon left-icon" onclick="javascript:window.print();">
                     <i class="fa fa-print"></i>
                     <span>
                       Print</span>

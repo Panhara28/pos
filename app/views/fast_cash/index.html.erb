@@ -23,14 +23,14 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="recipient-name" class="control-label mb-10">USD</label>
-                    <%=f.number_field :usd, as: :float, class: "form-control", placeholder: "USD $", value: 0%>
+                    <%=f.number_field :usd, as: :float, class: "form-control", placeholder: "USD $", value: 0.0%>
                   </div>
                 </div>
 
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="recipient-name" class="control-label mb-10">Riel</label>
-                    <%=f.number_field :riel, as: :float, class: "form-control", placeholder: "Riel ៛", value: 0%>
+                    <%=f.number_field :riel, as: :float, class: "form-control", placeholder: "Riel ៛", value: 0.0%>
                   </div>
                 </div>
               </div>
@@ -38,6 +38,7 @@
             <%end%>
 
             <%= link_to "Accept", sales_path, class: 'btn btn-success' %>
+            <%= link_to "Reset", set_cash_path(cash: 0), method: 'post', class: 'btn btn-danger'%>
           </div>
         </div>
       </div>
@@ -253,6 +254,7 @@
 <%=render "jquery"%>
 <script>
   $(document).ready(function(){
+
     $('#cash_usd').on('change', function() {
       console.log($('#cash_usd').val());
       usd = $('#cash_usd').val();
