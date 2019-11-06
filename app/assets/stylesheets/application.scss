@@ -16,6 +16,7 @@
  *= require tether
  */
  @media print {
+
   /* styles go here */
   #cancel, #print{
     display: none;
@@ -23,6 +24,19 @@
   @page {
     size: auto;   /* auto is the current printer page size */
     margin: 0mm;  /* this affects the margin in the printer settings */
+  }
+
+  footer{
+    display: none;
+  }
+
+  .panel{
+    width: 100mm;
+  }
+
+  td{
+    width: 75mm;
+    max-width: 75mm;
   }
 
  }
