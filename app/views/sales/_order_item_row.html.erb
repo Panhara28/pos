@@ -49,6 +49,17 @@
     </div>
   <div class="row">
       <div class="col-sm-12" style="margin-top:40px;">
+        <%if @order_items.last.order.cash == 0%>
+          <p>
+            <label for="" class="lable-order"><%= t('.Customer Riel Cast') %>: </label>
+            <%= number_to_currency @order_items.last.order.cash_in_riel , precision: 2 %>
+          </p>
+        <%else%>
+          <p>
+            <label for="" class="lable-order"><%= t('.Customer Riel Cast') %>: </label>
+            <%= number_to_currency @order_items.last.order.cash , precision: 2 %>
+          </p>
+        <%end%>
         <p>
           <label for="" class="lable-order"><%= t('.subtotal') %>: </label>
           <%= number_to_currency @order_items.last.order.subtotal, precision: 2 %>
@@ -71,16 +82,23 @@
 
         <% if @order_items.last.order.total_cash_in_riel > 0 %>
           <p>
-            <label for="" class="lable-order">  <%= t('.change') %>: </label>
+            <label for="" class="lable-order">  <%= t('.change_dollar') %>: </label>
             <%= number_to_currency ((@order_items.last.order.total_cash_in_riel / Constant::exchange_rate) - @order_items.last.order.total), precision: 2 %>
           </p>
+        <% end %>
 
+        <%if @order_items.last.order.cash_in_riel == 0%>
           <p>
             <label for="" class="lable-order"><%= t('.change_riel') %>: </label>
-
+            <%= "#{(@order_items.last.order.total_cash_in_riel - (@order_items.last.order.total * Constant.exchange_rate)) / 4100 * 4000 }"%>
+          </p>
+        <%else%>
+          <p>
+            <label for="" class="lable-order"><%= t('.change_riel') %>: </label>
             <%= "#{(@order_items.last.order.total_cash_in_riel - (@order_items.last.order.total * Constant.exchange_rate)) }"%>
           </p>
-        <% end %>
+        <%end%>
+
           <p>
             <label for="" class="lable-order">  <%= t('.grand_total') %>: </label>
             <%= number_to_currency @order_items.last.order.total, precision: 1 %>
