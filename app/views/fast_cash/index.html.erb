@@ -38,7 +38,7 @@
             <%end%>
 
             <%= link_to "Accept", sales_path, class: 'btn btn-success' %>
-            <%= link_to "Reset", set_cash_path(cash: 0), method: 'post', class: 'btn btn-danger'%>
+            <%= link_to "Reset", set_cash_path(cash: 0, cash_in_riel: 0, total_cash_in_riel: 0), method: 'post', class: 'btn btn-danger'%>
           </div>
         </div>
       </div>

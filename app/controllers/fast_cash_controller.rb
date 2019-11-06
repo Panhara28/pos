@@ -5,8 +5,8 @@ class FastCashController < ApplicationController
   end
 
   def set_cash
-    if params[:cash].to_i == 0 && params[:cash_in_riel] == 0
-      current_order.update(cash_in_riel: 0.0, cash: 0.0)
+    if params[:cash].to_i == 0 && params[:cash_in_riel].to_i == 0
+      current_order.update(cash_in_riel: 0.0, cash: 0.0, total_cash_in_riel: 0.0)
       redirect_to sales_path
     else
       if params[:cash].to_i > 100

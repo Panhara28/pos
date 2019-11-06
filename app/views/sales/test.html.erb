@@ -1,153 +1,131 @@
-<div class="container">
-  <% if !@orders.present? %>
-    <h5>
-      <%= t('.empty_sale_items') %>
-    </h5>
-  <% else %>
-    <h5>
-      <%= t('.sale_items') %>
-      &#58;
-      <%= @orders.count %>
-    </h5>
-    <h5>
-      <%= "#{t('.sum_total')} : #{​​ = number_to_currency @orders.sum(:total)}"%>
-    </h5>
-    <ul class="collapsible" data-collapsible="accordion">
-      <% @orders.each do |order| %>
-        <li>
-          <div class="collapsible-header">
-            <table>
-              <tbody>
-                <tr>
-                  <th>
-                    <%= t('.invoice_no') %>
-                  </th>
-                  <th>
-                    <%= t('.order_date') %>
-                  </th>
-                  <th>
-                    <%= t('.order_time') %>
-                  </th>
-                  <th>
-                    <%= t('.checkout_date') %>
-                  </th>
-                  <th>
-                    <%= t('.checkout_time') %>
-                  </th>
-                  <th>
-                    <%= t('.subtotal') %>
-                  </th>
-                  <th>
-                    <%= t('.tax') %>
-                  </th>
-                  <th>
-                    <%= t('.shipping') %>
-                  </th>
-                  <th>
-                    <%= t('.discount') %>
-                  </th>
-                  <th>
-                    <%= t('.total') %>
-                  </th>
-                  <th>
-                    <%= t('.customer_name') %>
-                  </th>
-                </tr>
-              </tbody>
-              <tbody>
-                <tr>
-                  <td>
-                    <%= '%09d' % order.id %>
-                  </td>
-                  <td>
-                    <%= order.order_date %>
-                  </td>
-                  <td>
-                    <%= order.order_time.to_s(:time) %>
-                  </td>
-                  <td>
-                    <%= order.checkout_date %>
-                  </td>
-                  <td>
-                    <%= order.checkout_time.to_s(:time) if order.checkout_time.present? %>
-                  </td>
-                  <td>
-                    <%= number_to_currency order.subtotal %>
-                  </td>
-                  <td>
-                    <%= number_to_currency order.tax %>
-                  </td>
-                  <td>
-                    <%= number_to_currency order.shipping %>
-                  </td>
-                  <td>
-                    <%= number_to_percentage order.discount %>
-                  </td>
-                  <td>
-                    <%= number_to_currency order.total %>
-                  </td>
-                  <td>
-                    <%= order.customer.customer_name %>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="collapsible-body">
-            <table class="bordered">
-              <thead>
-                <tr>
-                  <th>
-                    <%= t('.product_name') %>
-                  </th>
-                  <th>
-                    <%= t('.unit_price') %>
-                  </th>
-                  <th>
-                    <%= t('.quantity') %>
-                  </th>
-                  <th>
-                    <%= t('.subtotal') %>
-                  </th>
-                  <th>
-                    <%= t('.discount') %>
-                  </th>
-                  <th>
-                    <%= t('.total_price') %>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <% order.order_items.each do |order_item| %>
-                  <tr>
-                    <td>
-                      <%= order_item.product.product_name %>
-                    </td>
-                    <td>
-                      <%= number_to_currency order_item.unit_price %>
-                    </td>
-                    <td>
-                      <%= order_item.quantity %>
-                    </td>
-                    <td>
-                      <%= number_to_currency order_item.subtotal %>
-                    </td>
-                    <td>
-                      <%= number_to_percentage order_item.discount %>
-                    </td>
-                    <td>
-                      <%= number_to_currency order_item.total_price %>
-                    </td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-        </li>
+<div class="table-responsive">
+  <table class="table mb-0">
+    <thead>
+      <tr>
+        <th>Qty</th>
+        <th>Product Name</th>
+        <th>Price</th>
+        <th>Discount</th>
+        <th>Total Price</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @order_items.each do |order_item| %>
+      <tr>
+        <td><%= order_item.quantity %>x</td>
+        <td><%= order_item.product.product_name %></td>
+        <td><%= number_to_currency order_item.unit_price, precision: 2 %></td>
+        <td><%= "- #{number_to_percentage order_item.discount, precision: 2}" %></td>
+        <td>
+          <%= number_to_currency order_item.total_price, precision: 2 %>
+        </td>
+        <td>
+          <%= link_to edit_order_item_path(order_item), data: { turbolinks: false } do %>
+            <i class="fa fa-pencil"></i>
+            <% end %>
+          <%= link_to sales_order_item_destroy_path(order_item), class: '', data: { turbolinks: false }, method: :delete, remote: true do %>
+            <i class="fa fa-trash-o"></i>
+          <% end %>
+        </td>
+      </tr>
+      <%end%>
+    </tbody>
+  </table>
+</div>
+
+<div class="row">
+  <div class="col-sm-12" style="margin-top:40px;">
+    <%if @order_items.last.order.cash == 0%>
+      <p>
+        <label for="" class="lable-order"><%= t('.Customer Riel Cast') %>:
+        </label>
+        <%= number_to_currency @order_items.last.order.cash_in_riel , precision: 2 %>
+      </p>
+    <%else%>
+      <p>
+        <label for="" class="lable-order"><%= t('.Customer Riel Cast') %>:
+        </label>
+        <%= number_to_currency @order_items.last.order.cash , precision: 2 %>
+      </p>
+    <%end%>
+    <p>
+      <label for="" class="lable-order"><%= t('.subtotal') %>:
+      </label>
+      <%= number_to_currency @order_items.last.order.subtotal, precision: 2 %>
+    </p>
+
+    <p>
+      <label for="" class="lable-order"><%= t('.tax') %>:
+      </label>
+      <%= number_to_currency @order_items.last.order.tax, precision: 2 %>
+    </p>
+
+    <p>
+      <label for="" class="lable-order"><%= t('.shipping') %>:
+      </label>
+      <%= number_to_currency @order_items.last.order.shipping, precision: 2 %>
+    </p>
+
+    <p>
+      <label for="" class="lable-order"><%= t('.discount') %>:
+      </label>
+      <%= number_to_percentage @order_items.last.order.discount, precision: 2 %>
+    </p>
+
+    <% if @order_items.last.order.total_cash_in_riel > 0 %>
+      <p>
+        <label for="" class="lable-order">
+          <%= t('.change_dollar') %>:
+        </label>
+        <%= number_to_currency ((@order_items.last.order.total_cash_in_riel / Constant::exchange_rate) - @order_items.last.order.total), precision: 2 %>
+      </p>
+    <% end %>
+
+    <%if @order_items.last.order.cash_in_riel == 0 && @order_items.last.order.cash == 0%>
+      <p>
+        <label for="" class="lable-order"><%= t('.change_riel') %>:
+        </label>
+        <%= "#{0}"%>
+      </p>
+    <%else%>
+      <%if @order_items.last.order.cash_in_riel == 0%>
+        <p>
+          <label for="" class="lable-order"><%= t('.change_riel') %>:
+          </label>
+          <%= "#{(@order_items.last.order.total_cash_in_riel - (@order_items.last.order.total * Constant.exchange_rate)) / 4100 * 4000 }"%>
+        </p>
+        <%else@order_items.last.order.cash == 0%>
+          <p>
+            <label for="" class="lable-order"><%= t('.change_riel') %>:
+            </label>
+            <%= "#{(@order_items.last.order.total_cash_in_riel - (@order_items.last.order.total * Constant.exchange_rate)) }"%>
+          </p>
+        <%end%>
+      <%end%>
+
+      <p>
+        <label for="" class="lable-order">
+          <%= t('.grand_total') %>:
+        </label>
+        <%= number_to_currency @order_items.last.order.total, precision: 1 %>
+      </p>
+
+      <p>
+        <label for="" class="lable-order"><%= t('.grand_total_riel') %>:
+        </label>
+        <%= "#{@order_items.last.order.total * Constant.exchange_rate}"%>
+      </p>
+      <div style="margin-top: 20px;">
+        <%= link_to edit_order_path(@order_items.last.order.id, redirect: 'sales'), class: 'btn btn-default', data: { turbolinks: false } do %>
+        <i class="">settings</i>
       <% end %>
-    </ul>
-    <div id="paginate">
-      <%= will_paginate @orders, renderer: MaterializePagination::Rails %>
-    </div>
-  <% end %>
+
+      <%= link_to "checkout", sale_path(@order_items.last.order), class: 'btn btn-default' %>
+
+      <%= link_to fast_cash_index_path(order_id: @order_items.last.order.id, redirect: 'sales'), class: 'btn btn-default', data: { turbolinks: false } do %>
+      <i class="material-icons white-text text-darken-4">Fast Cash</i>
+    <% end %>
+  </div>
+</div>
 </div>
