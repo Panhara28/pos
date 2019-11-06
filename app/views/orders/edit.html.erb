@@ -1,0 +1,108 @@
+<!-- Main Content -->
+<div class="page-wrapper">
+  <div class="container pt-30">
+    <div class="row">
+      <div class="col-md-9">
+        <div class="panel panel-success card-view">
+          <div class="panel-heading">
+            <div class="pull-left">
+              <h6 class="panel-title txt-light">Edit Product</h6>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="panel-wrapper collapse in">
+            <div class="panel-body">
+              <%= simple_form_for @order do |f| %>
+              <% if @order.errors.any? %>
+              <div id="error_explanation">
+                <h4>
+                  <%= pluralize(@order.errors.count, "error") %>
+                  prohibited this cash drawer from being saved:
+                </h4>
+                <ul>
+                  <% @order.errors.full_messages.each do |message| %>
+                    <li>
+                      <%= message %>
+                    </li>
+                  <% end %>
+                </ul>
+              </div>
+              <% end %>
+              <div class="row">
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="recipient-name" class="control-label mb-10">Order Name</label>
+                    <%= f.text_field :order_name, class: "form-control" %>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="recipient-name" class="control-label mb-10">Order Date</label>
+                    <%= f.text_field :order_date, :class => 'form-control', placeholder: "Choose order date", disabled: true %>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="recipient-name" class="control-label mb-10">Order Time</label>
+                    <%= f.text_field :order_time, :as => :string, :value => time_format(f.object.order_time), :class => 'form-control', label: false, placeholder: "Choose order time", disabled: true %>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="recipient-name" class="control-label mb-10">Tax</label>
+                    <%=f.number_field :tax, class: "form-control"%>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="recipient-name" class="control-label mb-10">Shipping</label>
+                    <%=f.number_field :shipping, class: "form-control"%>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="recipient-name" class="control-label mb-10">Discount</label>
+                    <%=f.number_field :discount, class: "form-control"%>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="recipient-name" class="control-label mb-10">Customer</label>
+                    <%=f.collection_select :customer_id, Customer.all, :id, :customer_name, { prompt: "Select Customer" } , {class: "form-control select2"}%>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="recipient-name" class="control-label mb-10">Table</label>
+                    <%=f.collection_select :seat_table_id, SeatTable.all, :id, :table_number, { prompt: "Select Table" } , {class: "form-control select2"}%>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="modal-footer">
+                    <%=f.submit class: "btn btn-success"%>
+                  </div>
+                </div>
+              </div>
+
+            <%end%>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%=render "applications/footer"%>
+
+</div>
+<!-- /Main Content -->

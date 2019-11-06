@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Point Of Sale</title>
+    <%= csrf_meta_tags %>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta content="Admin Dashboard" name="description" />
+    <meta content="Themesbrand" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+  </head>
+
+  <body>
+      <div id="preloader">
+        <div id="status">
+          <div class="spinner"></div>
+        </div>
+      </div>
+      <%if admin_signed_in?%>
+        <div class="wrapper theme-2-active navbar-top-light horizontal-nav">
+          <%=render "components/nav"%>
+          <%=render "components/setting"%>
+      <%end%>
+        <%= yield %>
+
+
+      </div>
+      <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+      <%=custom_flash_message%>
+
+    <script type="text/javascript">
+
+      $(document).ready(function(){
+        $('.file-upload').hide();
+        $('#file-upload1').show();
+        $('#file-upload2').show();
+        $('.reveal-file').click(function(event) {
+          $('#file-upload2').show();
+          $(this).click(function(event) {
+            $('#file-upload3').show();
+            $(this).hide();
+          })
+        })
+
+
+        $('.image-box').click(function(event) {
+        var imgg = $(this).children('img');
+        $(this).siblings().children("input").trigger('click');
+
+        $(this).siblings().children("input").change(function() {
+          var reader = new FileReader();
+
+          reader.onload = function (e) {
+            var urll = e.target.result;
+            $(imgg).attr('src', urll);
+            imgg.parent().css('background','transparent');
+            imgg.show();
+            imgg.siblings('p').hide();
+
+          }
+          reader.readAsDataURL(this.files[0]);
+        });
+        });
+
+      });
+    </script>
+  </body>
+</html>

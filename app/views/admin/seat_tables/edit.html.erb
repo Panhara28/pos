@@ -1,0 +1,9 @@
+<h5 class="title" style="padding-left: 10px;">#{t('.edit_seat_table')}</h5>
+<%= render "form" %>
+<div class="row">
+  <div class="col s6">
+    <%= link_to "#{t('.show')}", admin_seat_table_path(@seat_table), :class => "waves-effect" %>
+    |
+    <%= link_to "#{t('.back')}", admin_admin_seat_tables_path(current_admin), :class => "waves-effect" %>
+  </div>
+</div>

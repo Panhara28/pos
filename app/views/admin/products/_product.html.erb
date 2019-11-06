@@ -1,0 +1,29 @@
+<tr class="delete_product_<%=product.id%>">
+
+  <td>
+    <%= product.product_name%>
+  </td>
+
+  <td>
+    <%=number_to_currency(product.product_price)%>
+  </td>
+
+  <td>
+    <%=product.product_no%>
+  </td>
+
+  <td>
+    <%=time_ago(product.created_at)%>
+  </td>
+
+  <td>
+    <%=form_for([:admin, product], remote: true) do |f|%>
+      <%=link_to admin_product_path(product), email: "View" do %>
+        View
+      <%end%>
+      <%=link_to edit_admin_product_path(product), email: "Edit",id: "show-form_#{product.id}" do %>
+        Edit
+      <%end%>
+    <%end%>
+  </td>
+</tr>

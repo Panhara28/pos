@@ -1,0 +1,67 @@
+class SalesController < ApplicationController
+
+  before_action :authenticate_user!
+
+  def index
+    # session.delete("order_id#{current_user.id}")
+    @categories = Category.order(id: :asc)
+    session[:order_count] = current_user.orders.where('is_paid=? AND order_date=? AND order_status=?', false, DateTime.now.to_date, 'order').count
+    session[:sale_count] = current_user.orders.where('is_paid=? AND order_date=?', true, DateTime.now.to_date).count
+    if params[:order_id].present?
+       session["order_id#{current_user.id}"] = params[:order_id]
+       @order_items = Order.unpaid_order.find(params[:order_id]).order_items
+    end
+
+    if params[:customer_id].present?
+      current_order.update(customer_id: params[:customer_id])
+      session["customer_id#{current_user.id}"] = params[:customer_id]
+    end
+    @order_items = Order.unpaid_order.find(session["order_id#{current_user.id}"]).order_items if session["order_id#{current_user.id}"].present?
+    @products = Category.find(session["category_id#{current_user.id}"]).products if session["category_id#{current_user.id}"].present?
+  end
+
+  def product
+    @products = Category.find(params[:category_id]).products.order('product_name')
+    session["category_id#{current_user.id}"] = params[:category_id] if params[:category_id].present?
+  end
+
+  def order_item
+    @order = current_order
+    @order.order_date = DateTime.now.to_date
+    @order.order_time = DateTime.now.to_s(:time)
+    @order.waitting_no = Order.where(order_date: DateTime.now.to_date).order('id').pluck(:waitting_no).last.to_i + 1 if @order.waitting_no.nil?
+    @order.user_id = current_user.id
+    if session["customer_id#{current_user.id}"].present?
+       @order.customer_id = session["customer_id#{current_user.id}"]
+    else
+      @order.customer_id = 1
+    end
+    @order_item = @order.order_items.new
+    @order_item.product_id = params[:product_id]
+    @order_item.quantity = params[:quantity]
+    @order_item.save
+    if @order.save
+      session["order_id#{current_user.id}"] = @order.id
+      @order_items = Order.find(session["order_id#{current_user.id}"]).order_items
+    end
+  end
+
+  def order_item_destroy
+    @order = current_order
+    @order_item = @order.order_items.find(params[:id])
+    @order_item.destroy
+    @order_items = @order.order_items
+
+    respond_to do |format|
+      format.js { render :order_item }
+    end
+  end
+
+  def show
+    @order = Order.find(params[:id])
+    @order.update(is_paid: true, user_id: current_user.id, checkout_date: Date.today, checkout_time: Time.now.strftime("%H:%M:%S"))
+    session.delete("order_id#{current_user.id}")
+    session.delete("customer_id#{current_user.id}")
+  end
+
+end

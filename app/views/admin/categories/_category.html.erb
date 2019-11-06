@@ -1,0 +1,21 @@
+<tr class="delete_category_<%=category.id%>">
+
+  <td>
+    <%= category.category_name%>
+  </td>
+
+  <td>
+    <%=time_ago(category.created_at)%>
+  </td>
+
+  <td>
+    <%=form_for([:admin, category], remote: true) do |f|%>
+      <%=link_to admin_category_path(category), email: "View" do %>
+        View
+      <%end%>
+      <%=link_to edit_admin_category_path(category), email: "Edit",id: "show-form_#{category.id}" do %>
+        Edit
+      <%end%>
+    <%end%>
+  </td>
+</tr>

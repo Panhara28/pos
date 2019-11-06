@@ -1,0 +1,153 @@
+<div class="container">
+  <% if !@orders.present? %>
+    <h5>
+      <%= t('.empty_sale_items') %>
+    </h5>
+  <% else %>
+    <h5>
+      <%= t('.sale_items') %>
+      &#58;
+      <%= @orders.count %>
+    </h5>
+    <h5>
+      <%= "#{t('.sum_total')} : #{​​ = number_to_currency @orders.sum(:total)}"%>
+    </h5>
+    <ul class="collapsible" data-collapsible="accordion">
+      <% @orders.each do |order| %>
+        <li>
+          <div class="collapsible-header">
+            <table>
+              <tbody>
+                <tr>
+                  <th>
+                    <%= t('.invoice_no') %>
+                  </th>
+                  <th>
+                    <%= t('.order_date') %>
+                  </th>
+                  <th>
+                    <%= t('.order_time') %>
+                  </th>
+                  <th>
+                    <%= t('.checkout_date') %>
+                  </th>
+                  <th>
+                    <%= t('.checkout_time') %>
+                  </th>
+                  <th>
+                    <%= t('.subtotal') %>
+                  </th>
+                  <th>
+                    <%= t('.tax') %>
+                  </th>
+                  <th>
+                    <%= t('.shipping') %>
+                  </th>
+                  <th>
+                    <%= t('.discount') %>
+                  </th>
+                  <th>
+                    <%= t('.total') %>
+                  </th>
+                  <th>
+                    <%= t('.customer_name') %>
+                  </th>
+                </tr>
+              </tbody>
+              <tbody>
+                <tr>
+                  <td>
+                    <%= '%09d' % order.id %>
+                  </td>
+                  <td>
+                    <%= order.order_date %>
+                  </td>
+                  <td>
+                    <%= order.order_time.to_s(:time) %>
+                  </td>
+                  <td>
+                    <%= order.checkout_date %>
+                  </td>
+                  <td>
+                    <%= order.checkout_time.to_s(:time) if order.checkout_time.present? %>
+                  </td>
+                  <td>
+                    <%= number_to_currency order.subtotal %>
+                  </td>
+                  <td>
+                    <%= number_to_currency order.tax %>
+                  </td>
+                  <td>
+                    <%= number_to_currency order.shipping %>
+                  </td>
+                  <td>
+                    <%= number_to_percentage order.discount %>
+                  </td>
+                  <td>
+                    <%= number_to_currency order.total %>
+                  </td>
+                  <td>
+                    <%= order.customer.customer_name %>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="collapsible-body">
+            <table class="bordered">
+              <thead>
+                <tr>
+                  <th>
+                    <%= t('.product_name') %>
+                  </th>
+                  <th>
+                    <%= t('.unit_price') %>
+                  </th>
+                  <th>
+                    <%= t('.quantity') %>
+                  </th>
+                  <th>
+                    <%= t('.subtotal') %>
+                  </th>
+                  <th>
+                    <%= t('.discount') %>
+                  </th>
+                  <th>
+                    <%= t('.total_price') %>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <% order.order_items.each do |order_item| %>
+                  <tr>
+                    <td>
+                      <%= order_item.product.product_name %>
+                    </td>
+                    <td>
+                      <%= number_to_currency order_item.unit_price %>
+                    </td>
+                    <td>
+                      <%= order_item.quantity %>
+                    </td>
+                    <td>
+                      <%= number_to_currency order_item.subtotal %>
+                    </td>
+                    <td>
+                      <%= number_to_percentage order_item.discount %>
+                    </td>
+                    <td>
+                      <%= number_to_currency order_item.total_price %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+    <div id="paginate">
+      <%= will_paginate @orders, renderer: MaterializePagination::Rails %>
+    </div>
+  <% end %>
+</div>

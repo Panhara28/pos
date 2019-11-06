@@ -1,0 +1,17 @@
+<%=simple_form_for([:admin, category], remote: true) do |f|%>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="recipient-name" class="control-label mb-10">category Name</label>
+        <%=f.text_field :category_name, class: "form-control"%>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <%=f.submit class: "btn btn-success"%>
+      </div>
+    </div>
+  </div>
+
+<%end%>

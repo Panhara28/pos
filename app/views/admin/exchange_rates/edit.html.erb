@@ -1,0 +1,37 @@
+<h5 class="title" style="padding-left: 10px;">#{t('.edit_exchange_rate')}</h5>
+<div class="card-panel white" id="admin">
+  <div class="row">
+    <div class="col s12">
+      <%= simple_form_for [:admin, @exchange_rate] do |f| %>
+        <% if @exchange_rate.errors.any? %>
+          <div id="error_explanation">
+            <h4>
+              <%= pluralize(@exchange_rate.errors.count, "error") %>
+              prohibited this exchange rate from being saved:
+            </h4>
+            <ul>
+              <% @exchange_rate.errors.full_messages.each do |message| %>
+                <li>
+                  <%= message %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <div class="row">
+          <div class="input-field col s6">
+            <%= f.input :usd_amount, label: "#{t('.usd_amount')}", disabled: true %>
+          </div>
+          <div class="input-field col s6">
+            <%= f.input :riel_amount, label: "#{t('.riel_amount')}" %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <%= f.button :submit, "#{t('.update_exchange_rate')}", :class => "btn-large indigo darken-4" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

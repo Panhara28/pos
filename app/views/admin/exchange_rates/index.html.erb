@@ -1,0 +1,32 @@
+<div class="card-panel white" id="admin">
+  <table class="striped responsive-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>#{t('.usd_amount')}</th>
+        <th>#{t('.riel_amount')}</th>
+        <th>#{t('.edit')}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @exchange_rates.each do |exchange_rate| %>
+        <tr>
+          <td>
+            <%= exchange_rate.id %>
+          </td>
+          <td>
+            <%= exchange_rate.usd_amount %>
+          </td>
+          <td>
+            <%= exchange_rate.riel_amount %>
+          </td>
+          <td>
+            <%= link_to edit_admin_exchange_rate_path(exchange_rate), data: { turbolinks: false }  do %>
+              <i class="small material-icons indigo-text text-darken-4">edit</i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

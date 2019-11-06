@@ -1,0 +1,10 @@
+$("input#category_category_name").val("");
+$("#category-errors").html(" ");
+$("#category-success").html("<%= custom_flash_message%>");
+$("#category-index").append("<%=escape_javascript render(@category)%>");
+
+$(function() {
+  $('.delete_category_<%=@category.id%>').submitOnCheck();
+});
+
+$('.delete_category_<%=@category.id%>').submitOnCheck();

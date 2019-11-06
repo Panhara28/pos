@@ -1,0 +1,53 @@
+<div class="card-panel white" id="admin">
+  <table class="striped responsive-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>#{t('.photo')}</th>
+        <th>#{t('.first_name')}</th>
+        <th>#{t('.last name')}</th>
+        <th>#{t('.email')}</th>
+        <th>#{t('.role')}</th>
+        <th>#{t('.is_active')}</th>
+        <th>#{t('.delete')}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td>
+            <%= user.id %>
+          </td>
+          <td>
+            <%= image_tag user.photo_url, size: '100x100', class: 'circle' if user.photo.present? %>
+          </td>
+          <td>
+            <%= user.first_name %>
+          </td>
+          <td>
+            <%= user.last_name %>
+          </td>
+          <td>
+            <%= user.email %>
+          </td>
+          <td>
+            <%= user.role %>
+          </td>
+          <% if user.is_active? %>
+            <td>Enable </td>
+          <% else %>
+            <td>Disable</td>
+          <% end %>
+          <td>
+            <%= link_to admin_user_path(user), class: "red-text", method: :put, data: { confirm: 'Are you sure want to disable this user?' } do %>
+              <i class="material-icons">phonelink_lock</i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div id="paginate">
+    <%= will_paginate @users, renderer: MaterializePagination::Rails %>
+  </div>
+</div>

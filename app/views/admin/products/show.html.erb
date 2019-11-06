@@ -1,0 +1,48 @@
+<div class="wrapper theme-2-active navbar-top-light horizontal-nav">
+	<%=render "components/nav"%>
+	<%=render "components/setting"%>
+	<!-- Main Content -->
+	<div class="page-wrapper">
+		<div class="container pt-30">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="panel panel-success card-view">
+						<div class="panel-heading">
+							<div class="pull-left">
+								<h6 class="panel-title txt-light">Product Detail</h6>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="panel-wrapper collapse in">
+							<div class="panel-body">
+								<span>
+									Product Name:
+									<span><%=@product.product_name%></span>
+								</span>
+								<hr>
+								<span>
+									Product Price:
+									<span><%=number_to_currency(@product.product_price)%></span>
+								</span>
+								<hr>
+								<span>
+									Product No:
+									<span><%=@product.product_no%></span>
+								</span>
+								<hr>
+								<div class="pull-left">
+									<%=link_to "Cancel", admin_products_path, class: "btn btn-warning"%>
+									<%=link_to "Edit", edit_admin_product_path(@product), class: "btn btn-success"%>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<%=render "components/footer"%>
+
+	</div>
+	<!-- /Main Content -->
+</div>

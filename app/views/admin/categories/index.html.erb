@@ -1,0 +1,93 @@
+<div class="wrapper theme-2-active navbar-top-light horizontal-nav">
+	<%=render "components/nav"%>
+	<%=render "components/setting"%>
+	<!-- Main Content -->
+	<div class="page-wrapper">
+		<div class="container pt-30">
+			<!-- Title -->
+			<div class="row heading-bg">
+				<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+					<h5 class="txt-dark">category</h5>
+					<div class="panel-wrapper collapse in">
+						<div class="panel-body" style="padding-left: 0px;">
+							<div class="button-list">
+								<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Add New</button>
+							</div>
+							<div class="modal fade bs-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+								<div class="modal-dialog modal-lg" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span></button>
+											<h5 class="modal-title" id="exampleModalLabel1">New message</h5>
+										</div>
+										<div class="modal-body">
+											<div id="categories">
+												<div id="category-errors"></div>
+												<div id="category-success"></div>
+												<%=render partial: "category_form", locals: {category: @category}%>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Breadcrumb -->
+				<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+					<ol class="breadcrumb">
+						<li>
+							<a href="/admin/dashboard">Dashboard</a>
+						</li>
+						<li class="active">
+							<span>category</span></li>
+					</ol>
+				</div>
+				<!-- /Breadcrumb -->
+			</div>
+			<!-- /Title -->
+
+			<!-- Row -->
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="panel panel-default border-panel card-view">
+						<div class="panel-heading">
+							<div class="pull-left">
+								<h6 class="panel-title txt-dark">category</h6>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="panel-wrapper collapse in">
+							<div class="panel-body">
+								<div class="table-wrap">
+									<div class="">
+										<table id="myTable1" class="table table-hover display  pb-30">
+											<thead>
+												<tr>
+													<th>Category Name</th>
+													<th>Created At</th>
+													<th>Actions</th>
+												</tr>
+											</thead>
+											<tbody id="category-index">
+												<%if @categories.any?%>
+													<%= render @categories%>
+												<%end%>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /Row -->
+		</div>
+
+		<%=render "components/footer"%>
+
+	</div>
+	<!-- /Main Content -->
+</div>

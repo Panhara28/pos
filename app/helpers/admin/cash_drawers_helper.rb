@@ -1,0 +1,2 @@
+module Admin::CashDrawersHelper
+end

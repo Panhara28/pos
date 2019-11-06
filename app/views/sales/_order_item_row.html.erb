@@ -1,0 +1,106 @@
+<% if @order_items.present? %>
+  <% if session[:customer_id].present? %>
+    <%= link_to Customer.find(session[:customer_id]).customer_name, customers_path%>
+    <% elsif @order_items.first.order.customer_id != 1 %>
+      <%= link_to @order_items.first.order.customer.customer_name, customers_path %>
+    <% end %>
+  <div class="row">
+      <!-- Basic Table -->
+      <div class="col-sm-12">
+        <div class="table-wrap">
+          <div class="table-responsive">
+            <table class="table mb-0">
+              <thead>
+                <tr>
+                  <th>Qty</th>
+                  <th>Product Name</th>
+                  <th>Price</th>
+                  <th>Discount</th>
+                  <th>Total Price</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @order_items.each do |order_item| %>
+                <tr>
+                  <td><%= order_item.quantity %>x</td>
+                  <td><%= order_item.product.product_name %></td>
+                  <td><%= number_to_currency order_item.unit_price, precision: 2 %></td>
+                  <td><%= "- #{number_to_percentage order_item.discount, precision: 2}" %></td>
+                  <td>
+                    <%= number_to_currency order_item.total_price, precision: 2 %>
+                  </td>
+                  <td>
+                    <%= link_to edit_order_item_path(order_item), data: { turbolinks: false } do %>
+                      <i class="fa fa-pencil"></i>
+                      <% end %>
+                    <%= link_to sales_order_item_destroy_path(order_item), class: '', data: { turbolinks: false }, method: :delete, remote: true do %>
+                      <i class="fa fa-trash-o"></i>
+                    <% end %>
+                  </td>
+                </tr>
+                <%end%>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- /Basic Table -->
+    </div>
+  <div class="row">
+      <div class="col-sm-12" style="margin-top:40px;">
+        <p>
+          <label for="" class="lable-order"><%= t('.subtotal') %>: </label>
+          <%= number_to_currency @order_items.last.order.subtotal, precision: 2 %>
+        </p>
+
+        <p>
+          <label for="" class="lable-order"><%= t('.tax') %>: </label>
+          <%= number_to_currency @order_items.last.order.tax, precision: 2 %>
+        </p>
+
+        <p>
+          <label for="" class="lable-order"><%= t('.shipping') %>: </label>
+          <%= number_to_currency @order_items.last.order.shipping, precision: 2 %>
+        </p>
+
+        <p>
+          <label for="" class="lable-order"><%= t('.discount') %>: </label>
+          <%= number_to_percentage @order_items.last.order.discount, precision: 2 %>
+        </p>
+
+        <% if @order_items.last.order.total_cash_in_riel > 0 %>
+          <p>
+            <label for="" class="lable-order">  <%= t('.change') %>: </label>
+            <%= number_to_currency ((@order_items.last.order.total_cash_in_riel / Constant::exchange_rate) - @order_items.last.order.total), precision: 2 %>
+          </p>
+
+          <p>
+            <label for="" class="lable-order"><%= t('.change_riel') %>: </label>
+
+            <%= "#{(@order_items.last.order.total_cash_in_riel - (@order_items.last.order.total * Constant.exchange_rate)) }"%>
+          </p>
+        <% end %>
+          <p>
+            <label for="" class="lable-order">  <%= t('.grand_total') %>: </label>
+            <%= number_to_currency @order_items.last.order.total, precision: 1 %>
+          </p>
+
+          <p>
+            <label for="" class="lable-order"><%= t('.grand_total_riel') %>: </label>
+            <%= "#{@order_items.last.order.total * Constant.exchange_rate}"%>
+          </p>
+          <div style="margin-top: 20px;">
+            <%= link_to edit_order_path(@order_items.last.order.id, redirect: 'sales'), class: 'btn btn-default', data: { turbolinks: false } do %>
+              <i class="">settings</i>
+            <% end %>
+
+            <%= link_to "checkout", sale_path(@order_items.last.order), class: 'btn btn-default' %>
+
+            <%= link_to fast_cash_index_path(order_id: @order_items.last.order.id, redirect: 'sales'), class: 'btn btn-default', data: { turbolinks: false } do %>
+              <i class="material-icons white-text text-darken-4">Fast Cash</i>
+            <% end %>
+          </div>
+        </div>
+      </div>
+<% end %>

@@ -1,0 +1,41 @@
+<div class="card-panel white" id="admin">
+  <table class="striped responsive-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>#{t('.table_number')}</th>
+        <th>#{t('.description')}</th>
+        <th>#{t('.edit')}</th>
+        <th>#{t'.delete'}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @seat_tables.each do |seat_table| %>
+        <tr>
+          <td>
+            <%= seat_table.id %>
+          </td>
+          <td>
+            <%= seat_table.table_number %>
+          </td>
+          <td>
+            <%= seat_table.description.html_safe %>
+          </td>
+          <td>
+            <%= link_to edit_admin_seat_table_path(seat_table), data: { turbolinks: false }  do %>
+              <i class="small material-icons indigo-text text-darken-4">edit</i>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to admin_seat_table_path(seat_table), method: :delete, data: { confirm: 'Are you sure want to delete this seat table?' } do %>
+              <i class="small material-icons red-text text-darken-4">delete</i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div id="paginate">
+    <%= will_paginate @seat_tables, renderer: MaterializePagination::Rails %>
+  </div>
+</div>

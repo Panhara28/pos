@@ -1,0 +1,88 @@
+<div class="card-panel white">
+  <div class="row">
+    <div class="col s12 m4 l4">
+      <%= link_to new_admin_customer_path, class: "btn-large indigo darken-4 white-text", data: { turbolinks: false } do %>
+        <i class="material-icons">person_add</i>
+        <span>
+          <%= t('.new_customer') %>
+        </span>
+      <% end %>
+    </div>
+    <div class="col s12 m8 l8">
+      <nav class="white">
+        <div class="nav-wrapper">
+          <form>
+            <div class="input-field">
+              <input id="search" name="query" placeholder="<%= t('.search_customer') %>" type="search" value="<%= params[:query] %>">/</input>
+              <label class="label-icon" for="search">
+                <i class="material-icons">search</i>
+              </label>
+              <i class="material-icons">close</i>
+            </div>
+          </form>
+        </div>
+      </nav>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <br/>
+  <table class="bordered">
+    <thead>
+      <tr>
+        <th>
+          <%= t('.photo') %>
+        </th>
+        <th>
+          <%= t('.name') %>
+        </th>
+        <th>
+          <%= t('.phone') %>
+        </th>
+        <th>
+          <%= t('.email') %>
+        </th>
+        <th class="center">
+          <%= t('.edit') %>
+        </th>
+        <th class="center">
+          <%= t('.delete') %>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @customers.each do |customer| %>
+        <tr>
+          <td>
+            <% if customer.photo.present? %>
+              <%= image_tag customer.photo_url, size: "100x100", class: "circle" %>
+            <% else %>
+              <%= image_tag "profile-pic.png", size: "100x100", class: "circle" %>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to customer.customer_name, admin_customer_path(customer) %>
+          </td>
+          <td>
+            <%= customer.phone %>
+          </td>
+          <td>
+            <%= customer.email %>
+          </td>
+          <td class="center">
+            <%= link_to edit_admin_customer_path(customer), data: { turbolinks: false }  do %>
+              <i class="small material-icons indigo-text text-darken-4">edit</i>
+            <% end %>
+          </td>
+          <td class="center">
+            <%= link_to admin_customer_path(customer), method: :delete, data: { confirm: 'Are you sure want to delete this customer?' } do %>
+              <i class="small material-icons red-text text-darken-4">delete</i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div id="paginate">
+    <%= will_paginate @customers, renderer: MaterializePagination::Rails %>
+  </div>
+</div>

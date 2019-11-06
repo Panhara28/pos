@@ -1,0 +1,64 @@
+<!-- Main Content -->
+<div class="page-wrapper">
+  <div class="container-fluid pt-30">
+    <div class="row">
+      <div class="col-sm-8 col-md-5">
+        <div class="panel panel-default border-panel card-view">
+          <div class="panel-heading">
+            <div class="pull-left">
+              <h6 class="panel-title txt-dark">Products</h6>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="panel-wrapper collapse in">
+            <div class="panel-body">
+              <div  class="tab-struct custom-tab-1 mt-40">
+                <ul class="nav nav-tabs">
+                  <%@categories.where.not(id: 1).each do |category|%>
+                    <li>
+                      <%= link_to category.category_name, product_path(category_id: category.id), class: "category", :remote => true %>
+                    </li>
+                  <%end%>
+                </ul>
+
+                <div class="tab-content" id="myTabContent_7">
+                  <div class="product-list">
+                    <%= render "product_row" if @products.present? %>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-4 col-md-7">
+        <div class="panel panel-default border-panel card-view">
+          <div class="panel-heading">
+            <div class="pull-left">
+              <h6 class="panel-title txt-dark">Order</h6>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="panel-wrapper collapse in">
+            <div class="panel-body">
+              <div  class="tab-struct custom-tab-1 mt-40">
+
+                <div class="order-item">
+                  <%= render "order_item_row" if @order_items.present? %>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+  <%=render "applications/footer"%>
+
+</div>

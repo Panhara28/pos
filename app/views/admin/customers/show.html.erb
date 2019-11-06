@@ -1,0 +1,75 @@
+<div class="card-panel white" id="admin">
+  <% if @customer.orders.count < 0 %>
+    <h5>There is no order item for user #{@customer.customer_name}</h5>
+  <% else %>
+
+    <h5>
+      <%= "#{t('.list_of_order')}" %> 
+      <b><%="#{@customer.customer_name}"%></b>
+    </h5>
+    <span>
+      <b><%= "#{t('.sum_total')}: #{number_to_currency @customer.orders.sum(:total)}"%></b>
+    </span>
+    <table class="bordered">
+      <thead>
+        <tr>
+          <th>
+            <%= t('.order_no') %>
+          </th>
+          <th>
+            <%= t('.order_date') %>
+          </th>
+          <th>
+            <%= t('.order_time') %>
+          </th>
+          <th>
+            <%= t('.subtotal') %>
+          </th>
+          <th>
+            <%= t('.discount') %>
+          </th>
+          <th>
+            <%= t('.tax') %>
+          </th>
+          <th>
+            <%= t('.shipping') %>
+          </th>
+          <th>
+            <%= t('.grand_total') %>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @customer.orders.each do |customer_order| %>
+          <tr>
+            <td>
+              <%= '%09d' % customer_order.id %>
+            </td>
+            <td>
+              <%= customer_order.order_date %>
+            </td>
+            <td>
+              <%= customer_order.order_time.to_s(:time) if customer_order.order_time.present? %>
+            </td>
+            <td>
+              <%= number_to_currency customer_order.subtotal %>
+            </td>
+            <td>
+              <%= number_to_percentage customer_order.discount %>
+            </td>
+            <td>
+              <%= customer_order.tax %>
+            </td>
+            <td>
+              <%= number_to_currency customer_order.shipping %>
+            </td>
+            <td>
+              <%= number_to_currency customer_order.total %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</div>
+<%= link_to "#{t('.back')}", admin_customers_path, {:style => "margin-left: 10px;", :class => "btn-large indigo darken-4"} %>

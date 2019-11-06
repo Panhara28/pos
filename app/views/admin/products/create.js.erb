@@ -1,0 +1,10 @@
+$("input#product_product_name").val("");
+$("#product-errors").html(" ");
+$("#product-success").html("<%= custom_flash_message%>");
+$("#product-index").append("<%=escape_javascript render(@product)%>");
+
+$(function() {
+  $('.delete_product_<%=@product.id%>').submitOnCheck();
+});
+
+$('.delete_product_<%=@product.id%>').submitOnCheck();

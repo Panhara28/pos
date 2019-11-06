@@ -1,0 +1,96 @@
+<div class="wrapper theme-2-active navbar-top-light horizontal-nav">
+	<%=render "components/nav"%>
+	<%=render "components/setting"%>
+	<!-- Main Content -->
+	<div class="page-wrapper">
+		<div class="container pt-30">
+			<!-- Row -->
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="panel panel-default border-panel card-view">
+						<div class="panel-heading">
+							<div class="pull-left">
+								<h6 class="panel-title txt-dark">order</h6>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="panel-wrapper collapse in">
+							<div class="panel-body">
+								<div class="table-wrap">
+									<div class="">
+										<table id="myTable1" class="table table-hover display  pb-30">
+											<thead>
+												<tr>
+													<th>Waiting No</th>
+													<th>Invoice No</th>
+													<th>Order Date</th>
+													<th>Order Time</th>
+                          <th>Customer</th>
+                          <th>Order Tax</th>
+                          <th>Order Shipping</th>
+                          <th>Subtotal</th>
+                          <th>Discount</th>
+                          <th>Grand Total</th>
+													<th>Actions</th>
+												</tr>
+											</thead>
+											<tbody>
+                        <%@orders.each do |order|%>
+                        <tr class="delete_order_<%=order.id%>">
+                          <td class="center">
+                            <b><%="#{order.waitting_no}"%></b>
+                          </td>
+                          <td>
+                            <%= '%09d' % order.id %>
+                          </td>
+                          <td>
+                            <%= order.order_date %>
+                          </td>
+                          <td>
+                            <%= order.order_time.to_s(:time) %>
+                          </td>
+                          <td>
+                            <%= order.customer.customer_name %>
+                          </td>
+                          <td>
+                            <%= order.tax %>
+                          </td>
+                          <td>
+                            <%= order.shipping %>
+                          </td>
+                          <td>
+                            <%= order.subtotal %>
+                          </td>
+                          <td>
+                            <%= order.discount %>
+                          </td>
+                          <td>
+                            <%= order.total %>
+                          </td>
+                          <td>
+                            <%=link_to admin_order_path(order), email: "View" do %>
+                              View
+                            <%end%>
+                            <%=link_to edit_admin_order_path(order), email: "Edit",id: "show-form_#{order.id}" do %>
+                              Edit
+                            <%end%>
+                          </td>
+                        </tr>
+                        <%end%>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /Row -->
+		</div>
+
+		<%=render "components/footer"%>
+
+	</div>
+	<!-- /Main Content -->
+</div>

@@ -1,0 +1,76 @@
+<!-- Main Content -->
+<div class="page-wrapper">
+  <div class="container pt-30">
+    <div class="row">
+      <div class="col-md-9">
+        <div class="panel panel-success card-view">
+          <div class="panel-heading">
+            <div class="pull-left">
+              <h6 class="panel-title txt-light">Edit Product</h6>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="panel-wrapper collapse in">
+            <div class="panel-body">
+              <%= simple_form_for @order_item do |f| %>
+              <% if @order_item.errors.any? %>
+                <div id="error_explanation">
+                  <h4>
+                    <%= pluralize(@order_item.errors.count, "error") %>
+                    prohibited this cash drawer from being saved:
+                  </h4>
+                  <ul>
+                    <% @order_item.errors.full_messages.each do |message| %>
+                      <li>
+                        <%= message %>
+                      </li>
+                    <% end %>
+                  </ul>
+                </div>
+              <% end %>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="recipient-name" class="control-label mb-10">Unit Price</label>
+                    <%= f.text_field :unit_price, class: "form-control" %>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="recipient-name" class="control-label mb-10">QTY</label>
+                    <%= f.text_field :quantity, class: "form-control" %>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="recipient-name" class="control-label mb-10">Subtotal</label>
+                    <%= f.number_field :subtotal, class: "form-control", disabled: true %>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="recipient-name" class="control-label mb-10">Discount</label>
+                    <%= f.number_field :discount, class: "form-control" %>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="modal-footer">
+                    <%=link_to "Cancle", sales_path, class: "btn btn-default"%>
+                    <%=f.submit class: "btn btn-success"%>
+                  </div>
+                </div>
+              </div>
+
+            <%end%>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%=render "applications/footer"%>
+
+</div>
+<!-- /Main Content -->

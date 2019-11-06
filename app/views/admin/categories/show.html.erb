@@ -1,0 +1,39 @@
+<div class="wrapper theme-2-active navbar-top-light horizontal-nav">
+	<%=render "components/nav"%>
+	<%=render "components/setting"%>
+	<!-- Main Content -->
+	<div class="page-wrapper">
+		<div class="container pt-30">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="panel panel-success card-view">
+						<div class="panel-heading">
+							<div class="pull-left">
+								<h6 class="panel-title txt-light">category Detail</h6>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="panel-wrapper collapse in">
+							<div class="panel-body">
+								<span>
+									category Name:
+									<span><%=@category.category_name%></span>
+								</span>
+								<hr>
+								<hr>
+								<div class="pull-left">
+									<%=link_to "Cancel", admin_categories_path, class: "btn btn-warning"%>
+									<%=link_to "Edit", edit_admin_category_path(@category), class: "btn btn-success"%>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<%=render "components/footer"%>
+
+	</div>
+	<!-- /Main Content -->
+</div>
