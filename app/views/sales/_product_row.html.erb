@@ -2,7 +2,7 @@
 
   <% @products.each_slice(3) do |products| %>
     <% products.each do |product| %>
-      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+      <div class="col-lg-2 col-md-4 col-sm-4 col-xs-6">
         <%= link_to sales_order_item_path(product_id: product.id, quantity: 1), remote: true do%>
         <div class="photo" style="">
           <%if product.photo.present?%>

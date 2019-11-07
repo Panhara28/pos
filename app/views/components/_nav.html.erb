@@ -78,22 +78,29 @@
 
     <li>
       <%=link_to admin_products_path do%>
-        <div class="pull-left"><i class="ti-image mr-20"></i><span class="right-nav-text">Product </span></div>
+        <div class="pull-left"><i class="ti-shopping-cart mr-20"></i><span class="right-nav-text">Product </span></div>
         <div class="clearfix"></div>
       <%end%>
     </li>
 
     <li>
       <%=link_to admin_orders_path do%>
-      <div class="pull-left"><i class="ti-dashboard mr-20"></i><span class="right-nav-text">Order</span></div>
-      <div class="clearfix"></div>
+        <div class="pull-left"><i class="ti-bar-chart mr-20"></i><span class="right-nav-text">Order</span></div>
+        <div class="clearfix"></div>
       <%end%>
     </li>
-    
+
     <li>
       <%=link_to admin_order_items_path do%>
-      <div class="pull-left"><i class="ti-dashboard mr-20"></i><span class="right-nav-text"><%= session[:order_count].present? ? "Sales (#{session[:sale_count]})" : "Sales"%></span></div>
-      <div class="clearfix"></div>
+        <div class="pull-left"><i class="ti-money mr-20"></i><span class="right-nav-text"><%= session[:order_count].present? ? "Sales (#{session[:sale_count]})" : "Sales"%></span></div>
+        <div class="clearfix"></div>
+      <%end%>
+    </li>
+
+    <li>
+      <%=link_to "#" do%>
+        <div class="pull-left"><i class="ti-agenda mr-20"></i><span class="right-nav-text">Report</span></div>
+        <div class="clearfix"></div>
       <%end%>
     </li>
 
