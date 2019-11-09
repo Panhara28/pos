@@ -29,14 +29,12 @@
               </div>
               <% end %>
               <div class="row">
-
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="recipient-name" class="control-label mb-10">Order Name</label>
-                    <%= f.text_field :order_name, class: "form-control" %>
-                  </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="recipient-name" class="control-label mb-10">Table</label>
+                  <%=f.collection_select :seat_table_id, SeatTable.all, :id, :table_number, { prompt: "Select Table" } , {class: "form-control select2"}%>
                 </div>
-
+              </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="recipient-name" class="control-label mb-10">Order Date</label>
@@ -50,39 +48,11 @@
                     <%= f.text_field :order_time, :as => :string, :value => time_format(f.object.order_time), :class => 'form-control', label: false, placeholder: "Choose order time", disabled: true %>
                   </div>
                 </div>
-
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="recipient-name" class="control-label mb-10">Tax</label>
-                    <%=f.number_field :tax, class: "form-control"%>
-                  </div>
-                </div>
-
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="recipient-name" class="control-label mb-10">Shipping</label>
-                    <%=f.number_field :shipping, class: "form-control"%>
-                  </div>
-                </div>
-
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="recipient-name" class="control-label mb-10">Discount</label>
-                    <%=f.number_field :discount, class: "form-control"%>
-                  </div>
-                </div>
-
+                
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="recipient-name" class="control-label mb-10">Customer</label>
                     <%=f.collection_select :customer_id, Customer.all, :id, :customer_name, { prompt: "Select Customer" } , {class: "form-control select2"}%>
-                  </div>
-                </div>
-
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="recipient-name" class="control-label mb-10">Table</label>
-                    <%=f.collection_select :seat_table_id, SeatTable.all, :id, :table_number, { prompt: "Select Table" } , {class: "form-control select2"}%>
                   </div>
                 </div>
 

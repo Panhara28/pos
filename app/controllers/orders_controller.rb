@@ -38,7 +38,7 @@ class OrdersController < DashboardsController
   def update
     @order = Order.find(params[:id])
     if @order.update(order_params)
-      redirect_to order_path(@order), notice: "Successful Updated"
+      redirect_to sales_path, notice: "Successful Updated"
     else
       render :edit
     end
