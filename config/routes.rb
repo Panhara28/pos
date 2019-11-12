@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     post 'namual_cash/usd' => 'fast_cash#set_manual_cash_usd', as: 'set_manual_cash_usd'
     post 'namual_cash/riel' => 'fast_cash#set_manual_cash_riel', as: 'set_manual_cash_riel'
     get 'customers/populate/customer_name', to: 'customers#populate_customer_name', as: 'populate_customer_name'
-
+    get 'tables' => "tables#index", as: "tables"
     resources :order_items
     resources :orders
     resources :customers
