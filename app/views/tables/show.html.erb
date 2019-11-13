@@ -2,7 +2,9 @@
 <div class="page-wrapper">
   <div class="container-fluid pt-30">
     <div class="row">
-      <%= @orders.id%>
+      <%@orders.each do |invoice|%>
+        <p>OrderID: <%=invoice.id%> (Table: <%=invoice.seat_table_id%>)</p>
+      <%end%>
     </div>
   </div>
 

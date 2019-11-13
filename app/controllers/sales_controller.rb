@@ -59,7 +59,7 @@ class SalesController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    @order.update(is_paid: true, user_id: current_user.id, checkout_date: Date.today, checkout_time: Time.now.strftime("%H:%M:%S"))
+    @order.update(is_paid: false, user_id: current_user.id, checkout_date: Date.today, checkout_time: Time.now.strftime("%H:%M:%S"))
     session.delete("order_id#{current_user.id}")
     session.delete("customer_id#{current_user.id}")
   end
