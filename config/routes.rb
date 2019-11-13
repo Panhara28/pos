@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     get 'customers/populate/customer_name', to: 'customers#populate_customer_name', as: 'populate_customer_name'
     get 'tables' => "tables#index", as: "tables"
     get 'tables/:id' => "tables#show", as: "table"
+    post 'payment/:id' => "tables#payment", as: "payment"
     resources :order_items
     resources :orders
     resources :customers
