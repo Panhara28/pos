@@ -6,6 +6,8 @@ class Order < ApplicationRecord
 
   belongs_to :seat_table, optional: true
 
+  has_many :invoices
+
   has_many :order_items, dependent: :destroy
 
   scope :unpaid_order, -> { where(is_paid: false) }

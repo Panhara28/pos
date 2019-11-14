@@ -86,7 +86,7 @@
                 </div>
                 <div class="button-list pull-right">
                   <%=link_to "Cancel", sales_path, class: "btn btn-orange mr-10", id: "cancel"%>
-                  <%=link_to "Print", payment_path(order_id: @table.orders.ids), method: "post",  class: "btn btn-default btn-outline btn-icon left-icon"%>
+                  <%=link_to "Payment", payment_path(order_id: @table.orders.ids), method: "post",  class: "btn btn-default btn-outline btn-icon left-icon"%>
                 </div>
                 <div class="clearfix"></div>
               </div>
