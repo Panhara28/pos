@@ -18,6 +18,12 @@ class SalesController < ApplicationController
     end
     @order_items = Order.unpaid_order.find(session["order_id#{current_user.id}"]).order_items if session["order_id#{current_user.id}"].present?
     @products = Category.find(session["category_id#{current_user.id}"]).products if session["category_id#{current_user.id}"].present?
+
+    if params[:order_id].present?
+      session.delete("order_id#{current_user.id}")
+      session.delete("customer_id#{current_user.id}")
+    end
+    
   end
 
   def product
@@ -48,6 +54,33 @@ class SalesController < ApplicationController
     end
   end
 
+  def check_exist(order, product_id)
+    order.order_items.each do |order_item|
+      if product_id == order_item.product_id
+        return order_item
+      end
+    end
+    return nil
+  end
+
+  def send_to_order
+    if session["order_id#{current_user.id}"].present?
+      @order = Order.find(session["order_id#{current_user.id}"])
+      @order.order_status = 'order'
+      if session["customer_id#{current_user.id}"].present?
+        @order.customer_id = session["customer_id#{current_user.id}"]
+      end
+      @order.save
+      session.delete("order_id#{current_user.id}")
+      session.delete("customer_id#{current_user.id}")
+      @order_items = @order.order_items
+      session[:order_count] = current_user.orders.where('is_paid=? AND order_date=? AND order_status=?', false, DateTime.now.to_date, 'order').count
+      respond_to do |format|
+        format.js { render :order_item }
+      end
+    end
+  end
+
   def order_item_destroy
     @order = current_order
     @order_item = @order.order_items.find(params[:id])
@@ -56,6 +89,20 @@ class SalesController < ApplicationController
 
     respond_to do |format|
       format.js { render :order_item }
+    end
+  end
+
+  def send_to_printer
+    @order = current_order
+    if @order.update(is_paid: true)
+      @order_items = @order.order_items
+      session.delete("order_id#{current_user.id}")
+      session.delete("customer_id#{current_user.id}")
+      respond_to do |format|
+        format.json {
+          render json: @order_items
+        }
+      end
     end
   end
 

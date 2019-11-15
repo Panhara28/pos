@@ -1,8 +1,11 @@
 class OrdersController < DashboardsController
   before_action :authenticate_user!
   def index
-    @order = current_user.orders.build
-    @orders = Order.where(is_paid: true)
+    if params[:query].present?
+      @orders = Order.unpaid_order.search(params[:query])
+    else
+      @orders = Order.where('is_paid=? AND order_status=?', false, "order").order('id desc')
+    end 
   end
 
   def show
@@ -10,24 +13,7 @@ class OrdersController < DashboardsController
   end
 
   def new
-
-  end
-
-  def create
-    @order = current_user.orders.build(order_params)
-    if @order.save
-      respond_to do |format|
-        flash.now[:notice] = "Successful Created"
-        format.html { redirect_to orders_path }
-        format.js
-      end
-    else
-      respond_to do |format|
-        flash.now[:alert] = "Please fill the field blank or order Duplicated"
-        format.html { redirect_to orders_path }
-        format.js { render template: "/orders/order_error.js.erb" }
-      end
-    end
+    @order = Order.new
   end
 
   def edit
@@ -38,18 +24,22 @@ class OrdersController < DashboardsController
   def update
     @order = Order.find(params[:id])
     if @order.update(order_params)
-      redirect_to sales_path, notice: "Successful Updated"
-    else
-      render :edit
+      if session[:redirect].present?
+        redirect_to pos_path, notice: "Your order has been updated."
+      else
+        redirect_to orders_path, notice: "Your order has been updated."
+      end
+      session.delete(:redirect)
+    else 
+      render :edit, notice: "Something went wrong."
     end
   end
 
   def destroy
-    @order = Order.destroy(params[:id])
-    respond_to do |format|
-      flash.now[:error] = "Delete"
-      format.html { redirect_to orders_url }
-      format.js
+    @order = Order.find(params[:id])
+    if @order.destroy
+      session.delete("order_id#{current_user.id}")
+      redirect_to orders_path
     end
   end
 
