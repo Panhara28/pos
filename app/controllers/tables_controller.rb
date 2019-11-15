@@ -12,7 +12,6 @@ class TablesController < ApplicationController
     @orders = @table.orders
     @orders.each do |order|
       order.update(is_paid: true)
-      Invoice.create(order_id: order.seat_table_id)
     end
     redirect_to sales_path
   end
