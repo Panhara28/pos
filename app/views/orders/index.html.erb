@@ -10,7 +10,7 @@
 					<div class="panel panel-default border-panel card-view">
 						<div class="panel-heading">
 							<div class="pull-left">
-								<h6 class="panel-title txt-dark">order</h6>
+                <h6 class="panel-title txt-dark">order</h6>
 							</div>
 							<div class="clearfix"></div>
 						</div>
@@ -18,9 +18,10 @@
 							<div class="panel-body">
 								<div class="table-wrap">
 									<div class="">
-										<table id="myTable1" class="table table-hover display  pb-30">
+										<table id="" class="table table-hover display  pb-30">
 											<thead>
 												<tr>
+                          <th>#<th>
 													<th>Waiting No</th>
 													<th>Invoice No</th>
 													<th>Order Date</th>
@@ -37,6 +38,9 @@
 											<tbody>
                         <%@orders.each do |order|%>
                         <tr class="delete_order_<%=order.id%>">
+                          <td>
+                            <%= link_to (image_tag "chair.jpg", class: "circle", size: "45x45"), sales_path(order_id: order.id), data: { turbolinks: false } %>
+                          </td>
                           <td class="center">
                             <b><%="#{order.waitting_no}"%></b>
                           </td>
@@ -68,14 +72,15 @@
                             <%= order.total %>
                           </td>
                           <td>
-                            <%=form_for @order, remote: true do |f|%>
-                              <%=link_to order_path(order), email: "View" do %>
-                                View
-                              <%end%>
-                              <%=link_to edit_order_path(order), email: "Edit",id: "show-form_#{order.id}" do %>
-                                Edit
-                              <%end%>
-                            <%end%>
+                            <%= link_to edit_order_path(order), data: { turbolinks: false }  do %>
+                              <i class="small material-icons indigo-text text-darken-4">edit</i>
+                            <% end %>
+                            <%= link_to order_path(order), data: { turbolinks: false }  do %>
+                              <i class="small material-icons indigo-text text-darken-4">print</i>
+                            <% end %>
+                            <%= link_to order_path(order), method: :delete, data: { confirm: 'Are you sure want to delete?' } do %>
+                              <i class="small material-icons red-text text-darken-4">delete</i>
+                            <% end %>
                           </td>
                         </tr>
                         <%end%>

@@ -12,8 +12,11 @@
         <% end %>
         <%= link_to fast_cash_index_path(order_id: @order_items.last.order.id, redirect: 'sales'), class: 'btn btn-primary btn-width', data: { turbolinks: false } do %>
           <i class="material-icons white-text text-darken-4">Fast Cash</i>
-        <% end %>
-        <%= link_to "checkout", sale_path(@order_items.last.order), class: 'btn btn-success btn-width' %>
+        <% end %>   
+        <%= link_to send_to_order_path, class: "btn btn-default", remote: true do %>
+          <%= t('.send_to_order') %>
+          (<%= "#{session[:order_count] if session[:order_count].present?}" %>)
+        <% end %>  
       </div>
       <div class="col-sm-12">
         <div class="table-wrap">
@@ -135,6 +138,9 @@
         </label>
         <%= "#{@order_items.last.order.total * Constant.exchange_rate}"%>
       </p>
+    </div>
+    <div class="col-lg-12">
+     <%= link_to "checkout", sale_path(@order_items.last.order), class: 'btn btn-success', style: "width: 100%;" %>
     </div>
   </div>
 <% end %>

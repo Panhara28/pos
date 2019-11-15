@@ -3044,7 +3044,7 @@ button.fc-agendaWeek-button, .fc-prev-button, .fc-next-button, .fc-today-button 
     background-color: #fff;
     backface-visibility: hidden; }
     .fixed-sidebar-left .side-nav li {
-      width: 250px; }
+      width: auto; }
       .fixed-sidebar-left .side-nav li.navigation-header > span, .fixed-sidebar-left .side-nav li.navigation-header > hr {
         padding: 11px 15px; }
       .fixed-sidebar-left .side-nav li.navigation-header > span {
