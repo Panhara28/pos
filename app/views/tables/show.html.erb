@@ -94,6 +94,12 @@
           </div>
         </div>
       </div>
+      <h1>Playground</h1>
+      <%@playgrounds.each do |order|%>
+        <%order.order_items.each do |item|%>
+          <%=item.product.product_price%>
+        <%end%>
+      <%end%>
     </div>
   </div>
 

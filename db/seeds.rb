@@ -27,3 +27,21 @@ Category.create!([
       admin_id: 1
     }
 ])
+
+SeatTable.create!([
+  {
+    table_number: "Take Away"
+  },
+  {
+    table_number: "Table 1"
+  },
+  {
+    table_number: "Table 2"
+  },
+  {
+    table_number: "Table 3"
+  },
+  {
+    table_number: "Table 4"
+  }
+])
