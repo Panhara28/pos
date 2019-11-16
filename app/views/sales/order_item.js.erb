@@ -1,1 +1,7 @@
-$(".order-item").html("<%= j render :partial => 'order_item_row', :locals => { :order_items => @order_items}%>");
+<%if session["order_id#{current_user.id}"].present?%>
+  $(".order-item").html("<%= j render :partial => 'order_item_row', :locals => { :order_items => @order_items}%>");
+<%else%>
+  $("#send_to_order_succcess").html("<%= custom_flash_message%>");
+  $("#session_order_count").html("Invoice (<%= session[:order_count] if session[:order_count].present? %>)")
+  $(".order-item").html("");
+<%end%>

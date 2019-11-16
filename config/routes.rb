@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
 
     root 'sales#index'
-    get 'sales/index'
-
+    get "pos" => "sales#pos", as: "pos"
     get 'fast_cash/index'
     get 'sales/product' => 'sales#product', as: 'product'
     get 'sales/order_item' =>  'sales#order_item', as: 'sales_order_item'
@@ -14,9 +13,8 @@ Rails.application.routes.draw do
     post 'namual_cash/usd' => 'fast_cash#set_manual_cash_usd', as: 'set_manual_cash_usd'
     post 'namual_cash/riel' => 'fast_cash#set_manual_cash_riel', as: 'set_manual_cash_riel'
     get 'customers/populate/customer_name', to: 'customers#populate_customer_name', as: 'populate_customer_name'
-    get 'tables' => "tables#index", as: "tables"
-    get 'tables/:id' => "tables#show", as: "table"
     post 'payment/:id' => "tables#payment", as: "payment"
+
     resources :order_items
     resources :orders
     resources :customers
