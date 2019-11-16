@@ -1,5 +1,7 @@
 class Order < ApplicationRecord
 
+  # validates :table_number, uniqueness: true
+
   belongs_to :user
 
   belongs_to :customer

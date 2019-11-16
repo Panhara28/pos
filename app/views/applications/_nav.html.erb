@@ -48,7 +48,7 @@
       <span>Main</span>
       <hr/>
     </li>
-      <%if params[:order_id].present?%>
+      <%if params[:order_id].present? || params[:edit] == "edit"%>
         <li>
           <%=link_to pos_path do%>
           <div class="pull-left"><i class="ti-dashboard mr-20"></i><span class="right-nav-text">sales</span></div>
@@ -66,7 +66,7 @@
       <%if params[:controller] != "orders"%>
         <li>
           <%=link_to orders_path do%>
-            <div class="pull-left"><i class="ti-money mr-20"></i><span class="right-nav-text" id="session_order_count">Invoice (<%= "#{session[:order_count] if session[:order_count].present?}" %>)</span></div>
+            <div class="pull-left"><i class=" ti-receipt mr-20"></i><span class="right-nav-text" id="session_order_count">Tables (<%= "#{session[:order_count] if session[:order_count].present?}" %>)</span></div>
             <div class="clearfix"></div>
           <%end%>
         </li>

@@ -54,6 +54,7 @@ class SalesController < ApplicationController
       session["order_id#{current_user.id}"] = @order.id
       @order_items = Order.find(session["order_id#{current_user.id}"]).order_items
     end
+    puts  @order.errors.full_messages
   end
 
   def check_exist(order, product_id)

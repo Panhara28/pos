@@ -1,41 +1,53 @@
 <div class="wrapper theme-2-active navbar-top-light horizontal-nav">
-	<%=render "applications/nav"%>
-	<%=render "applications/setting"%>
-	<!-- Main Content -->
-	<div class="page-wrapper">
-		<div class="container pt-30">
-			<!-- Row -->
-			<div class="row">
-				<div class="col-sm-12">
-					<div class="panel panel-default border-panel card-view">
-						<div class="panel-heading">
-							<div class="pull-left">
+  <%=render "applications/nav"%>
+  <%=render "applications/setting"%>
+  <!-- Main Content -->
+  <div class="page-wrapper">
+    <div class="container pt-30">
+      <!-- Row -->
+      <div class="row">
+        <div class="col-lg-3">
+          <div class="panel panel-pricing mb-0">
+            <div class="panel-heading bg-orange-light-4">
+              <i class=" ti-bookmark-alt"></i>
+              <h6>basic</h6>
+              <span class="panel-price">free</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-sm-12">
+          <div class="panel panel-default border-panel card-view">
+            <div class="panel-heading">
+              <div class="pull-left">
                 <h6 class="panel-title txt-dark">order</h6>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-						<div class="panel-wrapper collapse in">
-							<div class="panel-body">
-								<div class="table-wrap">
-									<div class="">
-										<table id="" class="table table-hover display  pb-30">
-											<thead>
-												<tr>
-                          <th>#<th>
-													<th>Waiting No</th>
-													<th>Invoice No</th>
-													<th>Order Date</th>
-													<th>Order Time</th>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="panel-wrapper collapse in">
+              <div class="panel-body">
+                <div class="table-wrap">
+                  <div class="">
+                    <table id="" class="table table-hover display  pb-30">
+                      <thead>
+                        <tr>
+                          <th>#
+                          <th>
+                          <th>Waiting No</th>
+                          <th>Invoice No</th>
+                          <th>Order Date</th>
+                          <th>Order Time</th>
                           <th>Customer</th>
                           <th>Order Tax</th>
                           <th>Order Shipping</th>
                           <th>Subtotal</th>
                           <th>Discount</th>
                           <th>Grand Total</th>
-													<th>Actions</th>
-												</tr>
-											</thead>
-											<tbody>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
                         <%@orders.each do |order|%>
                         <tr class="delete_order_<%=order.id%>">
                           <td>
@@ -73,31 +85,31 @@
                           </td>
                           <td>
                             <%= link_to edit_order_path(order), data: { turbolinks: false }  do %>
-                              <i class="small material-icons indigo-text text-darken-4">edit</i>
+                            <i class="small material-icons indigo-text text-darken-4">edit</i>
                             <% end %>
                             <%= link_to order_path(order), data: { turbolinks: false }  do %>
-                              <i class="small material-icons indigo-text text-darken-4">print</i>
+                            <i class="small material-icons indigo-text text-darken-4">print</i>
                             <% end %>
                             <%= link_to order_path(order), method: :delete, data: { confirm: 'Are you sure want to delete?' } do %>
-                              <i class="small material-icons red-text text-darken-4">delete</i>
+                            <i class="small material-icons red-text text-darken-4">delete</i>
                             <% end %>
                           </td>
                         </tr>
                         <%end%>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- /Row -->
-		</div>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /Row -->
+    </div>
 
-		<%=render "applications/footer"%>
+    <%=render "applications/footer"%>
 
-	</div>
-	<!-- /Main Content -->
+  </div>
+  <!-- /Main Content -->
 </div>

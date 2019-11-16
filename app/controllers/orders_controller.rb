@@ -24,14 +24,19 @@ class OrdersController < DashboardsController
   def update
     @order = Order.find(params[:id])
     if @order.update(order_params)
+      
       if session[:redirect].present?
-        redirect_to pos_path, notice: "Your order has been updated."
+        redirect_to sales_path, notice: "Your order has been updated."
       else
         redirect_to orders_path, notice: "Your order has been updated."
       end
+
       session.delete(:redirect)
+
     else 
+
       render :edit, notice: "Something went wrong."
+
     end
   end
 
