@@ -15,5 +15,6 @@ COPY . .
 RUN bundle exec rake assets:precompile
 RUN rake db:create
 RUN rake db:migrate
+RUN rake db:seed
 EXPOSE 80
 CMD ["rackup","config.ru", "--host", "0.0.0.0", "--port", "80"]
