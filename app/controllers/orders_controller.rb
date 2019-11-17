@@ -26,7 +26,7 @@ class OrdersController < DashboardsController
     if @order.update(order_params)
       
       if session[:redirect].present?
-        redirect_to sales_path, notice: "Your order has been updated."
+        redirect_to edit_order_path(@order, redirect: "sales", status: current_order.order_status), notice: "Your order has been updated."
       else
         redirect_to orders_path, notice: "Your order has been updated."
       end

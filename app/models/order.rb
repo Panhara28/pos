@@ -1,6 +1,18 @@
 class Order < ApplicationRecord
 
-  # validates :table_number, uniqueness: true
+  OPTION_TABLE = [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "9",
+    "10"
+  ]
+
+  validates :table_number, uniqueness: true
 
   belongs_to :user
 

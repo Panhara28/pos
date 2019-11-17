@@ -32,7 +32,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="recipient-name" class="control-label mb-10">Table</label>
-                  <%=f.text_field :table_number, class: "form-control", placeholder: "Add Table"%>
+                  <%=f.select :table_number, Order::OPTION_TABLE, {}, class: "form-control"%>
                 </div>
               </div>
                 <div class="col-md-6">
@@ -58,8 +58,13 @@
 
                 <div class="col-md-12">
                   <div class="modal-footer">
-                    <%=link_to "Back To Sale", sales_path, class: "btn btn-default"%>
+                    <%if params[:status] == "order"%>
+                      <%=link_to "Back To Sale", sales_path(order_id: current_order.id), class: "btn btn-default"%>
+                    <%else%>
+                      <%=link_to "Back To Sale", sales_path, class: "btn btn-default"%>
+                    <%end%>
                     <%=f.submit class: "btn btn-success"%>
+
                   </div>
                 </div>
               </div>

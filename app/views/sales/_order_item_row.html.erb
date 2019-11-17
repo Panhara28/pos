@@ -6,19 +6,26 @@
     <% end %>
     <div class="row">
       <!-- Basic Table -->
-      <div class="col-lg-12">
-       <%= link_to "checkout", sale_path(@order_items.last.order), class: 'btn btn-success', style: "width: 100%;" %>
+      
+      <div class="col-lg-4">
+        <%if params[:status] == "order"%>
+          <%= link_to edit_order_path(@order_items.last.order.id, redirect: 'sales', status: current_order.order_status), class: 'btn btn-default', style: "margin-left: 0; width: 100%;", data: { turbolinks: false } do %>
+            <i class="" style="font-size: 18px;">Choose Table</i>
+          <% end %>
+        <%else%>
+          <%= link_to edit_order_path(@order_items.last.order.id, redirect: 'sales'), class: 'btn btn-default', style: "margin-left: 0; width: 100%;", data: { turbolinks: false } do %>
+            <i class="" style="font-size: 18px;">Choose Table</i>
+          <% end %>
+        <%end%>
       </div>
-      <div class="col-lg-12" style="margin-top: 10px;">
-        <%= link_to edit_order_path(@order_items.last.order.id, redirect: 'sales'), class: 'btn btn-default btn-width', style: "margin-left: 0;", data: { turbolinks: false } do %>
-          <i class="">settings</i>
+      <div class="col-lg-4">     
+        <%= link_to fast_cash_index_path(order_id: @order_items.last.order.id, redirect: 'sales'), class: 'btn btn-primary', style: "width: 100%;", data: { turbolinks: false } do %>
+          <i class="" style="font-size: 18px;">Fast Cash</i>
         <% end %>
-        <%= link_to fast_cash_index_path(order_id: @order_items.last.order.id, redirect: 'sales'), class: 'btn btn-primary btn-width', data: { turbolinks: false } do %>
-          <i class="material-icons white-text text-darken-4">Fast Cash</i>
-        <% end %>
-        <%= link_to send_to_order_path, class: "btn btn-default btn-width", remote: true do %>
-          <%= t('.send_to_order') %>
-          (<%= "#{session[:order_count] if session[:order_count].present?}" %>)
+      </div>
+      <div class="col-lg-4">
+        <%= link_to send_to_order_path, class: "btn btn-default", style: "width: 100%;", remote: true do %>
+          <i class="" style="font-size: 18px;">Save To Order (<%= "#{session[:order_count] if session[:order_count].present?}" %>)</i>
         <% end %>
       </div>
       <div class="col-sm-12">
@@ -141,6 +148,9 @@
         </label>
         <%= "#{@order_items.last.order.total * Constant.exchange_rate}"%>
       </p>
+    </div>
+    <div class="col-lg-12">
+      <%= link_to "checkout", sale_path(@order_items.last.order), class: 'btn btn-success', style: "width: 100%;" %>
     </div>
   </div>
 <% end %>

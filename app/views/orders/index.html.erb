@@ -30,9 +30,16 @@
                     <tbody>
                       <%@orders.each do |order|%>
                         <tr>
-                          <td>
-                            <%= link_to "#", sales_path(order_id: order.id), data: { turbolinks: false } %>
-                            <%=order.table_number%>
+                          <td>                         
+                            <%if order.table_number.split(" ")[0] == "Take"%>
+                              <%= link_to sales_path(order_id: order.id, status: order.order_status), data: { turbolinks: false } do%>
+                                Add Table
+                              <%end%>
+                            <%else%>
+                              <%= link_to sales_path(order_id: order.id, status: order.order_status), data: { turbolinks: false } do%>
+                                <%=order.table_number%>
+                              <%end%>
+                            <%end%>
                           </td>
                           <td><%=order.order_status%></td>
                           <td><%=number_to_currency(order.subtotal)%></td>
