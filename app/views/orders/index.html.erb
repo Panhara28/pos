@@ -24,34 +24,38 @@
                         <th>Table Number</th>
                         <th>Status</th>
                         <th>Sub Total</th>
-                        <th>Action</th>
+                        <th style="text-align: center;">Action</th>
                       </tr>
                     </thead>
                     <tbody>
                       <%@orders.each do |order|%>
-                        <tr>
+                        <tr class="delete_order_<%=order.id%>">
                           <td>                         
                             <%if order.table_number.split(" ")[0] == "Take"%>
-                              <%= link_to sales_path(order_id: order.id, status: order.order_status), data: { turbolinks: false } do%>
-                                Add Table
+                              <%= link_to sales_path(order_id: order.id, status: order.order_status), data: { turbolinks: false } do%>                                                    
+                                <div class="<%= order.table_number.split(" ")[0] == "Take" ? "table_none" : "display_table_number"%>">
+                                  Add Table
+                                </div>
                               <%end%>
                             <%else%>
-                              <%= link_to sales_path(order_id: order.id, status: order.order_status), data: { turbolinks: false } do%>
-                                <%=order.table_number%>
+                              <%= link_to sales_path(order_id: order.id, status: order.order_status), data: { turbolinks: false } do%>                                                    
+                                <div class="<%= order.table_number.split(" ")[0] == "Take" ? "table_none" : "display_table_number"%>">
+                                  Table <%=order.table_number%>
+                                </div>
                               <%end%>
                             <%end%>
                           </td>
                           <td><%=order.order_status%></td>
                           <td><%=number_to_currency(order.subtotal)%></td>
-                          <td class="text-nowrap">
+                          <td class="text-nowrap" style="text-align: right;">
                             <%= link_to edit_order_path(order), class: "mr-25", data: { turbolinks: false }  do %>
-                             <i class="fa fa-pencil text-inverse m-r-10">Edit</i>
+                             <i class="btn btn-primary">Edit</i>
                             <% end %>
                             <%= link_to order_path(order),class: "mr-25", data: { turbolinks: false }  do %>
-                             <i class="fa fa-print text-danger">Print</i>
+                             <i class="btn btn-success">Print</i>
                             <% end %>
-                            <%= link_to order_path(order), class: "mr-25", method: :delete, data: { confirm: 'Are you sure want to delete?' } do %>
-                              <i class="fa fa-close text-danger">delete</i>
+                            <%= link_to order_path(order), class: "mr-25", method: :delete, data: { confirm: 'Are you sure want to delete?' }, remote: true do %>
+                              <i class="btn btn-danger">delete</i>
                             <% end %>
                           </td>
                         </tr>

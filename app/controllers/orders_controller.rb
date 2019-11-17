@@ -43,8 +43,12 @@ class OrdersController < DashboardsController
   def destroy
     @order = Order.find(params[:id])
     if @order.destroy
+      respond_to do |format|
+        flash.now[:alert] = "Table #{@order.table_number} Has Been Removed!"
+        format.html { redirect_to orders_path  }
+        format.js
+      end
       session.delete("order_id#{current_user.id}")
-      redirect_to orders_path
     end
   end
 

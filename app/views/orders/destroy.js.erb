@@ -1,1 +1,2 @@
 $('.delete_order_<%=@order.id%>').remove();
+$(".session_order_count").html("Tables (<%= Order.where(order_status: "order").count %>)")

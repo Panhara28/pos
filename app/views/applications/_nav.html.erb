@@ -63,14 +63,17 @@
           <%end%>
         </li>
       <%end%>
-      <%if params[:controller] != "orders"%>
-        <li>
-          <%=link_to orders_path do%>
-            <div class="pull-left"><i class=" ti-receipt mr-20"></i><span class="right-nav-text" id="session_order_count">Tables (<%= "#{session[:order_count] if session[:order_count].present?}" %>)</span></div>
-            <div class="clearfix"></div>
-          <%end%>
-        </li>
-      <%end%>
+      <li>
+         <%=link_to orders_path do%>
+           <div class="pull-left">
+             <i class=" ti-receipt mr-20"></i>
+             <span class="right-nav-text session_order_count">
+               Tables (<%= "#{ Order.where(order_status: "order").count}" %>)
+              </span>
+            </div>
+          <div class="clearfix"></div>
+        <%end%>
+      </li>
   </ul>
 </div>
 <!-- /Left Sidebar Menu -->
