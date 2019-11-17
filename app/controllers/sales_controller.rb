@@ -54,7 +54,6 @@ class SalesController < ApplicationController
       session["order_id#{current_user.id}"] = @order.id
       @order_items = Order.find(session["order_id#{current_user.id}"]).order_items
     end
-    puts  @order.errors.full_messages
   end
 
   def check_exist(order, product_id)
@@ -112,7 +111,14 @@ class SalesController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    @order.update(is_paid: false, user_id: current_user.id, checkout_date: Date.today, checkout_time: Time.now.strftime("%H:%M:%S"))
+    @order.update(
+      is_paid: true, 
+      user_id: current_user.id, 
+      checkout_date: Date.today, 
+      checkout_time: Time.now.strftime("%H:%M:%S"),
+      real_table_number: @order.table_number,
+      order_status: "completed"
+    )
     session.delete("order_id#{current_user.id}")
     session.delete("customer_id#{current_user.id}")
   end

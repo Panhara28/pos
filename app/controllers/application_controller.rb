@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
     if !session["order_id#{current_user.id}"].nil?
       Order.find(session["order_id#{current_user.id}"])
     else
-      Order.new
+      Order.new(table_number: "Take Away #{SecureRandom.hex(8)}")
     end
   end
 

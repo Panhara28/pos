@@ -6,104 +6,57 @@
     <div class="container pt-30">
       <!-- Row -->
       <div class="row">
-        <div class="col-lg-3">
-          <div class="panel panel-pricing mb-0">
-            <div class="panel-heading bg-orange-light-4">
-              <i class=" ti-bookmark-alt"></i>
-              <h6>basic</h6>
-              <span class="panel-price">free</span>
+        <div class="panel panel-default border-panel card-view">
+          <div class="panel-heading">
+            <div class="pull-left">
+              <h6 class="panel-title txt-dark">Table</h6>
             </div>
+            <div class="clearfix"></div>
           </div>
+          <div class="panel-wrapper collapse in">
+            <div class="panel-body">
 
-        </div>
-
-        <div class="col-sm-12">
-          <div class="panel panel-default border-panel card-view">
-            <div class="panel-heading">
-              <div class="pull-left">
-                <h6 class="panel-title txt-dark">order</h6>
-              </div>
-              <div class="clearfix"></div>
-            </div>
-            <div class="panel-wrapper collapse in">
-              <div class="panel-body">
-                <div class="table-wrap">
-                  <div class="">
-                    <table id="" class="table table-hover display  pb-30">
-                      <thead>
+              <div class="table-wrap mt-40">
+                <div class="table-responsive">
+                  <table class="table mb-0">
+                    <thead>
+                      <tr>
+                        <th>Table Number</th>
+                        <th>Status</th>
+                        <th>Sub Total</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <%@orders.each do |order|%>
                         <tr>
-                          <th>#
-                          <th>
-                          <th>Waiting No</th>
-                          <th>Invoice No</th>
-                          <th>Order Date</th>
-                          <th>Order Time</th>
-                          <th>Customer</th>
-                          <th>Order Tax</th>
-                          <th>Order Shipping</th>
-                          <th>Subtotal</th>
-                          <th>Discount</th>
-                          <th>Grand Total</th>
-                          <th>Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <%@orders.each do |order|%>
-                        <tr class="delete_order_<%=order.id%>">
                           <td>
-                            <%= link_to (image_tag "chair.jpg", class: "circle", size: "45x45"), sales_path(order_id: order.id), data: { turbolinks: false } %>
+                            <%= link_to "#", sales_path(order_id: order.id), data: { turbolinks: false } %>
+                            <%=order.table_number%>
                           </td>
-                          <td class="center">
-                            <b><%="#{order.waitting_no}"%></b>
-                          </td>
-                          <td>
-                            <%= '%09d' % order.id %>
-                          </td>
-                          <td>
-                            <%= order.order_date %>
-                          </td>
-                          <td>
-                            <%= order.order_time.to_s(:time) %>
-                          </td>
-                          <td>
-                            <%= order.customer.customer_name %>
-                          </td>
-                          <td>
-                            <%= order.tax %>
-                          </td>
-                          <td>
-                            <%= order.shipping %>
-                          </td>
-                          <td>
-                            <%= order.subtotal %>
-                          </td>
-                          <td>
-                            <%= order.discount %>
-                          </td>
-                          <td>
-                            <%= order.total %>
-                          </td>
-                          <td>
-                            <%= link_to edit_order_path(order), data: { turbolinks: false }  do %>
-                            <i class="small material-icons indigo-text text-darken-4">edit</i>
+                          <td><%=order.order_status%></td>
+                          <td><%=number_to_currency(order.subtotal)%></td>
+                          <td class="text-nowrap">
+                            <%= link_to edit_order_path(order), class: "mr-25", data: { turbolinks: false }  do %>
+                             <i class="fa fa-pencil text-inverse m-r-10">Edit</i>
                             <% end %>
-                            <%= link_to order_path(order), data: { turbolinks: false }  do %>
-                            <i class="small material-icons indigo-text text-darken-4">print</i>
+                            <%= link_to order_path(order),class: "mr-25", data: { turbolinks: false }  do %>
+                             <i class="fa fa-print text-danger">Print</i>
                             <% end %>
-                            <%= link_to order_path(order), method: :delete, data: { confirm: 'Are you sure want to delete?' } do %>
-                            <i class="small material-icons red-text text-darken-4">delete</i>
+                            <%= link_to order_path(order), class: "mr-25", method: :delete, data: { confirm: 'Are you sure want to delete?' } do %>
+                              <i class="fa fa-close text-danger">delete</i>
                             <% end %>
                           </td>
                         </tr>
-                        <%end%>
-                      </tbody>
-                    </table>
-                  </div>
+                      <%end%>
+                    </tbody>  
+                  </table>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
       </div>
       <!-- /Row -->
     </div>
