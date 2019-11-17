@@ -13,9 +13,7 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: panhara 
-  password: panhara28
-  host: "157.230.254.45"
+  url: mysql2://panhra:panhara28@157.230.254.45/point_of_sale_development
   socket: /var/run/mysqld/mysqld.sock
 
 development:
