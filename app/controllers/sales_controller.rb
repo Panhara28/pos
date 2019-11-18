@@ -27,6 +27,10 @@ class SalesController < ApplicationController
 
     @order_items = Order.unpaid_order.find(session["order_id#{current_user.id}"]).order_items if session["order_id#{current_user.id}"].present?
     @products = Category.find(session["category_id#{current_user.id}"]).products if session["category_id#{current_user.id}"].present?
+
+    if params[:controller] == "sales" && current_order.order_status == "order"
+      session.delete("order_id#{current_user.id}")
+    end
   end
 
   def product

@@ -8,15 +8,9 @@
       <!-- Basic Table -->
       
       <div class="col-lg-4">
-        <%if params[:status] == "order"%>
-          <%= link_to edit_order_path(@order_items.last.order.id, redirect: 'sales', status: current_order.order_status), class: 'btn btn-default', style: "margin-left: 0; width: 100%;", data: { turbolinks: false } do %>
-            <i class="" style="font-size: 18px;">Choose Table</i>
-          <% end %>
-        <%else%>
-          <%= link_to edit_order_path(@order_items.last.order.id, redirect: 'sales'), class: 'btn btn-default', style: "margin-left: 0; width: 100%;", data: { turbolinks: false } do %>
-            <i class="" style="font-size: 18px;">Choose Table</i>
-          <% end %>
-        <%end%>
+        <%= link_to edit_order_path(@order_items.last.order.id, redirect: 'sales'), class: 'btn btn-default', style: "margin-left: 0; width: 100%;", data: { turbolinks: false } do %>
+         <i class="" style="font-size: 18px;">Choose Table</i>
+        <% end %>
       </div>
       <div class="col-lg-4">     
         <%= link_to fast_cash_index_path(order_id: @order_items.last.order.id, redirect: 'sales'), class: 'btn btn-primary', style: "width: 100%;", data: { turbolinks: false } do %>

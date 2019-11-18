@@ -3,7 +3,8 @@
   <div class="nav-wrap">
     <div class="mobile-only-brand pull-left">
       <div class="nav-header pull-left">
-      <a id="toggle_nav_btn" class="toggle-left-nav-btn inline-block ml-20 pull-left" href="javascript:void(0);"><i class="ti-align-left"></i></a>
+        <a id="toggle_nav_btn" class="toggle-left-nav-btn inline-block ml-20 pull-left" href="javascript:void(0);"><i
+            class="ti-align-left"></i></a>
         <div class="logo-wrap">
           <a href="index-2.html"></a>
         </div>
@@ -13,7 +14,9 @@
       <ul class="nav navbar-right top-nav pull-right">
 
         <li class="dropdown auth-drp">
-          <a href="#" class="dropdown-toggle pr-0" data-toggle="dropdown"><img src="https://hencework.com/theme/admintres/img/user1.png" alt="user_auth" class="user-auth-img img-circle"/><span class="user-online-status"></span></a>
+          <a href="#" class="dropdown-toggle pr-0" data-toggle="dropdown"><img
+              src="https://hencework.com/theme/admintres/img/user1.png" alt="user_auth"
+              class="user-auth-img img-circle" /><span class="user-online-status"></span></a>
           <ul class="dropdown-menu user-auth-dropdown" data-dropdown-in="flipInX" data-dropdown-out="flipOutX">
             <li>
               <a href="profile.html"><i class="zmdi zmdi-account"></i><span>Profile</span></a>
@@ -31,7 +34,7 @@
             <li class="divider"></li>
             <li>
               <%=link_to destroy_user_session_path, method: :delete do%>
-                <i class="zmdi zmdi-power"></i><span>Log Out</span>
+              <i class="zmdi zmdi-power"></i><span>Log Out</span>
               <%end%>
             </li>
           </ul>
@@ -47,34 +50,25 @@
   <ul class="nav navbar-nav side-nav nicescroll-bar">
     <li class="navigation-header">
       <span>Main</span>
-      <hr/>
+      <hr />
     </li>
-      <%if params[:order_id].present? || params[:edit] == "edit"%>
-        <li>
-          <%=link_to pos_path do%>
-          <div class="pull-left"><i class="ti-dashboard mr-20"></i><span class="right-nav-text">sales</span></div>
-          <div class="clearfix"></div>
-          <%end%>
-        </li>
-      <%else%>
-        <li>
-          <%=link_to sales_path do%>
-          <div class="pull-left"><i class="ti-dashboard mr-20"></i><span class="right-nav-text">sales</span></div>
-          <div class="clearfix"></div>
-          <%end%>
-        </li>
+    <li>
+      <%=link_to sales_path do%>
+        <div class="pull-left"><i class="ti-dashboard mr-20"></i><span class="right-nav-text">sales</span></div>
+        <div class="clearfix"></div>
       <%end%>
-      <li>
-         <%=link_to orders_path do%>
-           <div class="pull-left">
-             <i class=" ti-receipt mr-20"></i>
-             <span class="right-nav-text session_order_count">
-               Tables (<%= "#{ Order.where(order_status: "order").count}" %>)
-              </span>
-            </div>
-          <div class="clearfix"></div>
-        <%end%>
-      </li>
+    </li>
+    <li>
+      <%=link_to orders_path do%>
+        <div class="pull-left">
+          <i class=" ti-receipt mr-20"></i>
+          <span class="right-nav-text session_order_count">
+            Tables (<%= "#{ Order.where(order_status: "order").count}" %>)
+          </span>
+        </div>
+        <div class="clearfix"></div>
+      <%end%>
+    </li>
   </ul>
 </div>
 <!-- /Left Sidebar Menu -->
