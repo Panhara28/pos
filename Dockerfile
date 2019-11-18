@@ -5,6 +5,9 @@ ENV RAILS_ROOT /var/www/app_name
 RUN mkdir -p $RAILS_ROOT
 # Set working directory
 WORKDIR $RAILS_ROOT
+RUN touch .env /var/www/app_name
+RUN echo "URL=mysql2://panhra:panhara28@157.230.254.45/point_of_sale_production" >> /var/www/app_name/.env
+
 # Adding gems
 COPY Gemfile Gemfile
 COPY Gemfile.lock Gemfile.lock
@@ -14,6 +17,6 @@ RUN bundle install --jobs 20 --retry 5 --without development test
 COPY . .
 RUN bundle exec rake db:create
 RUN bundle exec rake db:migrate
-RUN bundle exec rake db:seed
+RUN bundle exec rake db:seeed
 EXPOSE 80
 CMD ["rackup","config.ru", "--host", "0.0.0.0", "--port", "80"]
