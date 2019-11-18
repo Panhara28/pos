@@ -5,7 +5,7 @@ ENV RAILS_ROOT /var/www/app_name
 RUN mkdir -p $RAILS_ROOT
 # Set working directory
 WORKDIR $RAILS_ROOT
-RUN cp .env $RAILS_ROOT
+RUN echo $RAILS_ROOT
 # Adding gems
 COPY Gemfile Gemfile
 COPY Gemfile.lock Gemfile.lock
