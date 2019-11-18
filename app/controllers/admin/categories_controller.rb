@@ -1,6 +1,7 @@
 class Admin::CategoriesController < DashboardsController
-    layout "dashboards"
-    before_action :authenticate_admin!
+  layout "dashboards"
+  before_action :authenticate_admin!
+
   def index
     @category = current_admin.categories.build
     @categories = Category.all
@@ -36,7 +37,7 @@ class Admin::CategoriesController < DashboardsController
   end
 
   def update
-    @category = Category.find_by_slug(params[:id])
+    @category = Category.find(params[:id])
     if @category.update(category_params)
       redirect_to admin_category_path(@category), notice: "Successful Updated"
     else

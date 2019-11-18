@@ -39,17 +39,28 @@ class SalesController < ApplicationController
     @order.order_date = DateTime.now.to_date
     @order.order_time = DateTime.now.to_s(:time)
     @order.waitting_no = Order.where(order_date: DateTime.now.to_date).order('id').pluck(:waitting_no).last.to_i + 1 if @order.waitting_no.nil?
-    @order.seat_table_id = 1
     @order.user_id = current_user.id
+
     if session["customer_id#{current_user.id}"].present?
        @order.customer_id = session["customer_id#{current_user.id}"]
     else
       @order.customer_id = 1
     end
-    @order_item = @order.order_items.new
-    @order_item.product_id = params[:product_id]
-    @order_item.quantity = params[:quantity]
-    @order_item.save
+
+    if !(order_item = check_exist(@order, params[:product_id].to_i)).nil?
+      order_item.update(quantity: order_item.quantity + 1)
+    else
+      @order_item = @order.order_items.new
+      @order_item.product_id = params[:product_id]
+      @order_item.quantity = params[:quantity]
+      @order_item.save
+    end
+
+    # @order_item = @order.order_items.new
+    # @order_item.product_id = params[:product_id]
+    # @order_item.quantity = params[:quantity]
+    # @order_item.save
+
     if @order.save
       session["order_id#{current_user.id}"] = @order.id
       @order_items = Order.find(session["order_id#{current_user.id}"]).order_items
