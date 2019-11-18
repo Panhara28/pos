@@ -9,7 +9,7 @@ Bundler.require(*Rails.groups)
 module SalemangementSystem
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 5.1\
+    config.load_defaults 5.1
     config.i18n.default_locale = :en
     config.i18n.available_locales = [:en, :km]
     if ['development', 'test'].include? ENV['RAILS_ENV']
