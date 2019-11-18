@@ -23,6 +23,8 @@ gem 'simple_form'
 gem "haml-rails", "~> 1.0"
 
 gem 'jquery-rails'
+
+gem 'dotenv-rails', groups: [:development, :test, :production]
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.5'
 # Use mysql as the database for Active Record
