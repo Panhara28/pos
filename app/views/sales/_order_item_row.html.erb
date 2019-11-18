@@ -73,7 +73,20 @@
   <!-- /Basic Table -->
 </div>
 <div class="row">
-  <div class="col-sm-12" style="margin-top: 20px;">
+  <div class="col-sm-12" style="margin-top: 20px; font-weight: bold;">
+    <%if @order_items.last.order.cash == 0%>
+      <p>
+        <label for="" class="lable-order"><%= t('.Customer Cash In Riel') %>:
+        </label>
+        ៛ <%= current_order.cash_in_riel %>
+      </p>
+    <%else%>
+      <p>
+        <label for="" class="lable-order"><%= t('.Customer Cash In USD') %>:
+        </label>
+         <%= number_to_currency current_order.cash , precision: 2 %>
+      </p>
+    <%end%>
     <p >
       <label for="" class="lable-order"><%= t('.subtotal') %>:</label>
       <span id="sub_total">
@@ -104,7 +117,7 @@
       <p>
         <label for="" class="lable-order"><%= t('.change_in_riel') %>:</label>
         <span id="total_cash_in_riel_zero">
-          <%= "#{0}"%>
+          ៛ <%= "#{0}"%>
         </span>
       </p>
     <%else%>

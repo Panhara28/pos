@@ -64,7 +64,11 @@
           reader.readAsDataURL(this.files[0]);
         });
         });
-
+          $("#checkout").on('click', function() {
+          $('div#cont').removeClass('container');
+          $('div#card').removeClass('card-panel');
+            print();
+          });
       });
     </script>
   </body>

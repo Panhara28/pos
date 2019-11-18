@@ -3,18 +3,9 @@
   <div class="container">
     <!-- Row -->
     <div class="row">
-      
+      <%= link_to "Print", "#{}", class: 'waves-effect waves-light btn-large indigo darken-4 white-text', id: "checkout" %>
+
     </div>
     <!-- /Row -->
     <%=render "applications/footer"%>
   </div>
-
-<script>
-
-  jQuery("#checkout").on('click', function() {
-    $('div#cont').removeClass('container');
-    $('div#card').removeClass('card-panel');
-    print();
-  });
-
-</script>
