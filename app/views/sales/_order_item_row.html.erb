@@ -6,9 +6,8 @@
     <% end %>
     <div class="row">
       <!-- Basic Table -->
-      
       <div class="col-lg-4">
-        <%= link_to edit_order_path(@order_items.last.order.id, redirect: 'sales'), class: 'btn btn-default', style: "margin-left: 0; width: 100%;", data: { turbolinks: false } do %>
+        <%= link_to edit_order_path(@order_items.last.order.id, redirect: 'sales'), id: "link_#{current_order.id}", remote: true, class: 'btn btn-default', style: "margin-left: 0; width: 100%;", data: { turbolinks: false } do %>
          <i class="" style="font-size: 18px;">Choose Table</i>
         <% end %>
       </div>

@@ -70,6 +70,47 @@
             print();
           });
       });
+       $(document).ready(function(){
+
+    $('#cash_usd').on('change', function() {
+      console.log($('#cash_usd').val());
+      usd = $('#cash_usd').val();
+      if (usd === 0) {
+        return;
+      } else {
+        data = new Object;
+        data['usd'] = $('#cash_usd').val();
+        return $.ajax('/namual_cash/usd', {
+          type: 'post',
+          dataType: 'json',
+          data: data,
+          success: function(data) {
+
+          }
+        });
+      }
+    });
+
+    $('#cash_riel').on('change', function() {
+      console.log($('#cash_riel').val());
+      riel = $('#cash_riel').val();
+      if (riel === 0) {
+        return;
+      } else {
+        data = new Object;
+        data['riel'] = $('#cash_riel').val();
+        return $.ajax('/namual_cash/riel', {
+          type: 'post',
+          dataType: 'json',
+          data: data,
+          success: function(data) {
+
+          }
+        });
+      }
+    });
+
+  });
     </script>
   </body>
 </html>

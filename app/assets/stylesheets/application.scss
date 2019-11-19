@@ -16,6 +16,12 @@
  *= require tether
  */
 
+ @media (min-width: 768px){
+  .modal-dialog {
+    width: 1200px;
+    margin: 30px auto;
+  }
+ }
 .table_none{
   background: #ff6b81;
   text-align: center;

@@ -23,18 +23,23 @@ class OrdersController < DashboardsController
 
   def update
     @order = Order.find(params[:id])
-    if @order.update(order_params)
-      
+
+    if @order.update(order_params)      
       if session[:redirect].present?
-        redirect_to edit_order_path(@order, redirect: "sales", status: current_order.order_status), notice: "Your order has been updated."
+        respond_to do |format|
+          flash.now[:notice] = "Update Successfully"
+          format.html { redirect_to sales_path }
+          format.js
+        end
       else
+
         redirect_to orders_path, notice: "Your order has been updated."
       end
 
       session.delete(:redirect)
 
     else 
-
+      puts @order.errors.full_messages
       render :edit, notice: "Something went wrong."
 
     end

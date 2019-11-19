@@ -27,10 +27,6 @@ class SalesController < ApplicationController
 
     @order_items = Order.unpaid_order.find(session["order_id#{current_user.id}"]).order_items if session["order_id#{current_user.id}"].present?
     @products = Category.find(session["category_id#{current_user.id}"]).products if session["category_id#{current_user.id}"].present?
-
-    if params[:controller] == "sales" && current_order.order_status == "order"
-      session.delete("order_id#{current_user.id}")
-    end
   end
 
   def product
@@ -59,11 +55,6 @@ class SalesController < ApplicationController
       @order_item.quantity = params[:quantity]
       @order_item.save
     end
-
-    # @order_item = @order.order_items.new
-    # @order_item.product_id = params[:product_id]
-    # @order_item.quantity = params[:quantity]
-    # @order_item.save
 
     if @order.save
       session["order_id#{current_user.id}"] = @order.id
@@ -133,7 +124,7 @@ class SalesController < ApplicationController
       checkout_time: Time.now.strftime("%H:%M:%S"),
       table_number: "Take Away#{SecureRandom.hex(8)}",
       real_table_number: @order.table_number,
-      order_status: "completed"
+      order_status: "completed",     
     )
     session.delete("order_id#{current_user.id}")
     session.delete("customer_id#{current_user.id}")
