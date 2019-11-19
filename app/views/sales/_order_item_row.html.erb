@@ -48,7 +48,7 @@
                       <td><%= number_to_currency order_item.unit_price, precision: 2 %></td>
 
                       <td>
-                        <%= link_to edit_order_item_path(order_item), data: { turbolinks: false }, style: "margin-bottom: 5px;", class: "btn btn-primary" do %>
+                      <%= link_to edit_order_item_path(order_item), data: { turbolinks: false }, style: "margin-bottom: 5px;", class: "btn btn-primary" do %>
                         <i class="fa fa-pencil"></i>
                       <% end %>
                       <%= link_to sales_order_item_destroy_path(order_item), class: '', data: { turbolinks: false }, style: "margin-bottom: 5px;", method: :delete, remote: true, class: "btn btn-danger" do %>

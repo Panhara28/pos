@@ -12,7 +12,7 @@
         </button>
       </div>
       <div class="modal-body overflow-auto">
-        <%= simple_form_for @order, remote: true do |f| %>
+        <%= simple_form_for @order do |f| %>
               <% if @order.errors.any? %>
               <div id="error_explanation">
                 <h4>
@@ -35,6 +35,41 @@
                   <%=f.select :table_number, Order::OPTION_TABLE, {}, class: "form-control"%>
                 </div>
               </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="recipient-name" class="control-label mb-10">Members</label>
+                  <%=f.collection_select :customer_id, Customer.all, :id, :customer_name, { prompt: "Select Customer" } , {class: "form-control select2"}%>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="recipient-name" class="control-label mb-10">VAT</label>
+                  <%=f.number_field :tax, class: "form-control"%>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="recipient-name" class="control-label mb-10">Discount</label>
+                  <%=f.number_field :discount, class: "form-control"%>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="recipient-name" class="control-label mb-10">USD</label>
+                  <%=f.number_field :usd, class: "form-control"%>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="recipient-name" class="control-label mb-10">Riel</label>
+                  <%=f.number_field :riel, class: "form-control"%>
+                </div>
+              </div>
+
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="recipient-name" class="control-label mb-10">Order Date</label>
@@ -48,35 +83,10 @@
                     <%= f.text_field :order_time, :as => :string, :value => time_format(f.object.order_time), :class => 'form-control', label: false, placeholder: "Choose order time", disabled: true %>
                   </div>
                 </div>
-                
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="recipient-name" class="control-label mb-10">Customer</label>
-                    <%=f.collection_select :customer_id, Customer.all, :id, :customer_name, { prompt: "Select Customer" } , {class: "form-control select2"}%>
-                  </div>
-                </div>
-
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="recipient-name" class="control-label mb-10">USD</label>
-                    <%=f.number_field :usd, class: "form-control"%>
-                  </div>
-                </div>
-
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="recipient-name" class="control-label mb-10">Riel</label>
-                    <%=f.number_field :riel, class: "form-control"%>
-                  </div>
-                </div>
 
                 <div class="col-md-12">
                   <div class="modal-footer">
-                    <%if params[:status] == "order"%>
-                      <%=link_to "Back To Sale", sales_path(order_id: current_order.id), class: "btn btn-default"%>
-                    <%else%>
-                      <%=link_to "Back To Sale", sales_path, class: "btn btn-default"%>
-                    <%end%>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <%=f.submit class: "btn btn-success"%>
                     <%= link_to "checkout", sale_path(current_order.id), class: 'btn btn-success' %>
                   </div>

@@ -116,7 +116,7 @@ ActiveRecord::Schema.define(version: 20191119070546) do
     t.decimal "tax", precision: 12, scale: 3, default: "0.0"
     t.decimal "shipping", precision: 12, scale: 3, default: "0.0"
     t.decimal "discount", precision: 12, scale: 3, default: "0.0"
-    t.string "order_status"
+    t.string "order_status", default: "pending"
     t.bigint "seat_table_id"
     t.integer "waitting_no"
     t.decimal "cash", precision: 12, scale: 3, default: "0.0"

@@ -95,7 +95,9 @@ class SalesController < ApplicationController
     @order_item = @order.order_items.find(params[:id])
     @order_item.destroy
     @order_items = @order.order_items
-
+    if @order_items.count == 0
+      session.delete("order_id#{current_user.id}")
+    end
     respond_to do |format|
       format.js { render :order_item }
     end
