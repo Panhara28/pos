@@ -6,7 +6,6 @@
 			margin: 0mm;
 			/* this affects the margin in the printer settings */
 		}
-
 		#cancel,
 		#print {
 			display: none;
@@ -53,8 +52,8 @@
 	}
 
 	.ticket {
-		width: 302.36px;
-		max-width: 302.36px;
+		margin-left: 0.4cm;
+		max-width: 70mm;
 	}
 
 	img {
@@ -68,19 +67,15 @@
 	}
 </style>
 <div class="ticket">
-	<img src="./logo.png" alt="Logo">
 	<p class="centered">Mashisoyo Cambodia
 		<br>Address line 1
-		<p style="text-align: center; font-weight: bold;">វិក្កយបត្រ/Invoice</p>
-		<p style=" margin: 0px;">វិក្កយបត្រ/Invoice No: <span style="float: right; margin-top: 5px;"><%=@order.id%></span>
-		</p>
-		<p style=" margin: 0px;">តុ/Table: <span
-				style="float: right; margin-top: 5px;"><%=@order.table_number.split(" ")[0]%>
-				<%=@order.table_number.split(" ")[1]%></span></p>
-		<p style=" margin: 0px;">អ្នកគិតលុយ/Cashier: <span
-				style="float: right; margin-top: 5px;"><%=@order.user.username%></span></p>
-		<p style=" margin: 0px;">កាលបរិច្ឆេត/Date Time: <span
-				style="float: right; margin-top: 5px;"><%=@order.created_at%></span></p>
+		<div style="margin-bottom: 20px;">
+			<p style="text-align: center; font-weight: bold;">វិក្កយបត្រ/Invoice</p>
+			<p style=" margin: 0px;">វិក្កយបត្រ/Invoice No: <span style="float: right;"><%=@order.id%></span></p>
+			<p style=" margin: 0px;">តុ/Table: <span style="float: right;"><%=@order.table_number.split(" ")[0]%><%=@order.table_number.split(" ")[1]%></span></p>
+			<p style=" margin: 0px;">អ្នកគិតលុយ/Cashier: <span style="float: right;"><%=@order.user.username%></span></p>
+			<p style=" margin: 0px;">កាលបរិច្ឆេត/Date Time: <span style="float: right;"><%=@order.created_at%></span></p>	
+		</div>
 
 		<table>
 			<thead>
