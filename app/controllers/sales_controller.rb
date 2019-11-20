@@ -123,7 +123,7 @@ class SalesController < ApplicationController
       user_id: current_user.id, 
       checkout_date: Date.today, 
       checkout_time: Time.now.strftime("%H:%M:%S"),
-      table_number: "Take Away#{SecureRandom.hex(8)}",
+      table_number: "Take Away #{SecureRandom.hex(8)}",
       real_table_number: @order.table_number,
       order_status: "completed",     
     )

@@ -1,103 +1,132 @@
 <style type="text/css">
-	@media print{
+	@media print {
 		@page {
-			size: auto;   /* auto is the current printer page size */
-			margin: 0mm;  /* this affects the margin in the printer settings */
+			size: auto;
+			/* auto is the current printer page size */
+			margin: 0mm;
+			/* this affects the margin in the printer settings */
 		}
-		#cancel, #print{
+
+		#cancel,
+		#print {
 			display: none;
 		}
 	}
 
-  * {
-    font-size: 16px;
-    font-family: 'Times New Roman';
-  }
+	* {
+		font-size: 12px;
+		font-family: 'Times New Roman';
+	}
 
-  td,
-  th,
-  tr,
-  table {
-      border-top: 1px solid black;
-      border-collapse: collapse;
-  }
+	td,
+	th,
+	tr,
+	table {
+		border-top: 0px solid black;
+		border-collapse: collapse;
+	}
 
-td.description,
-th.description {
-    width: 302.36px;
-    max-width: 302.36px;
-}
+	td.description,
+	th.description {
+		width: 302.36px;
+		max-width: 302.36px;
+	}
 
-td.quantity,
-th.quantity {
-    width: 302.36px;
-    max-width: 302.36px;
-    word-break: break-all;
-}
+	td.quantity,
+	th.quantity {
+		width: 302.36px;
+		max-width: 302.36px;
+		word-break: break-all;
+	}
 
-td.price,
-th.price {
-    width: 302.36px;
-    max-width: 302.36px;
-    word-break: break-all;
+	td.price,
+	th.price {
+		width: 302.36px;
+		max-width: 302.36px;
+		word-break: break-all;
 		text-align: center;
-}
+	}
 
-.centered {
-    text-align: center;
-    align-content: center;
-}
+	.centered {
+		text-align: center;
+		align-content: center;
+	}
 
-.ticket {
-    width: 302.36px;
-    max-width: 302.36px;
-}
+	.ticket {
+		width: 302.36px;
+		max-width: 302.36px;
+	}
 
-img {
-    max-width: inherit;
-    width: inherit;
-}
+	img {
+		max-width: inherit;
+		width: inherit;
+	}
 
-.navbar, .fixed-sidebar-left {
-	display: none;
-}
-
-
-
+	.navbar,
+	.fixed-sidebar-left {
+		display: none;
+	}
 </style>
 <div class="ticket">
-            <img src="./logo.png" alt="Logo">
-            <p class="centered">Mashisoyo Cambodia
-                <br>Address line 1
-                <br>Address line 2</p>
-            <table>
-                <thead>
-                    <tr>
-                        <th class="quantity">QTY</th>
-                        <th class="description">Description</th>
-                        <th class="price">$$</th>
-                    </tr>
-                </thead>
-                <tbody>
-										<%@order.order_items.each do |order|%>
-											<tr>
-													<td class="quantity"><%=order.quantity%></td>
-													<td class="description"><%=order.product.product_name%></td>
-													<td class="price"><%=number_to_currency(order.product.product_price)%></td>
-											</tr>
-										<%end%>
-                    <tr>
-                        <td class="quantity"></td>
-                        <td class="description">TOTAL</td>
-                        <td class="price">$55.00</td>
-                    </tr>
-                </tbody>
-            </table>
-            <p class="centered">Thanks for your purchase!
-                <br>parzibyte.me/blog</p>
-        </div>
-<button type="button" id="print" class="btn btn-default btn-outline btn-icon left-icon " onclick="javascript:window.print();">
-                    <i class="fa fa-print"></i>
-                    <span>
-                      Print</span>
-                  </button>
+	<img src="./logo.png" alt="Logo">
+	<p class="centered">Mashisoyo Cambodia
+		<br>Address line 1
+		<p style="text-align: center; font-weight: bold;">វិក្កយបត្រ/Invoice</p>
+		<p style=" margin: 0px;">វិក្កយបត្រ/Invoice No: <span style="float: right; margin-top: 5px;"><%=@order.id%></span>
+		</p>
+		<p style=" margin: 0px;">តុ/Table: <span
+				style="float: right; margin-top: 5px;"><%=@order.table_number.split(" ")[0]%>
+				<%=@order.table_number.split(" ")[1]%></span></p>
+		<p style=" margin: 0px;">អ្នកគិតលុយ/Cashier: <span
+				style="float: right; margin-top: 5px;"><%=@order.user.username%></span></p>
+		<p style=" margin: 0px;">កាលបរិច្ឆេត/Date Time: <span
+				style="float: right; margin-top: 5px;"><%=@order.created_at%></span></p>
+
+		<table>
+			<thead>
+				<tr>
+					<th class="quantity">QTY <br> ចំនួន</th>
+					<th class="description">Description <br> បរិយាយ</th>
+					<th class="price">Price​ <br> តំលៃ </th>
+				</tr>
+			</thead>
+			<tbody>
+				<%@order.order_items.each do |order|%>
+				<tr style="border-top: 1px solid black; border-bottom: 1px solid black;">
+					<td class="quantity"><%=order.quantity%></td>
+					<td class="description"><%=order.product.product_name%></td>
+					<td class="price"><%=number_to_currency(order.product.product_price)%></td>
+				</tr>
+				<%end%>
+				<tr>
+					<td class="quantity"></td>
+					<td class="description">តំលៃ​ USD/Total </td>
+					<td class="price"><%=number_to_currency(@order.subtotal)%></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td class="description">តំលៃ​ Riel/Total </td>
+					<td class="price"><%=number_to_currency(@order.total_cash_in_riel)%></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td class="description">បញ្ចុះតំលៃ/Discount </td>
+					<td class="price"><%=@order.discount%> %</td>
+				</tr>
+
+				<tr>
+						<td>ប្រាក់ត្រូវបង់/Grand Total: </td>
+						<td></td>
+						<td class="price"><%=number_to_currency(@order.total)%></td>
+					</tr>
+			</tbody>
+		</table>
+		<p class="centered">Thanks for your supporting!
+			<br></p>
+</div>
+<button type="button" id="print" class="btn btn-default btn-outline btn-icon left-icon "
+	onclick="javascript:window.print();">
+	<i class="fa fa-print"></i>
+	<span>
+		Print</span>
+</button>
