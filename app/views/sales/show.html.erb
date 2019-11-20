@@ -3,8 +3,100 @@
   <div class="container">
     <!-- Row -->
     <div class="row">
-      <%= link_to "Print", "#{}", class: 'waves-effect waves-light btn-large indigo darken-4 white-text', id: "checkout" %>
+      <div class="col-md-12">
+        <div class="panel panel-default border-panel card-view">
+          <div class="panel-heading">
+            <div class="pull-left">
+              <h6 class="panel-title txt-dark">Invoice</h6>
+            </div>
+            <div class="pull-right">
+              <h6 class="txt-dark">Order #000<%=@order.id%></h6>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="panel-wrapper collapse in">
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-xs-6">
+                  <span class="txt-dark head-font inline-block capitalize-font mb-5">Billed to:</span>
+                  <address class="mb-15">
+                    <span class="address-head mb-5">Kompot Restuanrent</span>
+                    795 Folsom Ave, Suite 600
+                    <br>
+                    San Francisco, CA 94107
+                    <br>
+                    <abbr title="Phone">P:</abbr>(133) 456-7890
+                  </address>
+                </div>
+                <div class="col-xs-6 text-right">
+                  <span class="txt-dark head-font inline-block capitalize-font mb-5">shiped to:</span>
+                  <address class="mb-15">
+                    <span class="address-head mb-5">Xyz, Inc.</span>
+                    795 Folsom Ave, Suite 600
+                    <br>
+                    San Francisco, CA 94107
+                    <br>
+                    <abbr title="Phone">P:</abbr>(123) 456-7890
+                  </address>
+                </div>
+              </div>
 
+              <div class="row">
+                <div class="col-xs-6">
+                </div>
+                <div class="col-xs-6 text-right">
+                  <address>
+                    <span class="txt-dark head-font capitalize-font mb-5">order date:</span><br>
+                    <%=@order.order_date%><br><br>
+                  </address>
+                </div>
+              </div>
+
+              <div class="seprator-block"></div>
+
+              <div class="invoice-bill-table">
+                <div class="table-responsive">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>Item</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Totals</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <%@order.order_items.each do |item|%>
+                        <tr>
+                          <td><%=item.product.product_name.capitalize%></td>
+                          <td><%=number_to_currency(item.product.product_price)%></td>
+                          <td><%=item.quantity%></td>
+                          <td><%=number_to_currency(item.total_price)%></td>
+                        </tr>
+                      <%end%>
+                      <tr class="txt-dark">
+                        <td></td>
+                        <td></td>
+                        <td>Total</td>
+                        <td><%=number_to_currency(@order.total)%></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="button-list pull-right">
+                  <%=link_to "Cancel", sales_path, class: "btn btn-orange mr-10", id: "cancel"%>
+                  <button type="button" class="btn btn-default btn-outline btn-icon left-icon" onclick="javascript:window.print();">
+                    <i class="fa fa-print"></i>
+                    <span>
+                      Print</span>
+                  </button>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <!-- /Row -->
     <%=render "applications/footer"%>

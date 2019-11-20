@@ -22,6 +22,7 @@
     margin: 30px auto;
   }
  }
+ 
 .table_none{
   background: #ff6b81;
   text-align: center;
@@ -53,6 +54,7 @@ div.table-card{
   #cancel, #print{
     display: none;
   }
+
   @page {
     size: auto;   /* auto is the current printer page size */
     margin: 0mm;  /* this affects the margin in the printer settings */
@@ -63,12 +65,12 @@ div.table-card{
   }
 
   .panel{
-    width: 100mm;
+    width: 75mm;
   }
 
   td{
-    width: 75mm;
     max-width: 75mm;
+    text-overflow: ellipsis;
   }
 
  }

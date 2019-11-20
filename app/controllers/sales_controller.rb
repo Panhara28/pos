@@ -10,7 +10,6 @@ class SalesController < ApplicationController
   end
 
   def index
-    # session.delete("order_id#{current_user.id}")
     @categories = Category.order(id: :asc)
     session[:order_count] = current_user.orders.where('is_paid=? AND order_date=? AND order_status=?', false, DateTime.now.to_date, 'order').count
     session[:sale_count] = current_user.orders.where('is_paid=? AND order_date=?', true, DateTime.now.to_date).count
@@ -119,7 +118,7 @@ class SalesController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    @order.update(
+    if @order.update(
       is_paid: true, 
       user_id: current_user.id, 
       checkout_date: Date.today, 
@@ -128,8 +127,11 @@ class SalesController < ApplicationController
       real_table_number: @order.table_number,
       order_status: "completed",     
     )
+      redirect_to order_path(@order, state: "reciept")
+    end
     session.delete("order_id#{current_user.id}")
     session.delete("customer_id#{current_user.id}")
+ 
   end
 
 end

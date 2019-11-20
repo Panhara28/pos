@@ -1,113 +1,103 @@
-<!-- Main Content -->
-<div class="page-wrapper">
-  <div class="container" style="margin-top: 20px;">
-    <!-- Row -->
-    <div class="row">
-      <div class="col-md-12">
-        <div class="panel panel-default border-panel card-view">
-          <div class="panel-heading">
-            <div class="pull-left">
-              <h6 class="panel-title txt-dark">Invoice</h6>
-            </div>
-            <div class="pull-right">
-              <h6 class="txt-dark">Order #000<%=@order.id%></h6>
-            </div>
-            <div class="clearfix"></div>
-          </div>
-          <div class="panel-wrapper collapse in">
-            <div class="panel-body">
-              <div class="row">
-                <div class="col-xs-6">
-                  <span class="txt-dark head-font inline-block capitalize-font mb-5">Billed to:</span>
-                  <address class="mb-15">
-                    <span class="address-head mb-5">Kompot Restuanrent</span>
-                    795 Folsom Ave, Suite 600
-                    <br>
-                    San Francisco, CA 94107
-                    <br>
-                    <abbr title="Phone">P:</abbr>(133) 456-7890
-                  </address>
-                </div>
-                <div class="col-xs-6 text-right">
-                  <span class="txt-dark head-font inline-block capitalize-font mb-5">shiped to:</span>
-                  <address class="mb-15">
-                    <span class="address-head mb-5">Xyz, Inc.</span>
-                    795 Folsom Ave, Suite 600
-                    <br>
-                    San Francisco, CA 94107
-                    <br>
-                    <abbr title="Phone">P:</abbr>(123) 456-7890
-                  </address>
-                </div>
-              </div>
+<style type="text/css">
+	@media print{
+		@page {
+			size: auto;   /* auto is the current printer page size */
+			margin: 0mm;  /* this affects the margin in the printer settings */
+		}
+		#cancel, #print{
+			display: none;
+		}
+	}
 
-              <div class="row">
-                <div class="col-xs-6">
-                </div>
-                <div class="col-xs-6 text-right">
-                  <address>
-                    <span class="txt-dark head-font capitalize-font mb-5">order date:</span><br>
-                    <%=@order.order_date%><br><br>
-                  </address>
-                </div>
-              </div>
+  * {
+    font-size: 16px;
+    font-family: 'Times New Roman';
+  }
 
-              <div class="seprator-block"></div>
+  td,
+  th,
+  tr,
+  table {
+      border-top: 1px solid black;
+      border-collapse: collapse;
+  }
 
-              <div class="invoice-bill-table">
-                <div class="table-responsive">
-                  <table class="table table-hover">
-                    <thead>
-                      <tr>
-                        <th>Item</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Totals</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <%@order.order_items.each do |item|%>
-                        <tr>
-                          <td><%=item.product.product_name.capitalize%></td>
-                          <td><%=number_to_currency(item.product.product_price)%></td>
-                          <td><%=item.quantity%></td>
-                          <td><%=number_to_currency(item.total_price)%></td>
-                        </tr>
-                      <%end%>
-                      <tr class="txt-dark">
-                        <td></td>
-                        <td></td>
-                        <td>Total</td>
-                        <td><%=number_to_currency(@order.total)%></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="button-list pull-right">
-                  <%=link_to "Cancel", sales_path, class: "btn btn-orange mr-10"%>
-                  <button type="button" class="btn btn-default btn-outline btn-icon left-icon" onclick="javascript:window.print();">
+td.description,
+th.description {
+    width: 302.36px;
+    max-width: 302.36px;
+}
+
+td.quantity,
+th.quantity {
+    width: 302.36px;
+    max-width: 302.36px;
+    word-break: break-all;
+}
+
+td.price,
+th.price {
+    width: 302.36px;
+    max-width: 302.36px;
+    word-break: break-all;
+		text-align: center;
+}
+
+.centered {
+    text-align: center;
+    align-content: center;
+}
+
+.ticket {
+    width: 302.36px;
+    max-width: 302.36px;
+}
+
+img {
+    max-width: inherit;
+    width: inherit;
+}
+
+.navbar, .fixed-sidebar-left {
+	display: none;
+}
+
+
+
+</style>
+<div class="ticket">
+            <img src="./logo.png" alt="Logo">
+            <p class="centered">Mashisoyo Cambodia
+                <br>Address line 1
+                <br>Address line 2</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th class="quantity">QTY</th>
+                        <th class="description">Description</th>
+                        <th class="price">$$</th>
+                    </tr>
+                </thead>
+                <tbody>
+										<%@order.order_items.each do |order|%>
+											<tr>
+													<td class="quantity"><%=order.quantity%></td>
+													<td class="description"><%=order.product.product_name%></td>
+													<td class="price"><%=number_to_currency(order.product.product_price)%></td>
+											</tr>
+										<%end%>
+                    <tr>
+                        <td class="quantity"></td>
+                        <td class="description">TOTAL</td>
+                        <td class="price">$55.00</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="centered">Thanks for your purchase!
+                <br>parzibyte.me/blog</p>
+        </div>
+<button type="button" id="print" class="btn btn-default btn-outline btn-icon left-icon " onclick="javascript:window.print();">
                     <i class="fa fa-print"></i>
                     <span>
                       Print</span>
                   </button>
-                </div>
-                <div class="clearfix"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- /Row -->
-    <%=render "applications/footer"%>
-  </div>
-
-<script>
-
-  jQuery("#checkout").on('click', function() {
-    $('div#cont').removeClass('container');
-    $('div#card').removeClass('card-panel');
-    print();
-  });
-
-</script>
