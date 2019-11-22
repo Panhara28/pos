@@ -1,0 +1,54 @@
+<div class="wrapper theme-2-active navbar-top-light horizontal-nav">
+  <%=render "components/nav"%>
+  <%=render "components/setting"%>
+  <!-- Main Content -->
+  <div class="page-wrapper">
+    <div class="container pt-30">
+      <div class="col-sm-4">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="panel panel-default card-view  pa-0">
+              <div class="panel-wrapper collapse in">
+                <div class="panel-body  pa-0">
+                  <div class="profile-box">
+                    <div class="profile-cover-pic">
+                      <div class="fileupload btn btn-default">
+                        <%=link_to edit_admin_admin_path(current_admin.id) do%>
+                          <span class="btn-text">edit</span>
+                        <%end%>
+                      </div>
+                      <div class="profile-image-overlay"></div>
+                    </div>
+                    <div class="profile-info text-center mb-15">
+                      <div class="profile-img-wrap">
+                        <img class="inline-block mb-10" src="<%=current_admin.photo%>" alt="user">
+                        <div class="fileupload btn btn-default">
+                          <%=link_to edit_admin_admin_path(current_admin.id) do%>
+                            <span class="btn-text">edit</span>
+                          <%end%>
+                          <input class="upload" type="file">
+                        </div>
+                      </div>
+                      <h5 class="block mt-10 weight-500 capitalize-font txt-dark"><%=current_admin.username.capitalize%></h5>
+                      <h6 class="block capitalize-font"><%=current_admin.role%></h6>
+                    </div>
+                    <div class="social-info">
+                      <%=link_to edit_admin_admin_path(current_admin.id), class: "btn btn-orange btn-block  btn-anim mt-15" do%>
+                        <i class="fa fa-pencil"></i><span class="btn-text">edit profile</span>
+                      <%end%>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%=render "components/footer"%>
+
+</div>
+<!-- /Main Content -->
+</div>

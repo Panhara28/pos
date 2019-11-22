@@ -1,0 +1,21 @@
+<tr class="delete_admin_<%=admin.id%>">
+  <td>
+    <%=admin.username%>
+  </td>
+  <td>
+    <%=admin.email%>
+  </td>
+  <td>
+    <%=time_ago(admin.created_at)%>
+  </td>
+  <td>
+    <%=form_for([:admin, admin], remote: true) do |f|%>
+      <%=link_to admin_admin_path(admin),class: "btn btn-primary", "data-target" => "bd-example-modal-lg-panhara" do %>
+        View
+      <%end%>
+      <%=link_to edit_admin_admin_path(admin),id: "link_#{admin.id}",class: "btn btn-primary" do %>
+        Edit
+      <% end %>
+    <%end%>
+  </td>
+</tr>

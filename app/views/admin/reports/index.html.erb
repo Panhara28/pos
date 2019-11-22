@@ -1,3 +1,80 @@
+<div class="wrapper theme-2-active navbar-top-light horizontal-nav">
+	<%=render "components/nav"%>
+	<%=render "components/setting"%>
+	<!-- Main Content -->
+	<div class="page-wrapper">
+		<div class="container pt-30">
+			<!-- Row -->
+			<div class="row">
+				<div class="col-sm-12">
+          <div class="panel panel-default border-panel card-view">
+							<div class="panel-heading">
+								<div class="pull-left">
+									<h6 class="panel-title txt-dark">Report</h6>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body">
+									<div class="tab-struct custom-tab-2 mt-40">
+										<ul role="tablist" class="nav nav-tabs" id="myTabs_15">
+											<li class="active" role="presentation"><a aria-expanded="true" data-toggle="tab" role="tab" id="home_tab_15" href="#dailysale">Daily Sale</a></li>
+											<li role="presentation" class=""><a data-toggle="tab" id="profile_tab_15" role="tab" href="#seller" aria-expanded="false">By Seller</a></li>
+                      <li role="presentation" class=""><a data-toggle="tab" id="profile_tab_15" role="tab" href="#category" aria-expanded="false">By Category</a></li>
+                      <li role="presentation" class=""><a data-toggle="tab" id="profile_tab_15" role="tab" href="#cashdrawer" aria-expanded="false">By Cash Drawer</a></li>
+										</ul>
+										<div class="tab-content" id="myTabContent_15">
+											<div id="dailysale" class="tab-pane fade active in" role="tabpanel">
+												<h5>Dailly Sale</h5>
+                        <%= simple_form_for :report, :url => admin_reports_path, method: "get" do |f| %>
+                          <div class="row">
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label for="recipient-name" class="control-label mb-10">Date From</label>
+                                <%= f.date_field :dailly_sale_date_from, class: "form-control", value: session[:dailly_sale_date_from],placeholder: 'Choose one from date' %>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label for="recipient-name" class="control-label mb-10">To Date</label>
+                                  <%= f.date_field :dailly_sale_date_to, class: "form-control", value: session[:dailly_sale_date_to],placeholder: 'Choose one to date' %>
+                              </div>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="modal-footer">
+                                <%=link_to "Back", admin_dashboards_path, class: "btn btn-default"%>
+                                <%=f.submit "Result", class: "btn btn-success"%>
+                              </div>
+                            </div>
+                          </div>
+                        <% end %>
+											</div>
+											<div id="seller" class="tab-pane fade" role="tabpanel">
+												<p>Seller</p>
+											</div>
+											<div id="category" class="tab-pane fade " role="tabpanel">
+												<p>Category</p>
+											</div>
+											<div id="cashdrawer" class="tab-pane fade" role="tabpanel">
+												<p>Cashdrawer</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+				</div>
+			</div>
+			<!-- /Row -->
+		</div>
+
+		<%=render "components/footer"%>
+
+	</div>
+	<!-- /Main Content -->
+</div>
+
+
 <div class="card-panel white" id="admin">
   <div class="row">
     <div class="col s12">
@@ -51,10 +128,10 @@
       <%= simple_form_for :report, :url => admin_reports_path, method: "get" do |f| %>
         <div class="row">
           <div class="col s4">
-            <%= f.text_field :dailly_sale_date_from, class: "datepicker", value: session[:dailly_sale_date_from],placeholder: 'Choose one from date' %>
+            <%= f.date_field :dailly_sale_date_from, class: "datepicker", value: session[:dailly_sale_date_from],placeholder: 'Choose one from date' %>
           </div>
           <div class="col s4">
-            <%= f.text_field :dailly_sale_date_to, class: "datepicker", value: session[:dailly_sale_date_to],placeholder: 'Choose one to date' %>
+            <%= f.date_field :dailly_sale_date_to, class: "datepicker", value: session[:dailly_sale_date_to],placeholder: 'Choose one to date' %>
           </div>
           <div class="col s4">
             <%= f.button :submit, "Query Result", id: "btnDaillySale", :class => "btn-large indigo darken-4" %>

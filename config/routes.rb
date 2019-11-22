@@ -25,7 +25,8 @@ Rails.application.routes.draw do
     devise_for :admins, :controllers => { :registrations => :registrations }
 
     namespace :admin do
-      get '/', to: 'admin#index', as: 'dashboards'
+      get '/', to: 'dashboards#index', as: 'dashboards'
+      resources :reports, only: [:index]
       resources :categories
       resources :products
       resources :cash_drawers
@@ -36,6 +37,7 @@ Rails.application.routes.draw do
       resources :exchange_rates
       resources :order_items
       resources :orders
+      resources :admins
     end
 
 end

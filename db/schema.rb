@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191117123757) do
+ActiveRecord::Schema.define(version: 20191122042336) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
@@ -35,6 +35,10 @@ ActiveRecord::Schema.define(version: 20191117123757) do
     t.integer "pin"
     t.boolean "is_pin_required"
     t.string "username"
+    t.string "photo_file_name"
+    t.string "photo_content_type"
+    t.bigint "photo_file_size"
+    t.datetime "photo_updated_at"
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
     t.index ["username"], name: "index_admins_on_username", unique: true
@@ -116,7 +120,7 @@ ActiveRecord::Schema.define(version: 20191117123757) do
     t.decimal "tax", precision: 12, scale: 3, default: "0.0"
     t.decimal "shipping", precision: 12, scale: 3, default: "0.0"
     t.decimal "discount", precision: 12, scale: 3, default: "0.0"
-    t.string "order_status", default: "pending"
+    t.string "order_status"
     t.bigint "seat_table_id"
     t.integer "waitting_no"
     t.decimal "cash", precision: 12, scale: 3, default: "0.0"
@@ -126,6 +130,8 @@ ActiveRecord::Schema.define(version: 20191117123757) do
     t.time "checkout_time"
     t.string "table_number"
     t.string "real_table_number"
+    t.decimal "usd", precision: 10
+    t.decimal "riel", precision: 10
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["seat_table_id"], name: "index_orders_on_seat_table_id"
     t.index ["user_id"], name: "index_orders_on_user_id"

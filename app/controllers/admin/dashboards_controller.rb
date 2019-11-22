@@ -1,7 +1,5 @@
-class Admin::AdminController < DashboardsController
-
+class Admin::DashboardsController < DashboardsController
   before_action :authenticate_admin!
-
   layout "dashboards"
 
   def index
@@ -9,5 +7,5 @@ class Admin::AdminController < DashboardsController
     @products = Product.all
     @order_items = OrderItem.all
   end
-
+  
 end

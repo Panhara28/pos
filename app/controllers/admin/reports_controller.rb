@@ -1,4 +1,5 @@
 class Admin::ReportsController < DashboardsController
+  before_action :authenticate_admin!
     layout "dashboards"
   def index
     if params[:commit].present?

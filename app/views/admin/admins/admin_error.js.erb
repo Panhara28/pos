@@ -1,0 +1,4 @@
+$("input#admin_email").val("");
+$("input#admin_fullname").val("");
+$("input#admin_organization").val("");
+$("#admin-errors").html("<br><%= j render partial: 'layouts/flash_errors', locals: {flash: :flash}%>");
