@@ -120,7 +120,7 @@ ActiveRecord::Schema.define(version: 20191122042336) do
     t.decimal "tax", precision: 12, scale: 3, default: "0.0"
     t.decimal "shipping", precision: 12, scale: 3, default: "0.0"
     t.decimal "discount", precision: 12, scale: 3, default: "0.0"
-    t.string "order_status"
+    t.string "order_status", default: "pending"
     t.bigint "seat_table_id"
     t.integer "waitting_no"
     t.decimal "cash", precision: 12, scale: 3, default: "0.0"
@@ -130,8 +130,6 @@ ActiveRecord::Schema.define(version: 20191122042336) do
     t.time "checkout_time"
     t.string "table_number"
     t.string "real_table_number"
-    t.decimal "usd", precision: 10
-    t.decimal "riel", precision: 10
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["seat_table_id"], name: "index_orders_on_seat_table_id"
     t.index ["user_id"], name: "index_orders_on_user_id"

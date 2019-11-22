@@ -19,9 +19,6 @@
 									<div class="tab-struct custom-tab-2 mt-40">
 										<ul role="tablist" class="nav nav-tabs" id="myTabs_15">
 											<li class="active" role="presentation"><a aria-expanded="true" data-toggle="tab" role="tab" id="home_tab_15" href="#dailysale">Daily Sale</a></li>
-											<li role="presentation" class=""><a data-toggle="tab" id="profile_tab_15" role="tab" href="#seller" aria-expanded="false">By Seller</a></li>
-                      <li role="presentation" class=""><a data-toggle="tab" id="profile_tab_15" role="tab" href="#category" aria-expanded="false">By Category</a></li>
-                      <li role="presentation" class=""><a data-toggle="tab" id="profile_tab_15" role="tab" href="#cashdrawer" aria-expanded="false">By Cash Drawer</a></li>
 										</ul>
 										<div class="tab-content" id="myTabContent_15">
 											<div id="dailysale" class="tab-pane fade active in" role="tabpanel">
@@ -49,77 +46,13 @@
                           </div>
                         <% end %>
 											</div>
-											<div id="seller" class="tab-pane fade" role="tabpanel">
-												<p>Seller</p>
-											</div>
-											<div id="category" class="tab-pane fade " role="tabpanel">
-												<p>Category</p>
-											</div>
-											<div id="cashdrawer" class="tab-pane fade" role="tabpanel">
-												<p>Cashdrawer</p>
-											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 				</div>
-        <div class="col-sm-12">
-          <div class="panel panel-default border-panel card-view">
-							<div class="panel-heading">
-								<div class="pull-left">
-									<h6 class="panel-title txt-dark">Report</h6>
-								</div>
-								<div class="clearfix"></div>
-							</div>
-							<div class="panel-wrapper collapse in">
-								<div class="panel-body">
-                    <div class="table-wrap mt-40">
-										<div class="table-responsive">
-                      <% if @dailly_sales.present? %>
-                        <table class="table mb-0">
-                          <thead>
-                            <tr>
-                            <th>#</th>
-                            <th>Order Date</th>
-                            <th>Checkout Date</th>
-                            <th>Sub Total</th>
-                            <th>Discount</th>
-                            <th>Total</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <% @dailly_sales.each do |order| %>
-                              <tr>
-                                <td>
-                                  <%= '%09d' % order.id %>
-                                </td>
-                                <td>
-                                  <%= order.order_date %>
-                                </td>
-                                <td>
-                                  <%= order.checkout_date %>
-                                </td>
-                                <td>
-                                  <%= number_to_currency order.subtotal %>
-                                </td>
-                                <td>
-                                  <%= number_to_percentage order.discount %>
-                                </td>
-                                <td>
-                                  <%= number_to_currency order.total %>
-                                </td>
-                              </tr>
-                           <%end%>
-                          </tbody>
-                        </table>
-                      <%end%>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-				</div>
+        <%= render "sale_report"%>
 			</div>
     
       
