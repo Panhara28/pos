@@ -54,7 +54,7 @@
 
 	.ticket {
 		margin-left: 0.4cm;
-		max-width: 70mm;
+		max-width: 80mm;
 	}
 
 	img {
@@ -115,7 +115,7 @@
 									<tr>
 										<td></td>
 										<td class="description">តំលៃ​ Riel/Total </td>
-										<td class="price"><%=number_to_currency(@order.total_cash_in_riel)%></td>
+										<td class="price"><%=@order.total * Constant.exchange_rate%></td>
 									</tr>
 									<tr>
 										<td></td>
