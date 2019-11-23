@@ -1,53 +1,94 @@
-<div class="card-panel white" id="admin">
-  <table class="striped responsive-table">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>#{t('.photo')}</th>
-        <th>#{t('.first_name')}</th>
-        <th>#{t('.last name')}</th>
-        <th>#{t('.email')}</th>
-        <th>#{t('.role')}</th>
-        <th>#{t('.is_active')}</th>
-        <th>#{t('.delete')}</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @users.each do |user| %>
-        <tr>
-          <td>
-            <%= user.id %>
-          </td>
-          <td>
-            <%= image_tag user.photo_url, size: '100x100', class: 'circle' if user.photo.present? %>
-          </td>
-          <td>
-            <%= user.first_name %>
-          </td>
-          <td>
-            <%= user.last_name %>
-          </td>
-          <td>
-            <%= user.email %>
-          </td>
-          <td>
-            <%= user.role %>
-          </td>
-          <% if user.is_active? %>
-            <td>Enable </td>
-          <% else %>
-            <td>Disable</td>
-          <% end %>
-          <td>
-            <%= link_to admin_user_path(user), class: "red-text", method: :put, data: { confirm: 'Are you sure want to disable this user?' } do %>
-              <i class="material-icons">phonelink_lock</i>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <div id="paginate">
-    <%= will_paginate @users, renderer: MaterializePagination::Rails %>
-  </div>
+<div class="wrapper theme-2-active navbar-top-light horizontal-nav">
+	<%=render "components/nav"%>
+	<%=render "components/setting"%>
+	<!-- Main Content -->
+	<div class="page-wrapper">
+		<div class="container pt-30">
+			<!-- Title -->
+			<div class="row heading-bg">
+				<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+					<h5 class="txt-dark">Employee</h5>
+					<div class="panel-wrapper collapse in">
+						<div class="panel-body" style="padding-left: 0px;">
+							<div class="button-list">
+								<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Add New Employee</button>
+							</div>
+							<div class="modal fade bs-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+								<div class="modal-dialog modal-lg" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span></button>
+											<h5 class="modal-title" id="exampleModalLabel1">New Employee</h5>
+										</div>
+										<div class="modal-body">
+											<div id="users">
+												<div id="user-errors"></div>
+												<div id="user-success"></div>
+												<%=render partial: "user_form", locals: {user: @user}%>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Breadcrumb -->
+				<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+					<ol class="breadcrumb">
+						<li>
+							<a href="/admin/dashboard">Dashboard</a>
+						</li>
+						<li class="active">
+							<span>Employee</span></li>
+					</ol>
+				</div>
+				<!-- /Breadcrumb -->
+			</div>
+			<!-- /Title -->
+
+			<!-- Row -->
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="panel panel-default border-panel card-view">
+						<div class="panel-heading">
+							<div class="pull-left">
+								<h6 class="panel-title txt-dark">Employee</h6>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="panel-wrapper collapse in">
+							<div class="panel-body">
+								<div class="table-wrap">
+									<div class="">
+										<table id="myTable1" class="table table-hover display  pb-30">
+											<thead>
+												<tr>
+													<th>Username</th>
+													<th>Email</th>
+													<th>Created At</th>
+													<th>Actions</th>
+												</tr>
+											</thead>
+											<tbody id="user-index">
+												<%if @users.any?%>
+													<%= render @users%>
+												<%end%>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /Row -->
+		</div>
+
+		<%=render "components/footer"%>
+
+	</div>
+	<!-- /Main Content -->
 </div>

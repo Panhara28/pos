@@ -8,7 +8,7 @@ class Admin < ApplicationRecord
 
   has_many :categories
   has_many :products
-
+  has_many :users
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, authentication_keys: [:login]
 

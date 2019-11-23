@@ -15,22 +15,9 @@
 
         <li class="dropdown auth-drp">
           <a href="#" class="dropdown-toggle pr-0" data-toggle="dropdown"><img
-              src="https://hencework.com/theme/admintres/img/user1.png" alt="user_auth"
+              src="<%=current_user.photo%>" alt="user_auth"
               class="user-auth-img img-circle" /><span class="user-online-status"></span></a>
           <ul class="dropdown-menu user-auth-dropdown" data-dropdown-in="flipInX" data-dropdown-out="flipOutX">
-            <li>
-              <a href="profile.html"><i class="zmdi zmdi-account"></i><span>Profile</span></a>
-            </li>
-            <li>
-              <a href="#"><i class="zmdi zmdi-card"></i><span>my balance</span></a>
-            </li>
-            <li>
-              <a href="inbox.html"><i class="zmdi zmdi-email"></i><span>Inbox</span></a>
-            </li>
-            <li>
-              <a href="#"><i class="zmdi zmdi-settings"></i><span>Settings</span></a>
-            </li>
-
             <li class="divider"></li>
             <li>
               <%=link_to destroy_user_session_path, method: :delete do%>
@@ -59,11 +46,28 @@
       <%end%>
     </li>
     <li>
-      <%=link_to orders_path do%>
+      <%=link_to new_customer_path do%>
+        <div class="pull-left"><i class="ti-user mr-20"></i><span class="right-nav-text">Customer</span></div>
+        <div class="clearfix"></div>
+      <%end%>
+    </li>
+    <li>
+      <%=link_to orders_path(state: "ordered") do%>
         <div class="pull-left">
           <i class=" ti-receipt mr-20"></i>
           <span class="right-nav-text session_order_count">
             Tables (<%= "#{ Order.where(order_status: "order").count}" %>)
+          </span>
+        </div>
+        <div class="clearfix"></div>
+      <%end%>
+    </li>
+    <li>
+      <%=link_to orders_path(state: "completed") do%>
+        <div class="pull-left">
+          <i class=" ti-receipt mr-20"></i>
+          <span class="right-nav-text session_order_count">
+            Invoices (<%= "#{ Order.where(order_status: "completed").count}" %>)
           </span>
         </div>
         <div class="clearfix"></div>

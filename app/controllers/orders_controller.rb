@@ -1,11 +1,16 @@
 class OrdersController < DashboardsController
   before_action :authenticate_user!
   def index
-    if params[:query].present?
-      @orders = Order.unpaid_order.search(params[:query])
-    else
+    # if params[:query].present?
+    #   @orders = Order.unpaid_order.search(params[:query])
+    # else
+    #   @orders = Order.where('is_paid=? AND order_status=?', false, "order").order('id desc')
+    # end 
+    if params[:state] == "ordered"
       @orders = Order.where('is_paid=? AND order_status=?', false, "order").order('id desc')
-    end 
+    else
+      @orders = Order.where('is_paid=? AND order_status=?', true, "completed").order('id desc')
+    end
   end
 
   def show

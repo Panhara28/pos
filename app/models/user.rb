@@ -6,19 +6,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, authentication_keys: [:login]
 
-  has_and_belongs_to_many :permissions
-
-  has_and_belongs_to_many :stocks
-
   has_many :orders
-
-  has_many :cash_drawers
-
-  has_many :stock_requests
-
-  has_many :expenses
-
-  has_many :commodities, through: :stock_requests
+  belongs_to :admin, optional: true
 
   validates :username, presence: :true, uniqueness: { case_sensitive: false }
 
@@ -33,13 +22,12 @@ class User < ApplicationRecord
     @login || self.username || self.email
   end
 
-  # enum role: [:user, :seller]
-  # after_initialize :set_default_role, :if => :new_record?
+  enum role: [:user, :seller, :employee]
+  after_initialize :set_default_role, :if => :new_record?
 
-  # def set_default_role
-  #   self.role ||= :user
-  # end
-
+  def set_default_role
+    self.role ||= :user
+  end
 
   def self.find_for_database_authentication(warden_conditions)
       conditions = warden_conditions.dup

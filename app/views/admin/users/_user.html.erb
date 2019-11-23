@@ -1,0 +1,21 @@
+<tr class="delete_user_<%=user.id%>">
+  <td>
+    <%=user.username%>
+  </td>
+  <td>
+    <%=user.email%>
+  </td>
+  <td>
+    <%=time_ago(user.created_at)%>
+  </td>
+  <td>
+    <%=form_for([:admin, user], remote: true) do |f|%>
+      <%=link_to admin_user_path(user),class: "btn btn-primary", "data-target" => "bd-example-modal-lg-panhara" do %>
+        View
+      <%end%>
+      <%=link_to edit_admin_user_path(user),id: "link_#{user.id}",class: "btn btn-primary" do %>
+        Edit
+      <% end %>
+    <%end%>
+  </td>
+</tr>

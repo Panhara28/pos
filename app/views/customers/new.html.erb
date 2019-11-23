@@ -1,0 +1,58 @@
+<!-- Main Content -->
+<div class="page-wrapper">
+  <div class="container pt-30">
+    <div class="row">
+      <div class="col-md-9">
+        <div class="panel panel-success card-view">
+          <div class="panel-heading">
+            <div class="pull-left">
+              <h6 class="panel-title txt-light">Create New Customer</h6>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="panel-wrapper collapse in">
+            <div class="panel-body">
+              <%= simple_form_for @customer do |f| %>
+              <% if @customer.errors.any? %>
+                <div id="error_explanation">
+                  <h4>
+                    <%= pluralize(@customer.errors.count, "error") %>
+                    prohibited this cash drawer from being saved:
+                  </h4>
+                  <ul>
+                    <% @customer.errors.full_messages.each do |message| %>
+                      <li>
+                        <%= message %>
+                      </li>
+                    <% end %>
+                  </ul>
+                </div>
+              <% end %>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="recipient-name" class="control-label mb-10">Customer Name</label>
+                    <%= f.text_field :customer_name, class: "form-control" %>
+                  </div>
+                </div>
+                
+                <div class="col-md-12">
+                  <div class="modal-footer">
+                    <%=f.submit class: "btn btn-success"%>
+                  </div>
+                </div>
+              </div>
+
+            <%end%>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%=render "components/footer"%>
+
+</div>
+<!-- /Main Content -->

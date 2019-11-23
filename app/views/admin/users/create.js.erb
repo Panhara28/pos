@@ -1,0 +1,13 @@
+$("input#admin_email").val("");
+$("input#admin_fullname").val("");
+$("input#admin_organization").val("");
+$(".disabled").attr("disabled", false)
+$("#admin-errors").html(" ");
+$("#admin-success").html("<%= custom_flash_message%>");
+$("#admin-index").append("<%=escape_javascript render(@admin)%>");
+
+$(function() {
+  $('.delete_admin_<%=@admin.id%>').submitOnCheck();
+});
+
+$('.delete_admin_<%=@admin.id%>').submitOnCheck();

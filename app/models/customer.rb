@@ -1,7 +1,7 @@
 class Customer < ApplicationRecord
 
 
-  validates :customer_name, :phone, presence: true
+  validates :customer_name, presence: true
 
   has_many :orders, dependent: :nullify
 

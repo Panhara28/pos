@@ -13,7 +13,7 @@ class CustomersController < ApplicationController
     @customer.user_id = current_user.id
     if @customer.save
       flash[:notice] = "Your customer has been created."
-      redirect_to customers_path
+      redirect_to sales_path
     else
       flash[:alert] = "Something went wrong."
       render :new

@@ -1,6 +1,7 @@
 class Order < ApplicationRecord
 
   OPTION_TABLE = [
+    "Take Away",
     "1",
     "2",
     "3",
