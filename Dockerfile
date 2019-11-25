@@ -9,7 +9,7 @@ WORKDIR $RAILS_ROOT
 # RUN echo "URL=mysql2://panhra:panhara28@157.230.254.45/point_of_sale_production" >> /var/www/app_name/.env
 
 # Adding gems
-# COPY Gemfile Gemfile
+COPY Gemfile Gemfile
 COPY Gemfile.lock Gemfile.lock
 RUN gem install bundler:2.0.2
 RUN bundle install --jobs 20 --retry 5 --without development test
