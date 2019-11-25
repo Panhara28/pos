@@ -1,4 +1,6 @@
 class Product < ApplicationRecord
+  
+  include ImageUploader[:image]
 
   belongs_to :admin
 
@@ -9,6 +11,4 @@ class Product < ApplicationRecord
 
   default_scope { where(active: true) }
 
-  has_attached_file :photo, style: { medium: "300x500>",thumb: "100x100>" }
-  validates_attachment_content_type :photo, content_type: /\Aimage\/.*\z/
 end

@@ -62,6 +62,22 @@ GEM
     airbrussh (1.3.0)
       sshkit (>= 1.6.1, != 1.7.0)
     arel (8.0.0)
+    aws-eventstream (1.0.3)
+    aws-partitions (1.244.0)
+    aws-sdk-core (3.81.0)
+      aws-eventstream (~> 1.0, >= 1.0.2)
+      aws-partitions (~> 1, >= 1.239.0)
+      aws-sigv4 (~> 1.1)
+      jmespath (~> 1.0)
+    aws-sdk-kms (1.25.0)
+      aws-sdk-core (~> 3, >= 3.71.0)
+      aws-sigv4 (~> 1.1)
+    aws-sdk-s3 (1.57.0)
+      aws-sdk-core (~> 3, >= 3.77.0)
+      aws-sdk-kms (~> 1)
+      aws-sigv4 (~> 1.1)
+    aws-sigv4 (1.1.0)
+      aws-eventstream (~> 1.0, >= 1.0.2)
     bcrypt (3.1.12)
     bindex (0.5.0)
     builder (3.2.3)
@@ -114,6 +130,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
+    content_disposition (1.0.0)
     crass (1.0.4)
     devise (4.5.0)
       bcrypt (~> 3.0)
@@ -125,6 +142,8 @@ GEM
     dotenv-rails (2.7.5)
       dotenv (= 2.7.5)
       railties (>= 3.2, < 6.1)
+    down (5.0.0)
+      addressable (~> 2.5)
     erubi (1.7.1)
     erubis (2.7.0)
     execjs (2.7.0)
@@ -152,6 +171,7 @@ GEM
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
+    jmespath (1.4.0)
     jquery-rails (4.3.3)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -255,6 +275,9 @@ GEM
       childprocess (~> 0.5)
       rubyzip (~> 1.2)
     sexp_processor (4.11.0)
+    shrine (3.1.0)
+      content_disposition (~> 1.0)
+      down (~> 5.0)
     simple_form (4.0.1)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
@@ -309,6 +332,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aws-sdk-s3
   byebug
   capistrano (= 3.5.0)
   capistrano-nginx
@@ -338,6 +362,7 @@ DEPENDENCIES
   ransack!
   sass-rails (~> 5.0)
   selenium-webdriver
+  shrine
   simple_form
   spring
   spring-watcher-listen (~> 2.0.0)
