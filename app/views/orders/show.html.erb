@@ -107,38 +107,26 @@
 										<td class="price"><%=number_to_currency(order.product.product_price)%></td>
 									</tr>
 									<%end%>
-									<tr>
-										<td class="quantity"></td>
-										<td class="description">តំលៃ​ USD/Total </td>
-										<td class="price"><%=number_to_currency(@order.subtotal)%></td>
-									</tr>
-									<tr>
-										<td></td>
-										<td class="description">តំលៃ​ Riel/Total </td>
-										<td class="price"><%=@order.total * Constant.exchange_rate%></td>
-									</tr>
-									<tr>
-										<td></td>
-										<td class="description">បញ្ចុះតំលៃ/Discount </td>
-										<td class="price"><%=@order.discount%> %</td>
-									</tr>
-
-									<tr>
-										<td>ប្រាក់ត្រូវបង់/Grand Total: </td>
-										<td></td>
-										<td class="price"><%=number_to_currency(@order.total)%></td>
-									</tr>
 								</tbody>
 							</table>
+							<div style="margin-top: 10px;">
+								<p style=" margin: 0px;">តំលៃ​ USD/Total   
+								<span style="float: right;"><%=number_to_currency(@order.subtotal)%></span></p>
+								<p style=" margin: 0px;">តំលៃ​ Riel/Total   
+								<span style="float: right;">៛ <%=@order.total * Constant.exchange_rate%></span></p>
+								<p style=" margin: 0px;">បញ្ចុះតំលៃ/Discount  
+								<span style="float: right;"><%=@order.discount%> %</span></p>
+								<p style=" margin: 0px;">ប្រាក់ត្រូវបង់/Grand Total:  
+								<span style="float: right;"><%=number_to_currency(@order.total)%></span></p>
+							</div>
+							
 							<p class="centered">Thanks for your supporting!
 								<br></p>
 					</div>
-					<button type="button" id="print" class="btn btn-default btn-outline btn-icon left-icon "
-						onclick="javascript:window.print();">
+					<%=link_to print_reciept_path(@order), class: "btn btn-default btn-outline btn-icon left-icon", onclick: "javascript:window.print();", id: "print" do%>
 						<i class="fa fa-print"></i>
-						<span>
-							Print</span>
-					</button>
+						<span>Print</span>
+					<%end%>
 					<%=link_to "Cancel", sales_path, class: "btn btn-danger", id: "cancel"%>
 				</div>
 			</div>

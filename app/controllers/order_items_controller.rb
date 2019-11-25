@@ -7,19 +7,6 @@ class OrderItemsController < DashboardsController
     session[:sale_count] = current_user.orders.where('is_paid=? AND order_date=?', true, DateTime.now.to_date).count
   end
 
-  # def create
-  #   @order_item = OrderItem.new
-  #   @order_item.quantity = params[:quantity]
-  #   @order_item.product_id = params[:product_id]
-  #   @order_item.order_id = current_order.id
-  #   if @order_item.save
-  #     redirect_to sales_path
-  #   end
-  #   puts @order_item.errors.full_messages
-
-  # end
-  
-
   def edit
     @order_item = OrderItem.find(params[:id])
   end

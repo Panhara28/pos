@@ -14,9 +14,12 @@
       <ul class="nav navbar-right top-nav pull-right">
 
         <li class="dropdown auth-drp">
-          <a href="#" class="dropdown-toggle pr-0" data-toggle="dropdown"><img
-              src="<%=current_user.photo%>" alt="user_auth"
-              class="user-auth-img img-circle" /><span class="user-online-status"></span></a>
+          <a href="#" class="dropdown-toggle pr-0" data-toggle="dropdown">
+          <%if current_user.photo.present?%>
+            <img src="<%=current_user.photo%>" alt="user_auth" class="user-auth-img img-circle" /><span class="user-online-status"></span></a>
+          <%else%>
+            <img src="profile.png" alt="user_auth" class="user-auth-img img-circle" /><span class="user-online-status"></span></a>
+          <%end%>
           <ul class="dropdown-menu user-auth-dropdown" data-dropdown-in="flipInX" data-dropdown-out="flipOutX">
             <li class="divider"></li>
             <li>
@@ -66,7 +69,7 @@
       <%=link_to orders_path(state: "completed") do%>
         <div class="pull-left">
           <i class=" ti-receipt mr-20"></i>
-          <span class="right-nav-text session_order_count">
+          <span class="right-nav-text">
             Invoices (<%= "#{ Order.where(order_status: "completed").count}" %>)
           </span>
         </div>

@@ -5,7 +5,7 @@ class Admin::DashboardsController < DashboardsController
   def index
     @orders = Order.all
     @products = Product.all
-    @order_items = OrderItem.all
+    @customers = Customer.all
   end
   
 end
