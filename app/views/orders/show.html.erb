@@ -74,8 +74,9 @@
 	<div class="page-wrapper" style="padding-top: 0px; background: white;">
 		<div class="container pt-30">
 			<div class="row">
-				<div class="col-lg-12">
-
+				<div class="col-lg-4">
+				</div>
+				<div class="col-lg-4">
 					<div class="ticket">
 						<p class="centered">Mashisoyo Cambodia
 							<br>Address line 1
@@ -125,9 +126,11 @@
 					</div>
 					<%=link_to print_reciept_path(@order), class: "btn btn-default btn-outline btn-icon left-icon", onclick: "javascript:window.print();", id: "print" do%>
 						<i class="fa fa-print"></i>
-						<span>Print</span>
+						<span>Pay</span>
 					<%end%>
 					<%=link_to "Cancel", sales_path, class: "btn btn-danger", id: "cancel"%>
+				</div>
+				<div class="col-lg-4">
 				</div>
 			</div>
 		</div>

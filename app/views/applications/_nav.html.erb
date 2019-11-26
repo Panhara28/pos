@@ -12,7 +12,6 @@
     </div>
     <div id="mobile_only_nav" class="mobile-only-nav pull-right">
       <ul class="nav navbar-right top-nav pull-right">
-
         <li class="dropdown auth-drp">
           <a href="#" class="dropdown-toggle pr-0" data-toggle="dropdown">
           <%if current_user.photo.present?%>
@@ -29,6 +28,17 @@
             </li>
           </ul>
         </li>
+        <li>
+        <% if I18n.locale == :km %>
+          <%= link_to url_for(params.permit(:locale).merge({locale: 'en'})), data: { turbolinks: false } do %>
+            <img src="en.svg" width="40"> 
+          <%end%>
+        <% else %>
+          <%= link_to url_for(params.permit(:locale).merge({locale: 'km'})), data: { turbolinks: false } do %>
+            <img src="km.svg" width="40">
+          <%end%>
+        <% end %>
+      </li>
       </ul>
     </div>
   </div>

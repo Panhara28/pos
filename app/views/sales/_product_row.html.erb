@@ -6,7 +6,7 @@
         <%= link_to sales_order_item_path(product_id: product.id, quantity: 1), remote: true do%>
           <div class="photo" style="">
             <%if product.photo.present?%>
-              <img src="<%=product.photo%>" class="img-responsive" alt="Product Image"/>
+              <img src="<%=product.image.url%>" class="img-responsive" alt="Product Image"/>
             <%else%>
               <img src="/chair.jpg" class="img-responsive" alt="Product Image"/>
             <%end%>

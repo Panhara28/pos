@@ -16,6 +16,14 @@
  *= require tether
  */
 
+ .navbar.navbar-inverse.navbar-fixed-top .nav>li>a .user-online-status {
+  right: 15px;
+}
+
+ .navbar.navbar-inverse.navbar-fixed-top .nav>li>a {
+  padding: 0 15px !important;
+}
+
  @media (min-width: 768px){
   .modal-dialog {
     width: 1200px;

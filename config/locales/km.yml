@@ -1,0 +1,18 @@
+km:
+  sales:
+    order_item_row:
+      send_to_order: ផ្ងើរទៅកាន់បញ្ជាទិញ
+      setting: កែប្រែ
+      photo: រូបភាព
+      product: មុខម្ហូប
+      quantity: ចំនួន
+      price: តំលៃ
+      actions: សកម្មភាព
+      customer_cash_in_usd: លុយទទួលជាដុល្លា
+      sub_total: សរុបបឋម
+      vat: ពន្ធ
+      discount: បញ្ជុះតំលៃ
+      change_in_riel: លុយអាប់ជារៀល
+      change_in_dollar: លុយអាប់ជាដុល្លា
+      grand_total_usd: តំលៃសរុបជាដុល្លា
+      grand_total_riel: តំលៃសរុបជារៀល

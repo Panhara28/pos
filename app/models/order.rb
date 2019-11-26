@@ -1,7 +1,7 @@
 class Order < ApplicationRecord
 
   OPTION_TABLE = [
-    "Take Away",
+    "Take Away #{SecureRandom.hex(8)}",
     "1",
     "2",
     "3",

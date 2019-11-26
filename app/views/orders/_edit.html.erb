@@ -1,85 +1,92 @@
 <%=content_tag :div, class: "modal fade modal-slide-right", id: "edit_#{dom_id(@order, :modal)}" do%>
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <div class="row">
-          <div class="col-md-12">
-            <h5 class="m-b-0">Setting</h5>
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="row">
+        <div class="col-md-12">
+          <h5 class="m-b-0">Setting</h5>
+        </div>
+      </div>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body overflow-auto">
+      <%= simple_form_for @order do |f| %>
+      <% if @order.errors.any? %>
+      <div id="error_explanation">
+        <h4>
+          <%= pluralize(@order.errors.count, "error") %>
+          prohibited this cash drawer from being saved:
+        </h4>
+        <ul>
+          <% @order.errors.full_messages.each do |message| %>
+          <li>
+            <%= message %>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+      <% end %>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="recipient-name" class="control-label mb-10">Table</label>
+            <%=f.select :table_number, Order::OPTION_TABLE, { prompt: "Select Table"}, {class: "form-control"}%>
           </div>
         </div>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-        </button>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="recipient-name" class="control-label mb-10">Members</label>
+            <%=f.collection_select :customer_id, Customer.all, :id, :customer_name, { prompt: "Select Customer" } , {class: "form-control select2"}%>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="recipient-name" class="control-label mb-10">VAT</label>
+            <%=f.number_field :tax, class: "form-control"%>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="recipient-name" class="control-label mb-10">Discount</label>
+            <%=f.number_field :discount, class: "form-control"%>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="recipient-name" class="control-label mb-10">USD</label>
+            <%= f.text_field :cash, :class => 'form-control', value: 0.0%>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="recipient-name" class="control-label mb-10">Order Date</label>
+            <%= f.text_field :order_date, :class => 'form-control', placeholder: "Choose order date", disabled: true %>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="recipient-name" class="control-label mb-10">Order Time</label>
+            <%= f.text_field :order_time, :as => :string, :value => time_format(f.object.order_time), :class => 'form-control', label: false, placeholder: "Choose order time", disabled: true %>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <%=f.submit class: "btn btn-success"%>
+          </div>
+        </div>
       </div>
-      <div class="modal-body overflow-auto">
-        <%= simple_form_for @order do |f| %>
-              <% if @order.errors.any? %>
-              <div id="error_explanation">
-                <h4>
-                  <%= pluralize(@order.errors.count, "error") %>
-                  prohibited this cash drawer from being saved:
-                </h4>
-                <ul>
-                  <% @order.errors.full_messages.each do |message| %>
-                    <li>
-                      <%= message %>
-                    </li>
-                  <% end %>
-                </ul>
-              </div>
-              <% end %>
-              <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="recipient-name" class="control-label mb-10">Table</label>
-                  <%=f.select :table_number, Order::OPTION_TABLE, { prompt: "Select Table"}, {class: "form-control"}%>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="recipient-name" class="control-label mb-10">Members</label>
-                  <%=f.collection_select :customer_id, Customer.all, :id, :customer_name, { prompt: "Select Customer" } , {class: "form-control select2"}%>
-                </div>
-              </div>
 
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="recipient-name" class="control-label mb-10">VAT</label>
-                  <%=f.number_field :tax, class: "form-control"%>
-                </div>
-              </div>
-
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="recipient-name" class="control-label mb-10">Discount</label>
-                  <%=f.number_field :discount, class: "form-control"%>
-                </div>
-              </div>
-
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="recipient-name" class="control-label mb-10">Order Date</label>
-                    <%= f.text_field :order_date, :class => 'form-control', placeholder: "Choose order date", disabled: true %>
-                  </div>
-                </div>
-
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="recipient-name" class="control-label mb-10">Order Time</label>
-                    <%= f.text_field :order_time, :as => :string, :value => time_format(f.object.order_time), :class => 'form-control', label: false, placeholder: "Choose order time", disabled: true %>
-                  </div>
-                </div>
-
-                <div class="col-md-12">
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <%=f.submit class: "btn btn-success"%>
-                  </div>
-                </div>
-              </div>
-
-            <%end%>
-      </div>
+      <%end%>
     </div>
   </div>
+</div>
 <%end%>
