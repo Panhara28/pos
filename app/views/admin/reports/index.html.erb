@@ -7,55 +7,56 @@
 			<!-- Row -->
 			<div class="row">
 				<div class="col-sm-12">
-          <div class="panel panel-default border-panel card-view">
-							<div class="panel-heading">
-								<div class="pull-left">
-									<h6 class="panel-title txt-dark">Report</h6>
-								</div>
-								<div class="clearfix"></div>
+					<div class="panel panel-default border-panel card-view">
+						<div class="panel-heading">
+							<div class="pull-left">
+								<h6 class="panel-title txt-dark">Report</h6>
 							</div>
-							<div class="panel-wrapper collapse in">
-								<div class="panel-body">
-									<div class="tab-struct custom-tab-2 mt-40">
-										<ul role="tablist" class="nav nav-tabs" id="myTabs_15">
-											<li class="active" role="presentation"><a aria-expanded="true" data-toggle="tab" role="tab" id="home_tab_15" href="#dailysale">Daily Sale</a></li>
-										</ul>
-										<div class="tab-content" id="myTabContent_15">
-											<div id="dailysale" class="tab-pane fade active in" role="tabpanel">
-												<h3>Dailly Sale</h3>
-                        <%= simple_form_for :report, :url => admin_reports_path, method: "get" do |f| %>
-                          <div class="row">
-                            <div class="col-md-6">
-                              <div class="form-group">
-                                <label for="recipient-name" class="control-label mb-10">Date From</label>
-                                <%= f.date_field :dailly_sale_date_from, class: "form-control", value: session[:dailly_sale_date_from],placeholder: 'Choose one from date' %>
-                              </div>
-                            </div>
-                            <div class="col-md-6">
-                              <div class="form-group">
-                                <label for="recipient-name" class="control-label mb-10">To Date</label>
-                                  <%= f.date_field :dailly_sale_date_to, class: "form-control", value: session[:dailly_sale_date_to],placeholder: 'Choose one to date' %>
-                              </div>
-                            </div>
-                            <div class="col-md-12">
-                              <div class="modal-footer">
-                                <%=link_to "Reset", admin_reports_path, class: "btn btn-danger"%>
-                                <%=f.submit "Result", class: "btn btn-success"%>
-                              </div>
-                            </div>
-                          </div>
-                        <% end %>
+							<div class="clearfix"></div>
+						</div>
+						<div class="panel-wrapper collapse in">
+							<div class="panel-body">
+								<div class="tab-struct custom-tab-2 mt-40">
+									<ul role="tablist" class="nav nav-tabs" id="myTabs_15">
+										<li class="active" role="presentation"><a aria-expanded="true" data-toggle="tab" role="tab"
+												id="home_tab_15" href="#dailysale">Daily Sale</a></li>
+									</ul>
+									<div class="tab-content" id="myTabContent_15">
+										<div id="dailysale" class="tab-pane fade active in" role="tabpanel">
+											<h3>Dailly Sale</h3>
+											<%= simple_form_for :report, :url => admin_reports_path, method: "get" do |f| %>
+											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group">
+														<label for="recipient-name" class="control-label mb-10">Date From</label>
+														<%= f.date_field :dailly_sale_date_from, class: "form-control", value: session[:dailly_sale_date_from],placeholder: 'Choose one from date' %>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="form-group">
+														<label for="recipient-name" class="control-label mb-10">To Date</label>
+														<%= f.date_field :dailly_sale_date_to, class: "form-control", value: session[:dailly_sale_date_to],placeholder: 'Choose one to date' %>
+													</div>
+												</div>
+												<div class="col-md-12">
+													<div class="modal-footer">
+														<%=link_to "Reset", admin_reports_path, class: "btn btn-danger"%>
+														<%=f.submit "Result", class: "btn btn-success"%>
+													</div>
+												</div>
 											</div>
+											<% end %>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
+					</div>
 				</div>
-        <%= render "sale_report"%>
+				<%= render "sale_report"%>
 			</div>
-    
-      
+
+
 			<!-- /Row -->
 		</div>
 
@@ -64,4 +65,3 @@
 	</div>
 	<!-- /Main Content -->
 </div>
-

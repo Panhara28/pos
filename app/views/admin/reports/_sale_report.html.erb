@@ -1,64 +1,64 @@
 <div class="col-sm-12">
   <div class="panel panel-default border-panel card-view">
-      <div class="panel-heading">
-        <div class="pull-left">
-          <h6 class="panel-title txt-dark">Report</h6>
-        </div>
-        <div class="clearfix"></div>
+    <div class="panel-heading">
+      <div class="pull-left">
+        <h6 class="panel-title txt-dark">Report</h6>
       </div>
-      <div class="panel-wrapper collapse in">
-        <div class="panel-body">
-            <div class="table-wrap mt-40">
-            <div class="table-responsive">
-              <% if @dailly_sales.present? %>
-                <table class="table mb-0">
-                  <thead>
-                    <tr>
-                    <th>#</th>
-                    <th>Order Date</th>
-                    <th>Checkout Date</th>
-                    <th>Sub Total</th>
-                    <th>Discount</th>
-                    <th>Total</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <% @dailly_sales.each do |order| %>
-                      <tr>
-                        <td>
-                          <%= '%09d' % order.id %>
-                        </td>
-                        <td>
-                          <%= order.order_date %>
-                        </td>
-                        <td>
-                          <%= order.checkout_date %>
-                        </td>
-                        <td>
-                          <%= number_to_currency order.subtotal %>
-                        </td>
-                        <td>
-                          <%= number_to_percentage order.discount %>
-                        </td>
-                        <td>
-                          <%= number_to_currency order.total %>
-                        </td>
-                      </tr>
-                   <%end%>
-                   <tr>
-                     <td></td>
-                     <td></td>
-                     <td></td>
-                     <td></td>
-                     <td></td>
-                     <td><strong>Total Sales: <%= number_to_currency @dailly_sales.sum(:total) %></strong></td>
-                   </tr>
-                  </tbody>
-                </table>
-              <%end%>
-            </div>
+      <div class="clearfix"></div>
+    </div>
+    <div class="panel-wrapper collapse in">
+      <div class="panel-body">
+        <div class="table-wrap mt-40">
+          <div class="table-responsive">
+            <% if @dailly_sales.present? %>
+            <table class="table mb-0">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Order Date</th>
+                  <th>Checkout Date</th>
+                  <th>Sub Total</th>
+                  <th>Discount</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @dailly_sales.each do |order| %>
+                <tr>
+                  <td>
+                    <%= '%09d' % order.id %>
+                  </td>
+                  <td>
+                    <%= order.order_date %>
+                  </td>
+                  <td>
+                    <%= order.checkout_date %>
+                  </td>
+                  <td>
+                    <%= number_to_currency order.subtotal %>
+                  </td>
+                  <td>
+                    <%= number_to_percentage order.discount %>
+                  </td>
+                  <td>
+                    <%= number_to_currency order.total %>
+                  </td>
+                </tr>
+                <%end%>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td><strong>Total Sales: <%= number_to_currency @dailly_sales.sum(:total) %></strong></td>
+                </tr>
+              </tbody>
+            </table>
+            <%end%>
           </div>
         </div>
       </div>
     </div>
+  </div>
 </div>
