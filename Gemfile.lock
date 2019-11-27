@@ -102,6 +102,9 @@ GEM
       sshkit-interactive (~> 0.3.0)
     capistrano-rails-db (0.0.2)
       capistrano-rails (~> 1.1)
+    capistrano-rvm (0.1.2)
+      capistrano (~> 3.0)
+      sshkit (~> 1.2)
     capistrano-upload-config (0.8.2)
       capistrano (>= 3.0)
     capistrano3-puma (2.0.0)
@@ -334,6 +337,7 @@ DEPENDENCIES
   capistrano-rails
   capistrano-rails-console
   capistrano-rails-db
+  capistrano-rvm
   capistrano-upload-config
   capistrano3-puma
   capybara (~> 2.13)

@@ -85,7 +85,7 @@ gem 'font-awesome-rails'
 gem 'toastr-rails'
 group :development do
   gem 'capistrano', '3.5.0'
-  # gem 'capistrano-rvm'
+  gem 'capistrano-rvm'
   gem 'capistrano-nginx'
   gem 'capistrano3-puma'
   gem 'capistrano-rails'
