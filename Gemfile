@@ -92,5 +92,5 @@ group :development do
   gem 'capistrano-rails-db'
   gem 'capistrano-rails-console'
   gem 'capistrano-upload-config'
-  gem 'sshkit-sudo'
+  # gem 'sshkit-sudo'
 end

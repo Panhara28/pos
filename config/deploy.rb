@@ -50,13 +50,13 @@
 
 lock '3.5.0'
 
-set :repo_url, 'https://panharabit@bitbucket.org/panharabit/salemanagement-system.git'
+set :repo_url, 'https://github.com/Panhara28/pos'
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
-set :user, 'mcpanhara'
-set :application, 'salemanagement-system'
+set :user, 'mashisoyo'
+set :application, 'pos'
 set :rails_env, 'production'
-server '104.199.230.76', user: "#{fetch(:user)}", roles: %w{app db web}, primary: true
+server '157.245.148.44', user: "#{fetch(:user)}", roles: %w{app db web}, primary: true
 set :deploy_to,       "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
 set :pty, true
 
