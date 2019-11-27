@@ -5,8 +5,6 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-ruby '2.5.0'
-
 gem 'shrine'
 
 gem 'aws-sdk-s3'
@@ -87,7 +85,7 @@ gem 'font-awesome-rails'
 gem 'toastr-rails'
 group :development do
   gem 'capistrano', '3.5.0'
-  gem 'capistrano-rvm'
+  # gem 'capistrano-rvm'
   gem 'capistrano-nginx'
   gem 'capistrano3-puma'
   gem 'capistrano-rails'
