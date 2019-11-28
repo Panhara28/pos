@@ -298,6 +298,8 @@ GEM
       net-ssh (>= 2.8.0)
     sshkit-interactive (0.3.0)
       sshkit (~> 1.12)
+    sshkit-sudo (0.1.0)
+      sshkit (~> 1.8)
     temple (0.8.0)
     terrapin (0.6.0)
       climate_control (>= 0.0.3, < 1.0)
@@ -364,6 +366,7 @@ DEPENDENCIES
   simple_form
   spring
   spring-watcher-listen (~> 2.0.0)
+  sshkit-sudo
   toastr-rails
   turbolinks (~> 5)
   tzinfo-data
