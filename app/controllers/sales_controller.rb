@@ -118,19 +118,7 @@ class SalesController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    # if @order.update(
-    #   is_paid: true, 
-    #   user_id: current_user.id, 
-    #   checkout_date: Date.today, 
-    #   checkout_time: Time.now.strftime("%H:%M:%S"),
-    #   table_number: "Take Away #{SecureRandom.hex(8)}",
-    #   real_table_number: @order.table_number,
-    #   order_status: "completed",     
-    # )
-      redirect_to order_path(@order, state: "reciept")
-    # end
-    # session.delete("order_id#{current_user.id}")
-    # session.delete("customer_id#{current_user.id}")
+    redirect_to order_path(@order, state: "reciept")
   end
 
   def print_reciept
@@ -149,6 +137,5 @@ class SalesController < ApplicationController
     session.delete("order_id#{current_user.id}")
     session.delete("customer_id#{current_user.id}")
   end
-  
 
 end

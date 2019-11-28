@@ -31,6 +31,12 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
+                    <label for="recipient-name" class="control-label mb-10">Unit Price</label>
+                    <%= f.number_field :unit_price, class: "form-control" %>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
                     <label for="recipient-name" class="control-label mb-10">QTY</label>
                     <%= f.text_field :quantity, class: "form-control" %>
                   </div>

@@ -124,9 +124,9 @@
 							<p class="centered">Thanks for your supporting!
 								<br></p>
 					</div>
-					<%=link_to print_reciept_path(@order), class: "btn btn-default btn-outline btn-icon left-icon", onclick: "javascript:window.print();", id: "print" do%>
+					<%=link_to print_success_path(@order), class: "btn btn-default btn-outline btn-icon left-icon", onclick: "javascript:window.print();", id: "print" do%>
 						<i class="fa fa-print"></i>
-						<span>Pay</span>
+						<span>Send To Kitchen</span>
 					<%end%>
 					<%=link_to "Cancel", sales_path, class: "btn btn-danger", id: "cancel"%>
 				</div>
