@@ -1,0 +1,25 @@
+<tr class="delete_delivery_<%=delivery.id%>">
+
+  <td>
+    <%= delivery.company%>
+  </td>
+
+  <td>
+    <%=number_to_currency(delivery.delivery_fee)%>
+  </td>
+
+  <td>
+    <%=time_ago(delivery.created_at)%>
+  </td>
+
+  <td>
+    <%=form_for([:admin, delivery], remote: true) do |f|%>
+      <%=link_to admin_delivery_path(delivery), email: "View" do %>
+        View
+      <%end%>
+      <%=link_to edit_admin_delivery_path(delivery), email: "Edit",id: "show-form_#{delivery.id}" do %>
+        Edit
+      <%end%>
+    <%end%>
+  </td>
+</tr>

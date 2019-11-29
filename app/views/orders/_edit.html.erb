@@ -29,14 +29,22 @@
       </div>
       <% end %>
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
           <div class="form-group">
-            <label for="recipient-name" class="control-label mb-10">Table</label>
-            <%=f.select :table_number, Order::OPTION_TABLE, { prompt: "Select Table"}, {class: "form-control"}%>
+            <label for="recipient-name" class="control-label mb-10">Delivery Company</label>
+            <%=f.collection_select :delivery_id, Delivery.all, :id, :company, { prompt: "Select Company" } , {class: "form-control select2"}%>
           </div>
         </div>
+
         <div class="col-md-6">
-          <div class="form-group">
+          <div class="form-group" style="margin-top: 10px; margin-bottom: 20px;">
+            <label for="recipient-name" class="control-label mb-10">Table</label>
+            <%=f.select :table_number, Order::OPTION_TABLE, { prompt: "Select Table"}, {class: "form-control select2"}%>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group" style="margin-top: 10px; margin-bottom: 20px;">
             <label for="recipient-name" class="control-label mb-10">Members</label>
             <%=f.collection_select :customer_id, Customer.all, :id, :customer_name, { prompt: "Select Customer" } , {class: "form-control select2"}%>
           </div>
@@ -56,10 +64,17 @@
           </div>
         </div>
 
-        <div class="col-md-12">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="recipient-name" class="control-label mb-10">Delivery Fee</label>
+            <%= f.number_field :delivery_fee, :class => 'form-control', value: 0.0%>
+          </div>
+        </div>
+
+        <div class="col-md-6">
           <div class="form-group">
             <label for="recipient-name" class="control-label mb-10">USD</label>
-            <%= f.text_field :cash, :class => 'form-control', value: 0.0%>
+            <%= f.number_field :cash, :class => 'form-control', value: 0.0%>
           </div>
         </div>
 
@@ -90,3 +105,6 @@
   </div>
 </div>
 <%end%>
+<script>
+  $(document).ready(function() { $(".select2").select2(); });
+</script>

@@ -25,6 +25,8 @@ class Order < ApplicationRecord
 
   has_many :order_items, dependent: :destroy
 
+  belongs_to :delivery, optional: true
+
   scope :unpaid_order, -> { where(is_paid: false) }
 
   scope :paid_order, -> { where(is_paid: true) }

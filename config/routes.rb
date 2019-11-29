@@ -17,6 +17,8 @@ Rails.application.routes.draw do
     get "print_reciept/:id" => "sales#print_reciept", as: "print_reciept"
     get "print_to_kitchen/:id" => "orders#print_to_kitchen", as: "print_to_kitchen"
     get 'print_success/:id' => "orders#print_success", as: "print_success"
+    
+    resources :deliveries
     resources :order_items
     resources :orders
     resources :customers
@@ -40,6 +42,7 @@ Rails.application.routes.draw do
       resources :order_items
       resources :orders
       resources :admins
+      resources :deliveries
     end
 
 end
