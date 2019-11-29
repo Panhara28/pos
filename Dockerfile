@@ -15,8 +15,8 @@ RUN gem install bundler:2.0.2
 RUN bundle install --jobs 20 --retry 5 --without development test
 # Adding project files
 COPY . .
-# RUN bundle exec rake db:create
+RUN bundle exec rake db:create
 RUN bundle exec rake db:migrate
-# RUN bundle exec rake db:seed
+RUN bundle exec rake db:seed
 EXPOSE 80
 CMD ["rackup","config.ru", "--host", "0.0.0.0", "--port", "80"]
