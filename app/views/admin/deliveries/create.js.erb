@@ -1,0 +1,11 @@
+$("input#delivery_company").val("");
+$("input#delivery_delivery_fee").val("");
+$("#delivery-errors").html(" ");
+$("#delivery-success").html("<%= custom_flash_message%>");
+$("#delivery-index").append("<%=escape_javascript render(@delivery)%>");
+
+$(function() {
+  $('.delete_delivery_<%=@delivery.id%>').submitOnCheck();
+});
+
+$('.delete_delivery_<%=@delivery.id%>').submitOnCheck();

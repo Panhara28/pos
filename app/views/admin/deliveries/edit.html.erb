@@ -1,0 +1,52 @@
+<div class="wrapper theme-2-active navbar-top-light horizontal-nav">
+	<%=render "components/nav"%>
+	<%=render "components/setting"%>
+	<!-- Main Content -->
+	<div class="page-wrapper">
+		<div class="container pt-30">
+			<div class="row">
+				<div class="col-md-9">
+					<div class="panel panel-success card-view">
+						<div class="panel-heading">
+							<div class="pull-left">
+								<h6 class="panel-title txt-light">Edit Product</h6>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="panel-wrapper collapse in">
+							<div class="panel-body">
+								<%=simple_form_for([:admin, @delivery]) do |f|%>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="recipient-name" class="control-label mb-10">Company Name</label>
+											<%=f.text_field :company, class: "form-control"%>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="recipient-name" class="control-label mb-10">Delivery Fee</label>
+											<%=f.number_field :delivery_fee, class: "form-control", step: :any%>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="modal-footer">
+											<%=link_to "Cancel", admin_deliveries_path, class: "btn btn-default"%>
+											<%=f.submit class: "btn btn-success"%>
+										</div>
+									</div>
+								</div>
+							<%end%>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<%=render "components/footer"%>
+
+</div>
+<!-- /Main Content -->
+</div>

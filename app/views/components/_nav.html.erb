@@ -91,6 +91,13 @@
     </li>
 
     <li>
+      <%=link_to admin_deliveries_path do%>
+        <div class="pull-left"><i class="ti-money mr-20"></i><span class="right-nav-text">Delivery</span></div>
+        <div class="clearfix"></div>
+      <%end%>
+    </li>
+
+    <li>
       <%=link_to admin_order_items_path do%>
         <div class="pull-left"><i class="ti-money mr-20"></i><span class="right-nav-text"><%= session[:order_count].present? ? "Sales (#{session[:sale_count]})" : "Sales"%></span></div>
         <div class="clearfix"></div>

@@ -29,6 +29,12 @@
       </div>
       <% end %>
       <div class="row">
+      <div class="col-md-12">
+          <div class="form-group">
+            <label for="recipient-name" class="control-label mb-10">Delivery Company</label>
+            <%=f.collection_select :delivery_id, Delivery.all, :id, :company, { prompt: "Select Company" } , {class: "form-control select2"}%>
+          </div>
+        </div>
         <div class="col-md-6">
           <div class="form-group">
             <label for="recipient-name" class="control-label mb-10">Table</label>

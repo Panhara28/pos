@@ -11,6 +11,7 @@ class User < ApplicationRecord
 
   has_many :orders
   belongs_to :admin, optional: true
+  has_many :deliveries
 
   validates :username, presence: :true, uniqueness: { case_sensitive: false }
 

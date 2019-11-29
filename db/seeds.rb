@@ -9,7 +9,7 @@ puts 'CREATED  Email: ' << user.email
 
 Customer.create!([
   {
-    customer_name: "Guest",
+    customer_name: "Guest Test",
     phone: "123456789"
   }
 ])
