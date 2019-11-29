@@ -83,7 +83,6 @@ source 'https://rails-assets.org' do
 end
 gem 'font-awesome-rails'
 gem 'toastr-rails'
-gem "select2-rails"
 group :development do
   gem 'capistrano', '3.5.0'
   gem 'capistrano-rvm'
