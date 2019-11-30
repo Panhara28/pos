@@ -15,11 +15,11 @@ gem 'cocoon', '~> 1.2.0'
 
 gem 'paperclip'
 
-gem 'ransack', github: 'activerecord-hackery/ransack'
+gem 'ransack'
 
 gem 'kaminari', '~> 1.1', '>= 1.1.1'
 
-gem 'ckeditor', github: 'galetahub/ckeditor'
+gem 'ckeditor'
 
 gem 'simple_form'
 
