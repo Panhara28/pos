@@ -1,0 +1,43 @@
+<div class="wrapper theme-2-active navbar-top-light horizontal-nav">
+	<%=render "components/nav"%>
+	<%=render "components/setting"%>
+	<!-- Main Content -->
+	<div class="page-wrapper">
+		<div class="container pt-30">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="panel panel-success card-view">
+						<div class="panel-heading">
+							<div class="pull-left">
+								<h6 class="panel-title txt-light">Delivery Detail</h6>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="panel-wrapper collapse in">
+							<div class="panel-body">
+								<span>
+									Company Name:
+									<span><%=@delivery.company%></span>
+								</span>
+								<hr>
+								<span>
+									Delivery Fee:
+									<span><%=number_to_currency(@delivery.delivery_fee)%></span>
+								</span>
+								<hr>
+								<div class="pull-left">
+									<%=link_to "Cancel", admin_deliveries_path, class: "btn btn-warning"%>
+									<%=link_to "Edit", edit_admin_delivery_path(@delivery), class: "btn btn-success"%>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<%=render "components/footer"%>
+
+	</div>
+	<!-- /Main Content -->
+</div>

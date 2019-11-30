@@ -55,6 +55,16 @@ class OrdersController < DashboardsController
     end
   end
 
+  
+  def print_to_kitchen
+    @order = Order.find(params[:id])
+  end
+
+  def print_success
+    redirect_to sales_path
+    flash[:notice] = "Print To Kitchen Successfully"
+  end
+
   private
     def order_params
       params.required(:order).permit!

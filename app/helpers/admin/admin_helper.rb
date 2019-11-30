@@ -1,4 +1,20 @@
 module Admin::AdminHelper
+  def free?(obj)
+    if obj === 0.0
+      content_tag(:td, "Free")
+    else
+      content_tag(:td, number_to_currency(obj))
+    end
+  end
+
+  def in_invoice_free?(obj)
+    if obj === 0.0
+      content_tag(:td, number_to_currency(obj), class: "price")
+    else
+      content_tag(:td, number_to_currency(obj), class: "price")
+    end
+  end
+
   def custom_flash_message
     flash_messages = []
     flash.each do |type, message|

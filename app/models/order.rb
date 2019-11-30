@@ -2,6 +2,7 @@ class Order < ApplicationRecord
 
   OPTION_TABLE = [
     "Take Away #{SecureRandom.hex(8)}",
+    "Delivery #{SecureRandom.hex(8)}",
     "1",
     "2",
     "3",
@@ -24,6 +25,8 @@ class Order < ApplicationRecord
   has_many :invoices
 
   has_many :order_items, dependent: :destroy
+
+  belongs_to :delivery, optional: true
 
   scope :unpaid_order, -> { where(is_paid: false) }
 

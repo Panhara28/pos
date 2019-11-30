@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191125073607) do
+ActiveRecord::Schema.define(version: 20191129034910) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
@@ -79,6 +79,15 @@ ActiveRecord::Schema.define(version: 20191125073607) do
     t.index ["user_id"], name: "index_customers_on_user_id"
   end
 
+  create_table "deliveries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.decimal "delivery_fee", precision: 10
+    t.string "company"
+    t.integer "admin_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "exchange_rates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "usd_amount"
     t.float "riel_amount", limit: 24
@@ -120,7 +129,7 @@ ActiveRecord::Schema.define(version: 20191125073607) do
     t.decimal "tax", precision: 12, scale: 3, default: "0.0"
     t.decimal "shipping", precision: 12, scale: 3, default: "0.0"
     t.decimal "discount", precision: 12, scale: 3, default: "0.0"
-    t.string "order_status"
+    t.string "order_status", default: "pending"
     t.bigint "seat_table_id"
     t.integer "waitting_no"
     t.decimal "cash", precision: 12, scale: 3, default: "0.0"
@@ -130,6 +139,11 @@ ActiveRecord::Schema.define(version: 20191125073607) do
     t.time "checkout_time"
     t.string "table_number"
     t.string "real_table_number"
+    t.decimal "delivery_fee", precision: 12, scale: 3
+<<<<<<< HEAD
+=======
+    t.integer "delivery_id"
+>>>>>>> 9c3c1de9b7ce31b396036af2f6bb6764d936e5dc
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["seat_table_id"], name: "index_orders_on_seat_table_id"
     t.index ["user_id"], name: "index_orders_on_user_id"

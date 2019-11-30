@@ -40,8 +40,7 @@
                       <td>
                         <%=order_item.quantity%>
                       </td>
-                      <td><%= number_to_currency order_item.unit_price, precision: 2 %></td>
-
+                      <%= free?(order_item.unit_price) %>
                       <td>
                       <%= link_to edit_order_item_path(order_item), data: { turbolinks: false }, style: "margin-bottom: 5px;", class: "btn btn-primary" do %>
                         <i class="fa fa-pencil"></i>
