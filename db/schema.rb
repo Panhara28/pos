@@ -140,7 +140,10 @@ ActiveRecord::Schema.define(version: 20191129034910) do
     t.string "table_number"
     t.string "real_table_number"
     t.decimal "delivery_fee", precision: 12, scale: 3
+<<<<<<< HEAD
+=======
     t.integer "delivery_id"
+>>>>>>> 9c3c1de9b7ce31b396036af2f6bb6764d936e5dc
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["seat_table_id"], name: "index_orders_on_seat_table_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
