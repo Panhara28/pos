@@ -9,7 +9,7 @@ WORKDIR $RAILS_ROOT
 # Adding gems
 COPY Gemfile Gemfile
 COPY Gemfile.lock Gemfile.lock
-RUN gem install bundler:2.0.2
+RUN gem install bundler -v 2.0.2
 RUN bundle install --jobs 20 --retry 5 --without development test
 # Adding project fileshearteddingdressraekdbmigrate
 COPY . .
