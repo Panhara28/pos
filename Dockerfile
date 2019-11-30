@@ -1,4 +1,4 @@
-FROM ruby:2.6.3
+FROM ruby:2.6.5
 RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
 # # Set an environment variable where the Rails app is installed to inside of Docker image
 # ENV RAILS_ROOT /var/www/app_name
@@ -11,7 +11,7 @@ RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
 # Adding gems
 COPY Gemfile Gemfile
 COPY Gemfile.lock Gemfile.lock
-RUN gem install bundler:1.17.2
+RUN gem install bundler:2.0.2
 RUN bundle install --jobs 20 --retry 5 --without development test
 # Adding project files
 COPY . .
