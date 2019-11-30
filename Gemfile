@@ -5,8 +5,6 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-ruby "2.6.5"
-
 gem 'shrine'
 
 gem 'aws-sdk-s3'
@@ -24,8 +22,6 @@ gem 'kaminari', '~> 1.1', '>= 1.1.1'
 gem 'ckeditor'
 
 gem 'simple_form'
-
-gem "haml-rails", "~> 1.0"
 
 gem 'jquery-rails'
 
@@ -85,14 +81,4 @@ source 'https://rails-assets.org' do
 end
 gem 'font-awesome-rails'
 gem 'toastr-rails'
-group :development do
-  gem 'capistrano', '3.5.0'
-  gem 'capistrano-rvm'
-  gem 'capistrano-nginx'
-  gem 'capistrano3-puma'
-  gem 'capistrano-rails'
-  gem 'capistrano-rails-db'
-  gem 'capistrano-rails-console'
-  gem 'capistrano-upload-config'
-  gem 'sshkit-sudo'
-end
+gem "select2-rails"

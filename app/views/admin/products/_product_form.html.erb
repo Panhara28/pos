@@ -44,7 +44,8 @@
 
     <div class="col-md-12">
       <div class="form-group">
-        <%=f.input :description, class: "form-control", as: :ckeditor, input_html: {ckeditor: {toolbar: 'Full'} }%>
+      <label for="recipient-name" class="control-label mb-10">Description</label>
+        <%=f.text_area :description, class: "form-control", rows: "10" %>
       </div>
     </div>
 

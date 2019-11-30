@@ -38,7 +38,7 @@
         <div class="col-md-6">
           <div class="form-group">
             <label for="recipient-name" class="control-label mb-10">Table</label>
-            <%=f.select :table_number, Order::OPTION_TABLE, { prompt: "Select Table"}, {class: "form-control"}%>
+            <%=f.select :table_number, Order::OPTION_TABLE, { prompt: "Select Table"}, {class: "form-control select2"}%>
           </div>
         </div>
         <div class="col-md-6">
@@ -103,3 +103,7 @@
   </div>
 </div>
 <%end%>
+
+<script type="text/javascript">
+$( ".select2" ).select2();
+</script>
