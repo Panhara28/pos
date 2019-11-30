@@ -1,16 +1,18 @@
-FROM ruby:2.6.2-stretch
+FROM ruby:2.6.3
+RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
+# # Set an environment variable where the Rails app is installed to inside of Docker image
+# ENV RAILS_ROOT /var/www/app_name
+# RUN mkdir -p $RAILS_ROOT
+# # Set working directory
+# WORKDIR $RAILS_ROOT
+# RUN touch .env /var/www/app_name
+# RUN echo "URL=mysql2://panhra:panhara28@157.230.254.45/point_of_sale_production" >> /var/www/app_name/.env
 
-# Copy application code
-COPY . /application
-# Change to the application's directory
-WORKDIR /application
-
-RUN gem install bundler:2.0.2
-# Install gems, nodejs and precompile the assets
-RUN bundle install --deployment --without development test \
-    && curl -sL https://deb.nodesource.com/setup_10.x | bash - \
-    && apt install -y nodejs
-
+# Adding gems
+COPY Gemfile Gemfile
+COPY Gemfile.lock Gemfile.lock
+RUN gem install bundler:1.17.2
+RUN bundle install --jobs 20 --retry 5 --without development test
 # Adding project files
 COPY . .
 RUN bundle exec rake db:create
