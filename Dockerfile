@@ -11,9 +11,8 @@ RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
 # Adding gems
 COPY Gemfile Gemfile
 COPY Gemfile.lock Gemfile.lock
-RUN gem install bundler -v 1.17.2
-RUN gem install nokogiri -v 1.10.5
-RUN bundle install --deployment --without development test
+RUN gem install bundler:2.0.2
+RUN bundle install --jobs 20 --retry 5 --without development test
 # Adding project files
 COPY . .
 RUN bundle exec rake db:create
