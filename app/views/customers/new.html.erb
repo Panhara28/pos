@@ -14,28 +14,34 @@
             <div class="panel-body">
               <%= simple_form_for @customer do |f| %>
               <% if @customer.errors.any? %>
-                <div id="error_explanation">
-                  <h4>
-                    <%= pluralize(@customer.errors.count, "error") %>
-                    prohibited this cash drawer from being saved:
-                  </h4>
-                  <ul>
-                    <% @customer.errors.full_messages.each do |message| %>
-                      <li>
-                        <%= message %>
-                      </li>
-                    <% end %>
-                  </ul>
-                </div>
+              <div id="error_explanation">
+                <h4>
+                  <%= pluralize(@customer.errors.count, "error") %>
+                  prohibited this cash drawer from being saved:
+                </h4>
+                <ul>
+                  <% @customer.errors.full_messages.each do |message| %>
+                  <li>
+                    <%= message %>
+                  </li>
+                  <% end %>
+                </ul>
+              </div>
               <% end %>
               <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="recipient-name" class="control-label mb-10">Members Type</label>
+                    <%=f.select :customer_type, Customer::OPTION_TYPES, { prompt: "Select Type"}, {class: "form-control select2"}%>
+                  </div>
+                </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="recipient-name" class="control-label mb-10">Customer Name</label>
                     <%= f.text_field :customer_name, class: "form-control" %>
                   </div>
                 </div>
-                
+
                 <div class="col-md-12">
                   <div class="modal-footer">
                     <%=f.submit class: "btn btn-success"%>
@@ -43,16 +49,16 @@
                 </div>
               </div>
 
-            <%end%>
+              <%end%>
 
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<%=render "components/footer"%>
+  <%=render "components/footer"%>
 
 </div>
 <!-- /Main Content -->

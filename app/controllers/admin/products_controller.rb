@@ -63,7 +63,7 @@ class Admin::ProductsController < DashboardsController
     end
 
     def product_params
-      params.required(:product).permit(:product_no, :product_name, :barcode, :description, :product_price, :sale_tax, :photo, :category_id, :image)
+      params.required(:product).permit(:product_no, :product_name, :barcode, :description, :product_price, :sale_tax, :photo, :category_id, :image, :original_price)
     end
 
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191129034910) do
+ActiveRecord::Schema.define(version: 20191201045822) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 20191129034910) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.string "photo"
+    t.string "customer_type"
     t.index ["user_id"], name: "index_customers_on_user_id"
   end
 
@@ -111,6 +112,7 @@ ActiveRecord::Schema.define(version: 20191129034910) do
     t.datetime "updated_at", null: false
     t.decimal "discount", precision: 12, scale: 3, default: "0.0"
     t.decimal "subtotal", precision: 12, scale: 3
+    t.decimal "original_unit_price", precision: 12, scale: 3
     t.index ["order_id"], name: "index_order_items_on_order_id"
     t.index ["product_id"], name: "index_order_items_on_product_id"
   end
@@ -140,10 +142,8 @@ ActiveRecord::Schema.define(version: 20191129034910) do
     t.string "table_number"
     t.string "real_table_number"
     t.decimal "delivery_fee", precision: 12, scale: 3
-<<<<<<< HEAD
-=======
     t.integer "delivery_id"
->>>>>>> 9c3c1de9b7ce31b396036af2f6bb6764d936e5dc
+    t.decimal "profit", precision: 12, scale: 3
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["seat_table_id"], name: "index_orders_on_seat_table_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
@@ -173,6 +173,7 @@ ActiveRecord::Schema.define(version: 20191129034910) do
     t.bigint "photo_file_size"
     t.datetime "photo_updated_at"
     t.text "image_data"
+    t.decimal "original_price", precision: 12, scale: 3
     t.index ["admin_id"], name: "index_products_on_admin_id"
   end
 
