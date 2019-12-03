@@ -133,7 +133,7 @@ class SalesController < ApplicationController
       table_number: "Take Away #{SecureRandom.hex(8)}",
       real_table_number: @order.table_number,
       order_status: "completed",
-      delivery_fee: @order.delivery.delivery_fee
+      delivery_fee: @order.delivery.present? ? @order.delivery.delivery_fee : 0
     )
       redirect_to sales_path
     end
