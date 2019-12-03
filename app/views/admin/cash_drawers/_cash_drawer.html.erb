@@ -10,9 +10,9 @@
 
   <td><%=cash_drawer.user.username%></td>
 
-  <td><%=cash_drawer.start_at%></td>
+  <td><%=cash_drawer.start_at.to_s(:time) %></td>
 
-  <td><%=cash_drawer.end_at%></td>
+  <td><%=cash_drawer.end_at.to_s(:time) %></td>
 
   <td>
     <%=time_ago(cash_drawer.created_at)%>

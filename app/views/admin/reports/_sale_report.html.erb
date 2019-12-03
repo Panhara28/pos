@@ -19,6 +19,7 @@
                   <th>Checkout Date</th>
                   <th>Sub Total</th>
                   <th>Discount</th>
+                  <th>Profit</th>
                   <th>Total</th>
                 </tr>
               </thead>
@@ -43,6 +44,10 @@
                   <td>
                     <%= number_to_currency order.total %>
                   </td>
+                  <td>
+                    <%= number_to_currency order.profit %>
+                  </td>
+
                 </tr>
                 <%end%>
                 <tr>
@@ -51,7 +56,8 @@
                   <td></td>
                   <td></td>
                   <td></td>
-                  <td><strong>Total Sales: <%= number_to_currency @dailly_sales.sum(:total) %></strong></td>
+                  <td></td>
+                  <td><strong>Total Sales: <%= number_to_currency @dailly_sales.sum(:profit) %></strong></td>
                 </tr>
               </tbody>
             </table>

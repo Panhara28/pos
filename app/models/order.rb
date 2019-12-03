@@ -56,7 +56,7 @@ class Order < ApplicationRecord
     def update_subtotal
       self[:subtotal] = subtotal
       self[:total] = subtotal + self[:tax]+ self[:shipping] - (subtotal * (self[:discount] / 100))
-      self[:profit] = finalize_profit
+      self[:profit] = finalize_profit - delivery_fee.to_d
     end
 
     def update_chash_in

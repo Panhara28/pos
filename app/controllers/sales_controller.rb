@@ -132,7 +132,8 @@ class SalesController < ApplicationController
       checkout_time: Time.now.strftime("%H:%M:%S"),
       table_number: "Take Away #{SecureRandom.hex(8)}",
       real_table_number: @order.table_number,
-      order_status: "completed",     
+      order_status: "completed",
+      delivery_fee: @order.delivery.delivery_fee
     )
       redirect_to sales_path
     end
