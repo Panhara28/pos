@@ -6,6 +6,9 @@ class Admin::DashboardsController < DashboardsController
     @orders = Order.all
     @products = Product.all
     @customers = Customer.all
+    @users = User.all
+    @cash_drawers = CashDrawer.all
+    @orders = Order.all.where(is_paid: true)
   end
   
 end

@@ -21,7 +21,6 @@
                     <table id="example" class="cell-border">
                       <thead>
                         <tr>
-                          <th aria-controls="example" rowspan="1" colspan="1">Waiting No</th>
                           <th>Invoice No</th>
                           <th>Order Date</th>
                           <th>Order Time</th>
@@ -37,9 +36,6 @@
                       <tbody>
                         <%@orders.each do |order|%>
                         <tr class="delete_order_<%=order.id%>">
-                          <td class="center">
-                            <b><%="#{order.waitting_no}"%></b>
-                          </td>
                           <td>
                             <%= '%05d' % order.id %>
                           </td>

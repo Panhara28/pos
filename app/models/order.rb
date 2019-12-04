@@ -46,16 +46,14 @@ class Order < ApplicationRecord
   end
 
   def total
-
-    (subtotal + (1 - self[:tax] / 100) + 0.1) - (subtotal * (self[:discount] / 100))
- 
+    (subtotal + (self[:tax] == 0.0 ? 0.0 : (1 - self[:tax] / 100) + 0.1)) - (subtotal * (self[:discount] / 100))
   end
 
   private
 
     def update_subtotal
       self[:subtotal] = subtotal
-      self[:total] = (subtotal + (1 - self[:tax] / 100) + 0.1) - (subtotal * (self[:discount] / 100))
+      self[:total] = (subtotal + (self[:tax] == 0.0 ? 0.0 : (1 - self[:tax] / 100) + 0.1)) - (subtotal * (self[:discount] / 100))
       self[:profit] = finalize_profit - delivery_fee.to_d
     end
 

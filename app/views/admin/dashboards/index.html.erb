@@ -24,7 +24,7 @@
                       <div class="progress-anim">
                         <div class="progress">
                           <div class="progress-bar progress-bar-orange
-                          wow animated progress-animated" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                          wow animated progress-animated" role="progressbar" aria-valuenow="<%=@orders.count%>" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                       </div>
                     </div>
@@ -51,7 +51,7 @@
                       <div class="progress-anim">
                         <div class="progress">
                           <div class="progress-bar progress-bar-orange
-                          wow animated progress-animated" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                          wow animated progress-animated" role="progressbar" aria-valuenow="<%=@products.count%>" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                       </div>
                     </div>
@@ -78,7 +78,88 @@
                       <div class="progress-anim">
                         <div class="progress text-ok">
                           <div class="progress-bar progress-bar-orange
-                          wow animated progress-animated" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                          wow animated progress-animated" role="progressbar" aria-valuenow="<%=@customers.count%>" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-4 col-xs-12">
+            <div class="panel panel-default card-view pa-0">
+              <div class="panel-wrapper collapse in">
+                <div class="panel-body pa-0">
+                  <div class="sm-data-box">
+                    <div class="container-fluid">
+                      <div class="row">
+                        <div class="col-xs-6 text-center pl-0 pr-0 data-wrap-left">
+                          <span class="txt-dark block counter"><span class="counter-anim"><%=@orders.count%></span></span>
+                          <span class="capitalize-font block">Orders</span>
+                        </div>
+                        <div class="col-xs-6 text-center  pl-0 pr-0 data-wrap-right">
+                          <i class="icon-graph data-right-rep-icon"></i>
+                        </div>
+                      </div>
+                      <div class="progress-anim">
+                        <div class="progress">
+                          <div class="progress-bar progress-bar-orange
+                          wow animated progress-animated" role="progressbar" aria-valuenow="<%=@orders.count%>" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-4 col-xs-12">
+            <div class="panel panel-default card-view pa-0">
+              <div class="panel-wrapper collapse in">
+                <div class="panel-body pa-0">
+                  <div class="sm-data-box">
+                    <div class="container-fluid">
+                      <div class="row">
+                        <div class="col-xs-6 text-center pl-0 pr-0 data-wrap-left">
+                          <span class="txt-dark block counter"><span class="counter-anim"><%=@cash_drawers.count%></span></span>
+                          <span class="capitalize-font block">Cash Drawer</span>
+                        </div>
+                        <div class="col-xs-6 text-center  pl-0 pr-0 data-wrap-right">
+                          <i class="icon-share-alt data-right-rep-icon"></i>
+                        </div>
+                      </div>
+                      <div class="progress-anim">
+                        <div class="progress">
+                          <div class="progress-bar progress-bar-orange
+                          wow animated progress-animated" role="progressbar" aria-valuenow="<%=@cash_drawers.count%>" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-4 col-xs-12">
+            <div class="panel panel-default card-view pa-0">
+              <div class="panel-wrapper collapse in">
+                <div class="panel-body pa-0">
+                  <div class="sm-data-box">
+                    <div class="container-fluid">
+                      <div class="row">
+                        <div class="col-xs-6 text-center pl-0 pr-0 data-wrap-left">
+                          <span class="txt-dark block counter"><span class="counter-anim"><%=@users.count%></span></span>
+                          <span class="capitalize-font block">Employees</span>
+                        </div>
+                        <div class="col-xs-6 text-center  pl-0 pr-0 data-wrap-right">
+                          <i class="icon-people data-right-rep-icon"></i>
+                        </div>
+                      </div>
+                      <div class="progress-anim">
+                        <div class="progress">
+                          <div class="progress-bar progress-bar-orange
+                          wow animated progress-animated" role="progressbar" aria-valuenow="<%=@users.count%>" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                       </div>
                     </div>
