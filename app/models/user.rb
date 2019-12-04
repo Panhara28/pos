@@ -3,8 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   attr_writer :login
 
-  has_attached_file :photo, style: { medium: "300x500>",thumb: "100x100>" }
-  validates_attachment_content_type :photo, content_type: /\Aimage\/.*\z/
+  include ImageUploader[:image]
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, authentication_keys: [:login]

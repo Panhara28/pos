@@ -14,8 +14,8 @@
       <ul class="nav navbar-right top-nav pull-right">
         <li class="dropdown auth-drp">
           <a href="#" class="dropdown-toggle pr-0" data-toggle="dropdown">
-          <%if current_user.photo.present?%>
-            <img src="<%=current_user.photo%>" alt="user_auth" class="user-auth-img img-circle" /><span class="user-online-status"></span></a>
+          <%if current_user.image.present?%>
+            <img src="<%=current_user.image.url%>" alt="user_auth" class="user-auth-img img-circle" /><span class="user-online-status"></span></a>
           <%else%>
             <img src="profile.png" alt="user_auth" class="user-auth-img img-circle" /><span class="user-online-status"></span></a>
           <%end%>

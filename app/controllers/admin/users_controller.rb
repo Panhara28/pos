@@ -80,7 +80,7 @@ class Admin::UsersController < DashboardsController
       end
   
       def user_params
-        params.required(:user).permit!
+        params.required(:user).permit(:username, :email, :password, :password_confirmation, :role, :first_name, :last_name, :image)
       end
 
 end

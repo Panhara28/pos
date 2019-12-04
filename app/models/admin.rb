@@ -1,8 +1,7 @@
 class Admin < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  has_attached_file :photo, style: { medium: "300x500>",thumb: "100x100>" }
-  validates_attachment_content_type :photo, content_type: /\Aimage\/.*\z/
+  include ImageUploader[:image]
 
   attr_writer :login
 

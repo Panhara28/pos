@@ -21,8 +21,8 @@
                     </div>
                     <div class="profile-info text-center mb-15">
                       <div class="profile-img-wrap">
-                        <%if current_admin.photo.present?%>
-                          <img class="inline-block mb-10" src="<%=current_admin.photo%>" alt="user">
+                        <%if current_admin.image.present?%>
+                          <img class="inline-block mb-10" src="<%=current_admin.image.url%>" alt="user">
                         <%else%>
                           <img class="inline-block mb-10" src="/no-image.png" alt="user">
                         <%end%>

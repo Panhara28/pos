@@ -39,7 +39,7 @@ class SalesController < ApplicationController
     @order.order_time = DateTime.now.to_s(:time)
     @order.waitting_no = Order.where(order_date: DateTime.now.to_date).order('id').pluck(:waitting_no).last.to_i + 1 if @order.waitting_no.nil?
     @order.user_id = current_user.id
-    @order.table_number = SecureRandom.hex(8)
+    @order.table_number = "Take Away#{SecureRandom.hex(8)}"
     if session["customer_id#{current_user.id}"].present?
        @order.customer_id = session["customer_id#{current_user.id}"]
     else
