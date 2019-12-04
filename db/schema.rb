@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191202043700) do
+ActiveRecord::Schema.define(version: 20191204022923) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
@@ -90,6 +90,8 @@ ActiveRecord::Schema.define(version: 20191202043700) do
     t.bigint "user_id"
     t.string "photo"
     t.string "customer_type"
+    t.integer "admin_id"
+    t.date "dob"
     t.index ["user_id"], name: "index_customers_on_user_id"
   end
 

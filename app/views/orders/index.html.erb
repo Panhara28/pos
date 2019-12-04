@@ -1,3 +1,8 @@
+<style type="text/stylesheet">
+  .dt-buttons{
+    display: none;
+  }
+</style>
 <div class="wrapper theme-2-active navbar-top-light horizontal-nav">
   <%=render "applications/nav"%>
   <!-- Main Content -->
@@ -8,7 +13,7 @@
         <div class="panel panel-default border-panel card-view">
           <div class="panel-heading">
             <div class="pull-left">
-              <h6 class="panel-title txt-dark">Table</h6>
+              <h6 class="panel-title txt-dark">Orders</h6>
             </div>
             <div class="clearfix"></div>
           </div>
@@ -17,7 +22,7 @@
 
               <div class="table-wrap mt-40">
                 <div class="table-responsive">
-                  <table class="table mb-0">
+                  <table id="example" class="table mb-0">
                     <thead>
                       <tr>
                         <th>Table Number</th>
@@ -51,7 +56,7 @@
                           </td>
                           <td><%=order.order_status%></td>
                           <td><%=number_to_currency(order.subtotal)%></td>
-                          <td><%=time_ago(order.order_date)%></td>
+                          <td><%=time_ago(order.created_at)%></td>
                           <td class="text-nowrap" style="text-align: right;">
                             <%= link_to print_to_kitchen_path(order), class: "mr-25", data: { turbolinks: false }  do %>
                               <i class="btn btn-primary">Print To Kitchen</i>

@@ -1,0 +1,10 @@
+$("input#customer_customer_name").val("");
+$("#customer-errors").html(" ");
+$("#customer-success").html("<%= custom_flash_message%>");
+$("#customer-index").append("<%=escape_javascript render(@customer)%>");
+
+$(function() {
+  $('.delete_customer_<%=@customer.id%>').submitOnCheck();
+});
+
+$('.delete_customer_<%=@customer.id%>').submitOnCheck();

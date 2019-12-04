@@ -116,7 +116,7 @@
 								<p style=" margin: 0px;">តំលៃ​ Riel/Total   
 								<span style="float: right;">៛ <%=@order.total * Constant.exchange_rate%></span></p>
 								<p style=" margin: 0px;">បញ្ចុះតំលៃ/Discount  
-								<span style="float: right;"><%=@order.discount%> %</span></p>
+								<span style="float: right;"><%=number_to_percentage(@order.discount, precision: 0)%></span></p>
 								<p style=" margin: 0px;">ប្រាក់ត្រូវបង់/Grand Total:  
 								<span style="float: right;"><%=number_to_currency(@order.total)%></span></p>
 							</div>

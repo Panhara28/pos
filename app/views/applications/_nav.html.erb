@@ -59,7 +59,7 @@
       <%end%>
     </li>
     <li>
-      <%=link_to new_customer_path do%>
+      <%=link_to customers_path do%>
         <div class="pull-left"><i class="ti-user mr-20"></i><span class="right-nav-text">Customer</span></div>
         <div class="clearfix"></div>
       <%end%>
@@ -69,7 +69,7 @@
         <div class="pull-left">
           <i class=" ti-receipt mr-20"></i>
           <span class="right-nav-text session_order_count">
-            Tables (<%= "#{ Order.where(order_status: "order").count}" %>)
+            Orders (<%= "#{ Order.where(order_status: "order").count}" %>)
           </span>
         </div>
         <div class="clearfix"></div>
@@ -78,7 +78,7 @@
     <li>
       <%=link_to orders_path(state: "completed") do%>
         <div class="pull-left">
-          <i class=" ti-receipt mr-20"></i>
+          <i class="ti-clipboard mr-20"></i>
           <span class="right-nav-text">
             Invoices (<%= "#{ Order.where(order_status: "completed").count}" %>)
           </span>
