@@ -1,80 +1,80 @@
 <section>
-  <div class="panel panel-signup">
-      <div class="panel-body">
-          <div class="logo text-center">
-              <%if user_signed_in?%>
+    <div class="panel panel-signup">
+        <div class="panel-body">
+            <div class="logo text-center">
+                <%if user_signed_in?%>
                 <h5>Welcome To <%=link_to "Dashboard",dashboard_page_path%></h5>
-              <%else%>
+                <%else%>
                 <h5>Welcome To Administrator</h5>
-              <%end%>
-          </div>
-          <br />
-          <h4 class="text-center mb5">Create a new account</h4>
-          <p class="text-center">Please enter your credentials below</p>
+                <%end%>
+            </div>
+            <br />
+            <h4 class="text-center mb5">Create a new account</h4>
+            <p class="text-center">Please enter your credentials below</p>
 
-          <div class="mb30"></div>
+            <div class="mb30"></div>
 
-					<%= form_for(resource, as: resource_name, url: registration_path(resource_name),:class=>"login-form cf-style-1") do |f| %>
-						<%= devise_error_messages! %>
-              <div class="row">
-                  <div class="col-sm-6">
-                      <div class="input-group mb15">
-                          <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-													<%= f.text_field :username, autofocus: true,:class=>"form-control", :placeholder=>"Usernmae"%>
-                      </div><!-- input-group -->
-                  </div>
-                  <div class="col-sm-6">
-                      <div class="input-group mb15">
-                          <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                          <%= f.email_field :email, autofocus: true,:class=>"form-control", :placeholder=>"Email"%>
-                      </div><!-- input-group -->
-                  </div>
-              </div><!-- row -->
-              <br />
-              <div class="row">
-                  <div class="col-sm-6">
-                      <div class="input-group mb15">
-                          <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                          <%= f.password_field :current_password, autocomplete: "off" ,:class=>"form-control", :placeholder=>"Current Password"%>
-                      </div><!-- input-group -->
-                  </div>
-                  <div class="col-sm-6">
-                      <div class="input-group mb15">
-                          <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                          <%= f.password_field :password, autocomplete: "off",:class=>"form-control", :placeholder=>"Password"%>
-                      </div><!-- input-group -->
-                      <% if @minimum_password_length %>
-                      <em>(<%= @minimum_password_length %> characters minimum)</em>
-                      <% end %>
-                  </div>
-              </div><!-- row -->
-
-              <div class="row">
+            <%= form_for(resource, as: resource_name, url: registration_path(resource_name),:class=>"login-form cf-style-1") do |f| %>
+            <%= devise_error_messages! %>
+            <div class="row">
                 <div class="col-sm-6">
-                  <div class="input-group mb15">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                    <%= f.password_field :password_confirmation, autocomplete: "off",:class=>"form-control", :placeholder=>"Confirmation Password"%>
-                  </div>
+                    <div class="input-group mb15">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <%= f.text_field :username, autofocus: true,:class=>"form-control", :placeholder=>"Usernmae"%>
+                    </div><!-- input-group -->
                 </div>
-              </div>
-              <br />
-              <div class="clearfix">
-                  <div class="pull-left">
-                      <div class="ckbox ckbox-primary mt5">
-                          <input type="checkbox" id="agree" value="1">
-                          <label for="agree">I agree with <a href="#">Terms and Conditions</a></label>
-                      </div>
-                  </div>
-                  <div class="pull-right">
-											<%= f.submit "Create Free Account",:class=>"btn btn-success" do%>
-												 <i class="fa fa-angle-right ml5"></i>
-											<%end%>
-									</div>
-              </div>
-					<%end%>
-      </div><!-- panel-body -->
-      <div class="panel-footer">
-					<%=link_to "Already Have Account? Sign In",new_user_registration_path, :class=>"btn btn-primary btn-block"%>
-      </div><!-- panel-footer -->
-  </div><!-- panel -->
+                <div class="col-sm-6">
+                    <div class="input-group mb15">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                        <%= f.email_field :email, autofocus: true,:class=>"form-control", :placeholder=>"Email"%>
+                    </div><!-- input-group -->
+                </div>
+            </div><!-- row -->
+            <br />
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="input-group mb15">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <%= f.password_field :current_password, autocomplete: "off" ,:class=>"form-control", :placeholder=>"Current Password"%>
+                    </div><!-- input-group -->
+                </div>
+                <div class="col-sm-6">
+                    <div class="input-group mb15">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <%= f.password_field :password, autocomplete: "off",:class=>"form-control", :placeholder=>"Password"%>
+                    </div><!-- input-group -->
+                    <% if @minimum_password_length %>
+                    <em>(<%= @minimum_password_length %> characters minimum)</em>
+                    <% end %>
+                </div>
+            </div><!-- row -->
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="input-group mb15">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <%= f.password_field :password_confirmation, autocomplete: "off",:class=>"form-control", :placeholder=>"Confirmation Password"%>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="clearfix">
+                <div class="pull-left">
+                    <div class="ckbox ckbox-primary mt5">
+                        <input type="checkbox" id="agree" value="1">
+                        <label for="agree">I agree with <a href="#">Terms and Conditions</a></label>
+                    </div>
+                </div>
+                <div class="pull-right">
+                    <%= f.submit "Create Free Account",:class=>"btn btn-success" do%>
+                    <i class="fa fa-angle-right ml5"></i>
+                    <%end%>
+                </div>
+            </div>
+            <%end%>
+        </div><!-- panel-body -->
+        <div class="panel-footer">
+            <%=link_to "Already Have Account? Sign In",new_user_registration_path, :class=>"btn btn-primary btn-block"%>
+        </div><!-- panel-footer -->
+    </div><!-- panel -->
 </section>
