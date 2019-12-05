@@ -1,0 +1,54 @@
+
+<div class="ticket" style="font-size: 12px;">
+	<p class="centered">Mashisoyo Cambodia
+		<br>Address line 1
+		<div style="margin-bottom: 20px;">
+			<p style="text-align: center; font-weight: bold;">វិក្កយបត្រ/Invoice</p>
+			<p style=" margin: 0px;">វិក្កយបត្រ/Invoice No: <span style="float: right;"><%=@order.id%></span></p>
+			<p style=" margin: 0px;">តុ/Table: <span
+					style="float: right;"><%=@order.table_number.split(" ")[0]%><%=@order.table_number.split(" ")[1]%></span>
+			</p>
+			<p style=" margin: 0px;">អ្នកគិតលុយ/Cashier: <span style="float: right;"><%=@order.user.username%></span></p>
+			<p style=" margin: 0px;">កាលបរិច្ឆេត/Date Time: <span style="float: right;"><%=@order.created_at%></span></p>
+		</div>
+
+		<table>
+			<thead>
+				<tr>
+					<th class="quantity">QTY <br> ចំនួន</th>
+					<th class="description">Description <br> បរិយាយ</th>
+					<th class="price">Price​ <br> តំលៃ </th>
+				</tr>
+			</thead>
+			<tbody>
+				<%@order.order_items.each do |order|%>
+				<tr style="border-top: 1px solid black; border-bottom: 1px solid black;">
+					<td class="quantity"><%=order.quantity%></td>
+					<td class="description"><%=order.product.product_name%></td>
+					<%=in_invoice_free?(order.unit_price)%>
+				</tr>
+				<%end%>
+			</tbody>
+		</table>
+		<div style="margin-top: 10px;">
+			<p style=" margin: 0px;">ពន្ធ/VAT:
+				<span style="float: right;"><%=number_to_percentage(@order.tax, precision: 0)%></span></p>
+			<p style=" margin: 0px;">តំលៃ​ USD/Total
+				<span style="float: right;"><%=number_to_currency(@order.subtotal)%></span></p>
+			<p style=" margin: 0px;">តំលៃ​ Riel/Total
+				<span style="float: right;">៛ <%=@order.total * Constant.exchange_rate%></span></p>
+			<p style=" margin: 0px;">បញ្ចុះតំលៃ/Discount
+				<span style="float: right;"><%=number_to_percentage(@order.discount, precision: 0)%></span></p>
+			<p style=" margin: 0px;">ប្រាក់ត្រូវបង់/Grand Total:
+				<span style="float: right;"><%=number_to_currency(@order.total)%></span></p>
+		</div>
+
+		<p class="centered">Thanks for your supporting!
+			<br></p>
+</div>
+<%=link_to print_reciept_path(@order), class: "btn btn-default btn-outline btn-icon left-icon", onclick: "javascript:window.print();", id: "print" do%>
+<i class="fa fa-print"></i>
+<span>Pay</span>
+<%end%>
+<%=link_to "Cancel", sales_path, class: "btn btn-danger", id: "cancel"%>
+</div>
