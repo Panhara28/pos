@@ -1,4 +1,4 @@
-<div class="col-sm-7">
+<div class="col-sm-9">
   <div class="panel panel-default border-panel card-view">
     <div class="panel-heading">
       <div class="pull-left">
@@ -15,31 +15,17 @@
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Order Date</th>
-                  <th>Checkout Date</th>
-                  <th>Sub Total</th>
                   <th>Discount</th>
                   <th>Total</th>
                   <th>Profit</th>
+                  <th>Order Date</th>
                 </tr>
               </thead>
               <tbody>
                 <% @dailly_sales.each do |order| %>
                 <tr>
                   <td>
-                    <%= '%09d' % order.id %>
-                  </td>
-                  <td>
-                    <%= order.order_date %>
-                  </td>
-                  <td>
-                    <%= order.checkout_date %>
-                  </td>
-                  <td>
-                    <%= number_to_currency order.subtotal %>
-                  </td>
-                  <td>
-                    <%= number_to_percentage order.discount %>
+                    <%= number_to_percentage order.discount, precision: 0 %>
                   </td>
                   <td>
                     <%= number_to_currency order.total %>
@@ -47,11 +33,15 @@
                   <td>
                     <%= number_to_currency order.profit %>
                   </td>
-
+                  <td>
+                    <%= '%09d' % order.id %>
+                  </td>
+                  <td>
+                    <%= order.order_date %>
+                  </td>               
                 </tr>
                 <%end%>
                 <tr>
-                  <td></td>
                   <td></td>
                   <td></td>
                   <td></td>

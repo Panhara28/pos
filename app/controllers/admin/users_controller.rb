@@ -67,7 +67,12 @@ class Admin::UsersController < DashboardsController
       def admin_only?
         unless  current_admin.admin?
           unless @user == current_admin
-            redirect_to admin_dashboard_path, notice: "Access Denied"
+            respond_to do |format|
+              flash.now[:alert] = "Access Denied"
+              flash[:alert] = "Access Denied"
+              format.html { redirect_to admin_dashboards_path }
+              format.js { render template: "admin/users/admin_denied.js.erb" }
+            end
           end
         end
       end

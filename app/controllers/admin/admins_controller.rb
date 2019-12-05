@@ -70,7 +70,7 @@ class Admin::AdminsController < DashboardsController
     def admin_only?
       unless  current_admin.admin?
         unless @user == current_admin
-          redirect_to admin_dashboard_path, alert: "Access Denied"
+          redirect_to admin_dashboards_path, alert: "Access Denied"
         end
       end
     end
