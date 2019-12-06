@@ -9,7 +9,7 @@
     <meta content="Admin Dashboard" name="description" />
     <meta content="Themesbrand" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <%if params[:controller] != "orders" || params[:action] != "show"%>
+    <%if params[:controller] != "orders" || params[:action] != "show" && params[:action] != "print_to_kitchen"%>
       <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%end%>
   </head>
