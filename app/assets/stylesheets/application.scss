@@ -17,6 +17,10 @@
  *= require select2
  */
 
+ .btn.fancy-button.btn-danger.btn-0:hover{
+   color: #000 !important;
+ }
+
  .select2-container--default .select2-selection--single {
     border: 0px solid #aaa !important;
   }
@@ -47,6 +51,15 @@
 
 .display_table_number{
   background: #7bed9f;
+  font-size: 25px;
+  text-align: center;
+  padding: 25px;
+  color: white;
+  font-weight: bold;
+}
+
+.display_delivery{
+  background: #1e90ff;
   font-size: 25px;
   text-align: center;
   padding: 25px;
