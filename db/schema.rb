@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191202043700) do
+ActiveRecord::Schema.define(version: 20191204125014) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20191202043700) do
     t.string "photo_content_type"
     t.bigint "photo_file_size"
     t.datetime "photo_updated_at"
+    t.string "image_data"
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
     t.index ["username"], name: "index_admins_on_username", unique: true
@@ -90,6 +91,8 @@ ActiveRecord::Schema.define(version: 20191202043700) do
     t.bigint "user_id"
     t.string "photo"
     t.string "customer_type"
+    t.integer "admin_id"
+    t.date "dob"
     t.index ["user_id"], name: "index_customers_on_user_id"
   end
 
@@ -228,6 +231,7 @@ ActiveRecord::Schema.define(version: 20191202043700) do
     t.string "photo_content_type"
     t.bigint "photo_file_size"
     t.datetime "photo_updated_at"
+    t.string "image_data"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true

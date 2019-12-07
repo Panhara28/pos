@@ -3,8 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   attr_writer :login
 
-  has_attached_file :photo, style: { medium: "300x500>",thumb: "100x100>" }
-  validates_attachment_content_type :photo, content_type: /\Aimage\/.*\z/
+  include ImageUploader[:image]
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, authentication_keys: [:login]
@@ -13,6 +12,7 @@ class User < ApplicationRecord
   belongs_to :admin, optional: true
   has_many :deliveries
   has_many :cash_drawers
+  has_many :customers
   validates :username, presence: :true, uniqueness: { case_sensitive: false }
 
   validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true

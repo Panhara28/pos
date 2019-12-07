@@ -1,4 +1,4 @@
-<div class="col-sm-12">
+<div class="col-sm-9">
   <div class="panel panel-default border-panel card-view">
     <div class="panel-heading">
       <div class="pull-left">
@@ -11,14 +11,13 @@
         <div class="table-wrap mt-40">
           <div class="table-responsive">
             <% if @dailly_sales.present? %>
-            <table class="table mb-0">
+            <table id="example" class="cell-border">
               <thead>
                 <tr>
-                  <th>#</th>
+                  <th>OrderID</th>
                   <th>Order Date</th>
-                  <th>Checkout Date</th>
-                  <th>Sub Total</th>
                   <th>Discount</th>
+                  <th>VAT</th>
                   <th>Total</th>
                   <th>Profit</th>
                 </tr>
@@ -28,26 +27,20 @@
                 <tr>
                   <td>
                     <%= '%09d' % order.id %>
-                  </td>
+                  </td>  
                   <td>
                     <%= order.order_date %>
-                  </td>
+                  </td> 
                   <td>
-                    <%= order.checkout_date %>
+                    <%= number_to_percentage order.discount, precision: 0 %>
                   </td>
-                  <td>
-                    <%= number_to_currency order.subtotal %>
-                  </td>
-                  <td>
-                    <%= number_to_percentage order.discount %>
-                  </td>
+                  <td><%=number_to_percentage order.tax, precision: 0%></td>
                   <td>
                     <%= number_to_currency order.total %>
                   </td>
                   <td>
                     <%= number_to_currency order.profit %>
-                  </td>
-
+                  </td>            
                 </tr>
                 <%end%>
                 <tr>
@@ -56,8 +49,15 @@
                   <td></td>
                   <td></td>
                   <td></td>
-                  <td></td>
                   <td><strong>Total Sales: <%= number_to_currency @dailly_sales.sum(:profit) %></strong></td>
+                </tr>
+                <tr>
+                  <td colspan="2">Report From: <%=params[:report][:dailly_sale_date_from]%> to <%=params[:report][:dailly_sale_date_to]%></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
                 </tr>
               </tbody>
             </table>

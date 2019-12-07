@@ -14,7 +14,7 @@
 	}
 
 	* {
-		font-size: 12px;
+		font-size: 13px;
 		font-family: 'Times New Roman';
 	}
 
@@ -30,6 +30,7 @@
 	th.description {
 		width: 302.36px;
 		max-width: 302.36px;
+		text-align: left;
 	}
 
 	td.quantity,
@@ -37,6 +38,7 @@
 		width: 302.36px;
 		max-width: 302.36px;
 		word-break: break-all;
+		text-align: left;
 	}
 
 	td.price,
@@ -44,7 +46,7 @@
 		width: 302.36px;
 		max-width: 302.36px;
 		word-break: break-all;
-		text-align: center;
+		text-align: left;
 	}
 
 	.centered {
@@ -53,8 +55,7 @@
 	}
 
 	.ticket {
-		margin-left: 0.4cm;
-		max-width: 80mm;
+		max-width: 70mm;
 	}
 
 	img {
@@ -66,10 +67,22 @@
 	.fixed-sidebar-left {
 		display: none;
 	}
+
+  .pay-btn{
+    background: #ff6028;
+    padding: 20px 120px;
+		color: #fff;
+		font-size: 16px;
+	}
+	.pay-cancel{
+		background:#dcdcdc;
+    padding: 20px 112px;
+		color: #000;
+		font-size: 16px;
+	}
 </style>
 
 <div class="wrapper theme-2-active navbar-top-light horizontal-nav">
-	<%=render "applications/nav"%>
 	<!-- Main Content -->
 	<div class="page-wrapper" style="padding-top: 0px; background: white;">
 		<div class="container pt-30">
@@ -82,14 +95,15 @@
 							<br>Address line 1
 							<div style="margin-bottom: 20px;">
 								<p style="text-align: center; font-weight: bold;">វិក្កយបត្រ/Invoice</p>
-								<p style=" margin: 0px;">វិក្កយបត្រ/Invoice No: <span style="float: right;"><%=@order.id%></span></p>
+								<p style=" margin: 0px;">វិក្កយបត្រ/Invoice No: <span
+										style="float: right; margin-right: 10px;"><%=@order.id%></span></p>
 								<p style=" margin: 0px;">តុ/Table: <span
-										style="float: right;"><%=@order.table_number.split(" ")[0]%><%=@order.table_number.split(" ")[1]%></span>
+										style="float: right;margin-right: 10px;"><%=@order.table_number.split(" ")[0]%><%=@order.table_number.split(" ")[1]%></span>
 								</p>
 								<p style=" margin: 0px;">អ្នកគិតលុយ/Cashier: <span
-										style="float: right;"><%=@order.user.username%></span></p>
+										style="float: right;margin-right: 10px;"><%=@order.user.username%></span></p>
 								<p style=" margin: 0px;">កាលបរិច្ឆេត/Date Time: <span
-										style="float: right;"><%=@order.created_at%></span></p>
+										style="float: right;margin-right: 10px;"><%=@order.created_at%></span></p>
 							</div>
 
 							<table>
@@ -111,32 +125,44 @@
 								</tbody>
 							</table>
 							<div style="margin-top: 10px;">
-								<p style=" margin: 0px;">តំលៃ​ USD/Total   
-								<span style="float: right;"><%=number_to_currency(@order.subtotal)%></span></p>
-								<p style=" margin: 0px;">តំលៃ​ Riel/Total   
-								<span style="float: right;">៛ <%=@order.total * Constant.exchange_rate%></span></p>
-								<p style=" margin: 0px;">បញ្ចុះតំលៃ/Discount  
-								<span style="float: right;"><%=@order.discount%> %</span></p>
-								<p style=" margin: 0px;">ប្រាក់ត្រូវបង់/Grand Total:  
-								<span style="float: right;"><%=number_to_currency(@order.total)%></span></p>
+								<p style=" margin: 0px;">ពន្ធ/VAT:
+									<span
+										style="float: right;margin-right: 10px;"><%=number_to_percentage(@order.tax, precision: 0)%></span>
+								</p>
+								<p style=" margin: 0px;">តំលៃ​ USD/Total
+									<span style="float: right;margin-right: 10px;"><%=number_to_currency(@order.subtotal)%></span></p>
+								<p style=" margin: 0px;">តំលៃ​ Riel/Total
+									<span style="float: right;margin-right: 10px;">៛ <%=@order.total * Constant.exchange_rate%></span></p>
+								<p style=" margin: 0px;">បញ្ចុះតំលៃ/Discount
+									<span
+										style="float: right;margin-right: 10px;"><%=number_to_percentage(@order.discount, precision: 0)%></span>
+								</p>
+								<p style=" margin: 0px;margin-right: 10px;">ប្រាក់ត្រូវបង់/Grand Total:
+									<span style="float: right;"><%=number_to_currency(@order.total)%></span></p>
 							</div>
-							
+
 							<p class="centered">Thanks for your supporting!
-								<br></p>
+								<br>
+							</p>
 					</div>
-					<%=link_to print_reciept_path(@order), class: "btn btn-default btn-outline btn-icon left-icon", onclick: "javascript:window.print();", id: "print" do%>
-						<i class="fa fa-print"></i>
-						<span>Pay</span>
+					<br />
+					<%=link_to print_reciept_path(@order), class: "pay-btn", onclick: "printReciept();", id: "print" do%>
+						Pay
 					<%end%>
-					<%=link_to "Cancel", sales_path, class: "btn btn-danger", id: "cancel"%>
+					<br><br><br>
+					<%=link_to "Cancel", sales_path, class: "pay-cancel", id: "cancel"%>
 				</div>
 				<div class="col-lg-4">
 				</div>
 			</div>
 		</div>
 
-		<%=render "applications/footer"%>
-
 	</div>
 	<!-- /Main Content -->
 </div>
+
+<script>
+	function printReciept(){
+		window.print();
+	}
+</script>

@@ -1,56 +1,71 @@
 class Admin::CustomersController < DashboardsController
-    before_action :authenticate_admin!
-      layout "dashboards"
+  before_action :authenticate_admin!
+  layout "dashboards"
   def index
-    if params[:query].present?
-      @customers = Customer.search(params[:query])
-      .paginate(:page => params[:page], :per_page => Constant::PAGE_SIZE)
-    else
-      @customers = Customer.order('customer_name')
-      .paginate(:page => params[:page], :per_page => Constant::PAGE_SIZE)
-    end
-  end
-
-  def new
-    @customer = Customer.new
-  end
-
-  def edit
-    @customer = Customer.find(params[:id])
+    @customers = Customer.all
+    @customer = current_admin.customers.build
   end
 
   def show
     @customer = Customer.find(params[:id])
   end
 
+  def new
+
+  end
+
   def create
-    @customer = Customer.new(customer_params)
+    @customer = current_admin.customers.build(customer_params)
     if @customer.save
-      redirect_to admin_customers_path, notice: "Your customer has been created."
+      respond_to do |format|
+        flash.now[:notice] = "Successful Created"
+        format.html { redirect_to admin_customers_path }
+        format.js
+      end
     else
-      render :new, notice: "Something went wrong."
+      respond_to do |format|
+        flash.now[:alert] = "Please fill the field blank or customer Duplicated"
+        format.html { redirect_to admin_customers_path }
+        format.js { render template: "admin/customers/customer_error.js.erb" }
+      end
     end
+  end
+
+  def edit
+    @customer = Customer.find(params[:id])
   end
 
   def update
     @customer = Customer.find(params[:id])
     if @customer.update(customer_params)
-      redirect_to admin_customers_path, notice: "Your customer been updated."
+      redirect_to admin_customer_path(@customer), notice: "Successful Updated"
     else
-      render :edit, notice: "Something went wrong."
+      render :edit
+      puts @customer.errors.full_messages
     end
   end
 
   def destroy
-    @customer = Customer.find(params[:id])
-    if @customer.destroy
-      redirect_to admin_customers_path
+    @customer = Customer.destroy(params[:id])
+    respond_to do |format|
+      flash.now[:error] = "Delete"
+      format.html { redirect_to admin_customers_url }
+      format.js
     end
   end
 
   private
-    def customer_params
-      params.require(:customer).permit(:customer_name, :email, :phone, :address, :state, :country, :photo)
+    def admin_only?
+      unless  current_admin_user.admin?
+        unless @user == current_admin_user
+          redirect_to admin_dashboard_path, notice: "Access Denied"
+        end
+      end
     end
+
+    def customer_params
+      params.required(:customer).permit!
+    end
+
 
 end

@@ -7,6 +7,6 @@ class Customer < ApplicationRecord
   validates :customer_name, presence: true
 
   has_many :orders, dependent: :nullify
-
-
+  belongs_to :admin, optional: true
+  belongs_to :user, optional: true
 end

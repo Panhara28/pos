@@ -2,7 +2,6 @@ class Order < ApplicationRecord
 
   OPTION_TABLE = [
     "Take Away #{SecureRandom.hex(8)}",
-    "Delivery #{SecureRandom.hex(8)}",
     "1",
     "2",
     "3",
@@ -46,16 +45,14 @@ class Order < ApplicationRecord
   end
 
   def total
-
-    subtotal + self[:tax] + self[:shipping] - (subtotal * (self[:discount] / 100))
- 
+    subtotal + (subtotal * self[:tax] / 100) - (subtotal * (self[:discount] / 100))
   end
 
   private
 
     def update_subtotal
       self[:subtotal] = subtotal
-      self[:total] = subtotal + self[:tax]+ self[:shipping] - (subtotal * (self[:discount] / 100))
+      self[:total] = subtotal + (subtotal * self[:tax] / 100) - (subtotal * (self[:discount] / 100))
       self[:profit] = finalize_profit - delivery_fee.to_d
     end
 

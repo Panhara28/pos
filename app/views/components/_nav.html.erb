@@ -4,9 +4,9 @@
     <div class="mobile-only-brand pull-left">
       <div class="nav-header pull-left">
         <div class="logo-wrap">
-          <a href="index-2.html">
-            <img class="brand-img" src="" alt="brand"/>
-            <span class="brand-text"><img  src="" alt="brand"/></span>
+          <a href="/">
+            <img class="brand-img" src="/mashisoyologo.png" alt="brand"/>
+            <span class="brand-text"><img  src="/mashisoyologo.png" alt="brand"/></span>
           </a>
         </div>
       </div>
@@ -18,7 +18,16 @@
       <ul class="nav navbar-right top-nav pull-right">
 
         <li class="dropdown auth-drp">
-          <a href="#" class="dropdown-toggle pr-0" data-toggle="dropdown"><img src="https://hencework.com/theme/admintres/img/user1.png" alt="user_auth" class="user-auth-img img-circle"/><span class="user-online-status"></span></a>
+          
+          <a href="#" class="dropdown-toggle pr-0" data-toggle="dropdown">
+            <%if current_admin.image.present?%>
+              <img src="<%=current_admin.image.url%>" alt="user_auth" class="user-auth-img img-circle" /><span
+                class="user-online-status"></span></a>
+            <%else%>
+             <img src="profile.png" alt="user_auth" class="user-auth-img img-circle" /><span class="user-online-status"></span></a>
+            <%end%>
+            <span class="user-online-status"></span>
+          </a>
           <ul class="dropdown-menu user-auth-dropdown" data-dropdown-in="flipInX" data-dropdown-out="flipOutX">
             <li>
               <%=link_to admin_admin_path(current_admin.id) do%>
@@ -70,6 +79,12 @@
       <%end%>
     </li>
     <li>
+      <%=link_to admin_customers_path do%>
+        <div class="pull-left"><i class="ti-face-smile mr-20"></i><span class="right-nav-text">Customers</span></div>
+        <div class="clearfix"></div>
+      <%end%>
+    </li>
+    <li>
       <%=link_to admin_categories_path do%>
         <div class="pull-left"><i class="ti-image mr-20"></i><span class="right-nav-text">Category </span></div>
         <div class="clearfix"></div>
@@ -85,7 +100,7 @@
 
     <li>
       <%=link_to admin_cash_drawers_path do%>
-        <div class="pull-left"><i class="ti-shopping-cart mr-20"></i><span class="right-nav-text">Cash Drawers </span></div>
+        <div class="pull-left"><i class="ti-blackboard mr-20"></i><span class="right-nav-text">Cash Drawers </span></div>
         <div class="clearfix"></div>
       <%end%>
     </li>
@@ -99,7 +114,7 @@
 
     <li>
       <%=link_to admin_deliveries_path do%>
-        <div class="pull-left"><i class="ti-money mr-20"></i><span class="right-nav-text">Delivery</span></div>
+        <div class="pull-left"><i class="ti-truck mr-20"></i><span class="right-nav-text">Delivery</span></div>
         <div class="clearfix"></div>
       <%end%>
     </li>
