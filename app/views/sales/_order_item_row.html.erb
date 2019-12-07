@@ -23,7 +23,6 @@
               <table class="table mb-30">
                 <thead>
                   <tr role="row">
-                    <th style="width: 185px;"><%=t(".photo")%></th>
                     <th style="width: 246px;"><%=t(".product")%></th>
                     <th style="width: 406px;"><%=t(".quantity")%></th>
                     <th style="width: 116px;"><%=t(".price")%></th>
@@ -33,9 +32,6 @@
                 <tbody>
                   <% @order_items.each do |order_item| %>
                     <tr role="row" class="odd">
-                      <td class="sorting_1">
-                        <img src="<%=order_item.product.image.url%>" alt="iMac" height="110">
-                      </td>
                       <td class="txt-dark"><%= order_item.product.product_name %></td>
                       <td>
                         <%=order_item.quantity%>

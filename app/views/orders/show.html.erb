@@ -130,7 +130,7 @@
 										style="float: right;margin-right: 10px;"><%=number_to_percentage(@order.tax, precision: 0)%></span>
 								</p>
 								<p style=" margin: 0px;">តំលៃ​ USD/Total
-									<span style="float: right;margin-right: 10px;"><%=number_to_currency(@order.subtotal)%></span></p>
+									<span style="float: right;margin-right: 10px;"><%=number_to_currency(@order.total)%></span></p>
 								<p style=" margin: 0px;">តំលៃ​ Riel/Total
 									<span style="float: right;margin-right: 10px;">៛ <%=@order.total * Constant.exchange_rate%></span></p>
 								<p style=" margin: 0px;">បញ្ចុះតំលៃ/Discount
