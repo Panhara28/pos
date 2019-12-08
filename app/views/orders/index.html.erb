@@ -28,7 +28,8 @@
                         <th>Table Number</th>
                         <th>Status</th>
                         <th>Sub Total</th>
-                        <th>Created At</th>
+                        <th>Ordered At</th>
+                        <th>Time</th>
                         <th style="text-align: center;"></th>
                       </tr>
                     </thead>
@@ -56,7 +57,8 @@
                           </td>
                           <td><%=order.order_status%></td>
                           <td><%=number_to_currency(order.subtotal)%></td>
-                          <td><%=time_ago(order.created_at)%></td>
+                          <td><%=order.created_at%></td>
+                          <td><%=order.order_time.to_s(:time)%></td>
                           <td class="text-nowrap" style="text-align: right;">
                             <%= link_to print_to_kitchen_path(order), class: "mr-25", data: { turbolinks: false }  do %>
                               <i class="btn btn-primary">Print To Kitchen</i>

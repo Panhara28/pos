@@ -56,13 +56,17 @@
     </li>
     <li>
       <%=link_to sales_path do%>
-        <div class="pull-left"><i class="ti-dashboard mr-20"></i><span class="right-nav-text">sales</span></div>
+        <div class="pull-left">
+          <i class="ti-dashboard mr-20"></i>
+          <span class="right-nav-text"><%=t('.sales')%></span></div>
         <div class="clearfix"></div>
       <%end%>
     </li>
     <li>
       <%=link_to customers_path do%>
-        <div class="pull-left"><i class="ti-user mr-20"></i><span class="right-nav-text">Customer</span></div>
+        <div class="pull-left">
+          <i class="ti-user mr-20"></i>
+          <span class="right-nav-text"><%=t('.customers')%></span></div>
         <div class="clearfix"></div>
       <%end%>
     </li>
@@ -71,7 +75,7 @@
         <div class="pull-left">
           <i class=" ti-receipt mr-20"></i>
           <span class="right-nav-text session_order_count">
-            Orders (<%= "#{ Order.where(order_status: "order").count}" %>)
+            <%=t('.orders')%> (<%= "#{ Order.where(order_status: "order").count}" %>)
           </span>
         </div>
         <div class="clearfix"></div>
@@ -82,7 +86,7 @@
         <div class="pull-left">
           <i class="ti-clipboard mr-20"></i>
           <span class="right-nav-text">
-            Invoices (<%= "#{ Order.where(order_status: "completed").count}" %>)
+            <%=t('.invoices')%> (<%= "#{ Order.where(order_status: "completed").count}" %>)
           </span>
         </div>
         <div class="clearfix"></div>
