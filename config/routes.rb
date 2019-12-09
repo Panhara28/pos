@@ -43,6 +43,7 @@ Rails.application.routes.draw do
       resources :orders
       resources :admins
       resources :deliveries
+      resources :exchange_rates
     end
 
 end

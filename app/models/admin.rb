@@ -11,6 +11,7 @@ class Admin < ApplicationRecord
   has_many :deliveries
   has_many :cash_drawers
   has_many :customers
+  has_many :exchange_rates
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, authentication_keys: [:login]
 

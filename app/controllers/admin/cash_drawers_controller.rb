@@ -1,4 +1,4 @@
-class Admin::CashDrawersController < ApplicationController
+class Admin::CashDrawersController < DashboardsController
   before_action :authenticate_admin!
 
   layout "dashboards"
