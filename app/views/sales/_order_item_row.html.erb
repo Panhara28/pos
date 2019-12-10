@@ -1,9 +1,4 @@
 <% if @order_items.present? %>
-  <% if session[:customer_id].present? %>
-    <%= link_to Customer.find(session[:customer_id]).customer_name, customers_path%>
-    <% elsif @order_items.first.order.customer_id != 1 %>
-      <%= link_to @order_items.first.order.customer.customer_name, customers_path %>
-    <% end %>
     <div class="row">
       <!-- Basic Table -->
       <div class="col-lg-12">
@@ -57,10 +52,18 @@
 </div>
 <div class="row">
   <div class="col-sm-12" style="margin-top: 20px; font-weight: bold;">
-    <p>
-      <label for="" class="lable-order"><%= t('.customer_cash_in_usd') %>:</label>
-      <%= number_to_currency current_order.cash , precision: 2 %>
-    </p>
+    <%if current_order.cash == 0%>
+      <p>
+        <label for="" class="lable-order"><%= t('.customer_receive_riel') %>:</label>
+        <%= number_to_currency current_order.cash_in_riel , precision: 0%>
+      </p>
+    <%else%>
+      <p>
+        <label for="" class="lable-order"><%= t('.customer_receive_usd') %>:</label>
+        <%= number_to_currency current_order.cash , precision: 2 %>
+      </p>
+    <%end%>
+
     <p >
       <label for="" class="lable-order"><%= t('.sub_total') %>:</label>
       <span id="sub_total">

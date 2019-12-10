@@ -24,7 +24,7 @@ km:
       members: សមាជិក
       vat: ពន្ធ
       discount: បញ្ចុះតំលៃ
-      customer_receive: ប្រាក់ទទួលពីអតិថិជន
+      customer_receive_usd: ប្រាក់ទទួលពីអតិថិជន
       order_date: ថ្ងៃបញ្ជាទិញ
       order_time: ម៉ោងបញ្ជាទិញ
   applications:

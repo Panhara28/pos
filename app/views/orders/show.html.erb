@@ -95,14 +95,14 @@
 							<br>Address line 1
 							<div style="margin-bottom: 20px;">
 								<p style="text-align: center; font-weight: bold;">វិក្កយបត្រ/Invoice</p>
-								<p style=" margin: 0px;">វិក្កយបត្រ/Invoice No: <span
+								<p style=" margin: 0px;">វិក្កយបត្រ / Invoice No: <span
 										style="float: right; margin-right: 10px;"><%=@order.id%></span></p>
-								<p style=" margin: 0px;">តុ/Table: <span
+								<p style=" margin: 0px;">តុ / Table: <span
 										style="float: right;margin-right: 10px;"><%=@order.table_number.split(" ")[0]%><%=@order.table_number.split(" ")[1]%></span>
 								</p>
-								<p style=" margin: 0px;">អ្នកគិតលុយ/Cashier: <span
+								<p style=" margin: 0px;">អ្នកគិតលុយ / Cashier: <span
 										style="float: right;margin-right: 10px;"><%=@order.user.username%></span></p>
-								<p style=" margin: 0px;">កាលបរិច្ឆេត/Date Time: <span
+								<p style=" margin: 0px;">កាលបរិច្ឆេត / Date Time: <span
 										style="float: right;margin-right: 10px;"><%=@order.created_at%></span></p>
 							</div>
 
@@ -125,20 +125,34 @@
 								</tbody>
 							</table>
 							<div style="margin-top: 10px;">
-								<p style=" margin: 0px;">ពន្ធ/VAT:
+								<p style=" margin: 0px;">ពន្ធ /​ VAT:
 									<span
 										style="float: right;margin-right: 10px;"><%=number_to_percentage(@order.tax, precision: 0)%></span>
 								</p>
-								<p style=" margin: 0px;">តំលៃ​ USD/Total
+								<p style=" margin: 0px;">តំលៃ​ USD / Total
 									<span style="float: right;margin-right: 10px;"><%=number_to_currency(@order.total)%></span></p>
-								<p style=" margin: 0px;">តំលៃ​ Riel/Total
-									<span style="float: right;margin-right: 10px;">៛ <%=@order.total * Constant.exchange_rate%></span></p>
-								<p style=" margin: 0px;">បញ្ចុះតំលៃ/Discount
+								<p style=" margin: 0px;">តំលៃ​ Riel / Total
+									<span style="float: right;margin-right: 10px;"><%=number_to_currency(@order.total * Constant.exchange_rate, unit: "៛", precision: 0)%></span></p>
+								<p style=" margin: 0px;">បញ្ចុះតំលៃ / Discount
 									<span
 										style="float: right;margin-right: 10px;"><%=number_to_percentage(@order.discount, precision: 0)%></span>
 								</p>
-								<p style=" margin: 0px;margin-right: 10px;">ប្រាក់ត្រូវបង់/Grand Total:
+								<p style=" margin: 0px;margin-right: 10px;">ប្រាក់ត្រូវបង់ / Grand Total:
 									<span style="float: right;"><%=number_to_currency(@order.total)%></span></p>
+									<%if current_order.cash == 0 && current_order.cash_in_riel == 0%>
+									<%else%>
+										<%if current_order.cash == 0%>
+											<p style=" margin: 0px;margin-right: 10px;">ប្រាក់ទទួលជារៀល:
+												<span style="float: right;"><%= number_to_currency(current_order.cash_in_riel, unit: "៛", precision: 0)%></span></p>
+										<p style=" margin: 0px;margin-right: 10px;">ប្រាក់ត្រូវអាប់ជារៀល:
+											<span style="float: right;"><%= number_to_currency (((@order_items.last.order.total_cash_in_riel / Constant::exchange_rate) - @order_items.last.order.total) * 4100), precision: 0, unit: "៛" %></span></p>
+										<%else%>
+											<p style=" margin: 0px;margin-right: 10px;">ប្រាក់ទទួលជាដុល្លា:
+												<span style="float: right;"><%= number_to_currency current_order.cash , precision: 2 %></span></p>
+												<p style=" margin: 0px;margin-right: 10px;">ប្រាក់ត្រូវអាប់ជាដុល្លា:
+													<span style="float: right;"><%= number_to_currency (((@order_items.last.order.total_cash_in_riel / Constant::exchange_rate) - @order_items.last.order.total)), precision: 2 %></span></p>
+										<%end%>
+									<%end%>
 							</div>
 
 							<p class="centered">Thanks for your supporting!

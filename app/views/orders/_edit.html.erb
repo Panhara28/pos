@@ -62,10 +62,17 @@
           </div>
         </div>
 
-        <div class="col-md-12">
+        <div class="col-md-6">
           <div class="form-group">
-            <label for="recipient-name" class="control-label mb-10"><%=t('.customer_receive')%></label>
+            <label for="recipient-name" class="control-label mb-10"><%=t('.customer_receive_usd')%></label>
             <%= f.number_field :cash, :class => 'form-control', value: 0.0%>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="recipient-name" class="control-label mb-10"><%=t('.customer_receive_riel')%></label>
+            <%= f.number_field :cash_in_riel, :class => 'form-control', value: 0.0%>
           </div>
         </div>
 
