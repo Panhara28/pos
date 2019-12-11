@@ -1,7 +1,7 @@
 class Order < ApplicationRecord
 
   OPTION_TABLE = [
-    "Take Away #{SecureRandom.hex(8)}",
+    "Take Away",
     "1",
     "2",
     "3",
@@ -12,8 +12,6 @@ class Order < ApplicationRecord
     "9",
     "10"
   ]
-
-  validates :table_number, uniqueness: true
 
   belongs_to :user
 
@@ -49,7 +47,6 @@ class Order < ApplicationRecord
   end
 
   private
-
     def update_subtotal
       self[:subtotal] = subtotal
       self[:total] = subtotal + (subtotal * self[:tax] / 100) - (subtotal * (self[:discount] / 100))
