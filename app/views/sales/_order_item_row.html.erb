@@ -111,7 +111,7 @@
       <p>
         <label for="" class="lable-order"><%= t('.grand_total_usd') %>:</label>
         <span id="grand_total">
-          <%= number_to_currency @order_items.last.order.total, precision: 1 %>
+          <%= number_to_currency @order_items.last.order.total %>
         </span>
       </p>
       <p>

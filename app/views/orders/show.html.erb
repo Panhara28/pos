@@ -138,7 +138,7 @@
 										style="float: right;margin-right: 10px;"><%=number_to_percentage(@order.discount, precision: 0)%></span>
 								</p>
 								<p style=" margin: 0px;margin-right: 10px;">ប្រាក់ត្រូវបង់ / Grand Total:
-									<span style="float: right;"><%=number_to_currency(@order.total)%></span></p>
+									<span style="float: right;"><%=number_to_currency(@order_items.last.order.total)%></span></p>
 									<%if current_order.cash == 0 && current_order.cash_in_riel == 0%>
 									<%else%>
 										<%if current_order.cash == 0%>
@@ -150,7 +150,7 @@
 											<p style=" margin: 0px;margin-right: 10px;">ប្រាក់ទទួលជាដុល្លា:
 												<span style="float: right;"><%= number_to_currency current_order.cash , precision: 2 %></span></p>
 												<p style=" margin: 0px;margin-right: 10px;">ប្រាក់ត្រូវអាប់ជាដុល្លា:
-													<span style="float: right;"><%= number_to_currency (((@order_items.last.order.total_cash_in_riel / Constant::exchange_rate) - @order_items.last.order.total)), precision: 2 %></span></p>
+													<span style="float: right;"><%= number_to_currency (((@order_items.last.order.total_cash_in_riel / Constant::exchange_rate) - @order_items.last.order.total)), precision: 3 %></span></p>
 										<%end%>
 									<%end%>
 							</div>
