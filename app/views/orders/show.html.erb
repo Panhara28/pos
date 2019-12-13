@@ -97,14 +97,17 @@
 								<p style="text-align: center; font-weight: bold;">Invoice</p>
 								<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Invoice No: <%=@order.id%></span></p>
 								<br>
-								<div style="margin-bottom: 10px;"></div>
+								<div style="margin-bottom: 5px;"></div>
 								<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Table: <%=@order.table_number.split(" ")[0]%> <%=@order.table_number.split(" ")[1]%></span></p>
 								<br>
-								<div style="margin-bottom: 10px;"></div>
+								<div style="margin-bottom: 5px;"></div>
 								<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Cashier: <%=@order.user.username.capitalize%></span></p>
 								<br>
-								<div style="margin-bottom: 10px;"></div>
-								<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Date Time: <%=@order.created_at%></span></p>
+								<div style="margin-bottom: 5px;"></div>
+								<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Date: <%=@order.created_at%></span></p>
+								<br>
+								<div style="margin-bottom: 5px;"></div>
+								<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Time: <%=@order.order_time.to_s(:time)%></span></p>
 							</div>
 							<br><br>
 							<table>
@@ -113,6 +116,7 @@
 										<th class="description">Description</th>
 										<th class="quantity">QTY</th>
 										<th class="price">Price​</th>
+										<th class="price">Amount</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -121,17 +125,19 @@
 											<td class="description"><%=order.product.product_name%></td>
 											<td class="quantity"><%=order.quantity%></td>
 											<%=in_invoice_free?(order.unit_price)%>
+											<td class="quantity"><%=number_to_currency(order.quantity * order.unit_price, precision: 2)%></td>
 										</tr>
 									<%end%>
 								</tbody>
 							</table>
 
-							<div style="float: right; width: 70%;">
+							<div style="float: right; width: 70%; margin-right: 10px;">
 								<br>
 								<p style="margin: 0px;">Subtotal $: <span style="float: right;"><%=number_to_currency(@order.subtotal)%></span></p>
 								<p style="margin: 0px;">Subtotal R: <span style="float: right;"><%=number_to_currency(@order.subtotal * Constant.exchange_rate, unit: "៛", precision: 0)%></span></p>
 								<hr>
 								<p style="margin: 0px;">VAT: <span style="float: right;"><%=number_to_percentage(@order.tax, precision: 0)%></span></p>
+								<p style="margin: 0px;">Discount: <span style="float: right;"><%=number_to_percentage(@order.discount, precision: 0)%></span></p>
 								<p style="margin: 0px;">Service Fee: <span style="float: right;"></span></p>
 								<hr>
 								<p style="margin: 0px;">Grand Total $: <span style="float: right;"><%=number_to_currency(@order.total)%></span></p>
@@ -144,9 +150,9 @@
 								<p><%= 1 %>$ = <%=number_to_currency(Constant.exchange_rate, precision: 0, unit: "៛")%> | Phone Number: 0122223333</p>
 							</div>			
 							<p class="centered">
-								Address N 22, Str 317 Tol Kork, Phnom Penh, Cambodia 
+								Address: N∸ 22, Str 317  Toul Kork, Phnom Penh, Cambodia 
 								<br>
-								Thank You, Please Come Again
+								Thank You, See You Again Soon
 							</p>
 					</div>
 
