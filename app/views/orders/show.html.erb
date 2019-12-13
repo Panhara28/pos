@@ -31,6 +31,7 @@
 		width: 302.36px;
 		max-width: 302.36px;
 		text-align: left;
+		padding: 5px;
 	}
 
 	td.quantity,
@@ -80,6 +81,7 @@
 		color: #000;
 		font-size: 16px;
 	}
+
 </style>
 
 <div class="wrapper theme-2-active navbar-top-light horizontal-nav">
@@ -135,17 +137,17 @@
 								<br>
 								<p style="margin: 0px;">Subtotal $: <span style="float: right;"><%=number_to_currency(@order.subtotal)%></span></p>
 								<p style="margin: 0px;">Subtotal R: <span style="float: right;"><%=number_to_currency(@order.subtotal * Constant.exchange_rate, unit: "៛", precision: 0)%></span></p>
-								<hr>
+								<hr style="border: 1px solid #000;" />
 								<p style="margin: 0px;">VAT: <span style="float: right;"><%=number_to_percentage(@order.tax, precision: 0)%></span></p>
 								<p style="margin: 0px;">Discount: <span style="float: right;"><%=number_to_percentage(@order.discount, precision: 0)%></span></p>
 								<p style="margin: 0px;">Service Fee: <span style="float: right;"></span></p>
-								<hr>
+								<hr style="border: 1px solid #000;" />
 								<p style="margin: 0px;">Grand Total $: <span style="float: right;"><%=number_to_currency(@order.total)%></span></p>
 								<p style="margin: 0px;">Grand Total R: <span style="float: right;"><%=number_to_currency(@order.total * Constant.exchange_rate, unit: "៛", precision: 0)%></span></p>
-								<hr>
+								<hr style="border: 1px solid #000;" />
 							</div>
 							<br><br><br><br><br><br><br><br><br><br><br>
-							<hr>
+							<hr style="border: 1px solid #000;">
 							<div style="text-align: center;">
 								<p><%= 1 %>$ = <%=number_to_currency(Constant.exchange_rate, precision: 0, unit: "៛")%> | Phone Number: 0122223333</p>
 							</div>			
