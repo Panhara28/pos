@@ -1,0 +1,53 @@
+<div style="margin-top: 10px;">
+    <p style=" margin: 0px;">VAT:
+      <span
+        style="float: right;margin-right: 10px;">VAT: <%=number_to_percentage(@order.tax, precision: 0)%></span>
+    </p>
+    <p style=" margin: 0px;">Total
+      <span style="float: right;margin-right: 10px;">Subtotal: <%=number_to_currency(@order.total)%></span></p>
+    <p style=" margin: 0px;">តំលៃ​ Riel / Total
+      <span style="float: right;margin-right: 10px;">Subtotal R: <%=number_to_currency(@order.total * Constant.exchange_rate, unit: "៛", precision: 0)%></span></p>
+    <p style=" margin: 0px;">Discount
+      <span
+        style="float: right;margin-right: 10px;">Discount: <%=number_to_percentage(@order.discount, precision: 0)%></span>
+    </p>
+    <p style=" margin: 0px;margin-right: 10px;">ប្រាក់ត្រូវបង់ / Grand Total:
+      <span style="float: right;">Grand Total: <%=number_to_currency(@order.total)%></span></p>
+  </div>
+
+  <table>
+      <thead>
+        <tr>
+          <th class="description"></th>
+          <th class="quantity"></th>
+          <th class="price"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="description"></td>
+          <td colspan="3"></td>
+          <td class="" style="width: 50%;">Subtotal $: <%=number_to_currency(@order.subtotal)%></td>
+        </tr>
+        <tr>
+          <td class="description"></td>
+          <td colspan="3"></td>
+          <td class="" style="width: 50%;">Subtotal R: <%=number_to_currency(@order.subtotal * Constant.exchange_rate, unit: "៛", precision: 0)%></td>
+        </tr>
+        <tr>
+          <td class="description"></td>
+          <td colspan="3"></td>
+          <td class="" style="width: 50%;">VAT: <%=number_to_percentage(@order.tax, precision: 0)%></td>
+        </tr>
+        <tr>
+        <td class="description"></td>
+        <td colspan="3"></td>
+          <td class="" style="width: 50%;">Grand Total $: <%=number_to_currency(@order.total)%></td>
+        </tr>
+        <tr>
+          <td class="description"></td>
+          <td colspan="3"></td></td>
+          <td class="" style="width: 50%;">Grand Total R: <%=number_to_currency(@order.total * Constant.exchange_rate, unit: "៛", precision: 0)%></td>
+        </tr>
+      </tbody>
+  </table>

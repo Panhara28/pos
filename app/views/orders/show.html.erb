@@ -91,74 +91,65 @@
 				</div>
 				<div class="col-lg-4">
 					<div class="ticket">
-						<p class="centered">Mashisoyo Cambodia
-							<br>Address line 1
+						<p class="centered">
+							<img src="/mashisoyologo.png"/>
 							<div style="margin-bottom: 20px;">
-								<p style="text-align: center; font-weight: bold;">វិក្កយបត្រ/Invoice</p>
-								<p style=" margin: 0px;">វិក្កយបត្រ / Invoice No: <span
-										style="float: right; margin-right: 10px;"><%=@order.id%></span></p>
-								<p style=" margin: 0px;">តុ / Table: <span
-										style="float: right;margin-right: 10px;"><%=@order.table_number.split(" ")[0]%><%=@order.table_number.split(" ")[1]%></span>
-								</p>
-								<p style=" margin: 0px;">អ្នកគិតលុយ / Cashier: <span
-										style="float: right;margin-right: 10px;"><%=@order.user.username%></span></p>
-								<p style=" margin: 0px;">កាលបរិច្ឆេត / Date Time: <span
-										style="float: right;margin-right: 10px;"><%=@order.created_at%></span></p>
+								<p style="text-align: center; font-weight: bold;">Invoice</p>
+								<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Invoice No: <%=@order.id%></span></p>
+								<br>
+								<div style="margin-bottom: 10px;"></div>
+								<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Table: <%=@order.table_number.split(" ")[0]%> <%=@order.table_number.split(" ")[1]%></span></p>
+								<br>
+								<div style="margin-bottom: 10px;"></div>
+								<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Cashier: <%=@order.user.username.capitalize%></span></p>
+								<br>
+								<div style="margin-bottom: 10px;"></div>
+								<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Date Time: <%=@order.created_at%></span></p>
 							</div>
-
+							<br><br>
 							<table>
 								<thead>
 									<tr>
-										<th class="quantity">QTY <br> ចំនួន</th>
-										<th class="description">Description <br> បរិយាយ</th>
-										<th class="price">Price​ <br> តំលៃ </th>
+										<th class="description">Description</th>
+										<th class="quantity">QTY</th>
+										<th class="price">Price​</th>
 									</tr>
 								</thead>
 								<tbody>
 									<%@order.order_items.each do |order|%>
-									<tr style="border-top: 1px solid black; border-bottom: 1px solid black;">
-										<td class="quantity"><%=order.quantity%></td>
-										<td class="description"><%=order.product.product_name%></td>
-										<%=in_invoice_free?(order.unit_price)%>
-									</tr>
+										<tr style="border-top: 1px solid black; border-bottom: 1px solid black;">
+											<td class="description"><%=order.product.product_name%></td>
+											<td class="quantity"><%=order.quantity%></td>
+											<%=in_invoice_free?(order.unit_price)%>
+										</tr>
 									<%end%>
 								</tbody>
 							</table>
-							<div style="margin-top: 10px;">
-								<p style=" margin: 0px;">ពន្ធ /​ VAT:
-									<span
-										style="float: right;margin-right: 10px;"><%=number_to_percentage(@order.tax, precision: 0)%></span>
-								</p>
-								<p style=" margin: 0px;">តំលៃ​ USD / Total
-									<span style="float: right;margin-right: 10px;"><%=number_to_currency(@order.total)%></span></p>
-								<p style=" margin: 0px;">តំលៃ​ Riel / Total
-									<span style="float: right;margin-right: 10px;"><%=number_to_currency(@order.total * Constant.exchange_rate, unit: "៛", precision: 0)%></span></p>
-								<p style=" margin: 0px;">បញ្ចុះតំលៃ / Discount
-									<span
-										style="float: right;margin-right: 10px;"><%=number_to_percentage(@order.discount, precision: 0)%></span>
-								</p>
-								<p style=" margin: 0px;margin-right: 10px;">ប្រាក់ត្រូវបង់ / Grand Total:
-									<span style="float: right;"><%=number_to_currency(@order_items.last.order.total)%></span></p>
-									<%if current_order.cash == 0 && current_order.cash_in_riel == 0%>
-									<%else%>
-										<%if current_order.cash == 0%>
-											<p style=" margin: 0px;margin-right: 10px;">ប្រាក់ទទួលជារៀល:
-												<span style="float: right;"><%= number_to_currency(current_order.cash_in_riel, unit: "៛", precision: 0)%></span></p>
-										<p style=" margin: 0px;margin-right: 10px;">ប្រាក់ត្រូវអាប់ជារៀល:
-											<span style="float: right;"><%= number_to_currency (((@order_items.last.order.total_cash_in_riel / Constant::exchange_rate) - @order_items.last.order.total) * 4100), precision: 0, unit: "៛" %></span></p>
-										<%else%>
-											<p style=" margin: 0px;margin-right: 10px;">ប្រាក់ទទួលជាដុល្លា:
-												<span style="float: right;"><%= number_to_currency current_order.cash , precision: 2 %></span></p>
-												<p style=" margin: 0px;margin-right: 10px;">ប្រាក់ត្រូវអាប់ជាដុល្លា:
-													<span style="float: right;"><%= number_to_currency (((@order_items.last.order.total_cash_in_riel / Constant::exchange_rate) - @order_items.last.order.total)), precision: 3 %></span></p>
-										<%end%>
-									<%end%>
-							</div>
 
-							<p class="centered">Thanks for your supporting!
+							<div style="float: right; width: 70%;">
 								<br>
+								<p style="margin: 0px;">Subtotal $: <span style="float: right;"><%=number_to_currency(@order.subtotal)%></span></p>
+								<p style="margin: 0px;">Subtotal R: <span style="float: right;"><%=number_to_currency(@order.subtotal * Constant.exchange_rate, unit: "៛", precision: 0)%></span></p>
+								<hr>
+								<p style="margin: 0px;">VAT: <span style="float: right;"><%=number_to_percentage(@order.tax, precision: 0)%></span></p>
+								<p style="margin: 0px;">Service Fee: <span style="float: right;"></span></p>
+								<hr>
+								<p style="margin: 0px;">Grand Total $: <span style="float: right;"><%=number_to_currency(@order.total)%></span></p>
+								<p style="margin: 0px;">Grand Total R: <span style="float: right;"><%=number_to_currency(@order.total * Constant.exchange_rate, unit: "៛", precision: 0)%></span></p>
+								<hr>
+							</div>
+							<br><br><br><br><br><br><br><br><br><br><br>
+							<hr>
+							<div style="text-align: center;">
+								<p><%= 1 %>$ = <%=number_to_currency(Constant.exchange_rate, precision: 0, unit: "៛")%> | Phone Number: 0122223333</p>
+							</div>			
+							<p class="centered">
+								Address N 22, Str 317 Tol Kork, Phnom Penh, Cambodia 
+								<br>
+								Thank You, Please Come Again
 							</p>
 					</div>
+
 					<br />
 					<%=link_to print_reciept_path(@order), class: "pay-btn", onclick: "printReciept();", id: "print" do%>
 						Pay
