@@ -36,7 +36,7 @@ class SalesController < ApplicationController
   def order_item
     @order = current_order
     @order.order_date = DateTime.now.to_date
-    @order.order_time = DateTime.now.to_s(:time)
+    @order.order_time = Time.now.strftime("%I:%M %p")
     @order.waitting_no = Order.where(order_date: DateTime.now.to_date).order('id').pluck(:waitting_no).last.to_i + 1 if @order.waitting_no.nil?
     @order.user_id = current_user.id
     @order.table_number = "Take Away #{SecureRandom.hex(8)}"
@@ -129,7 +129,7 @@ class SalesController < ApplicationController
       is_paid: true, 
       user_id: current_user.id, 
       checkout_date: Date.today, 
-      checkout_time: Time.now.strftime("%H:%M:%S"),
+      checkout_time: Time.now.strftime("%I:%M %p"),
       table_number: "Take Away #{SecureRandom.hex(8)}",
       real_table_number: @order.table_number,
       order_status: "completed",
