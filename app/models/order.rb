@@ -39,7 +39,7 @@ class Order < ApplicationRecord
   end
 
   def finalize_profit
-    order_items.collect { |oi| oi.valid? ? total - (oi.quantity * oi.original_price) * (1 - oi.discount / 100) : 0 }.sum
+    order_items.collect { |oi| oi.valid? ? (oi.quantity * oi.original_price) * (1 - oi.discount / 100) : 0 }.sum
   end
 
   def total

@@ -19,7 +19,7 @@
           <%if current_user.image.present?%>
             <img src="<%=current_user.image.url%>" alt="user_auth" class="user-auth-img img-circle" /><span class="user-online-status"></span></a>
           <%else%>
-            <img src="profile.png" alt="user_auth" class="user-auth-img img-circle" /><span class="user-online-status"></span></a>
+            <img src="/profile.png" alt="user_auth" class="user-auth-img img-circle" /><span class="user-online-status"></span></a>
           <%end%>
           <ul class="dropdown-menu user-auth-dropdown" data-dropdown-in="flipInX" data-dropdown-out="flipOutX">
             <li class="divider"></li>

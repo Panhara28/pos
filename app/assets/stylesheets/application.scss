@@ -17,6 +17,28 @@
  *= require select2
  */
 
+ @media print {
+  @page {
+    size: auto;
+    /* auto is the current printer page size */
+    margin: 5mm;
+    /* this affects the margin in the printer settings */
+  }
+
+  #cancel,
+		#print {
+			display: none;
+    }
+  td,
+	th,
+	tr,
+	table {
+		border-top: 2px solid black !important;
+    border-collapse: collapse;
+    width: 50mm;
+	}
+ }
+
  .btn.fancy-button.btn-danger.btn-0:hover{
    color: #000 !important;
  }
@@ -73,33 +95,6 @@ div.table-card{
   text-align: center;
   padding: 50px;
 }
-
- @media print {
-
-  /* styles go here */
-  #cancel, #print{
-    display: none;
-  }
-
-  @page {
-    size: auto;   /* auto is the current printer page size */
-    margin: 0mm;  /* this affects the margin in the printer settings */
-  }
-
-  footer{
-    display: none;
-  }
-
-  .panel{
-    width: 75mm;
-  }
-
-  td{
-    max-width: 75mm;
-    text-overflow: ellipsis;
-  }
-
- }
 
  @import "toastr";
 
