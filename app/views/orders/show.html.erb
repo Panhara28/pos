@@ -1,4 +1,5 @@
 <style type="text/css">
+
 	@media print {
 		@page {
 			size: auto;
@@ -11,10 +12,15 @@
 		#print {
 			display: none;
 		}
+
+		th{
+			font-size: 11px;
+		}
+
 	}
 
 	* {
-		font-size: 13px;
+		font-size: 12px;
 		font-family: 'Times New Roman';
 	}
 
@@ -28,7 +34,7 @@
 
 	td.description,
 	th.description {
-		width: 302.36px;
+		width: 130.36px;
 		max-width: 302.36px;
 		text-align: left;
 		padding: 5px;
@@ -39,7 +45,7 @@
 		width: 302.36px;
 		max-width: 302.36px;
 		word-break: break-all;
-		text-align: left;
+		text-align: center;
 	}
 
 	td.price,
@@ -105,11 +111,22 @@
 								<div style="margin-bottom: 5px;"></div>
 								<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Cashier: <%=@order.user.username.capitalize%></span></p>
 								<br>
-								<div style="margin-bottom: 5px;"></div>
-								<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Date: <%=@order.created_at%></span></p>
-								<br>
-								<div style="margin-bottom: 5px;"></div>
-								<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Time: <%=@order.order_time.to_s(:time)%></span></p>
+								<%if @order.checkout_date.present?%>
+									<div style="margin-bottom: 5px;"></div>
+									<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Date: <%=@order.checkout_date.strftime("%B %d, %Y")%></span></p>
+									<br>
+								<%else%>
+									<div style="margin-bottom: 5px;"></div>
+									<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Date: <%=@order.created_at.strftime("%B %d, %Y")%></span></p>
+									<br>
+								<%end%>
+								<%if @order.checkout_time.present?%>
+									<div style="margin-bottom: 5px;"></div>
+									<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Time: <%=@order.order_time.strftime("%I:%M %p")%></span></p>
+								<%else%>
+									<div style="margin-bottom: 5px;"></div>
+									<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Time: <%=Time.now.strftime("%I:%M %p")%></span></p>
+								<%end%>
 							</div>
 							<br><br>
 							<table>
@@ -118,6 +135,7 @@
 										<th class="description">Description</th>
 										<th class="quantity">QTY</th>
 										<th class="price">Price​</th>
+										<th class="price">Discount</th>
 										<th class="price">Amount</th>
 									</tr>
 								</thead>
@@ -127,6 +145,7 @@
 											<td class="description"><%=order.product.product_name%></td>
 											<td class="quantity"><%=order.quantity%></td>
 											<%=in_invoice_free?(order.unit_price)%>
+											<td><%=number_to_percentage(order.discount, precision: 0)%></td>
 											<td class="quantity"><%=number_to_currency(order.quantity * order.unit_price, precision: 2)%></td>
 										</tr>
 									<%end%>
