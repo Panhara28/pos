@@ -10,10 +10,10 @@
 
   <td>
     <%=form_for([:admin, customer], remote: true) do |f|%>
-      <%=link_to admin_customer_path(customer), email: "View" do %>
+      <%=link_to admin_customer_path(customer),class: "btn btn-primary", email: "View" do %>
         View
       <%end%>
-      <%=link_to edit_admin_customer_path(customer), email: "Edit",id: "show-form_#{customer.id}" do %>
+      <%=link_to edit_admin_customer_path(customer),class: "btn btn-primary", email: "Edit",id: "show-form_#{customer.id}" do %>
         Edit
       <%end%>
     <%end%>

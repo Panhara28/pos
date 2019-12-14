@@ -37,13 +37,13 @@
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
-													<label for="recipient-name" class="control-label mb-10">Customer Name</label>
+													<label for="recipient-name" class="control-label mb-10">Date Of Birth</label>
 													<%=f.date_field :dob, class: "form-control"%>
 												</div>
 											</div>
 											<div class="col-md-12">
 												<div class="modal-footer">
-													<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+													<%=link_to "Cancel", customers_path, class: "btn btn-default"%>
 													<%=f.submit class: "btn btn-success"%>
 												</div>
 											</div>

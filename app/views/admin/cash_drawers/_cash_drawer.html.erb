@@ -1,7 +1,7 @@
 <tr class="delete_cash_drawer_<%=cash_drawer.id%>">
 
   <td>
-    <%= cash_drawer.cash_drawer_date%>
+    <%= cash_drawer.cash_drawer_date.strftime(" %d %B, %Y")%>
   </td>
 
   <td>
@@ -10,9 +10,9 @@
 
   <td><%=cash_drawer.user.username%></td>
 
-  <td><%=cash_drawer.start_at.to_s(:time) %></td>
+  <td><%=cash_drawer.start_at.strftime("%I:%M %p") %></td>
 
-  <td><%=cash_drawer.end_at.to_s(:time) %></td>
+  <td><%=cash_drawer.end_at.strftime("%I:%M %p") %></td>
 
   <td>
     <%=time_ago(cash_drawer.created_at)%>
@@ -20,10 +20,10 @@
 
   <td>
     <%=form_for([:admin, cash_drawer], remote: true) do |f|%>
-      <%=link_to admin_cash_drawer_path(cash_drawer), email: "View" do %>
+      <%=link_to admin_cash_drawer_path(cash_drawer),class: "btn btn-primary", email: "View" do %>
         View
       <%end%>
-      <%=link_to edit_admin_cash_drawer_path(cash_drawer), email: "Edit",id: "show-form_#{cash_drawer.id}" do %>
+      <%=link_to edit_admin_cash_drawer_path(cash_drawer),class: "btn btn-primary", email: "Edit",id: "show-form_#{cash_drawer.id}" do %>
         Edit
       <%end%>
     <%end%>

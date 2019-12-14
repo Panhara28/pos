@@ -45,16 +45,15 @@
 													
 														<td>
 															<%=form_for([:admin, setting], remote: true) do |f|%>
-																<%=link_to admin_exchange_rate_path(setting), email: "View" do %>
+																<%=link_to admin_exchange_rate_path(setting),class: "btn btn-primary", email: "View" do %>
 																	View
 																<%end%>
-																<%=link_to edit_admin_exchange_rate_path(setting), email: "Edit",id: "show-form_#{setting.id}" do %>
+																<%=link_to edit_admin_exchange_rate_path(setting),class: "btn btn-primary", email: "Edit",id: "show-form_#{setting.id}" do %>
 																	Edit
 																<%end%>
 															<%end%>
 														</td>
-													</tr>
-												
+													</tr>									
 												<%end%>
 											</tbody>
 										</table>
