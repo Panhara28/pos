@@ -39,6 +39,6 @@ class Admin::ExchangeRatesController < DashboardsController
 
   private
     def setting_params
-      params.required(:exchange_rate).permit(:usd_amount, :riel_amount, :vat)
+      params.required(:exchange_rate).permit(:usd_amount, :riel_amount, :vat, :tax)
     end
 end

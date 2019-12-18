@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191214072702) do
+ActiveRecord::Schema.define(version: 20191218092925) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
@@ -112,6 +112,7 @@ ActiveRecord::Schema.define(version: 20191214072702) do
     t.datetime "updated_at", null: false
     t.decimal "vat", precision: 12, scale: 3
     t.integer "admin_id"
+    t.decimal "tax", precision: 12, scale: 3
   end
 
   create_table "invoices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

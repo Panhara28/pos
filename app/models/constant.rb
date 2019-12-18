@@ -9,6 +9,9 @@ class Constant
   def self.vat
     ExchangeRate.last.vat
   end
-  
+
+  def self.tax
+    ExchangeRate.last.tax
+  end
 
 end
