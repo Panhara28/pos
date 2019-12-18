@@ -15,6 +15,7 @@ class OrdersController < DashboardsController
 
   def show
     @order = Order.find(params[:id])
+    @order_items = Order.unpaid_order.find(session["order_id#{current_user.id}"]).order_items if session["order_id#{current_user.id}"].present?
   end
 
   def new

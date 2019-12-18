@@ -1,2 +1,63 @@
-<h5 class="title" style="padding-left: 10px;">#{t('.edit_customer')}</h5>
-<%= render "form" %>
+<div class="wrapper theme-2-active navbar-top-light horizontal-nav">
+	<%=render "components/nav"%>
+	<%=render "components/setting"%>
+		<!-- Main Content -->
+		<div class="page-wrapper">
+			<div class="container pt-30">
+				<div class="row">
+					<div class="col-md-9">
+						<div class="panel panel-success card-view">
+							<div class="panel-heading">
+								<div class="pull-left">
+									<h6 class="panel-title txt-light">Edit category</h6>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body">
+									<%=simple_form_for([:admin, @customer], remote: true) do |f|%>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="recipient-name" class="control-label mb-10">Customer Name</label>
+													<%=f.text_field :customer_name, class: "form-control"%>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="recipient-name" class="control-label mb-10">Email</label>
+													<%=f.email_field :email, class: "form-control"%>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="recipient-name" class="control-label mb-10">Phone Number</label>
+													<%=f.text_field :phone, class: "form-control"%>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="recipient-name" class="control-label mb-10">Customer Name</label>
+													<%=f.date_field :dob, class: "form-control"%>
+												</div>
+											</div>
+											<div class="col-md-12">
+												<div class="modal-footer">
+													<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+													<%=f.submit class: "btn btn-success"%>
+												</div>
+											</div>
+										</div>
+								<%end%>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<%=render "components/footer"%>
+
+	</div>
+<!-- /Main Content -->
+</div>

@@ -1,7 +1,7 @@
 class Order < ApplicationRecord
 
   OPTION_TABLE = [
-    "Take Away #{SecureRandom.hex(8)}",
+    "Take Away",
     "1",
     "2",
     "3",
@@ -12,8 +12,6 @@ class Order < ApplicationRecord
     "9",
     "10"
   ]
-
-  validates :table_number, uniqueness: true
 
   belongs_to :user
 
@@ -37,24 +35,22 @@ class Order < ApplicationRecord
   before_update :update_chash_in
 
   def subtotal
-
     order_items.collect { |oi| oi.valid? ? (oi.quantity * oi.unit_price) * (1 - oi.discount / 100) : 0 }.sum
+  end
 
+  def finalize_profit
+    order_items.collect { |oi| oi.valid? ? (oi.quantity * oi.original_price) * (1 - oi.discount / 100) : 0 }.sum
   end
 
   def total
-
-    subtotal + self[:tax] + self[:shipping] - (subtotal * (self[:discount] / 100))
- 
+    subtotal + (subtotal * self[:tax] / 100) - (subtotal * (self[:discount] / 100))
   end
 
   private
-
     def update_subtotal
-
       self[:subtotal] = subtotal
-      self[:total] = subtotal + self[:tax]+ self[:shipping] - (subtotal * (self[:discount] / 100))
-
+      self[:total] = subtotal + (subtotal * self[:tax] / 100) - (subtotal * (self[:discount] / 100))
+      self[:profit] = finalize_profit - delivery_fee.to_d
     end
 
     def update_chash_in

@@ -1,9 +1,4 @@
 <% if @order_items.present? %>
-  <% if session[:customer_id].present? %>
-    <%= link_to Customer.find(session[:customer_id]).customer_name, customers_path%>
-    <% elsif @order_items.first.order.customer_id != 1 %>
-      <%= link_to @order_items.first.order.customer.customer_name, customers_path %>
-    <% end %>
     <div class="row">
       <!-- Basic Table -->
       <div class="col-lg-12">
@@ -17,13 +12,12 @@
         <% end %>
       </div>
       <div class="col-sm-12">
-        <div class="table-wrap">
+        <div class="">
           <div class="table-responsive">
-            <div id="datable_1_wrapper" class="dataTables_wrapper">
-              <table class="table display product-overview mb-30 dataTable" id="datable_1" role="grid">
+            <div id="" class="">
+              <table class="table mb-30">
                 <thead>
                   <tr role="row">
-                    <th style="width: 185px;"><%=t(".photo")%></th>
                     <th style="width: 246px;"><%=t(".product")%></th>
                     <th style="width: 406px;"><%=t(".quantity")%></th>
                     <th style="width: 116px;"><%=t(".price")%></th>
@@ -33,9 +27,6 @@
                 <tbody>
                   <% @order_items.each do |order_item| %>
                     <tr role="row" class="odd">
-                      <td class="sorting_1">
-                        <img src="<%=order_item.product.image.url%>" alt="iMac" height="80">
-                      </td>
                       <td class="txt-dark"><%= order_item.product.product_name %></td>
                       <td>
                         <%=order_item.quantity%>
@@ -61,10 +52,18 @@
 </div>
 <div class="row">
   <div class="col-sm-12" style="margin-top: 20px; font-weight: bold;">
-    <p>
-      <label for="" class="lable-order"><%= t('.customer_cash_in_usd') %>:</label>
-      <%= number_to_currency current_order.cash , precision: 2 %>
-    </p>
+    <%if current_order.cash == 0%>
+      <p>
+        <label for="" class="lable-order"><%= t('.customer_receive_riel') %>:</label>
+        <%= number_to_currency current_order.cash_in_riel , precision: 0%>
+      </p>
+    <%else%>
+      <p>
+        <label for="" class="lable-order"><%= t('.customer_receive_usd') %>:</label>
+        <%= number_to_currency current_order.cash , precision: 2 %>
+      </p>
+    <%end%>
+
     <p >
       <label for="" class="lable-order"><%= t('.sub_total') %>:</label>
       <span id="sub_total">
@@ -72,15 +71,9 @@
       </span>     
     </p>
     <p>
-      <label for="" class="lable-order"><%= t('.vat') %>:</label>
-      <span id="tax">
-        <%= number_to_currency @order_items.last.order.tax, precision: 2 %>
-      </span>
-    </p>
-    <p>
       <label for="" class="lable-order"><%= t('.discount') %>:</label>
       <span id="discount">
-        <%= number_to_percentage @order_items.last.order.discount, precision: 2 %>
+        <%= number_to_percentage @order_items.last.order.discount, precision: 0 %>
       </span>
     </p>
     <% if @order_items.last.order.total_cash_in_riel > 0 %>
@@ -118,7 +111,7 @@
       <p>
         <label for="" class="lable-order"><%= t('.grand_total_usd') %>:</label>
         <span id="grand_total">
-          <%= number_to_currency @order_items.last.order.total, precision: 1 %>
+          <%= number_to_currency @order_items.last.order.total %>
         </span>
       </p>
       <p>
@@ -129,7 +122,9 @@
       </p>
     </div>
     <div class="col-lg-12" style="margin-top: 20px;">
-      <%= link_to "checkout", sale_path(@order_items.last.order), class: 'btn btn-success', style: "width: 100%;" %>
+      <%= link_to sale_path(@order_items.last.order), class: 'btn btn-success', style: "width: 100%;"  do%>
+        <%=t('.checkout')%>
+      <%end%>
     </div>
   </div>
 <% end %>

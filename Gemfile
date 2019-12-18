@@ -15,15 +15,13 @@ gem 'cocoon', '~> 1.2.0'
 
 gem 'paperclip'
 
-gem 'ransack', github: 'activerecord-hackery/ransack'
+gem 'ransack'
 
 gem 'kaminari', '~> 1.1', '>= 1.1.1'
 
-gem 'ckeditor', github: 'galetahub/ckeditor'
+gem 'ckeditor'
 
 gem 'simple_form'
-
-gem "haml-rails", "~> 1.0"
 
 gem 'jquery-rails'
 
@@ -83,14 +81,4 @@ source 'https://rails-assets.org' do
 end
 gem 'font-awesome-rails'
 gem 'toastr-rails'
-group :development do
-  gem 'capistrano', '3.5.0'
-  gem 'capistrano-rvm'
-  gem 'capistrano-nginx'
-  gem 'capistrano3-puma'
-  gem 'capistrano-rails'
-  gem 'capistrano-rails-db'
-  gem 'capistrano-rails-console'
-  gem 'capistrano-upload-config'
-  gem 'sshkit-sudo'
-end
+gem "select2-rails"

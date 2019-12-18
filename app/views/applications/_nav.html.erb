@@ -3,21 +3,23 @@
   <div class="nav-wrap">
     <div class="mobile-only-brand pull-left">
       <div class="nav-header pull-left">
-        <a id="toggle_nav_btn" class="toggle-left-nav-btn inline-block ml-20 pull-left" href="javascript:void(0);"><i
-            class="ti-align-left"></i></a>
         <div class="logo-wrap">
-          <a href="index-2.html"></a>
+          <img class="brand-img" src="/mashisoyologo.png" alt="brand"/>
+          <span class="brand-text"><img  src="/mashisoyologo.png" alt="brand"/></span>
         </div>
       </div>
+      <a id="toggle_nav_btn" class="toggle-left-nav-btn inline-block ml-20 pull-left" href="javascript:void(0);">
+        <i class="ti-align-left"></i>
+      </a>
     </div>
     <div id="mobile_only_nav" class="mobile-only-nav pull-right">
       <ul class="nav navbar-right top-nav pull-right">
         <li class="dropdown auth-drp">
           <a href="#" class="dropdown-toggle pr-0" data-toggle="dropdown">
-          <%if current_user.photo.present?%>
-            <img src="<%=current_user.photo%>" alt="user_auth" class="user-auth-img img-circle" /><span class="user-online-status"></span></a>
+          <%if current_user.image.present?%>
+            <img src="<%=current_user.image.url%>" alt="user_auth" class="user-auth-img img-circle" /><span class="user-online-status"></span></a>
           <%else%>
-            <img src="profile.png" alt="user_auth" class="user-auth-img img-circle" /><span class="user-online-status"></span></a>
+            <img src="/profile.png" alt="user_auth" class="user-auth-img img-circle" /><span class="user-online-status"></span></a>
           <%end%>
           <ul class="dropdown-menu user-auth-dropdown" data-dropdown-in="flipInX" data-dropdown-out="flipOutX">
             <li class="divider"></li>
@@ -54,13 +56,17 @@
     </li>
     <li>
       <%=link_to sales_path do%>
-        <div class="pull-left"><i class="ti-dashboard mr-20"></i><span class="right-nav-text">sales</span></div>
+        <div class="pull-left">
+          <i class="ti-dashboard mr-20"></i>
+          <span class="right-nav-text"><%=t('.sales')%></span></div>
         <div class="clearfix"></div>
       <%end%>
     </li>
     <li>
-      <%=link_to new_customer_path do%>
-        <div class="pull-left"><i class="ti-user mr-20"></i><span class="right-nav-text">Customer</span></div>
+      <%=link_to customers_path do%>
+        <div class="pull-left">
+          <i class="ti-user mr-20"></i>
+          <span class="right-nav-text"><%=t('.customers')%></span></div>
         <div class="clearfix"></div>
       <%end%>
     </li>
@@ -69,7 +75,7 @@
         <div class="pull-left">
           <i class=" ti-receipt mr-20"></i>
           <span class="right-nav-text session_order_count">
-            Tables (<%= "#{ Order.where(order_status: "order").count}" %>)
+            <%=t('.orders')%> (<%= "#{ Order.where(order_status: "order").count}" %>)
           </span>
         </div>
         <div class="clearfix"></div>
@@ -78,9 +84,9 @@
     <li>
       <%=link_to orders_path(state: "completed") do%>
         <div class="pull-left">
-          <i class=" ti-receipt mr-20"></i>
+          <i class="ti-clipboard mr-20"></i>
           <span class="right-nav-text">
-            Invoices (<%= "#{ Order.where(order_status: "completed").count}" %>)
+            <%=t('.invoices')%> (<%= "#{ Order.where(order_status: "completed").count}" %>)
           </span>
         </div>
         <div class="clearfix"></div>

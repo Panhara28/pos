@@ -2,8 +2,13 @@ class Constant
 
   def self.exchange_rate
 
-    ExchangeRate.find(1).riel_amount
+    ExchangeRate.last.riel_amount
 
   end
+
+  def self.vat
+    ExchangeRate.last.vat
+  end
+  
 
 end

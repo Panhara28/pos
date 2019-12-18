@@ -4,7 +4,7 @@ class Admin::OrdersController < DashboardsController
   layout "dashboards"
   def index
     @order = current_user.orders.build
-    @orders = Order.where(is_paid: true)
+    @orders = Order.where(is_paid: true).order(id: :desc)
   end
 
   def show

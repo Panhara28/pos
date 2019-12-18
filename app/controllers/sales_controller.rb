@@ -36,10 +36,10 @@ class SalesController < ApplicationController
   def order_item
     @order = current_order
     @order.order_date = DateTime.now.to_date
-    @order.order_time = DateTime.now.to_s(:time)
+    @order.order_time = Time.now.strftime("%I:%M %p")
     @order.waitting_no = Order.where(order_date: DateTime.now.to_date).order('id').pluck(:waitting_no).last.to_i + 1 if @order.waitting_no.nil?
     @order.user_id = current_user.id
-
+    @order.table_number = "Take Away #{SecureRandom.hex(8)}"
     if session["customer_id#{current_user.id}"].present?
        @order.customer_id = session["customer_id#{current_user.id}"]
     else
@@ -53,11 +53,13 @@ class SalesController < ApplicationController
       @order_item.product_id = params[:product_id]
       @order_item.quantity = params[:quantity]
       @order_item.save
+      puts "Show"
     end
 
     if @order.save
       session["order_id#{current_user.id}"] = @order.id
       @order_items = Order.find(session["order_id#{current_user.id}"]).order_items
+      puts "Show Not"
     end
   end
 
@@ -127,10 +129,11 @@ class SalesController < ApplicationController
       is_paid: true, 
       user_id: current_user.id, 
       checkout_date: Date.today, 
-      checkout_time: Time.now.strftime("%H:%M:%S"),
+      checkout_time: Time.now.strftime("%I:%M %p"),
       table_number: "Take Away #{SecureRandom.hex(8)}",
       real_table_number: @order.table_number,
-      order_status: "completed",     
+      order_status: "completed",
+      delivery_fee: @order.delivery.present? ? @order.delivery.delivery_fee : 0
     )
       redirect_to sales_path
     end

@@ -1,13 +1,13 @@
-$("input#admin_email").val("");
-$("input#admin_fullname").val("");
-$("input#admin_organization").val("");
+$("input#user_email").val("");
+$("input#user_fullname").val("");
+$("input#user_organization").val("");
 $(".disabled").attr("disabled", false)
-$("#admin-errors").html(" ");
-$("#admin-success").html("<%= custom_flash_message%>");
-$("#admin-index").append("<%=escape_javascript render(@admin)%>");
+$("#user-errors").html(" ");
+$("#user-success").html("<%= custom_flash_message%>");
+$("#user-index").append("<%=escape_javascript render(@user)%>");
 
 $(function() {
-  $('.delete_admin_<%=@admin.id%>').submitOnCheck();
+  $('.delete_user_<%=@user.id%>').submitOnCheck();
 });
 
-$('.delete_admin_<%=@admin.id%>').submitOnCheck();
+$('.delete_user_<%=@user.id%>').submitOnCheck();

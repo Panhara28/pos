@@ -14,28 +14,85 @@
                     <div class="profile-cover-pic">
                       <div class="fileupload btn btn-default">
                         <%=link_to edit_admin_admin_path(current_admin.id) do%>
-                          <span class="btn-text">edit</span>
+                        <span class="btn-text">edit</span>
                         <%end%>
                       </div>
                       <div class="profile-image-overlay"></div>
                     </div>
                     <div class="profile-info text-center mb-15">
                       <div class="profile-img-wrap">
-                        <img class="inline-block mb-10" src="<%=current_admin.photo%>" alt="user">
+                        <%if current_admin.image.present?%>
+                        <img class="inline-block mb-10" src="<%=current_admin.image.url%>" alt="user">
+                        <%else%>
+                        <img class="inline-block mb-10" src="/no-image.png" alt="user">
+                        <%end%>
                         <div class="fileupload btn btn-default">
                           <%=link_to edit_admin_admin_path(current_admin.id) do%>
-                            <span class="btn-text">edit</span>
+                          <span class="btn-text">edit</span>
                           <%end%>
-                          <input class="upload" type="file">
                         </div>
                       </div>
-                      <h5 class="block mt-10 weight-500 capitalize-font txt-dark"><%=current_admin.username.capitalize%></h5>
+                      <h5 class="block mt-10 weight-500 capitalize-font txt-dark"><%=current_admin.username.capitalize%>
+                      </h5>
                       <h6 class="block capitalize-font"><%=current_admin.role%></h6>
                     </div>
                     <div class="social-info">
                       <%=link_to edit_admin_admin_path(current_admin.id), class: "btn btn-orange btn-block  btn-anim mt-15" do%>
-                        <i class="fa fa-pencil"></i><span class="btn-text">edit profile</span>
+                      <i class="fa fa-pencil"></i><span class="btn-text">edit profile</span>
                       <%end%>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-8">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="panel panel-default card-view pa-0">
+              <div class="panel-wrapper collapse in">
+                <div class="panel-body pb-0">
+                  <div class="tab-struct custom-tab-1">
+                    <ul role="tablist" class="nav nav-tabs nav-tabs-responsive" id="myTabs_8">
+                      <li class="active" role="presentation"><a data-toggle="tab" id="profile_tab_8" role="tab"
+                          href="#profile_8" aria-expanded="false"><span>profile</span></a></li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent_8">
+                      <div id="profile_8" class="tab-pane fade active in" role="tabpanel">
+                        <div class="col-md-12">
+                          <div class="pt-20">
+                            <div class="streamline user-activity">
+
+                              <div class="sl-item">
+                                <a href="javascript:void(0)">
+                                  <div class="sl-avatar avatar avatar-sm avatar-circle">
+                                    <%if current_admin.photo.present?%>
+                                    <img class="img-responsive img-circle" src="<%=current_admin.photo%>" alt="avatar">
+                                    <%else%>
+                                    <img class="img-responsive img-circle" src="/no-image.png" alt="avatar">
+                                    <%end%>
+                                  </div>
+                                  <div class="sl-content">
+                                    <p class="inline-block">Fullname: <span
+                                        class="capitalize-font txt-orange mr-5 weight-500"><%= "#{current_admin.first_name}" + "#{current_admin.last_name}"%></span>
+                                    </p>
+                                    <br />
+                                    <p class="inline-block">Username: <span
+                                        class="capitalize-font txt-orange mr-5 weight-500"><%=current_admin.username%></span>
+                                    </p>
+                                    <span class="block txt-grey font-12 capitalize-font">Created_at:
+                                      <%=time_ago(current_admin.created_at)%></span>
+                                    <span class="block txt-grey font-12 capitalize-font">Role:
+                                      <%=current_admin.role%></span>
+                                  </div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>

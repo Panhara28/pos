@@ -12,10 +12,10 @@
 //
 
 //= require rails-ujs
-//= require ckeditor/init
 //= require_tree ./admin/js/
 //= require toastr
 //= require cocoon
+//= require select2
 
 jQuery.fn.submitOnCheck = function() {
 	this.find('input[type=submit]').remove();

@@ -1,4 +1,5 @@
 <style type="text/css">
+
 	@media print {
 		@page {
 			size: auto;
@@ -11,6 +12,11 @@
 		#print {
 			display: none;
 		}
+
+		th{
+			font-size: 11px;
+		}
+
 	}
 
 	* {
@@ -28,8 +34,10 @@
 
 	td.description,
 	th.description {
-		width: 302.36px;
+		width: 130.36px;
 		max-width: 302.36px;
+		text-align: left;
+		padding: 5px;
 	}
 
 	td.quantity,
@@ -37,6 +45,7 @@
 		width: 302.36px;
 		max-width: 302.36px;
 		word-break: break-all;
+		text-align: center;
 	}
 
 	td.price,
@@ -44,7 +53,7 @@
 		width: 302.36px;
 		max-width: 302.36px;
 		word-break: break-all;
-		text-align: center;
+		text-align: left;
 	}
 
 	.centered {
@@ -53,8 +62,7 @@
 	}
 
 	.ticket {
-		margin-left: 0.4cm;
-		max-width: 80mm;
+		max-width: 70mm;
 	}
 
 	img {
@@ -66,10 +74,23 @@
 	.fixed-sidebar-left {
 		display: none;
 	}
+
+  .pay-btn{
+    background: #ff6028;
+    padding: 20px 120px;
+		color: #fff;
+		font-size: 16px;
+	}
+	.pay-cancel{
+		background:#dcdcdc;
+    padding: 20px 112px;
+		color: #000;
+		font-size: 16px;
+	}
+
 </style>
 
 <div class="wrapper theme-2-active navbar-top-light horizontal-nav">
-	<%=render "applications/nav"%>
 	<!-- Main Content -->
 	<div class="page-wrapper" style="padding-top: 0px; background: white;">
 		<div class="container pt-30">
@@ -78,65 +99,79 @@
 				</div>
 				<div class="col-lg-4">
 					<div class="ticket">
-						<p class="centered">Mashisoyo Cambodia
-							<br>Address line 1
+						<p class="centered">
+							<img src="/mashisoyologo.png"/>
 							<div style="margin-bottom: 20px;">
-								<p style="text-align: center; font-weight: bold;">វិក្កយបត្រ/Invoice</p>
-								<p style=" margin: 0px;">វិក្កយបត្រ/Invoice No: <span style="float: right;"><%=@order.id%></span></p>
-								<p style=" margin: 0px;">តុ/Table: <span
-										style="float: right;"><%=@order.table_number.split(" ")[0]%><%=@order.table_number.split(" ")[1]%></span>
-								</p>
-								<p style=" margin: 0px;">អ្នកគិតលុយ/Cashier: <span
-										style="float: right;"><%=@order.user.username%></span></p>
-								<p style=" margin: 0px;">កាលបរិច្ឆេត/Date Time: <span
-										style="float: right;"><%=@order.created_at%></span></p>
+								<p style="text-align: center; font-weight: bold;">Invoice</p>
+								<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Invoice No: <%= '%05d' % @order.id %></span></p>
+								<br>
+								<div style="margin-bottom: 5px;"></div>
+								<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Table No: <%=@order.table_number.split(" ")[0]%> <%=@order.table_number.split(" ")[1]%></span></p>
+								<br>
+								<div style="margin-bottom: 5px;"></div>
+								<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Cashier: <%=@order.user.username.capitalize%></span></p>
+								<br>
+								<%if @order.checkout_date.present?%>
+									<div style="margin-bottom: 5px;"></div>
+									<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Date: <%=@order.checkout_date.strftime("%B %d, %Y")%></span></p>
+									<br>
+								<%else%>
+									<div style="margin-bottom: 5px;"></div>
+									<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Date: <%=@order.created_at.strftime("%B %d, %Y")%></span></p>
+									<br>
+								<%end%>
+								<%if @order.checkout_time.present?%>
+									<div style="margin-bottom: 5px;"></div>
+									<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Time: <%=@order.order_time.strftime("%I:%M %p")%></span></p>
+								<%else%>
+									<div style="margin-bottom: 5px;"></div>
+									<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Time: <%=Time.now.strftime("%I:%M %p")%></span></p>
+								<%end%>
 							</div>
-
+							<br><br>
 							<table>
 								<thead>
 									<tr>
-										<th class="quantity">QTY <br> ចំនួន</th>
-										<th class="description">Description <br> បរិយាយ</th>
-										<th class="price">Price​ <br> តំលៃ </th>
+										<th class="description">Description</th>
+										<th class="quantity">QTY</th>
+										<th class="price">Price​</th>
+										<th class="price">Discount</th>
+										<th class="price">Amount</th>
 									</tr>
 								</thead>
 								<tbody>
 									<%@order.order_items.each do |order|%>
-									<tr style="border-top: 1px solid black; border-bottom: 1px solid black;">
-										<td class="quantity"><%=order.quantity%></td>
-										<td class="description"><%=order.product.product_name%></td>
-										<%=in_invoice_free?(order.unit_price)%>
-									</tr>
+										<tr style="border-top: 1px solid black; border-bottom: 1px solid black;">
+											<td class="description"><%=order.product.product_name%></td>
+											<td class="quantity"><%=order.quantity%></td>
+											<%=in_invoice_free?(order.unit_price)%>
+											<td><%=number_to_percentage(order.discount, precision: 0)%></td>
+											<td class="quantity"><%=number_to_currency(order.quantity * order.unit_price, precision: 2)%></td>
+										</tr>
 									<%end%>
 								</tbody>
 							</table>
-							<div style="margin-top: 10px;">
-								<p style=" margin: 0px;">តំលៃ​ USD/Total   
-								<span style="float: right;"><%=number_to_currency(@order.subtotal)%></span></p>
-								<p style=" margin: 0px;">តំលៃ​ Riel/Total   
-								<span style="float: right;">៛ <%=@order.total * Constant.exchange_rate%></span></p>
-								<p style=" margin: 0px;">បញ្ចុះតំលៃ/Discount  
-								<span style="float: right;"><%=@order.discount%> %</span></p>
-								<p style=" margin: 0px;">ប្រាក់ត្រូវបង់/Grand Total:  
-								<span style="float: right;"><%=number_to_currency(@order.total)%></span></p>
-							</div>
-							
-							<p class="centered">Thanks for your supporting!
-								<br></p>
+							<br><br><br>
 					</div>
-					<%=link_to print_success_path(@order), class: "btn btn-default btn-outline btn-icon left-icon", onclick: "javascript:window.print();", id: "print" do%>
-						<i class="fa fa-print"></i>
-						<span>Send To Kitchen</span>
+
+					<br />
+					<%=link_to print_to_kitchen_path(@order), class: "pay-btn", onclick: "printReciept();", id: "print", style:"padding: 20px 80px;"  do%>
+							Print To Kitchen
 					<%end%>
-					<%=link_to "Cancel", sales_path, class: "btn btn-danger", id: "cancel"%>
+					<br><br><br><br><br>
+					<%=link_to "Cancel", sales_path, class: "pay-cancel", id: "cancel"%>
 				</div>
 				<div class="col-lg-4">
 				</div>
 			</div>
 		</div>
 
-		<%=render "applications/footer"%>
-
 	</div>
 	<!-- /Main Content -->
 </div>
+
+<script>
+	function printReciept(){
+		window.print();
+	}
+</script>

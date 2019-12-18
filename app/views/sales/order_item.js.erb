@@ -2,6 +2,6 @@
   $(".order-item").html("<%= j render :partial => 'order_item_row', :locals => { :order_items => @order_items}%>");
 <%else%>
   $("#send_to_order_succcess").html("<%= custom_flash_message%>");
-  $(".session_order_count").html("Tables (<%= Order.where(order_status: "order").count %>)")
+  $(".session_order_count").html("Orders (<%= Order.where(order_status: "order").count %>)")
   $(".order-item").html("");
 <%end%>

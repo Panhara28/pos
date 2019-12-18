@@ -1,32 +1,74 @@
-<div class="card-panel white" id="admin">
-  <table class="striped responsive-table">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>#{t('.usd_amount')}</th>
-        <th>#{t('.riel_amount')}</th>
-        <th>#{t('.edit')}</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @exchange_rates.each do |exchange_rate| %>
-        <tr>
-          <td>
-            <%= exchange_rate.id %>
-          </td>
-          <td>
-            <%= exchange_rate.usd_amount %>
-          </td>
-          <td>
-            <%= exchange_rate.riel_amount %>
-          </td>
-          <td>
-            <%= link_to edit_admin_exchange_rate_path(exchange_rate), data: { turbolinks: false }  do %>
-              <i class="small material-icons indigo-text text-darken-4">edit</i>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+<div class="wrapper theme-2-active navbar-top-light horizontal-nav">
+	<%=render "components/nav"%>
+	<%=render "components/setting"%>
+	<!-- Main Content -->
+	<div class="page-wrapper">
+		<div class="container pt-30">
+			<!-- Row -->
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="panel panel-default border-panel card-view">
+						<div class="panel-heading">
+							<div class="pull-left">
+								<h6 class="panel-title txt-dark">setting</h6>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="panel-wrapper collapse in">
+							<div class="panel-body">
+								<div class="table-wrap">
+									<div class="">
+										<table id="example" class="cell-border">
+											<thead>
+												<tr>
+													<th>USD</th>
+													<th>Riel</th>
+													<th>VAT</th>
+													<th>Actions</th>
+												</tr>
+											</thead>
+											<tbody id="setting-index">
+												<%@settings.each do |setting|%>
+													<tr class="delete_setting_<%=setting.id%>">
+
+														<td>
+															<%= number_to_currency(setting.usd_amount)%>
+														</td>
+													
+														<td>
+															<%=number_to_currency(setting.riel_amount)%>
+														</td>
+													
+														<td>
+															<%=number_to_percentage(setting.vat)%>
+														</td>
+													
+														<td>
+															<%=form_for([:admin, setting], remote: true) do |f|%>
+																<%=link_to admin_exchange_rate_path(setting),class: "btn btn-primary", email: "View" do %>
+																	View
+																<%end%>
+																<%=link_to edit_admin_exchange_rate_path(setting),class: "btn btn-primary", email: "Edit",id: "show-form_#{setting.id}" do %>
+																	Edit
+																<%end%>
+															<%end%>
+														</td>
+													</tr>									
+												<%end%>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /Row -->
+		</div>
+
+		<%=render "components/footer"%>
+
+	</div>
+	<!-- /Main Content -->
 </div>

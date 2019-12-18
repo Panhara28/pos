@@ -1,0 +1,21 @@
+<tr class="delete_customer_<%=customer.id%>">
+
+  <td>
+    <%= customer.customer_name%>
+  </td>
+
+  <td>
+    <%=time_ago(customer.created_at)%>
+  </td>
+
+  <td>
+    <%=form_for(customer, remote: true) do |f|%>
+      <%=link_to customer_path(customer), email: "View" do %>
+        View
+      <%end%>
+      <%=link_to edit_customer_path(customer), email: "Edit",id: "show-form_#{customer.id}" do %>
+        Edit
+      <%end%>
+    <%end%>
+  </td>
+</tr>
