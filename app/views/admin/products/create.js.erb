@@ -1,4 +1,12 @@
 $("input#product_product_name").val("");
+$("input#product_product_price").val("");
+$("input#product_original_price").val("");
+$("select#product_category_id").val("")
+
+$("div.image-box").attr("style", "background: #D24D57;")
+$("#img-upload").attr("style", "display: inline;")
+$("img#upload-img").attr("style", "display: none;")
+$("img#upload-img").attr("src", "")
 $("#product-errors").html(" ");
 $("#product-success").html("<%= custom_flash_message%>");
 $("#product-index").append("<%=escape_javascript render(@product)%>");
