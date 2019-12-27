@@ -127,15 +127,18 @@ class SalesController < ApplicationController
   def print_reciept
     @order = Order.find(params[:id])
     if @order.update(
-      is_paid: true, 
-      user_id: current_user.id, 
-      checkout_date: Date.today, 
-      checkout_time: Time.now.strftime("%I:%M %p"),
-      table_number: "Take Away #{SecureRandom.hex(8)}",
-      real_table_number: @order.table_number,
-      order_status: "completed",
-      delivery_fee: @order.delivery.present? ? @order.delivery.delivery_fee : 0
-    )
+        is_paid: true, 
+        user_id: current_user.id, 
+        checkout_date: Date.today, 
+        checkout_time: Time.now.strftime("%I:%M %p"),
+        table_number: "Take Away #{SecureRandom.hex(8)}",
+        real_table_number: @order.table_number,
+        order_status: "completed",
+        delivery_fee: @order.delivery.present? ? @order.delivery.delivery_fee : 0,
+      )
+      @order.order_items.each do |oi|
+        @order.update(profit: ((oi.product.product_price - oi.product.original_price) * oi.quantity + (@order.total * @order.tax / 100)))
+      end
       redirect_to sales_path
     end
     session.delete("order_id#{current_user.id}")
