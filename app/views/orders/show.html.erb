@@ -165,19 +165,19 @@
 								<p style="margin: 0px;">Grand Total R: <span style="float: right;"><%=number_to_currency(@order.total * Constant.exchange_rate, unit: "៛", precision: 0)%></span></p>
 								<hr style="border: 1px solid #000;" />
 								<%if @order.cash_in_riel == 0.0%>
-									<p style="margin: 0px;">Charge In Dollor $: <span style="float: right;">
-										<%= number_to_currency ((@order.total_cash_in_riel / Constant::exchange_rate) - @order.total), precision: 2 %>
+									<p style="margin: 0px;">Charge In Dollar $: <span style="float: right;">
+										<%= number_to_currency (@order.total - (@order.total_cash_in_riel / Constant::exchange_rate)), precision: 2 %>
 									</p>								
 								<%elsif @order.cash == 0.0%>
 									<p style="margin: 0px;">Charge In Riel $: <span style="float: right;">
-										<%= number_to_currency ((@order.total_cash_in_riel / Constant::exchange_rate) - @order.total), precision: 2 %>
-									</p>
-								<%elsif @order.cash != 0.0 && @order.cash_in_riel != 0.0%>
-									<p style="margin: 0px;">Charge In Dollor $: <span style="float: right;">
 										<%= number_to_currency (@order.total - (@order.total_cash_in_riel / Constant::exchange_rate)), precision: 2 %>
 									</p>
+								<%elsif @order.cash != 0.0 && @order.cash_in_riel != 0.0%>
+									<p style="margin: 0px;">Charge In Dollar $: <span style="float: right;">
+										<%= number_to_currency ((@order_items.last.order.total_cash_in_riel / Constant::exchange_rate) - @order_items.last.order.total), precision: 2 %>
+									</p>
 									<p style="margin: 0px;">Charge In Riel $: <span style="float: right;">
-										<%= "#{((@order.total * Constant.exchange_rate) - @order.total_cash_in_riel) / 4100 * 4000 }"%>
+										<%= "#{ number_to_currency((@order.total_cash_in_riel - (@order.total * Constant.exchange_rate)), precision: 0, unit: "៛")}"%>
 									</p>
 								<%end%>
 							</div>

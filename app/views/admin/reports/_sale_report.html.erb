@@ -19,7 +19,8 @@
                   <th>Discount(Order)</th>
                   <th>Discount(Product)</th>
                   <th>VAT</th>
-                  <th>Total</th>
+                  <th>Delivery Fee</th>
+                  <th>Total + VAT</th>
                   <th>Profit</th>
                 </tr>
               </thead>
@@ -39,6 +40,11 @@
                     <%=number_to_percentage order.order_items.sum(:discount), precision: 0%>
                   </td>
                   <td><%=number_to_percentage order.tax, precision: 0%></td>
+                  <%if order.delivery_fee.present?%>
+                    <td><%= number_to_percentage order.delivery_fee, precision: 0%></td>
+                  <%else%>
+                    <td><%= number_to_percentage order.delivery_fee%></td>
+                  <%end%>
                   <td>
                     <%= number_to_currency order.total %>
                   </td>
@@ -53,11 +59,13 @@
                   <td></td>
                   <td></td>
                   <td></td>
+                  <td></td>
                   <td><strong>Total Sales: <%= number_to_currency @dailly_sales.sum(:total) %></strong></td>
                   <td><strong>Profit Sales: <%= number_to_currency @dailly_sales.sum(:profit) %></strong></td>
                 </tr>
                 <tr>
                   <td colspan="1">Report From: <%=params[:report][:dailly_sale_date_from]%> to <%=params[:report][:dailly_sale_date_to]%></td>
+                  <td></td>
                   <td></td>
                   <td></td>
                   <td></td>

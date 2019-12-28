@@ -137,7 +137,12 @@ class SalesController < ApplicationController
         delivery_fee: @order.delivery.present? ? @order.delivery.delivery_fee : 0,
       )
       @order.order_items.each do |oi|
-        @order.update(profit: ((oi.product.product_price - oi.product.original_price) * oi.quantity + (@order.total * @order.tax / 100)))
+        profitCal = ((oi.product.product_price - oi.product.original_price) * oi.quantity)
+        delivery_fee = (oi.product.product_price * (@order.delivery_fee / 100))
+        puts "ProfitCal: #{profitCal}"
+        puts "DeliveryFEE: #{(oi.product.product_price * (@order.delivery_fee / 100))}"
+        finalize = profitCal - delivery_fee
+        @order.update(profit: finalize)
       end
       redirect_to sales_path
     end

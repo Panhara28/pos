@@ -76,6 +76,7 @@
         <%= number_to_percentage @order_items.last.order.discount, precision: 0 %>
       </span>
     </p>
+
     <% if @order_items.last.order.total_cash_in_riel > 0 %>
       <p>
         <label for="" class="lable-order"><%= t('.change_in_dollar') %>:</label>       
@@ -84,6 +85,7 @@
         </span>
       </p>
     <% end %>
+
     <%if @order_items.last.order.cash_in_riel == 0 && @order_items.last.order.cash == 0%>
       <p>
         <label for="" class="lable-order"><%= t('.change_in_riel') %>:</label>
@@ -108,18 +110,21 @@
           </p>
         <%end%>
       <%end%>
+
       <p>
         <label for="" class="lable-order"><%= t('.grand_total_usd') %>:</label>
         <span id="grand_total">
           <%= number_to_currency @order_items.last.order.total %>
         </span>
       </p>
+
       <p>
         <label for="" class="lable-order"><%= t('.grand_total_riel') %>:</label>
         <span id="grand_total_riel">
           ៛<%= "#{@order_items.last.order.total * Constant.exchange_rate}"%>
         </span>
       </p>
+      
     </div>
     <div class="col-lg-12" style="margin-top: 20px;">
       <%= link_to sale_path(@order_items.last.order), class: 'btn btn-success', style: "width: 100%;"  do%>
