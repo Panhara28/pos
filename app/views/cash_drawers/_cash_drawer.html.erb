@@ -1,0 +1,26 @@
+<tr class="delete_cash_drawer_<%=cash_drawer.id%>">
+
+  <td>
+    <%= cash_drawer.cash_drawer_date.strftime(" %d %B, %Y")%>
+  </td>
+
+  <td>
+    <%=cash_drawer.cash_drawer_amout%>
+  </td>
+
+  <td><%=cash_drawer.user.username%></td>
+
+  <td><%=cash_drawer.admin.username%></td>
+
+  <td><%=cash_drawer.start_at.strftime("%I:%M %p") %></td>
+
+  <td><%=cash_drawer.end_at.strftime("%I:%M %p") %></td>
+  <td>
+    <%=form_for([:admin, cash_drawer], remote: true) do |f|%>
+      <%=link_to cash_drawer_path(cash_drawer),class: "btn btn-primary", email: "View" do %>
+        View
+      <%end%>
+    <%end%>
+  </td>
+</tr>
+

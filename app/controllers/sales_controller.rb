@@ -54,13 +54,14 @@ class SalesController < ApplicationController
       @order_item.product_id = params[:product_id]
       @order_item.quantity = params[:quantity]
       @order_item.save
-      puts "Show"
+      profit = @order_item.order.total - @order_item.product.original_price
+      @order.update(profit: profit)
     end
 
     if @order.save
       session["order_id#{current_user.id}"] = @order.id
       @order_items = Order.find(session["order_id#{current_user.id}"]).order_items
-      puts "Show Not"
+      puts "RUN Order"
     end
   end
 
