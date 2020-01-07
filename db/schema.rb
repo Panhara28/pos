@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191129034910) do
+ActiveRecord::Schema.define(version: 20191218092925) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20191129034910) do
     t.string "photo_content_type"
     t.bigint "photo_file_size"
     t.datetime "photo_updated_at"
+    t.string "image_data"
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
     t.index ["username"], name: "index_admins_on_username", unique: true
@@ -48,6 +49,19 @@ ActiveRecord::Schema.define(version: 20191129034910) do
     t.bigint "admin_id", null: false
     t.bigint "permission_id", null: false
     t.index ["admin_id", "permission_id"], name: "index_admins_permissions_on_admin_id_and_permission_id"
+  end
+
+  create_table "cash_drawers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.date "cash_drawer_date"
+    t.decimal "cash_drawer_amout", precision: 10
+    t.time "start_at"
+    t.time "end_at"
+    t.string "status"
+    t.decimal "total_sale_amount", precision: 10
+    t.integer "admin_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -76,6 +90,9 @@ ActiveRecord::Schema.define(version: 20191129034910) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.string "photo"
+    t.string "customer_type"
+    t.integer "admin_id"
+    t.date "dob"
     t.index ["user_id"], name: "index_customers_on_user_id"
   end
 
@@ -93,6 +110,9 @@ ActiveRecord::Schema.define(version: 20191129034910) do
     t.float "riel_amount", limit: 24
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "vat", precision: 12, scale: 3
+    t.integer "admin_id"
+    t.decimal "tax", precision: 12, scale: 3
   end
 
   create_table "invoices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -111,6 +131,7 @@ ActiveRecord::Schema.define(version: 20191129034910) do
     t.datetime "updated_at", null: false
     t.decimal "discount", precision: 12, scale: 3, default: "0.0"
     t.decimal "subtotal", precision: 12, scale: 3
+    t.decimal "original_unit_price", precision: 12, scale: 3
     t.index ["order_id"], name: "index_order_items_on_order_id"
     t.index ["product_id"], name: "index_order_items_on_product_id"
   end
@@ -140,10 +161,9 @@ ActiveRecord::Schema.define(version: 20191129034910) do
     t.string "table_number"
     t.string "real_table_number"
     t.decimal "delivery_fee", precision: 12, scale: 3
-<<<<<<< HEAD
-=======
     t.integer "delivery_id"
->>>>>>> 9c3c1de9b7ce31b396036af2f6bb6764d936e5dc
+    t.decimal "profit", precision: 12, scale: 3
+    t.text "note"
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["seat_table_id"], name: "index_orders_on_seat_table_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
@@ -173,6 +193,8 @@ ActiveRecord::Schema.define(version: 20191129034910) do
     t.bigint "photo_file_size"
     t.datetime "photo_updated_at"
     t.text "image_data"
+    t.decimal "original_price", precision: 12, scale: 3
+    t.boolean "status", default: true
     t.index ["admin_id"], name: "index_products_on_admin_id"
   end
 
@@ -214,6 +236,7 @@ ActiveRecord::Schema.define(version: 20191129034910) do
     t.string "photo_content_type"
     t.bigint "photo_file_size"
     t.datetime "photo_updated_at"
+    t.string "image_data"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true

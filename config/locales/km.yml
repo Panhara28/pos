@@ -1,7 +1,7 @@
 km:
   sales:
     order_item_row:
-      send_to_order: ផ្ងើរទៅកាន់បញ្ជាទិញ
+      send_to_order: ផ្ងើរទៅកាន់ការបញ្ជាទិញ
       setting: កែប្រែ
       photo: រូបភាព
       product: មុខម្ហូប
@@ -16,3 +16,21 @@ km:
       change_in_dollar: លុយអាប់ជាដុល្លា
       grand_total_usd: តំលៃសរុបជាដុល្លា
       grand_total_riel: តំលៃសរុបជារៀល
+      checkout: គិតលុយ
+  orders:
+    edit:
+      delivery_company: ក្រុមហ៊ុនដឹកជញ្ជូន
+      table: ជ្រើសរើសតុ
+      members: សមាជិក
+      vat: ពន្ធ
+      discount: បញ្ចុះតំលៃ
+      customer_receive_usd: ប្រាក់ទទួលពីអតិថិជន
+      order_date: ថ្ងៃបញ្ជាទិញ
+      order_time: ម៉ោងបញ្ជាទិញ
+  applications:
+    nav:
+      sales: កន្លែងលក់
+      customers: អតិថិជនថ្មី
+      orders: ការកម្ម៉ង
+      invoices: បញ្ជីវិក័យបត្រ
+  

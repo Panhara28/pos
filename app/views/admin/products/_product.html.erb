@@ -9,7 +9,7 @@
   </td>
 
   <td>
-    <%=product.product_no%>
+    <%=number_to_currency(product.original_price)%>
   </td>
 
   <td>
@@ -18,10 +18,10 @@
 
   <td>
     <%=form_for([:admin, product], remote: true) do |f|%>
-      <%=link_to admin_product_path(product), email: "View" do %>
+      <%=link_to admin_product_path(product),class: "btn btn-primary", email: "View" do %>
         View
       <%end%>
-      <%=link_to edit_admin_product_path(product), email: "Edit",id: "show-form_#{product.id}" do %>
+      <%=link_to edit_admin_product_path(product),class: "btn btn-primary", email: "Edit",id: "show-form_#{product.id}" do %>
         Edit
       <%end%>
     <%end%>

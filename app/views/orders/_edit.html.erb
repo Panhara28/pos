@@ -31,62 +31,69 @@
       <div class="row">
       <div class="col-md-12">
           <div class="form-group">
-            <label for="recipient-name" class="control-label mb-10">Delivery Company</label>
+            <label for="recipient-name" class="control-label mb-10"><%=t('.delivery_company')%></label>
             <%=f.collection_select :delivery_id, Delivery.all, :id, :company, { prompt: "Select Company" } , {class: "form-control select2"}%>
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6" style="margin-top: 20px;">
           <div class="form-group">
-            <label for="recipient-name" class="control-label mb-10">Table</label>
-            <%=f.select :table_number, Order::OPTION_TABLE, { prompt: "Select Table"}, {class: "form-control"}%>
+            <label for="recipient-name" class="control-label mb-10"><%=t('.table')%></label>
+            <%=f.select :table_number, Order::OPTION_TABLE, { prompt: "Select Table"}, {class: "form-control select2"}%>
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6" style="margin-top: 20px;">
           <div class="form-group">
-            <label for="recipient-name" class="control-label mb-10">Members</label>
+            <label for="recipient-name" class="control-label mb-10"><%=t('.members')%></label>
             <%=f.collection_select :customer_id, Customer.all, :id, :customer_name, { prompt: "Select Customer" } , {class: "form-control select2"}%>
           </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6" style="margin-top: 20px;">
           <div class="form-group">
-            <label for="recipient-name" class="control-label mb-10">VAT</label>
-            <%=f.number_field :tax, class: "form-control"%>
+            <label for="recipient-name" class="control-label mb-10"><%=t('.vat')%></label>
+            <%=f.number_field :tax, class: "form-control", value: Constant::vat, disabled: true%>
           </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6" style="margin-top: 20px;">
           <div class="form-group">
-            <label for="recipient-name" class="control-label mb-10">Discount</label>
+            <label for="recipient-name" class="control-label mb-10"><%=t('.discount')%></label>
             <%=f.number_field :discount, class: "form-control"%>
           </div>
         </div>
 
         <div class="col-md-6">
           <div class="form-group">
-            <label for="recipient-name" class="control-label mb-10">Delivery Fee</label>
-            <%= f.number_field :delivery_fee, :class => 'form-control', value: 0.0%>
-          </div>
-        </div>
-
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="recipient-name" class="control-label mb-10">USD</label>
+            <label for="recipient-name" class="control-label mb-10"><%=t('.customer_receive_usd')%></label>
             <%= f.number_field :cash, :class => 'form-control', value: 0.0%>
           </div>
         </div>
 
         <div class="col-md-6">
           <div class="form-group">
-            <label for="recipient-name" class="control-label mb-10">Order Date</label>
+            <label for="recipient-name" class="control-label mb-10"><%=t('.customer_receive_riel')%></label>
+            <%= f.number_field :cash_in_riel, :class => 'form-control', value: 0.0%>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="recipient-name" class="control-label mb-10"><%=t('.order_date')%></label>
             <%= f.text_field :order_date, :class => 'form-control', placeholder: "Choose order date", disabled: true %>
           </div>
         </div>
 
         <div class="col-md-6">
           <div class="form-group">
-            <label for="recipient-name" class="control-label mb-10">Order Time</label>
-            <%= f.text_field :order_time, :as => :string, :value => time_format(f.object.order_time), :class => 'form-control', label: false, placeholder: "Choose order time", disabled: true %>
+            <label for="recipient-name" class="control-label mb-10"><%=t('.order_time')%></label>
+            <%= f.text_field :order_time, :as => :string, :value => Time.now.strftime("%I:%M %p"), :class => 'form-control', label: false, placeholder: "Choose order time", disabled: true %>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="recipient-name" class="control-label mb-10"><%=t('.note')%></label>
+            <%= f.text_area :note, class: "form-control", rows: "10" %>
           </div>
         </div>
 
@@ -103,3 +110,7 @@
   </div>
 </div>
 <%end%>
+
+<script type="text/javascript">
+$( ".select2" ).select2();
+</script>

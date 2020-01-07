@@ -16,6 +16,14 @@ class OrderItem < ApplicationRecord
     end
   end
 
+  def original_price
+    if persisted?
+      self[:original_unit_price]
+    else
+      product.original_price
+    end
+  end
+
   def quantity
     self[:quantity]
   end
@@ -40,6 +48,7 @@ private
 
   def finalize
     self[:unit_price] = unit_price
+    self[:original_unit_price] = original_price
     self[:subtotal] = quantity * self[:unit_price]
   end
 

@@ -10,10 +10,10 @@
 
   <td>
     <%=form_for([:admin, category], remote: true) do |f|%>
-      <%=link_to admin_category_path(category), email: "View" do %>
+      <%=link_to admin_category_path(category),class: "btn btn-primary", email: "View" do %>
         View
       <%end%>
-      <%=link_to edit_admin_category_path(category), email: "Edit",id: "show-form_#{category.id}" do %>
+      <%=link_to edit_admin_category_path(category),class: "btn btn-primary", email: "Edit",id: "show-form_#{category.id}" do %>
         Edit
       <%end%>
     <%end%>

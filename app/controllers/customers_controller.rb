@@ -1,77 +1,67 @@
 class CustomersController < ApplicationController
+  def index
+    @customers = Customer.all
+    @customer = current_user.customers.build
+  end
+
+  def show
+    @customer = Customer.find(params[:id])
+  end
 
   def new
-    @customer = Customer.new
+
+  end
+
+  def create
+    @customer = current_user.customers.build(customer_params)
+    if @customer.save
+      respond_to do |format|
+        flash.now[:notice] = "Successful Created"
+        format.html { redirect_to customers_path }
+        format.js
+      end
+    else
+      puts @customer.errors.full_messages
+      respond_to do |format|
+        flash.now[:alert] = "Please fill the field blank or customer Duplicated"
+        format.html { redirect_to customers_path }
+        format.js { render template: "customers/customer_error.js.erb" }
+      end
+    end
   end
 
   def edit
     @customer = Customer.find(params[:id])
   end
 
-  def create
-    @customer = Customer.new(customer_params)
-    @customer.user_id = current_user.id
-    if @customer.save
-      flash[:notice] = "Your customer has been created."
-      redirect_to sales_path
-    else
-      flash[:alert] = "Something went wrong."
-      render :new
-    end
-  end
-
   def update
     @customer = Customer.find(params[:id])
-    @customer.user_id = current_user.id
     if @customer.update(customer_params)
-      flash[:notice] = "Your customer been updated."
-      redirect_to customers_path
+      redirect_to admin_customer_path(@customer), notice: "Successful Updated"
     else
-      flash[:alert] = "Something went wrong."
-      render :new
+      render :edit
     end
   end
 
-  def show
-    @paid_orders = Customer.find(params[:id]).orders.paid_order.order('order_date')
-    @unpaid_orders = Customer.find(params[:id]).orders.unpaid_order.order('order_date')
-  end
-
-  def index
-    if params[:query].present?
-      @customers = Customer.search(params[:query])
-      .paginate(:page => params[:page], :per_page => Constant::PAGE_SIZE)
-    elsif params[:paid].present? && params[:order_id].present?
-      order = Order.find(params[:order_id])
-      order.update_attributes(is_paid: true, user_id: current_user.id, checkout_date: Date.today, checkout_time: Time.now.strftime("%H:%M:%S"))
-      @customers = Customer.order('id desc')
-      .paginate(:page => params[:page], :per_page => Constant::PAGE_SIZE)
-    elsif params[:paid_all].present? && params[:customer_id].present?
-      orders = Customer.find(params[:customer_id]).orders.unpaid_order
-      orders.each do |order|
-        order.update_attributes(is_paid: true, user_id: current_user.id, checkout_date: Date.today, checkout_time: Time.now.strftime("%H:%M:%S"))
-      end
-      @customers = Customer.order('id desc')
-      .paginate(:page => params[:page], :per_page => Constant::PAGE_SIZE)
-    else
-      @customers = Customer.order('id desc')
-      .paginate(:page => params[:page], :per_page => Constant::PAGE_SIZE)
-    end
-  end
-
-  def populate_customer_name
-    @customers = Customer.select("id, customer_name")
+  def destroy
+    @customer = Customer.destroy(params[:id])
     respond_to do |format|
-      format.json {
-        render json: @customers
-      }
+      flash.now[:error] = "Delete"
+      format.html { redirect_to customers_url }
+      format.js
     end
   end
 
   private
-
-    def customer_params
-      params.require(:customer).permit(:customer_name, :email, :phone, :address, :state, :country, :photo)
+    def admin_only?
+      unless  current_admin_user.admin?
+        unless @user == current_admin_user
+          redirect_to admin_dashboard_path, notice: "Access Denied"
+        end
+      end
     end
 
+    def customer_params
+      params.required(:customer).permit!
+    end
 end

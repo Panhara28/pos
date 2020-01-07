@@ -36,10 +36,11 @@ class SalesController < ApplicationController
   def order_item
     @order = current_order
     @order.order_date = DateTime.now.to_date
-    @order.order_time = DateTime.now.to_s(:time)
+    @order.order_time = Time.now.strftime("%I:%M %p")
     @order.waitting_no = Order.where(order_date: DateTime.now.to_date).order('id').pluck(:waitting_no).last.to_i + 1 if @order.waitting_no.nil?
     @order.user_id = current_user.id
-
+    @order.table_number = "Take Away #{SecureRandom.hex(8)}"
+    @order.tax = Constant::vat
     if session["customer_id#{current_user.id}"].present?
        @order.customer_id = session["customer_id#{current_user.id}"]
     else
@@ -53,11 +54,14 @@ class SalesController < ApplicationController
       @order_item.product_id = params[:product_id]
       @order_item.quantity = params[:quantity]
       @order_item.save
+      profit = @order_item.order.total - @order_item.product.original_price
+      @order.update(profit: profit)
     end
 
     if @order.save
       session["order_id#{current_user.id}"] = @order.id
       @order_items = Order.find(session["order_id#{current_user.id}"]).order_items
+      puts "RUN Order"
     end
   end
 
@@ -124,14 +128,23 @@ class SalesController < ApplicationController
   def print_reciept
     @order = Order.find(params[:id])
     if @order.update(
-      is_paid: true, 
-      user_id: current_user.id, 
-      checkout_date: Date.today, 
-      checkout_time: Time.now.strftime("%H:%M:%S"),
-      table_number: "Take Away #{SecureRandom.hex(8)}",
-      real_table_number: @order.table_number,
-      order_status: "completed",     
-    )
+        is_paid: true, 
+        user_id: current_user.id, 
+        checkout_date: Date.today, 
+        checkout_time: Time.now.strftime("%I:%M %p"),
+        table_number: "Take Away #{SecureRandom.hex(8)}",
+        real_table_number: @order.table_number,
+        order_status: "completed",
+        delivery_fee: @order.delivery.present? ? @order.delivery.delivery_fee : 0,
+      )
+      @order.order_items.each do |oi|
+        profitCal = ((oi.product.product_price - oi.product.original_price) * oi.quantity)
+        delivery_fee = (oi.product.product_price * (@order.delivery_fee / 100))
+        puts "ProfitCal: #{profitCal}"
+        puts "DeliveryFEE: #{(oi.product.product_price * (@order.delivery_fee / 100))}"
+        finalize = profitCal - delivery_fee
+        @order.update(profit: finalize)
+      end
       redirect_to sales_path
     end
     session.delete("order_id#{current_user.id}")

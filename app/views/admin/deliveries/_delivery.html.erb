@@ -14,10 +14,10 @@
 
   <td>
     <%=form_for([:admin, delivery], remote: true) do |f|%>
-      <%=link_to admin_delivery_path(delivery), email: "View" do %>
+      <%=link_to admin_delivery_path(delivery),class: "btn btn-primary", email: "View" do %>
         View
       <%end%>
-      <%=link_to edit_admin_delivery_path(delivery), email: "Edit",id: "show-form_#{delivery.id}" do %>
+      <%=link_to edit_admin_delivery_path(delivery),class: "btn btn-primary", email: "Edit",id: "show-form_#{delivery.id}" do %>
         Edit
       <%end%>
     <%end%>
