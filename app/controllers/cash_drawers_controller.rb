@@ -4,7 +4,7 @@ class CashDrawersController < DashboardsController
 
   def index
     @cash_drawer = current_user.cash_drawers.build
-    @cash_drawers = CashDrawer.all
+    @cash_drawers = current_user.cash_drawers.all.where(status: "assign")
   end
 
   def show
@@ -39,7 +39,7 @@ class CashDrawersController < DashboardsController
   def update
     @cash_drawer = CashDrawer.find(params[:id])
     if @cash_drawer.update(cash_drawer_params)
-      redirect_to cash_drawer_path(@cash_drawer), notice: "Successful Updated"
+      redirect_to cash_drawers_path, notice: "Successful Updated"
     else
       render :edit
     end

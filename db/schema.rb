@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 20191218092925) do
     t.decimal "cash_drawer_amout", precision: 10
     t.time "start_at"
     t.time "end_at"
-    t.string "status"
+    t.string "status", default: "assign"
     t.decimal "total_sale_amount", precision: 10
     t.integer "admin_id"
     t.integer "user_id"
