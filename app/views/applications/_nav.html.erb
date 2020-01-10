@@ -33,11 +33,11 @@
         <li>
         <% if I18n.locale == :km %>
           <%= link_to url_for(params.permit(:locale).merge({locale: 'en'})), data: { turbolinks: false } do %>
-            <img src="en.svg" width="40"> 
+            <img src="/en.svg" width="40"> 
           <%end%>
         <% else %>
           <%= link_to url_for(params.permit(:locale).merge({locale: 'km'})), data: { turbolinks: false } do %>
-            <img src="km.svg" width="40">
+            <img src="/km.svg" width="40">
           <%end%>
         <% end %>
       </li>
