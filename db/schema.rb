@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191218092925) do
+ActiveRecord::Schema.define(version: 20200110135220) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
@@ -49,6 +49,15 @@ ActiveRecord::Schema.define(version: 20191218092925) do
     t.bigint "admin_id", null: false
     t.bigint "permission_id", null: false
     t.index ["admin_id", "permission_id"], name: "index_admins_permissions_on_admin_id_and_permission_id"
+  end
+
+  create_table "cash_drawer_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "admin_id"
+    t.integer "user_id"
+    t.string "status"
+    t.integer "cash_drawer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "cash_drawers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
