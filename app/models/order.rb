@@ -44,8 +44,7 @@ class Order < ApplicationRecord
 
   private
     def update_subtotal
-      puts "C: #{Constant::vat.present?}"
-      self[:subtotal] = subtotal + (subtotal * Constant::vat.nil? ? 0.0 : Constant::vat / 100)
+      self[:subtotal] = subtotal + (subtotal * Constant::vat / 100)
       # puts "DF: #{self[:delivery_fee].nil? ? 0:(subtotal * (self[:delivery_fee] / 100))}"
       self[:total] = subtotal + (subtotal * self[:tax] / 100) - (subtotal * (self[:discount] / 100))
     end

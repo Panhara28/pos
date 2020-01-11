@@ -119,7 +119,7 @@ ActiveRecord::Schema.define(version: 20200110135220) do
     t.float "riel_amount", limit: 24
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.decimal "vat", precision: 12, scale: 3
+    t.decimal "vat", precision: 12, scale: 3, default: "0.0"
     t.integer "admin_id"
     t.decimal "tax", precision: 12, scale: 3
   end
@@ -169,7 +169,7 @@ ActiveRecord::Schema.define(version: 20200110135220) do
     t.time "checkout_time"
     t.string "table_number"
     t.string "real_table_number"
-    t.decimal "delivery_fee", precision: 12, scale: 3
+    t.decimal "delivery_fee", precision: 12, scale: 3, default: "0.0"
     t.integer "delivery_id"
     t.decimal "profit", precision: 12, scale: 3
     t.text "note"
