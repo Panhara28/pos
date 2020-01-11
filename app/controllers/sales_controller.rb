@@ -131,7 +131,7 @@ class SalesController < ApplicationController
         is_paid: true, 
         user_id: current_user.id, 
         checkout_date: Date.today, 
-        checkout_time: Time.now.strftime("%I:%M %p"),
+        checkout_time: Time.zone.now.strftime("%I:%M %p"),
         table_number: "Take Away #{SecureRandom.hex(8)}",
         real_table_number: @order.table_number,
         order_status: "completed",
