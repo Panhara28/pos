@@ -1,0 +1,81 @@
+<%=content_tag :div, class: "modal fade modal-slide-right", id: "edit_#{dom_id(@order_setting, :modal)}" do%>
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="row">
+        <div class="col-md-12">
+          <h5 class="m-b-0">Setting 1</h5>
+        </div>
+      </div>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body overflow-auto">
+      <%= simple_form_for @order_setting, url: updated_setting_path do |f| %>
+      <% if @order_setting.errors.any? %>
+      <div id="error_explanation">
+        <h4>
+          <%= pluralize(@order_setting.errors.count, "error") %>
+          prohibited this cash drawer from being saved:
+        </h4>
+        <ul>
+          <% @order_setting.errors.full_messages.each do |message| %>
+          <li>
+            <%= message %>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+      <% end %>
+      <div class="row">
+        <div class="col-md-6" style="margin-top: 20px;">
+          <div class="form-group">
+            <label for="recipient-name" class="control-label mb-10"><%=t('.delivery_company')%></label>
+            <%=f.collection_select :delivery_id, Delivery.all, :id, :company, { prompt: "Select Company" } , {class: "form-control select2"}%>
+          </div>
+        </div>
+        <div class="col-md-6" style="margin-top: 20px;">
+          <div class="form-group">
+            <label for="recipient-name" class="control-label mb-10"><%=t('.table')%></label>
+            <%=f.select :table_number, Order::OPTION_TABLE, { prompt: "Select Table"}, {class: "form-control select2"}%>
+          </div>
+        </div>
+        <div class="col-md-6" style="margin-top: 20px;">
+          <div class="form-group">
+            <label for="recipient-name" class="control-label mb-10"><%=t('.members')%></label>
+            <%=f.collection_select :customer_id, Customer.all, :id, :customer_name, { prompt: "Select Customer" } , {class: "form-control select2"}%>
+          </div>
+        </div>
+
+        <div class="col-md-6" style="margin-top: 20px;">
+          <div class="form-group">
+            <label for="recipient-name" class="control-label mb-10"><%=t('.discount')%></label>
+            <%=f.number_field :discount, class: "form-control"%>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="recipient-name" class="control-label mb-10"><%=t('.note')%></label>
+            <%= f.text_area :note, class: "form-control", rows: "10" %>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <%=f.submit class: "btn btn-success"%>
+          </div>
+        </div>
+      </div>
+
+      <%end%>
+    </div>
+  </div>
+</div>
+<%end%>
+
+<script type="text/javascript">
+$( ".select2" ).select2();
+</script>

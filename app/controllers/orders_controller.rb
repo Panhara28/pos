@@ -27,7 +27,29 @@ class OrdersController < DashboardsController
     session[:redirect] = params[:redirect]
   end
 
+  def edit_setting 
+    @order_setting = Order.find(params[:id])
+    session[:redirect] = params[:redirect]
+  end
+
   def update
+    @order = Order.find(params[:id])
+
+    if @order.update(order_params)      
+      if session[:redirect].present?
+        flash[:notice] = "Update Successfully"
+        redirect_to order_path(@order)
+      else
+        redirect_to orders_path, notice: "Your order has been updated."
+      end
+      session.delete(:redirect)
+    else 
+      puts @order.errors.full_messages
+      render :edit, notice: "Something went wrong."
+    end
+  end
+
+  def update_to_setting
     @order = Order.find(params[:id])
 
     if @order.update(order_params)      

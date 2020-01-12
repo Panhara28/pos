@@ -18,7 +18,8 @@ Rails.application.routes.draw do
     get "print_to_kitchen/:id" => "orders#print_to_kitchen", as: "print_to_kitchen"
     get 'print_success/:id' => "orders#print_success", as: "print_success"
     get "print_to_show/:id" => "orders#print_to_show", as: "print_to_show"
-
+    get "edit_setting/:id" => "orders#edit_setting", as: "edit_setting"
+    patch "update_for_setting/:id" => "orders#update_to_setting", as: "updated_setting"
     resources :deliveries
     resources :order_items
     resources :orders

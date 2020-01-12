@@ -66,7 +66,7 @@
                             <%= link_to print_to_show_path(order), class: "mr-20", data: { turbolinks: false }  do %>
                               <i class="btn btn-default">Print For Customer</i>
                             <% end %> 
-                            <%= link_to order_path(order), class: "mr-20", data: { turbolinks: false }  do %>
+                            <%= link_to edit_order_path(order.id, redirect: 'sales'), class: "mr-20", id: "link_#{current_order.id}", remote: true, data: { turbolinks: false } do %>
                               <i class="btn btn-success">Print Reciept</i>
                             <% end %>                         
                             <%if order.order_status == "order"%>
