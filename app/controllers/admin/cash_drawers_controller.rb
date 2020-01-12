@@ -4,7 +4,8 @@ class Admin::CashDrawersController < DashboardsController
   layout "dashboards"
   def index
     @cash_drawer = current_admin.cash_drawers.build
-    @cash_drawers = current_admin.cash_drawers.all.order(created_at: :desc).where(status: "assign")
+    status = params[:status].nil? ? "assign":params[:status]
+    @cash_drawers = current_admin.cash_drawers.all.order(created_at: :desc).where(status: status)
   end
 
   def show

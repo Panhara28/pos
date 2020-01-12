@@ -7,18 +7,16 @@
   <td>
     <%=cash_drawer.cash_drawer_amout%>
   </td>
-
+  
   <td><%=cash_drawer.user.username%></td>
+
+  <td><%=cash_drawer.admin.username%></td>
 
   <td><%=cash_drawer.start_at.strftime("%I:%M %p") %></td>
 
   <td><%=cash_drawer.end_at.strftime("%I:%M %p") %></td>
 
   <td><%=cash_drawer.status%></td>
-
-  <td>
-    <%=time_ago(cash_drawer.created_at)%>
-  </td>
 
   <td>
     <%=form_for([:admin, cash_drawer], remote: true) do |f|%>

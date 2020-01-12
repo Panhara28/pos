@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     get "print_reciept/:id" => "sales#print_reciept", as: "print_reciept"
     get "print_to_kitchen/:id" => "orders#print_to_kitchen", as: "print_to_kitchen"
     get 'print_success/:id' => "orders#print_success", as: "print_success"
+    get "print_to_show/:id" => "orders#print_to_show", as: "print_to_show"
 
     resources :deliveries
     resources :order_items

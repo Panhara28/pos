@@ -1,0 +1,245 @@
+<style type="text/css">
+
+	@media print {
+		@page {
+			size: auto;
+			/* auto is the current printer page size */
+			margin: 0mm;
+			/* this affects the margin in the printer settings */
+		}
+
+		#cancel,
+		#print {
+			display: none;
+		}
+
+		th{
+			font-size: 11px;
+		}
+
+	}
+
+	* {
+		font-size: 12px;
+		font-family: 'Times New Roman';
+	}
+
+	td,
+	th,
+	tr,
+	table {
+		border-top: 0px solid black;
+		border-collapse: collapse;
+	}
+
+	td.description,
+	th.description {
+		width: 130.36px;
+		max-width: 302.36px;
+		text-align: left;
+		padding: 5px;
+	}
+
+	td.quantity,
+	th.quantity {
+		width: 302.36px;
+		max-width: 302.36px;
+		word-break: break-all;
+		text-align: center;
+	}
+
+	td.price,
+	th.price {
+		width: 302.36px;
+		max-width: 302.36px;
+		word-break: break-all;
+		text-align: left;
+	}
+
+	.centered {
+		text-align: center;
+		align-content: center;
+	}
+
+	.ticket {
+		max-width: 70mm;
+	}
+
+	img {
+		max-width: inherit;
+		width: inherit;
+	}
+
+	.navbar,
+	.fixed-sidebar-left {
+		display: none;
+	}
+
+  .pay-btn{
+    background: #ff6028;
+    padding: 20px 120px;
+		color: #fff;
+		font-size: 16px;
+	}
+	.pay-cancel{
+		background:#dcdcdc;
+    padding: 20px 112px;
+		color: #000;
+		font-size: 16px;
+	}
+
+</style>
+
+<div class="wrapper theme-2-active navbar-top-light horizontal-nav">
+	<!-- Main Content -->
+	<div class="page-wrapper" style="padding-top: 0px; background: white;">
+		<div class="container pt-30">
+			<div class="row">
+				<div class="col-lg-4">
+				</div>
+				<div class="col-lg-4">
+					<div class="ticket">
+						<p class="centered">
+							<img src="/mashisoyologo.png"/>
+							<div style="margin-bottom: 20px;">
+								<p style="text-align: center; font-weight: bold;">Invoice</p>
+								<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Invoice No: <%= '%05d' % @order.id %></span></p>
+								<br>
+								<div style="margin-bottom: 5px;"></div>
+								<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Table No: <%=@order.table_number.split(" ")[0]%> <%=@order.table_number.split(" ")[1]%></span></p>
+								<br>
+								<div style="margin-bottom: 5px;"></div>
+								<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Cashier: <%=@order.user.username.capitalize%></span></p>
+								<br>
+								<%if @order.checkout_date.present?%>
+									<div style="margin-bottom: 5px;"></div>
+									<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Date: <%=@order.checkout_date.strftime("%B %d, %Y")%></span></p>
+									<br>
+								<%else%>
+									<div style="margin-bottom: 5px;"></div>
+									<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Date: <%=@order.created_at.strftime("%B %d, %Y")%></span></p>
+									<br>
+								<%end%>
+								<%if @order.checkout_time.present?%>
+									<div style="margin-bottom: 5px;"></div>
+									<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Time: <%=@order.checkout_time.strftime("%I:%M %p")%></span></p>
+								<%else%>
+									<div style="margin-bottom: 5px;"></div>
+									<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Time: <%=Time.zone.now.strftime("%I:%M %p")%></span></p>
+								<%end%>
+							</div>
+							<br><br>
+							<table style="margin-right: 10px;">
+								<thead>
+									<tr>
+										<th class="description">Description</th>
+										<th class="quantity">QTY</th>
+										<th class="price">Price​</th>
+										<th class="price">Discount</th>
+										<th class="price">Amount</th>
+									</tr>
+								</thead>
+								<tbody>
+									<%@order.order_items.each do |order|%>
+										<tr style="border-top: 1px solid black; border-bottom: 1px solid black;">
+											<td class="description"><%=order.product.product_name%></td>
+											<td class="quantity"><%=order.quantity%></td>
+											<%=in_invoice_free?(order.unit_price)%>
+											<td><%=number_to_percentage(order.discount, precision: 0)%></td>
+											<td class="quantity"><%=number_to_currency(order.quantity * order.unit_price, precision: 2)%></td>
+										</tr>
+									<%end%>
+								</tbody>
+							</table>
+
+							<div style="float: right; width: 70%; margin-right: 10px;">
+								<br>
+								<p style="margin: 0px;">Subtotal $: <span style="float: right;"><%=number_to_currency(@order.subtotal)%></span></p>
+								<p style="margin: 0px;">Subtotal R: <span style="float: right;"><%=number_to_currency(@order.subtotal * Constant.exchange_rate, unit: "៛", precision: 0)%></span></p>
+								<hr style="border: 1px solid #000;" />
+								<p style="margin: 0px;">VAT: <span style="float: right;"><%=number_to_percentage(@order.tax, precision: 0)%></span></p>
+								<p style="margin: 0px;">Discount: <span style="float: right;"><%=number_to_percentage(@order.discount, precision: 0)%></span></p>
+								<p style="margin: 0px;">Service Fee: <span style="float: right;"></span></p>
+								<hr style="border: 1px solid #000;" />
+								<p style="margin: 0px;">Grand Total $: <span style="float: right;"><%=number_to_currency(@order.total)%></span></p>
+								<p style="margin: 0px;">Grand Total R: <span style="float: right;"><%=number_to_currency(@order.total * Constant.exchange_rate, unit: "៛", precision: 0)%></span></p>
+								<hr style="border: 1px solid #000;" />
+								<%if @order.cash_in_riel == 0.0%>
+									<p style="margin: 0px;">Charge In Dollar $: 
+										<span style="float: right;">
+											<%= number_to_currency ((@order.total_cash_in_riel / Constant::exchange_rate) - @order.total), precision: 2 %>
+										</span>
+									</p>
+									<p style="margin: 0px;">Recive $: 
+										<span style="float: right;">
+											<%= number_to_currency (@order.cash), precision: 2 %>
+										</span>
+									</p>						
+								<%elsif @order.cash == 0.0%>
+									<p style="margin: 0px;">Charge In Riel $: 
+										<span style="float: right;">
+											<%= number_to_currency (@order.total - (@order.total_cash_in_riel / Constant::exchange_rate)), precision: 2 %>
+										</span>
+									</p>
+									<p style="margin: 0px;">Recive ៛: 
+										<span style="float: right;">
+											<%= number_to_currency (@order.cash), precision: 2 %>
+										</span>
+									</p>	
+								<%elsif @order.cash != 0.0 && @order.cash_in_riel != 0.0%>
+									<p style="margin: 0px;">Charge In Dollar $: 
+										<span style="float: right;">
+											<%= number_to_currency ((@order_items.last.order.total_cash_in_riel / Constant::exchange_rate) - @order_items.last.order.total), precision: 2 %>
+										</span>
+									</p>
+									<p style="margin: 0px;">Charge In Riel $: 
+										<span style="float: right;">
+											<%= "#{ number_to_currency((@order.total_cash_in_riel - (@order.total * Constant.exchange_rate)), precision: 0, unit: "៛")}"%>
+										</span>
+									</p>
+									<hr style="border: 1px solid #000;" />
+									<p style="margin: 0px;">Recive $: 
+										<span style="float: right;">
+											<%= number_to_currency (@order.cash), precision: 2 %>
+										</span>
+									</p>
+									<p style="margin: 0px;">Recive ៛: 
+										<span style="float: right;">
+											<%= number_to_currency (@order.cash_in_riel), precision: 2 %>
+										</span>
+									</p>
+								<%end%>
+							</div>
+							<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+							<hr style="border: 1px solid #000;">
+							<div style="text-align: center;">
+								<p><%= 1 %>$ = <%=number_to_currency(Constant.exchange_rate, precision: 0, unit: "៛")%> | Phone Number: 010 997 928</p>
+							</div>			
+							<p class="centered">
+								Address: N∸ 22, Str 317  Toul Kork, Phnom Penh, Cambodia 
+								<br>
+								Thank You, See You Again Soon
+							</p>
+					</div>
+
+					<br />
+					<%=link_to print_to_show_path(@order), class: "pay-btn", onclick: "printReciept();", id: "print", style: "padding: 20px 72px;" do%>
+						Print For Customer
+					<%end%>
+					<br><br><br>
+					<%=link_to "Cancel", sales_path, class: "pay-cancel", id: "cancel"%>
+				</div>
+				<div class="col-lg-4">
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!-- /Main Content -->
+</div>
+
+<script>
+	function printReciept(){
+		window.print();
+	}
+</script>

@@ -55,6 +55,11 @@
 						<div class="panel-heading">
 							<div class="pull-left">
 								<h6 class="panel-title txt-dark">Cash Drawer</h6>
+								
+							</div>
+							<div class="pull-right">
+								<%= link_to  "Completed", admin_cash_drawers_path(status: "completed"), class: "btn btn-success" %>
+								<%= link_to  "Assign", admin_cash_drawers_path(status: "assign"), class: "btn btn-primary" %>
 							</div>
 							<div class="clearfix"></div>
 						</div>
@@ -68,10 +73,10 @@
 													<th>Cash Drawer Date</th>
 													<th>Cash Drawer Amount</th>
 													<th>Receiver</th>
+													<th>Created By</th>
 													<th>Started At</th>
 													<th>Ended At</th>
 													<th>Status</th>
-													<th>Created At</th>
 													<th>Actions</th>
 												</tr>
 											</thead>

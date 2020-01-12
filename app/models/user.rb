@@ -13,6 +13,7 @@ class User < ApplicationRecord
   has_many :deliveries
   has_many :cash_drawers
   has_many :customers
+  has_many :cash_drawer_details
   validates :username, presence: :true, uniqueness: { case_sensitive: false }
 
   validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
