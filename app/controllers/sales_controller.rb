@@ -25,7 +25,7 @@ class SalesController < ApplicationController
     end
 
     @order_items = Order.unpaid_order.find(session["order_id#{current_user.id}"]).order_items if session["order_id#{current_user.id}"].present?
-    @products = Category.find(session["category_id#{current_user.id}"]).products if session["category_id#{current_user.id}"].present?
+    @products = Category.find(session["category_id"]).products if session["category_id"].present?
   end
 
   def product
