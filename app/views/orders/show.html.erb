@@ -122,14 +122,14 @@
 								<%end%>
 								<%if @order.checkout_time.present?%>
 									<div style="margin-bottom: 5px;"></div>
-									<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Time: <%=@order.checkout_time.strftime("%I:%M %p")%></span></p>
+									<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Time: <%=@order.order_time.strftime("%I:%M %p")%></span></p>
 								<%else%>
 									<div style="margin-bottom: 5px;"></div>
-									<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Time: <%=Time.zone.now.strftime("%I:%M %p")%></span></p>
+									<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Time: <%=Time.now.strftime("%I:%M %p")%></span></p>
 								<%end%>
 							</div>
 							<br><br>
-							<table style="margin-right: 10px;">
+							<table>
 								<thead>
 									<tr>
 										<th class="description">Description</th>
@@ -165,55 +165,26 @@
 								<p style="margin: 0px;">Grand Total R: <span style="float: right;"><%=number_to_currency(@order.total * Constant.exchange_rate, unit: "៛", precision: 0)%></span></p>
 								<hr style="border: 1px solid #000;" />
 								<%if @order.cash_in_riel == 0.0%>
-									<p style="margin: 0px;">Charge In Dollar $: 
-										<span style="float: right;">
-											<%= number_to_currency ((@order.total_cash_in_riel / Constant::exchange_rate) - @order.total), precision: 2 %>
-										</span>
-									</p>
-									<p style="margin: 0px;">Recive $: 
-										<span style="float: right;">
-											<%= number_to_currency (@order.cash), precision: 2 %>
-										</span>
-									</p>						
+									<p style="margin: 0px;">Charge In Dollar $: <span style="float: right;">
+										<%= number_to_currency (@order.total - (@order.total_cash_in_riel / Constant::exchange_rate)), precision: 2 %>
+									</p>								
 								<%elsif @order.cash == 0.0%>
-									<p style="margin: 0px;">Charge In Riel $: 
-										<span style="float: right;">
-											<%= number_to_currency (@order.total - (@order.total_cash_in_riel / Constant::exchange_rate)), precision: 2 %>
-										</span>
+									<p style="margin: 0px;">Charge In Riel $: <span style="float: right;">
+										<%= number_to_currency (@order.total - (@order.total_cash_in_riel / Constant::exchange_rate)), precision: 2 %>
 									</p>
-									<p style="margin: 0px;">Recive ៛: 
-										<span style="float: right;">
-											<%= number_to_currency (@order.cash), precision: 2 %>
-										</span>
-									</p>	
 								<%elsif @order.cash != 0.0 && @order.cash_in_riel != 0.0%>
-									<p style="margin: 0px;">Charge In Dollar $: 
-										<span style="float: right;">
-											<%= number_to_currency ((@order_items.last.order.total_cash_in_riel / Constant::exchange_rate) - @order_items.last.order.total), precision: 2 %>
-										</span>
+									<p style="margin: 0px;">Charge In Dollar $: <span style="float: right;">
+										<%= number_to_currency ((@order_items.last.order.total_cash_in_riel / Constant::exchange_rate) - @order_items.last.order.total), precision: 2 %>
 									</p>
-									<p style="margin: 0px;">Charge In Riel $: 
-										<span style="float: right;">
-											<%= "#{ number_to_currency((@order.total_cash_in_riel - (@order.total * Constant.exchange_rate)), precision: 0, unit: "៛")}"%>
-										</span>
-									</p>
-									<hr style="border: 1px solid #000;" />
-									<p style="margin: 0px;">Recive $: 
-										<span style="float: right;">
-											<%= number_to_currency (@order.cash), precision: 2 %>
-										</span>
-									</p>
-									<p style="margin: 0px;">Recive ៛: 
-										<span style="float: right;">
-											<%= number_to_currency (@order.cash_in_riel), precision: 2 %>
-										</span>
+									<p style="margin: 0px;">Charge In Riel $: <span style="float: right;">
+										<%= "#{ number_to_currency((@order.total_cash_in_riel - (@order.total * Constant.exchange_rate)), precision: 0, unit: "៛")}"%>
 									</p>
 								<%end%>
 							</div>
-							<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+							<br><br><br><br><br><br><br><br><br><br><br><br><br>
 							<hr style="border: 1px solid #000;">
 							<div style="text-align: center;">
-								<p><%= 1 %>$ = <%=number_to_currency(Constant.exchange_rate, precision: 0, unit: "៛")%> | Phone Number: 010 997 928</p>
+								<p><%= 1 %>$ = <%=number_to_currency(Constant.exchange_rate, precision: 0, unit: "៛")%> | Phone Number: 0122223333</p>
 							</div>			
 							<p class="centered">
 								Address: N∸ 22, Str 317  Toul Kork, Phnom Penh, Cambodia 

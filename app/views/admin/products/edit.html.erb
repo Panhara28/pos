@@ -64,11 +64,7 @@
 							      <h3>Upload Photo</h3>
 										<div class="image-box text-center" style="background: transparent;">
 											<p style="display: none;">Upload Image</p>
-											<%if @product.image.present?%>
-												<img src="<%=@product.image.url%>" alt="" style="display: inline;"></div>
-											<%else%>
-												<img src="/noproduct.png" alt="" style="display: inline;"></div>
-											<%end%>
+											<img src="<%=@product.image.url%>" alt="" style="display: inline;"></div>
 							        <div class="controls">
 							            <%=f.file_field :image%>
 							        </div>

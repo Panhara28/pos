@@ -10,16 +10,14 @@ puts 'CREATED  Email: ' << user.email
 Customer.create!([
   {
     customer_name: "Guest Test",
-    phone: "123456789",
-    admin_id: 1
+    phone: "123456789"
   }
 ])
 
 ExchangeRate.create!([
     {
       usd_amount: 1,
-      riel_amount: 4100,
-      admin_id: 1
+      riel_amount: 4100
     }
 ])
 

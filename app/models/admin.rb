@@ -15,7 +15,7 @@ class Admin < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, authentication_keys: [:login]
 
-  enum role: [:user, :admin]
+  enum role: [:user, :vip, :admin]
   after_initialize :set_default_role, :if => :new_record?
 
   # has_and_belongs_to_many :permissions

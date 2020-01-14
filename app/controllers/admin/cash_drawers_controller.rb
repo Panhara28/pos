@@ -4,8 +4,7 @@ class Admin::CashDrawersController < DashboardsController
   layout "dashboards"
   def index
     @cash_drawer = current_admin.cash_drawers.build
-    status = params[:status].nil? ? "assign":params[:status]
-    @cash_drawers = current_admin.cash_drawers.all.order(created_at: :desc).where(status: status)
+    @cash_drawers = CashDrawer.all
   end
 
   def show
@@ -35,16 +34,12 @@ class Admin::CashDrawersController < DashboardsController
 
   def edit
     @cash_drawer = CashDrawer.find(params[:id])
-    if @cash_drawer.status == "completed"
-      redirect_to admin_cash_drawers_path
-      flash[:alert] = "You can`t do that!"
-    end
   end
 
   def update
     @cash_drawer = CashDrawer.find(params[:id])
     if @cash_drawer.update(cash_drawer_params)
-      redirect_to admin_cash_drawers_path, notice: "Successful Updated"
+      redirect_to admin_cash_drawer_path(@cash_drawer), notice: "Successful Updated"
     else
       render :edit
     end

@@ -20,7 +20,7 @@
           <div class="panel-wrapper collapse in">
             <div class="panel-body">
 
-              <div class="table-wrap">
+              <div class="table-wrap mt-40">
                 <div class="table-responsive">
                   <table id="example" class="table mb-0">
                     <thead>
@@ -60,17 +60,14 @@
                           <td><%=order.created_at%></td>
                           <td><%=order.order_time.strftime("%I:%M %p")%></td>
                           <td class="text-nowrap" style="text-align: right;">
-                            <%= link_to print_to_kitchen_path(order), class: "mr-20", data: { turbolinks: false }  do %>
+                            <%= link_to print_to_kitchen_path(order), class: "mr-25", data: { turbolinks: false }  do %>
                               <i class="btn btn-primary">Print To Kitchen</i>
                             <% end %>
-                            <%= link_to print_to_show_path(order), class: "mr-20", data: { turbolinks: false }  do %>
-                              <i class="btn btn-default">Print For Customer</i>
-                            <% end %> 
-                            <%= link_to order_path(order), class: "mr-20", data: { turbolinks: false }  do %>
-                              <i class="btn btn-success">Print Reciept</i>
+                            <%= link_to order_path(order), class: "mr-25", data: { turbolinks: false }  do %>
+                              <i class="btn btn-success">Print</i>
                             <% end %>                         
                             <%if order.order_status == "order"%>
-                              <%= link_to order_path(order), class: "mr-20", method: :delete, data: { confirm: 'Are you sure want to delete?' }, remote: true do %>
+                              <%= link_to order_path(order), class: "mr-25", method: :delete, data: { confirm: 'Are you sure want to delete?' }, remote: true do %>
                                 <i class="btn btn-danger">delete</i>
                               <% end %>
                             <%end%>

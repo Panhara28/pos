@@ -1,15 +1,9 @@
 <%=simple_form_for([:admin, cash_drawer], remote: true) do |f|%>
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
       <div class="form-group">
         <label for="recipient-name" class="control-label mb-10">Username</label>
         <%=f.collection_select :user_id, User.all, :id, :username, { prompt: "Select Username" } , {class: "form-control select2"}%>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="form-group">
-        <label for="recipient-name" class="control-label mb-10">Status</label>
-        <%=f.select :status, CashDrawer::OPTION_STATUS, {}, {class: "form-control", disabled: true}%>
       </div>
     </div>
     <div class="col-md-6">
@@ -36,7 +30,7 @@
         <%=f.time_field :end_at, class: "form-control"%>
       </div>
     </div>
-    
+
     <div class="col-md-12">
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
