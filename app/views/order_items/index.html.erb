@@ -1,6 +1,6 @@
 <div class="wrapper theme-2-active navbar-top-light horizontal-nav">
-	<%=render "components/nav"%>
-	<%=render "components/setting"%>
+	<%=render "applications/nav"%>
+	<%=render "applications/setting"%>
 	<!-- Main Content -->
 	<div class="page-wrapper">
 
@@ -91,7 +91,7 @@
                                               <td></td>
                                               <td></td>
                                               <td></td>
-                                              <td>Total: <%=order.total%></td>
+                                              <td>Total: <%=number_to_currency(order.total)%></td>
                                             </tr>
                   												</tbody>
                   											</table>
