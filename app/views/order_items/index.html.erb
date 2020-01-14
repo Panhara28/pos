@@ -21,6 +21,7 @@
                   <h3>
                     Sum Of Today: <%=number_to_currency @orders.sum(:total)%>
                   </h3>
+                  <%=link_to "Closed", closed_path(state: "close"), class: "btn btn-success"%>
                 <%end%>
               </div>
               <div class="clearfix"></div>

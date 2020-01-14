@@ -1,0 +1,152 @@
+<style type="text/css">
+
+	@media print {
+		@page {
+			size: auto;
+			/* auto is the current printer page size */
+			margin: 0mm;
+			/* this affects the margin in the printer settings */
+		}
+
+		#cancel,
+		#print {
+			display: none;
+		}
+
+		th{
+			font-size: 11px;
+		}
+
+	}
+
+	* {
+		font-size: 12px;
+		font-family: 'Times New Roman';
+	}
+
+	td,
+	th,
+	tr,
+	table {
+		border-top: 0px solid black;
+		border-collapse: collapse;
+	}
+
+	td.description,
+	th.description {
+		width: 130.36px;
+		max-width: 302.36px;
+		text-align: left;
+		padding: 5px;
+	}
+
+	td.quantity,
+	th.quantity {
+		width: 302.36px;
+		max-width: 302.36px;
+		word-break: break-all;
+		text-align: center;
+	}
+
+	td.price,
+	th.price {
+		width: 302.36px;
+		max-width: 302.36px;
+		word-break: break-all;
+		text-align: left;
+	}
+
+	.centered {
+		text-align: center;
+		align-content: center;
+	}
+
+	.ticket {
+		max-width: 70mm;
+	}
+
+	img {
+		max-width: inherit;
+		width: inherit;
+	}
+
+	.navbar,
+	.fixed-sidebar-left {
+		display: none;
+	}
+
+  .pay-btn{
+    background: #ff6028;
+    padding: 20px 120px;
+		color: #fff;
+		font-size: 16px;
+	}
+	.pay-cancel{
+		background:#dcdcdc;
+    padding: 20px 112px;
+		color: #000;
+		font-size: 16px;
+	}
+
+</style>
+
+<div class="wrapper theme-2-active navbar-top-light horizontal-nav">
+	<!-- Main Content -->
+	<div class="page-wrapper" style="padding-top: 0px; background: white;">
+		<div class="container pt-30">
+			<div class="row">
+				<div class="col-lg-4">
+				</div>
+				<div class="col-lg-4">
+					<div class="ticket">
+						<p class="centered">
+							<img src="/mashisoyologo.png"/>
+							<br><br>
+							<table>
+								<thead>
+									<tr>
+										<th class="description">Description</th>
+										<th class="quantity">QTY</th>
+										<th class="price">Price​</th>
+										<th class="price">Discount</th>
+										<th class="price">Amount</th>
+									</tr>
+								</thead>
+								<tbody>
+                  <%@orders.each do |order_item|%>
+                    <%order_item.order_items.each do |order| %>
+                      <tr style="border-top: 1px solid black; border-bottom: 1px solid black;">
+                        <td class="description"><%=order.product.product_name%></td>
+                        <td class="quantity"><%=order.quantity%></td>
+                        <%=in_invoice_free?(order.unit_price)%>
+                        <td><%=number_to_percentage(order.discount, precision: 0)%></td>
+                        <td class="quantity"><%=number_to_currency(order.quantity * order.unit_price, precision: 2)%></td>
+                      </tr>
+                    <%end%>
+									<%end%>
+								</tbody>
+							</table>
+							<br><br>
+					</div>
+
+					<br />
+          <%=link_to "#", class: "pay-btn", onclick: "printReciept();", id: "print" do%>
+						Print
+					<%end%>
+					<br><br><br>
+					<%=link_to "Cancel", sales_path, class: "pay-cancel", id: "cancel"%>
+				</div>
+				<div class="col-lg-4">
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!-- /Main Content -->
+</div>
+
+<script>
+	function printReciept(){
+		window.print();
+	}
+</script>

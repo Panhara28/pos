@@ -7,6 +7,11 @@ class OrderItemsController < DashboardsController
     session[:sale_count] = current_user.orders.where('is_paid=? AND order_date=?', true, DateTime.now.to_date).count
   end
 
+  def closed
+    @orders = User.find(current_user.id).orders.where('is_paid=? AND checkout_date=?', true, DateTime.now.to_date).order('id desc')
+    session[:sale_count] = current_user.orders.where('is_paid=? AND order_date=?', true, DateTime.now.to_date).count
+  end
+
   def edit
     @order_item = OrderItem.find(params[:id])
   end

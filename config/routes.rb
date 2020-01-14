@@ -20,13 +20,14 @@ Rails.application.routes.draw do
     get "print_to_show/:id" => "orders#print_to_show", as: "print_to_show"
     get "edit_setting/:id" => "orders#edit_setting", as: "edit_setting"
     patch "update_for_setting/:id" => "orders#update_to_setting", as: "updated_setting"
+    get "closed" => "order_items#closed", as: "closed"
     resources :deliveries
     resources :order_items
     resources :orders
     resources :customers
     resources :sales, only: [:index, :show]
     resources :cash_drawers
-
+    
     devise_for :users
     devise_for :admins, :controllers => { :registrations => :registrations }
 
