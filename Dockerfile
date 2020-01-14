@@ -19,5 +19,8 @@ COPY . .
 RUN bundle exec rake db:create
 RUN bundle exec rake db:migrate
 # RUN bundle exec rake db:seed
+COPY entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.sh
+ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 80
 CMD ["rackup","config.ru", "--host", "0.0.0.0", "--port", "80"]
