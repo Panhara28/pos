@@ -20,7 +20,8 @@
                   <th>Discount(Product)</th>
                   <th>VAT</th>
                   <th>Delivery Fee</th>
-                  <th>Total + VAT</th>
+                  <th>Total + VAT + Delivery Fee</th>
+                  <th>Total</th>
                   <th>Profit</th>
                 </tr>
               </thead>
@@ -46,8 +47,9 @@
                     <td><%= number_to_percentage order.delivery_fee%></td>
                   <%end%>
                   <td>
-                    <%= number_to_currency order.total %>
+                    <%= number_to_currency(order.total + (order.subtotal * (order.delivery_fee / 100)))%>
                   </td>
+                  <td><%= number_to_currency(order.total)%></td>
                   <td>
                     <%= number_to_currency order.profit %>
                   </td>            
@@ -60,11 +62,13 @@
                   <td></td>
                   <td></td>
                   <td></td>
-                  <td><strong>Total Sales: <%= number_to_currency @dailly_sales.sum(:total) %></strong></td>
-                  <td><strong>Profit Sales: <%= number_to_currency @dailly_sales.sum(:profit) %></strong></td>
+                  <td></td>
+                  <td><strong>Total: <%=number_to_currency @dailly_sales.sum(:total)%></strong></td>
+                  <td><strong>Profit: <%=number_to_currency @dailly_sales.sum(:profit)%></strong></td>
                 </tr>
                 <tr>
                   <td colspan="1">Report From: <%=params[:report][:dailly_sale_date_from]%> to <%=params[:report][:dailly_sale_date_to]%></td>
+                  <td></td>
                   <td></td>
                   <td></td>
                   <td></td>

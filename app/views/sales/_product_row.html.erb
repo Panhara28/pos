@@ -2,13 +2,17 @@
 
   <% @products.each_slice(3) do |products| %>
     <% products.each do |product| %>
-      <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6" style="margin-top: 20px;">
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6" style="margin-top: 20px; padding-left: 10px; padding-right: 10px">
         <%= link_to sales_order_item_path(product_id: product.id, quantity: 1), remote: true do%>
           <div class="photo" style="">
-            <img src="<%=product.image.url%>" class="img-responsive" alt="Product Image"/>
+            <%if product.image.present?%>
+              <img src="<%=product.image.url%>" class="img-responsive" alt="Product Image"/>
+            <%else%>
+              <img src="/noproduct.png" class="img-responsive" alt="Product Image"/>
+            <%end%>
           </div>
           <div class="info">
-            <h6><%=product.product_name.capitalize%></h6>
+            <h6 style="font-size: 12px;"><%=product.product_name.capitalize%></h6>
             <span class="head-font block txt-orange-light-1 font-16">
               <%=number_to_currency(product.product_price)%>
             </span>

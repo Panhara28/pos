@@ -61,6 +61,10 @@ class OrdersController < DashboardsController
     @order = Order.find(params[:id])
   end
 
+  def print_to_show
+    @order = Order.find(params[:id])
+  end
+
   def print_success
     redirect_to sales_path
     flash[:notice] = "Print To Kitchen Successfully"

@@ -78,7 +78,7 @@
                                                   <%= number_to_currency order_item.subtotal %>
                                                 </td>
                                                 <td>
-                                                  <%= number_to_percentage order_item.discount %>
+                                                  <%= number_to_percentage(order_item.discount, :precision => 0) %>
                                                 </td>
                                                 <td>
                                                   <%= number_to_currency order_item.total_price %>
@@ -91,7 +91,7 @@
                                               <td></td>
                                               <td></td>
                                               <td></td>
-                                              <td>Total: <%=order.total%></td>
+                                              <td>Total: <%=number_to_currency(order.total)%></td>
                                             </tr>
                   												</tbody>
                   											</table>

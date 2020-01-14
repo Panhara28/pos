@@ -223,8 +223,8 @@
 					</div>
 
 					<br />
-					<%=link_to print_reciept_path(@order), class: "pay-btn", onclick: "printReciept();", id: "print" do%>
-						Pay
+					<%=link_to print_to_show_path(@order), class: "pay-btn", onclick: "printReciept();", id: "print", style: "padding: 20px 72px;" do%>
+						Print For Customer
 					<%end%>
 					<br><br><br>
 					<%=link_to "Cancel", sales_path, class: "pay-cancel", id: "cancel"%>

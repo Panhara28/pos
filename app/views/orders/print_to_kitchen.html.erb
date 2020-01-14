@@ -100,14 +100,8 @@
 				<div class="col-lg-4">
 					<div class="ticket">
 						<p class="centered">
-							<img src="/mashisoyologo.png"/>
-							<div style="margin-bottom: 20px;">
-								<p style="text-align: center; font-weight: bold;">Invoice</p>
-								<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Invoice No: <%= '%05d' % @order.id %></span></p>
-								<br>
+							<div>
 								<div style="margin-bottom: 5px;"></div>
-								<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Table No: <%=@order.table_number.split(" ")[0]%> <%=@order.table_number.split(" ")[1]%></span></p>
-								<br>
 								<div style="margin-bottom: 5px;"></div>
 								<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Cashier: <%=@order.user.username.capitalize%></span></p>
 								<br>
@@ -127,16 +121,21 @@
 									<div style="margin-bottom: 5px;"></div>
 									<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Time: <%=Time.now.strftime("%I:%M %p")%></span></p>
 								<%end%>
+								<br>
+								<div style="margin-bottom: 5px;"></div>
+								<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Invoice No: <%= '%05d' % @order.id %></span></p>
+								<br>
+								<h1>
+									<span style="margin-right: 10px; font-size: 20px;">Table No: <%=@order.table_number.split(" ")[0]%> <%=@order.table_number.split(" ")[1]%></span>
+								</h1>
 							</div>
-							<br><br>
 							<table>
 								<thead>
 									<tr>
 										<th class="description">Description</th>
 										<th class="quantity">QTY</th>
-										<th class="price">Price​</th>
-										<th class="price">Discount</th>
-										<th class="price">Amount</th>
+										<th class="quantity">Note</th>
+
 									</tr>
 								</thead>
 								<tbody>
@@ -144,13 +143,13 @@
 										<tr style="border-top: 1px solid black; border-bottom: 1px solid black;">
 											<td class="description"><%=order.product.product_name%></td>
 											<td class="quantity"><%=order.quantity%></td>
-											<%=in_invoice_free?(order.unit_price)%>
-											<td><%=number_to_percentage(order.discount, precision: 0)%></td>
-											<td class="quantity"><%=number_to_currency(order.quantity * order.unit_price, precision: 2)%></td>
+											<td class="quantity"><%=order.note%></td>
+
 										</tr>
 									<%end%>
 								</tbody>
 							</table>
+							<p style="font-size: 16px;"><%=@order.note%></p>
 							<br><br><br>
 					</div>
 

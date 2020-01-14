@@ -25,7 +25,7 @@ class SalesController < ApplicationController
     end
 
     @order_items = Order.unpaid_order.find(session["order_id#{current_user.id}"]).order_items if session["order_id#{current_user.id}"].present?
-    @products = Category.find(session["category_id#{current_user.id}"]).products if session["category_id#{current_user.id}"].present?
+    @products = Category.find(session["category_id"]).products if session["category_id"].present?
   end
 
   def product
@@ -54,13 +54,14 @@ class SalesController < ApplicationController
       @order_item.product_id = params[:product_id]
       @order_item.quantity = params[:quantity]
       @order_item.save
-      puts "Show"
+      profit = @order_item.order.total - @order_item.product.original_price
+      @order.update(profit: profit)
     end
 
     if @order.save
       session["order_id#{current_user.id}"] = @order.id
       @order_items = Order.find(session["order_id#{current_user.id}"]).order_items
-      puts "Show Not"
+      puts "RUN Order"
     end
   end
 
@@ -130,7 +131,7 @@ class SalesController < ApplicationController
         is_paid: true, 
         user_id: current_user.id, 
         checkout_date: Date.today, 
-        checkout_time: Time.now.strftime("%I:%M %p"),
+        checkout_time: Time.zone.now.strftime("%I:%M %p"),
         table_number: "Take Away #{SecureRandom.hex(8)}",
         real_table_number: @order.table_number,
         order_status: "completed",

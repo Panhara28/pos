@@ -7,7 +7,7 @@
   <td>
     <%=cash_drawer.cash_drawer_amout%>
   </td>
-  
+
   <td><%=cash_drawer.user.username%></td>
 
   <td><%=cash_drawer.admin.username%></td>
@@ -15,17 +15,15 @@
   <td><%=cash_drawer.start_at.strftime("%I:%M %p") %></td>
 
   <td><%=cash_drawer.end_at.strftime("%I:%M %p") %></td>
-
-  <td><%=cash_drawer.status%></td>
-
   <td>
     <%=form_for([:admin, cash_drawer], remote: true) do |f|%>
-      <%=link_to admin_cash_drawer_path(cash_drawer),class: "btn btn-primary", email: "View" do %>
+      <%=link_to cash_drawer_path(cash_drawer),class: "btn btn-primary", email: "View" do %>
         View
       <%end%>
-      <%=link_to edit_admin_cash_drawer_path(cash_drawer),class: "btn btn-primary", email: "Edit",id: "show-form_#{cash_drawer.id}" do %>
-        Edit
+      <%=link_to edit_cash_drawer_path(cash_drawer),class: "btn btn-primary", email: "View" do %>
+        Assign
       <%end%>
     <%end%>
   </td>
 </tr>
+

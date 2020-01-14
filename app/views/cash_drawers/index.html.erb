@@ -1,6 +1,6 @@
 <div class="wrapper theme-2-active navbar-top-light horizontal-nav">
-	<%=render "components/nav"%>
-	<%=render "components/setting"%>
+	<%=render "applications/nav"%>
+	<%=render "applications/setting"%>
 	<!-- Main Content -->
 	<div class="page-wrapper">
 		<div class="container pt-30">
@@ -10,9 +10,6 @@
 					<h5 class="txt-dark">Cash Drawer</h5>
 					<div class="panel-wrapper collapse in">
 						<div class="panel-body" style="padding-left: 0px;">
-							<div class="button-list">
-								<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Add New</button>
-							</div>
 							<div class="modal fade bs-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
 								<div class="modal-dialog modal-lg" role="document">
 									<div class="modal-content">
@@ -55,11 +52,6 @@
 						<div class="panel-heading">
 							<div class="pull-left">
 								<h6 class="panel-title txt-dark">Cash Drawer</h6>
-								
-							</div>
-							<div class="pull-right">
-								<%= link_to  "Completed", admin_cash_drawers_path(status: "completed"), class: "btn btn-success" %>
-								<%= link_to  "Assign", admin_cash_drawers_path(status: "assign"), class: "btn btn-primary" %>
 							</div>
 							<div class="clearfix"></div>
 						</div>
@@ -75,8 +67,7 @@
 													<th>Receiver</th>
 													<th>Created By</th>
 													<th>Started At</th>
-													<th>Ended At</th>
-													<th>Status</th>
+													<th>End At</th>
 													<th>Actions</th>
 												</tr>
 											</thead>

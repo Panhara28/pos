@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191218092925) do
+ActiveRecord::Schema.define(version: 20200112064244) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
@@ -51,12 +51,21 @@ ActiveRecord::Schema.define(version: 20191218092925) do
     t.index ["admin_id", "permission_id"], name: "index_admins_permissions_on_admin_id_and_permission_id"
   end
 
+  create_table "cash_drawer_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "admin_id"
+    t.integer "user_id"
+    t.string "status"
+    t.integer "cash_drawer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "cash_drawers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.date "cash_drawer_date"
     t.decimal "cash_drawer_amout", precision: 10
     t.time "start_at"
     t.time "end_at"
-    t.string "status"
+    t.string "status", default: "assign"
     t.decimal "total_sale_amount", precision: 10
     t.integer "admin_id"
     t.integer "user_id"
@@ -110,7 +119,7 @@ ActiveRecord::Schema.define(version: 20191218092925) do
     t.float "riel_amount", limit: 24
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.decimal "vat", precision: 12, scale: 3
+    t.decimal "vat", precision: 12, scale: 3, default: "0.0"
     t.integer "admin_id"
     t.decimal "tax", precision: 12, scale: 3
   end
@@ -132,6 +141,7 @@ ActiveRecord::Schema.define(version: 20191218092925) do
     t.decimal "discount", precision: 12, scale: 3, default: "0.0"
     t.decimal "subtotal", precision: 12, scale: 3
     t.decimal "original_unit_price", precision: 12, scale: 3
+    t.string "note"
     t.index ["order_id"], name: "index_order_items_on_order_id"
     t.index ["product_id"], name: "index_order_items_on_product_id"
   end
@@ -160,7 +170,7 @@ ActiveRecord::Schema.define(version: 20191218092925) do
     t.time "checkout_time"
     t.string "table_number"
     t.string "real_table_number"
-    t.decimal "delivery_fee", precision: 12, scale: 3
+    t.decimal "delivery_fee", precision: 12, scale: 3, default: "0.0"
     t.integer "delivery_id"
     t.decimal "profit", precision: 12, scale: 3
     t.text "note"
