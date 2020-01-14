@@ -138,6 +138,8 @@ class SalesController < ApplicationController
       )
       @order.order_items.each do |oi|
         profitCal = ((oi.product.product_price - oi.product.original_price) * oi.quantity)
+        tax = (profitCal * @order.tax / 100)
+        puts "Tax: #{profitCal - tax}"
         delivery_fee = (oi.product.product_price * (@order.delivery_fee / 100))
         puts "ProfitCal: #{profitCal}"
         puts "DeliveryFEE: #{(oi.product.product_price * (@order.delivery_fee / 100))}"
