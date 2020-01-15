@@ -13,12 +13,11 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  url: <%=ENV['URL']%>
   # socket: /var/run/mysqld/mysqld.sock
 
 development:
   <<: *default
-  database: <%=ENV['DB_NAME']%>
+  url: <%=ENV['URL']%>
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
