@@ -27,17 +27,17 @@
                           <img class="inline-block mb-10" src="no-image.png" alt="user">
                         <%end%>
                         <div class="fileupload btn btn-default">
-                          <%=link_to edit_admin_admin_path(current_admin.id) do%>
+                          <%=link_to edit_admin_user_path(current_user.id) do%>
                            <span class="btn-text">edit</span>
                           <%end%>
                         </div>
                       </div>
                       <h5 class="block mt-10 weight-500 capitalize-font txt-dark"><%=current_admin.username.capitalize%>
                       </h5>
-                      <h6 class="block capitalize-font"><%=current_admin.role%></h6>
+                      <h6 class="block capitalize-font"><%=@user.role%></h6>
                     </div>
                     <div class="social-info">
-                      <%=link_to edit_admin_admin_path(current_admin.id), class: "btn btn-orange btn-block  btn-anim mt-15" do%>
+                      <%=link_to edit_admin_user_path(current_admin.id), class: "btn btn-orange btn-block  btn-anim mt-15" do%>
                       <i class="fa fa-pencil"></i><span class="btn-text">edit profile</span>
                       <%end%>
                     </div>

@@ -6,6 +6,7 @@ class OrdersController < DashboardsController
     # else
     #   @orders = Order.where('is_paid=? AND order_status=?', false, "order").order('id desc')
     # end 
+    @orders_count = Order.where('is_paid=? AND checkout_date=?', true, DateTime.now.to_date).order('id desc')
     if params[:state] == "ordered"
       @orders = Order.where('is_paid=? AND order_status=?', false, "order").order('created_at desc')
     else
@@ -81,6 +82,11 @@ class OrdersController < DashboardsController
   
   def print_to_kitchen
     @order = Order.find(params[:id])
+  end
+
+  def print_to_show
+    @order = Order.find(params[:id])
+
   end
 
   def print_success

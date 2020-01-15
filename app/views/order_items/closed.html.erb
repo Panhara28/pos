@@ -113,7 +113,7 @@
 									</tr>
 								</thead>
 								<tbody>
-                  <%@orders.each do |order_item|%>
+                  <%@orders_count.each do |order_item|%>
                     <%order_item.order_items.each do |order| %>
                       <tr style="border-top: 1px solid black; border-bottom: 1px solid black;">
                         <td class="description"><%=order.product.product_name%></td>

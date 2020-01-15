@@ -1,18 +1,17 @@
 class OrderItemsController < DashboardsController
 
   before_action :authenticate_user!
-
+  before_action :admin_only?, only: [:closed, :index]
   def index
-    @orders = User.find(current_user.id).orders.where('is_paid=? AND checkout_date=?', true, DateTime.now.to_date).order('id desc')
-    session[:sale_count] = current_user.orders.where('is_paid=? AND order_date=?', true, DateTime.now.to_date).count
+    @orders_count = Order.where('is_paid=? AND checkout_date=?', true, DateTime.now.to_date).order('id desc')
   end
 
   def closed
-    @orders = User.find(current_user.id).orders.where('is_paid=? AND checkout_date=?', true, DateTime.now.to_date).order('id desc')
-    session[:sale_count] = current_user.orders.where('is_paid=? AND order_date=?', true, DateTime.now.to_date).count
+    @orders_count = Order.where('is_paid=? AND checkout_date=?', true, DateTime.now.to_date).order('id desc')
   end
 
   def edit
+    @orders_count = Order.where('is_paid=? AND checkout_date=?', true, DateTime.now.to_date).order('id desc')
     @order_item = OrderItem.find(params[:id])
   end
 
@@ -28,6 +27,11 @@ class OrderItemsController < DashboardsController
 
 
   private
+    def admin_only?
+      unless  current_user.role == "admin"
+        redirect_to sales_path, alert: "Access Denied"
+      end
+    end
 
     def order_item_params
        params.require(:order_item).permit!

@@ -10,6 +10,7 @@ class SalesController < ApplicationController
   end
 
   def index
+    @orders_count = Order.where('is_paid=? AND checkout_date=?', true, DateTime.now.to_date).order('id desc')
     @categories = Category.order(id: :asc)
     session[:order_count] = current_user.orders.where('is_paid=? AND order_date=? AND order_status=?', false, DateTime.now.to_date, 'order').count
     session[:sale_count] = current_user.orders.where('is_paid=? AND order_date=?', true, DateTime.now.to_date).count

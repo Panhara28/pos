@@ -73,8 +73,12 @@
                     </div>
                     <div class="col-md-12">
                       <div class="control-group file-upload" id="file-upload1">
-                      <h3>Upload Photo</h3>
-                      <div class="image-box text-center"><p>Upload Image</p><img src="" alt=""></div>
+                        <h3>Upload Photo</h3>
+                        <%if @admin.image.present?%>
+                          <img class="image-box" src="<%=@admin.image.url%>" alt="">
+                        <%else%>
+                          <div class="image-box text-center"><p>Upload Image</p><img src="" alt=""></div>
+                        <%end%>
                         <div class="controls">
                             <%=f.file_field :image%>
                         </div>

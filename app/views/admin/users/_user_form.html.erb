@@ -39,7 +39,7 @@
     <div class="col-md-12">
       <div class="form-group">
         <label for="recipient-name" class="control-label mb-10">Role</label>
-        <%=f.select :role,(User.roles.keys.map{ |role| [role.titleize, role]}), {}, {:class=>"form-control"}%>
+        <%=f.select :role, User::OPTION_ROLE, {}, {:class=>"form-control"}%>
       </div>
     </div>
     <div class="col-md-6">

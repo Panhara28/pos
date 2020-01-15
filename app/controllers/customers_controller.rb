@@ -1,5 +1,6 @@
 class CustomersController < ApplicationController
   def index
+    @orders_count = Order.where('is_paid=? AND checkout_date=?', true, DateTime.now.to_date).order('id desc')
     @customers = Customer.all
     @customer = current_user.customers.build
   end
@@ -31,13 +32,14 @@ class CustomersController < ApplicationController
   end
 
   def edit
+    @orders_count = Order.where('is_paid=? AND checkout_date=?', true, DateTime.now.to_date).order('id desc')
     @customer = Customer.find(params[:id])
   end
 
   def update
     @customer = Customer.find(params[:id])
     if @customer.update(customer_params)
-      redirect_to admin_customer_path(@customer), notice: "Successful Updated"
+      redirect_to customers_path, notice: "Successful Updated"
     else
       render :edit
     end

@@ -26,7 +26,7 @@ class User < ApplicationRecord
     @login || self.username || self.email
   end
 
-  enum role: [:user, :seller, :employee]
+  OPTION_ROLE = [:user, :seller, :employee, :admin]
   after_initialize :set_default_role, :if => :new_record?
 
   def set_default_role

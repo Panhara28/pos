@@ -18,7 +18,7 @@
                 <%=simple_form_for([:admin, @user]) do |f|%>
                   <div class="row">
                     <div class="col-lg-12">
-                      <h2>useristrator Security</h2>
+                      <h2>Employee Security</h2>
                     </div>
                   <div class="col-md-6">
                       <div class="form-group">
@@ -51,12 +51,12 @@
                   <hr/>
                   <div class="row">
                     <div class="col-lg-12">
-                      <h2>useristrator Information</h2>
+                      <h2>Employee Information</h2>
                     </div>
                     <div class="col-md-12">
                       <div class="form-group">
                         <label for="recipient-name" class="control-label mb-10">Role</label>
-                        <%=f.select :role,(User.roles.keys.map{ |role| [role.titleize, role]}), {}, {:class=>"form-control"}%>
+                        <%=f.select :role, User::OPTION_ROLE, {}, {:class=>"form-control"}%>
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -73,12 +73,15 @@
                     </div>
                     <div class="col-md-12">
                       <div class="control-group file-upload" id="file-upload1">
-                      <h3>Upload Photo</h3>
-                      <div class="image-box text-center"><p>Upload Image</p><img src="" alt=""></div>
+                       <h3>Upload Photo</h3>
+                       <%if @user.image.present?%>
+                          <img class="image-box" src="<%=@user.image.url%>" alt="">
+                        <%else%>
+                          <div class="image-box text-center"><p>Upload Image</p><img src="" alt=""></div>
+                        <%end%>
                         <div class="controls">
                             <%=f.file_field :image%>
                         </div>
-                      </div>
                     </div>
                     
                     <div class="col-md-12">

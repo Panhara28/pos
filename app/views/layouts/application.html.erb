@@ -11,7 +11,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <%if params[:controller] != "orders" || 
       params[:action] != "show" && 
-      params[:action] != "print_to_kitchen"%>
+      params[:action] != "print_to_kitchen" &&
+      params[:action] != "print_to_show"
+    %>
       <%if params[:action] != "closed"%>
         <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
       <%end%>
@@ -25,7 +27,7 @@
       </div>
     </div>
     <div class="wrapper theme-2-active navbar-top-light horizontal-nav">
-      <%if user_signed_in? && params[:state] != "close"%>
+      <%if user_signed_in? && params[:state] != "close" && params[:action] != "print_to_show" %>
         <%=render "applications/nav"%>
         <%=render "applications/setting"%>
       <%end%>

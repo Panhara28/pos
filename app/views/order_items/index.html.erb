@@ -12,14 +12,14 @@
             <div class="panel-heading">
               <div class="pull-left">
                 <h6 class="panel-title txt-dark">Order Item</h6>
-                <%if !@orders.present?%>
+                <%if !@orders_count.present?%>
                   <h3>Empty Sale Items</h3>
                 <%else%>
                   <h3>
-                    Today ordered count: <%=@orders.count%>
+                    Today ordered count: <%=@orders_count.count%>
                   </h3>
                   <h3>
-                    Sum Of Today: <%=number_to_currency @orders.sum(:total)%>
+                    Sum Of Today: <%=number_to_currency @orders_count.sum(:total)%>
                   </h3>
                   <%=link_to "Closed", closed_path(state: "close"), class: "btn btn-success"%>
                 <%end%>
@@ -37,7 +37,7 @@
                       <div class="panel-body pa-15"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer la. </div>
                     </div>
                   </div>
-                  <%@orders.each do |order|%>
+                  <%@orders_count.each do |order|%>
                     <div class="panel panel-default">
                       <div class="panel-heading <%=order.id == 1 ? "activestate" :  "" %>" role="tab" id="heading_<%=order.id%>">
                         <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapse_<%=order.id%>" aria-expanded="false">Invoice NO: <%='%09d' % order.id%></a>
