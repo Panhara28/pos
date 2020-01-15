@@ -15,7 +15,7 @@ ENV RAILS_ENV development
 
 ENV RACK_ENV development
 # Adding project files
-COPY .env .env
+
 COPY . .
 RUN bundle exec rake db:create
 RUN bundle exec rake db:migrate
