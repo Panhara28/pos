@@ -17,8 +17,8 @@ ENV RACK_ENV development
 # Adding project files
 
 COPY . .
-RUN bundle exec rake db:create
-RUN bundle exec rake db:migrate
+# RUN bundle exec rake db:create
+# RUN bundle exec rake db:migrate
 # RUN bundle exec rake db:seed
 EXPOSE 80
 CMD ["rackup","config.ru", "--host", "0.0.0.0", "--port", "80"]
