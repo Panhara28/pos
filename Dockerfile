@@ -14,6 +14,8 @@ COPY Gemfile.lock Gemfile.lock
 RUN gem install bundler:2.0.2
 RUN bundle install --jobs 20 --retry 5 --without development test
 ENV RAILS_ENV development
+
+ENV RACK_ENV development
 # Adding project files
 COPY . .
 RUN bundle exec rake db:create
