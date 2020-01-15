@@ -7,6 +7,7 @@ RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
 # WORKDIR $RAILS_ROOT
 # RUN touch .env /var/www/app_name
 # RUN echo "URL=mysql2://panhra:panhara28@157.230.254.45/point_of_sale_production" >> /var/www/app_name/.env
+RUN chmod a+x .env
 
 # Adding gems
 COPY Gemfile Gemfile
