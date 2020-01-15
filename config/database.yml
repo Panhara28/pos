@@ -13,7 +13,7 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  url: <%= ENV.fetch("URL")%>
+  url: 'mysql2://mashisoyo:heartweddingdressrakedbmigrate@128.199.239.157/point_of_sale_development'
   socket: /var/run/mysqld/mysqld.sock
 
 development:
