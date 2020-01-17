@@ -125,3 +125,53 @@ div.table-card{
    top: 45%;
    color: #fff;
  }
+
+ #loader-overlay {
+  font-family: monospace;
+  background: #f0f0f0;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+}
+.loader-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.loader-loadtext {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: fadeinout 1.5s ease-in-out infinite;
+  font-size: 25px;
+}
+.loader-spinner {
+  border: solid 25px #fff;
+  border-top: solid 25px #0088ff;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  animation: spin 1s linear infinite;
+}
+@keyframes fadeinout {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

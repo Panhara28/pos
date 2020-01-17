@@ -22,6 +22,8 @@ jQuery.fn.submitOnCheck = function() {
 	return this;
 }
 
+
+
 toastr.options = {
   "closeButton": true,
   "debug": false,

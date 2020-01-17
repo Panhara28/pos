@@ -21,11 +21,12 @@
   </head>
 
   <body>
-    <div id="preloader">
-      <div id="status">
-        <div class="spinner"></div>
+    <%# <div id="loader-overlay">
+      <div class="loader-container">
+        <span class="loader-loadtext">LOADING</span>
+        <div class="loader-spinner"></div>
       </div>
-    </div>
+    </div> %>
     <div class="wrapper theme-2-active navbar-top-light horizontal-nav">
       <%if user_signed_in? && params[:state] != "close" && params[:action] != "print_to_show" %>
         <%=render "applications/nav"%>
@@ -39,6 +40,9 @@
     <%=custom_flash_message%>
 
     <script type="text/javascript">
+      $(window).load(function () {
+        $('#loader-overlay').hide();
+      });
 
       $(document).ready(function(){
         $('.file-upload').hide();

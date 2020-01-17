@@ -174,7 +174,7 @@
 									</p>
 								<%elsif @order.cash != 0.0 && @order.cash_in_riel != 0.0%>
 									<p style="margin: 0px;">Charge In Dollar $: <span style="float: right;">
-										<%= number_to_currency ((@order_items.last.order.total_cash_in_riel / Constant::exchange_rate) - @order_items.last.order.total), precision: 2 %>
+										<%= number_to_currency ((@order.total_cash_in_riel / Constant::exchange_rate) - @order.total), precision: 2 %>
 									</p>
 									<p style="margin: 0px;">Charge In Riel $: <span style="float: right;">
 										<%= "#{ number_to_currency((@order.total_cash_in_riel - (@order.total * Constant.exchange_rate)), precision: 0, unit: "៛")}"%>
