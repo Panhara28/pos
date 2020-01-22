@@ -3,7 +3,6 @@ class OrderItemsController < DashboardsController
   before_action :authenticate_user!
   before_action :admin_only?, only: [:closed, :index]
   def index
-    @orders_count = Order.where('is_paid=? AND checkout_date=?', true, DateTime.now.to_date).order('id desc')
   end
 
   def closed

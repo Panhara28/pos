@@ -1,6 +1,5 @@
 class CustomersController < ApplicationController
   def index
-    @orders_count = Order.where('is_paid=? AND checkout_date=?', true, DateTime.now.to_date).order('id desc')
     @customers = Customer.all
     @customer = current_user.customers.build
   end

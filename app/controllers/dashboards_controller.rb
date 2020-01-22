@@ -3,7 +3,7 @@ class DashboardsController < ActionController::Base
   protect_from_forgery with: :exception
   skip_before_action :verify_authenticity_token
   before_action :configure_permitted_parameters, if: :devise_controller?
-
+  before_action :order_count
   before_action :set_locale
 
   # respond_to :html, :xml, :json, :js
@@ -59,5 +59,11 @@ class DashboardsController < ActionController::Base
   def default_url_options(options = {})
     { locale: I18n.locale }.merge(options)
   end
+
+  def order_count
+    @orders_count = Order.where('is_paid=? AND checkout_date=?', true, DateTime.now.to_date).order('id desc')
+
+  end
+
 
 end

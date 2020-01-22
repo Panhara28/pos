@@ -3,7 +3,6 @@ class CashDrawersController < DashboardsController
   layout "dashboards"
 
   def index
-    @orders_count = Order.where('is_paid=? AND checkout_date=?', true, DateTime.now.to_date).order('id desc')
     @cash_drawer = current_user.cash_drawers.build
     @cash_drawers = current_user.cash_drawers.all.where(status: "assign")
   end

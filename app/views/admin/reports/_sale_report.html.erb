@@ -1,4 +1,4 @@
-<div class="col-sm-8 col-md-8 col-lg-8">
+<div class="col-sm-12 col-md-12 col-lg-12">
   <div class="panel panel-default border-panel card-view">
     <div class="panel-heading">
       <div class="pull-left">
@@ -27,21 +27,23 @@
               <tbody>
                 <% @dailly_sales.each do |order| %>
                 <tr>
-                  <td>
+                  <td style="width: 20%;">
                     <%= '%05d' % order.id %>
                   </td>  
-                  <td>
+                  <td style="width: 15%;">
                     <%= order.order_date.to_s(:long) %>
                   </td> 
-                  <td>
+                  <td style="width: 10%;">
                     <%= number_to_percentage order.discount, precision: 0 %>
                   </td>
-                  <td>
+                  <td style="width: 10%;">
                     <%=number_to_percentage order.order_items.sum(:discount), precision: 0%>
                   </td>
-                  <td><%=number_to_percentage order.tax, precision: 0%></td>
+                  <td>
+                    <%=number_to_currency(order.total * (order.tax / 100), precision: 2)%>
+                  </td>
                   <%if order.delivery_fee.present?%>
-                    <td><%= number_to_percentage order.delivery_fee, precision: 0%></td>
+                    <td><%= number_to_currency(order.total * (order.delivery_fee / 100), precision: 2)%></td>
                   <%else%>
                     <td><%= number_to_percentage order.delivery_fee%></td>
                   <%end%>
