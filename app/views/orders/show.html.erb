@@ -159,32 +159,22 @@
 								<hr style="border: 1px solid #000;" />
 								<p style="margin: 0px;">VAT: <span style="float: right;"><%=number_to_percentage(@order.tax, precision: 0)%></span></p>
 								<p style="margin: 0px;">Discount: <span style="float: right;"><%=number_to_percentage(@order.discount, precision: 0)%></span></p>
-								<p style="margin: 0px;">Service Fee: <span style="float: right;"></span></p>
 								<hr style="border: 1px solid #000;" />
 								<p style="margin: 0px;">Grand Total $: <span style="float: right;"><%=number_to_currency(@order.total)%></span></p>
 								<p style="margin: 0px;">Grand Total R: <span style="float: right;"><%=number_to_currency(@order.total * Constant.exchange_rate, unit: "៛", precision: 0)%></span></p>
 								<hr style="border: 1px solid #000;" />
-								<%if @order.cash_in_riel == 0.0%>
-									<p style="margin: 0px;">Charge In Dollar $: <span style="float: right;">
-										<%= number_to_currency (@order.total - (@order.total_cash_in_riel / Constant::exchange_rate)), precision: 2 %>
-									</p>								
-								<%elsif @order.cash == 0.0%>
-									<p style="margin: 0px;">Charge In Riel $: <span style="float: right;">
-										<%= number_to_currency (@order.total - (@order.total_cash_in_riel / Constant::exchange_rate)), precision: 2 %>
-									</p>
-								<%elsif @order.cash != 0.0 && @order.cash_in_riel != 0.0%>
-									<p style="margin: 0px;">Charge In Dollar $: <span style="float: right;">
-										<%= number_to_currency ((@order.total_cash_in_riel / Constant::exchange_rate) - @order.total), precision: 2 %>
-									</p>
-									<p style="margin: 0px;">Charge In Riel $: <span style="float: right;">
-										<%= "#{ number_to_currency((@order.total_cash_in_riel - (@order.total * Constant.exchange_rate)), precision: 0, unit: "៛")}"%>
-									</p>
-								<%end%>
+								<p style="margin: 0px;">Receive In $: <span style="float: right;">
+									<%= number_to_currency (@order.cash), precision: 2 %>
+								</p>
+								<p style="margin: 0px;">Charge In Riel $: <span style="float: right;">
+									<%= number_to_currency ( @order.cash - @order.total), precision: 2 %>
+								</p>
+									
 							</div>
 							<br><br><br><br><br><br><br><br><br><br><br><br><br>
 							<hr style="border: 1px solid #000;">
 							<div style="text-align: center;">
-								<p><%= 1 %>$ = <%=number_to_currency(Constant.exchange_rate, precision: 0, unit: "៛")%> | Phone Number: 0122223333</p>
+								<p><%= 1 %>$ = <%=number_to_currency(Constant.exchange_rate, precision: 0, unit: "៛")%> | Phone Number: 010 997 928</p>
 							</div>			
 							<p class="centered">
 								Address: N∸ 22, Str 317  Toul Kork, Phnom Penh, Cambodia 

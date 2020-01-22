@@ -1,42 +1,48 @@
 <%=simple_form_for([:admin, cash_drawer], remote: true) do |f|%>
-  <div class="row">
-    <div class="col-md-12">
-      <div class="form-group">
-        <label for="recipient-name" class="control-label mb-10">Username</label>
-        <%=f.collection_select :user_id, User.all, :id, :username, { prompt: "Select Username" } , {class: "form-control select2"}%>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="form-group">
-        <label for="recipient-name" class="control-label mb-10">Cash Drawer Date</label>
-        <%=f.date_field :cash_drawer_date, class: "form-control"%>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="form-group">
-        <label for="recipient-name" class="control-label mb-10">Amount</label>
-        <%=f.number_field :cash_drawer_amout, class: "form-control"%>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="form-group">
-        <label for="recipient-name" class="control-label mb-10">Started At</label>
-        <%=f.time_field :start_at, class: "form-control"%>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="form-group">
-        <label for="recipient-name" class="control-label mb-10">End At</label>
-        <%=f.time_field :end_at, class: "form-control"%>
-      </div>
-    </div>
-
-    <div class="col-md-12">
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <%=f.submit class: "btn btn-success"%>
-      </div>
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="recipient-name" class="control-label mb-10">Username</label>
+      <%=f.collection_select :user_id, User.all, :id, :username, { prompt: "Select Username" } , {class: "form-control select2"}%>
     </div>
   </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="recipient-name" class="control-label mb-10">Username</label>
+      <%=f.select :status, CashDrawer::OPTION_SELECT, { prompt: "Select Username" } , {class: "form-control select2", disabled: true}%>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="recipient-name" class="control-label mb-10">Cash Drawer Date</label>
+      <%=f.date_field :cash_drawer_date, class: "form-control"%>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="recipient-name" class="control-label mb-10">Amount</label>
+      <%=f.number_field :cash_drawer_amout, class: "form-control"%>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="recipient-name" class="control-label mb-10">Started At</label>
+      <%=f.time_field :start_at, class: "form-control"%>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="recipient-name" class="control-label mb-10">End At</label>
+      <%=f.time_field :end_at, class: "form-control"%>
+    </div>
+  </div>
+
+  <div class="col-md-12">
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <%=f.submit class: "btn btn-success"%>
+    </div>
+  </div>
+</div>
 
 <%end%>

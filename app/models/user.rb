@@ -12,6 +12,8 @@ class User < ApplicationRecord
   belongs_to :admin, optional: true
   has_many :deliveries
   has_many :cash_drawers
+  has_many :cash_drawer_details
+
   has_many :customers
   validates :username, presence: :true, uniqueness: { case_sensitive: false }
 

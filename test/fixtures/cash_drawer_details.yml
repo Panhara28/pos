@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  admin_id: 1
+  user_id: 1
+  status: MyString
+  cash_drawer_id: 1
+
+two:
+  admin_id: 1
+  user_id: 1
+  status: MyString
+  cash_drawer_id: 1

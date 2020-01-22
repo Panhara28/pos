@@ -92,6 +92,17 @@
         <div class="clearfix"></div>
       <%end%>
     </li>
+    <li>
+      <%=link_to cash_drawers_path do%>
+        <div class="pull-left">
+          <i class="ti-key mr-20"></i>
+          <span class="right-nav-text">
+            <%=t('.Cash Drawer')%>
+          </span>
+        </div>
+        <div class="clearfix"></div>
+      <%end%>
+    </li>
     <%if current_user.role == "admin"%>
       <li>
         <%=link_to order_items_path do%>
