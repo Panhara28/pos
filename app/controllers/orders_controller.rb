@@ -15,6 +15,7 @@ class OrdersController < DashboardsController
   end
 
   def show
+    @orders_count = Order.where('is_paid=? AND checkout_date=?', true, DateTime.now.to_date).order('id desc')
     @order = Order.find(params[:id])
     @order_items = Order.unpaid_order.find(session["order_id#{current_user.id}"]).order_items if session["order_id#{current_user.id}"].present?
   end
@@ -38,7 +39,6 @@ class OrdersController < DashboardsController
 
     if @order.update(order_params)      
       if session[:redirect].present?
-        flash[:notice] = "Update Successfully"
         redirect_to order_path(@order)
       else
         redirect_to orders_path, notice: "Your order has been updated."

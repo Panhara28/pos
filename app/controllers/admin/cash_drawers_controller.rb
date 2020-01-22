@@ -4,7 +4,7 @@ class Admin::CashDrawersController < DashboardsController
   layout "dashboards"
   def index
     @cash_drawer = current_admin.cash_drawers.build
-    @cash_drawers = CashDrawer.all
+    @cash_drawers = current_admin.cash_drawers.where(status: params[:state])
   end
 
   def show

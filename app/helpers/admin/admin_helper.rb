@@ -9,9 +9,9 @@ module Admin::AdminHelper
 
   def in_invoice_free?(obj)
     if obj === 0.0
-      content_tag(:td, number_to_currency(obj), class: "price")
+      content_tag(:td, number_to_currency(obj), class: "price", style: "text-align: center;")
     else
-      content_tag(:td, number_to_currency(obj), class: "price")
+      content_tag(:td, number_to_currency(obj), class: "price", style: "text-align: center;")
     end
   end
 

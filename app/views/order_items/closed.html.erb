@@ -108,7 +108,7 @@
 										<th class="description">Description</th>
 										<th class="quantity">QTY</th>
 										<th class="price">Price​</th>
-										<th class="price">Discount</th>
+										<th class="price" style="text-align: center;">Dis</th>
 										<th class="price">Amount</th>
 									</tr>
 								</thead>
@@ -119,18 +119,25 @@
                         <td class="description"><%=order.product.product_name%></td>
                         <td class="quantity"><%=order.quantity%></td>
                         <%=in_invoice_free?(order.unit_price)%>
-                        <td><%=number_to_percentage(order.discount, precision: 0)%></td>
-                        <td class="quantity"><%=number_to_currency(order.quantity * order.unit_price, precision: 2)%></td>
+                        <td style="text-align: center;"><%=number_to_percentage(order.discount, precision: 0)%></td>
+                        <td class="quantity" style="text-align: left;"><%=number_to_currency(order.quantity * order.unit_price, precision: 2)%></td>
                       </tr>
                     <%end%>
 									<%end%>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td>Total: <%=number_to_currency @orders_count.sum(:total)%></td >
+									</tr>
 								</tbody>
 							</table>
 							<br><br>
 					</div>
 
 					<br />
-          <%=link_to "#", class: "pay-btn", onclick: "printReciept();", id: "print" do%>
+          <%=link_to destroy_user_session_path, method: :delete, class: "pay-btn", onclick: "printReciept();", id: "print" do%>
 						Print
 					<%end%>
 					<br><br><br>

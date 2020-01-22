@@ -38,7 +38,8 @@
 							<a href="/admin/dashboard">Dashboard</a>
 						</li>
 						<li class="active">
-							<span>Cash Drawer</span></li>
+							<span>Cash Drawer</span>
+						</li>
 					</ol>
 				</div>
 				<!-- /Breadcrumb -->
@@ -52,6 +53,8 @@
 						<div class="panel-heading">
 							<div class="pull-left">
 								<h6 class="panel-title txt-dark">Cash Drawer</h6>
+								<%=link_to "Completed", cash_drawers_path(state: "completed"), class: "btn btn-success"%>
+								<%=link_to "Assigned", cash_drawers_path(state: "assign"), class: "btn btn-primary"%>
 							</div>
 							<div class="clearfix"></div>
 						</div>
