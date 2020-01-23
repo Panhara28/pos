@@ -38,6 +38,10 @@ class Order < ApplicationRecord
     order_items.collect { |oi| oi.valid? ? (oi.quantity * oi.unit_price) * (1 - oi.discount / 100) : 0 }.sum
   end
 
+  def cost
+    order_items.collect { |oi| oi.valid? ? (oi.product.original_price * oi.quantity) : 0 }.sum
+  end
+
   def total
     subtotal + (subtotal * self[:tax] / 100) - (subtotal * (self[:discount] / 100))
   end
@@ -46,6 +50,7 @@ class Order < ApplicationRecord
     def update_subtotal
       self[:subtotal] = subtotal + (subtotal * Constant::vat / 100)
       self[:total] = subtotal + (subtotal * self[:tax] / 100) - (subtotal * (self[:discount] / 100))
+      self[:profit] = total - cost
     end
 
     def update_chash_in

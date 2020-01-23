@@ -37,7 +37,7 @@
                     <%= number_to_percentage order.discount, precision: 0 %>
                   </td>
                   <td style="width: 10%;">
-                    <%=number_to_percentage order.order_items.sum(:discount), precision: 0%>
+                    <%=number_to_currency ((order.order_items.sum(:discount) / 100)), precision: 2%>
                   </td>
                   <td>
                     <%=number_to_currency(order.total * (order.tax / 100), precision: 2)%>
