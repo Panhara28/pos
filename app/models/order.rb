@@ -50,8 +50,11 @@ class Order < ApplicationRecord
     def update_subtotal
       self[:subtotal] = subtotal + (subtotal * Constant::vat / 100)
       self[:total] = subtotal + (subtotal * self[:tax] / 100) - (subtotal * (self[:discount] / 100))
-      puts "Delivery Fee: #{delivery_fee.present? ? delivery_fee : 0}"
-      self[:profit] = total - cost
+      df = delivery.present? ?  delivery.delivery_fee : 0
+      self[:delivery_fee] = subtotal * (df.to_d / 100)
+      puts "delivery fee: #{delivery_fee}"
+      self[:profit] = (total - cost)
+      puts "profit: #{profit}"
     end
 
     def update_chash_in
