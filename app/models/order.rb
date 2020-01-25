@@ -48,12 +48,18 @@ class Order < ApplicationRecord
 
   private
     def update_subtotal
-      self[:subtotal] = subtotal + (subtotal * Constant::vat / 100)
+      self[:subtotal] = subtotal
       self[:total] = subtotal + (subtotal * self[:tax] / 100) - (subtotal * (self[:discount] / 100))
-      df = delivery.present? ?  delivery.delivery_fee : 0
-      self[:delivery_fee] = subtotal * (df.to_d / 100)
+      delivery_fe = delivery.present? ?  delivery.delivery_fee : 0
+      self[:delivery_fee] = subtotal * (delivery_fe.to_d / 100)
+      total_minius_tax = (total - (subtotal * self[:tax] / 100))
+      profit = total_minius_tax - cost - delivery_fee
+      puts "Subtotal: #{subtotal}"
+      puts "Total: #{total}"
       puts "delivery fee: #{delivery_fee}"
-      self[:profit] = (total - cost)
+      puts "discount: #{(subtotal * (self[:discount] / 100))}"
+      puts "Grand Total: #{total}"
+      self[:profit] = profit
       puts "profit: #{profit}"
     end
 

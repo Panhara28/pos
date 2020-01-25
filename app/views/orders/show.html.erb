@@ -125,7 +125,7 @@
 									<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Time: <%=@order.order_time.strftime("%I:%M %p")%></span></p>
 								<%else%>
 									<div style="margin-bottom: 5px;"></div>
-									<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Time: <%=Time.now.strftime("%I:%M %p")%></span></p>
+									<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Time: <%=Time.zone.now.strftime("%I:%M %p")%></span></p>
 								<%end%>
 							</div>
 							<br><br>
