@@ -58,7 +58,8 @@ class Order < ApplicationRecord
       puts "Total: #{total}"
       puts "delivery fee: #{delivery_fee}"
       puts "discount: #{(subtotal * (self[:discount] / 100))}"
-      puts "Grand Total: #{total}"
+      puts "Tax: #{(subtotal * self[:tax] / 100)}"
+      puts "Grand Total: #{total - delivery_fee}"
       self[:profit] = profit
       puts "profit: #{profit}"
     end
