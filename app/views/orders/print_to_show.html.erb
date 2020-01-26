@@ -159,7 +159,6 @@
 								<hr style="border: 1px solid #000;" />
 								<p style="margin: 0px;">VAT: <span style="float: right;"><%=number_to_percentage(@order.tax, precision: 0)%></span></p>
 								<p style="margin: 0px;">Discount: <span style="float: right;"><%=number_to_percentage(@order.discount, precision: 0)%></span></p>
-								<p style="margin: 0px;">Service Fee: <span style="float: right;"></span></p>
 								<hr style="border: 1px solid #000;" />
 								<p style="margin: 0px;">Grand Total $: <span style="float: right;"><%=number_to_currency(@order.total)%></span></p>
 								<p style="margin: 0px;">Grand Total R: <span style="float: right;"><%=number_to_currency(@order.total * Constant.exchange_rate, unit: "៛", precision: 0)%></span></p>
