@@ -167,7 +167,7 @@
 									<p style="margin: 0px;">Receive In $: <span style="float: right;">
 										<%= number_to_currency (@order.cash), precision: 2 %>
 									</p>
-									<p style="margin: 0px;">Charge In $: <span style="float: right;">
+									<p style="margin: 0px;">Change In $: <span style="float: right;">
 										<%= number_to_currency ( @order.cash - @order.total), precision: 2 %>
 									</p>
 								<%end%>
