@@ -131,7 +131,7 @@
 									<tr>
 										<th class="description">Description</th>
 										<th class="quantity">QTY</th>
-										<th class="quantity">Note</th>
+										<th class="quantity">Item Note</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -139,11 +139,12 @@
 										<tr style="border-top: 1px solid black; border-bottom: 1px solid black;">
 											<td class="description"><%=order.product.product_name%></td>
 											<td class="quantity"><%=order.quantity%></td>
-											<td class="quantity"><%=order.note%></td>
+											<td class="quantity"g><%=order.note%></td>
 										</tr>
 									<%end%>
 								</tbody>
 							</table>
+							<p>Note: <%=@order.note%></p>
 							<br><br><br>
 					</div>
 
