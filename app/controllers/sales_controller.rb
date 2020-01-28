@@ -36,7 +36,8 @@ class SalesController < ApplicationController
   def order_item
     @order = current_order
     @order.order_date = DateTime.now.to_date
-    @order.order_time = Time.now.strftime("%I:%M %p")
+    puts "Time: #{Time.zone.now.strftime("%I:%M %p")}"
+    @order.order_time = Time.zone.now.strftime("%I:%M %p")
     @order.waitting_no = Order.where(order_date: DateTime.now.to_date).order('id').pluck(:waitting_no).last.to_i + 1 if @order.waitting_no.nil?
     @order.user_id = current_user.id
     @order.tax = Constant::vat
