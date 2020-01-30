@@ -24,6 +24,7 @@ gem 'ckeditor'
 gem 'simple_form'
 
 gem 'jquery-rails'
+gem 'pry-rails', :group => :development
 
 gem 'dotenv-rails', groups: [:development, :test, :production]
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
