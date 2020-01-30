@@ -112,18 +112,21 @@
 										<th class="description">Description</th>
 										<th class="quantity">QTY</th>
 										<th class="price">Price​</th>
-										<th class="price" style="text-align: center;">Dis</th>
-										<th class="price">Total</th>
+										<th class="price" style="text-align: center;">Total</th>
+										<th class="price">Dis</th>
+										<th class="price">Sell</th>
 									</tr>
 								</thead>
 								<tbody>
                   <%@orders_count.each do |order_item|%>
                       <tr style="border-top: 1px solid black; border-bottom: 1px solid black;">
-                        <td class="description"><%=order_item[2]%></td>
+                        <td class="description"><%=order_item[0]%></td>
                         <td class="quantity"><%=order_item[1]%></td>
-                        <td class="quantity"><%=order_item[0] * order_item[1]%></td>
-                        <td style="text-align: center;"><%=""%></td>
-                        <td class="quantity" style="text-align: left;"><%="thank"%></td>
+                        <td class="quantity"><%=order_item[2]%></td>
+                        <td style="text-align: center;"><%=order_item[3]%></td>
+												<td class="quantity" style="text-align: left;"><%=order_item[4]%></td>
+												<td class="quantity" style="text-align: left;"><%=order_item[5]%></td>
+
                       </tr>
 									<%end%>
 									<tr>

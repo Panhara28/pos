@@ -10,7 +10,14 @@ class OrderItemsController < DashboardsController
     @orders_count = Order
     .joins([{ order_items: :product }])
     .where(checkout_date: DateTime.now.to_date, is_paid: true)
-    .group(:product_id).pluck("SUM(quantity), product_price, product_name")
+    .group(:product_id).pluck("
+      product_name, 
+      SUM(quantity), 
+      product_price, 
+      SUM(unit_price), 
+      SUM(orders.discount), 
+      SUM(orders.total)"
+    )
   end
 
   def edit
