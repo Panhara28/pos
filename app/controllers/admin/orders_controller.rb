@@ -3,7 +3,7 @@ class Admin::OrdersController < DashboardsController
   before_action :authenticate_admin!
   layout "dashboards"
   def index
-    @order = current_user.orders.build
+    @order = current_admin.orders.build
     @orders = Order.where(is_paid: true).order(id: :desc)
   end
 
@@ -16,7 +16,7 @@ class Admin::OrdersController < DashboardsController
   end
 
   def create
-    @order = current_user.orders.build(order_params)
+    @order = current_admin.orders.build(order_params)
     if @order.save
       respond_to do |format|
         flash.now[:notice] = "Successful Created"
