@@ -6,7 +6,7 @@ class OrderItemsController < DashboardsController
   end
 
   def closed
-    # @orders_count = Order.where('is_paid=? AND checkout_date=?', true, DateTime.now.to_date).order('id desc')
+    @orders_sum = Order.where('is_paid=? AND checkout_date=?', true, DateTime.now.to_date).order('id desc')
     @orders_count = Order
     .joins([{ order_items: :product }])
     .where(checkout_date: DateTime.now.to_date, is_paid: true)
@@ -16,7 +16,7 @@ class OrderItemsController < DashboardsController
       product_price, 
       SUM(unit_price), 
       SUM(orders.discount), 
-      SUM(orders.total)"
+      SUM(orders.subtotal)"
     )
   end
 
