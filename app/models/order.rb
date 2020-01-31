@@ -29,7 +29,7 @@ class Order < ApplicationRecord
 
   scope :paid_order, -> { where(is_paid: true) }
 
-
+  belongs_to :admin
   before_save :update_subtotal
 
   before_update :update_chash_in
