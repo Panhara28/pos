@@ -125,21 +125,22 @@
                       <tr style="border-top: 1px solid black; border-bottom: 1px solid black;">
                         <td class="description"><%=order_item[0]%></td>
                         <td class="quantity"><%=order_item[1]%></td>
-                        <td class="quantity"><%= number_to_currency(order_item[2], precision: 2)%></td>
-                        <td style="text-align: center;"><%=number_to_currency(order_item[2] * order_item[1], precision: 2)%></td>
-												<td class="quantity" style="text-align: left;"><%=number_to_currency((order_item[2] * order_item[1])  * (order_item[4] / 100), precision: 2)%></td>
-												<td class="quantity" style="text-align: center;"><%=number_to_currency(order_item[5] * ( order_item[4] === 0.0 ? 1:(order_item[4] / 100)), precision: 2)%></td>
+                        <td class="quantity"><%= number_to_currency(order_item[2], precision: 1)%></td>
+                        <td style="text-align: center;"><%=number_to_currency(order_item[2] * order_item[1], precision: 1)%></td>
+												<td class="quantity" style="text-align: left;"><%=number_to_currency((order_item[2] * order_item[1])  * (order_item[4] == 0.0 ? 1:(order_item[4] / 100)), precision: 1)%></td>
+												<td class="quantity" style="text-align: center;"><%=number_to_currency(order_item[5] * ( order_item[4] == 0.0 ? 1:(order_item[4] / 100)), precision: 1)%></td>
                       </tr>
 									<%end%>
 									<tr>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td>Total: 
+										<td colspan="5"><br>
+										Total Sell:
 											<%=number_to_currency(@orders_count.map{ |x| x[5] * (x[4] === 0.0 ? 1:x[4] / 100) }.sum, precision: 2)%> 
 										</td >
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
 									</tr>
 								</tbody>
 							</table>

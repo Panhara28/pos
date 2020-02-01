@@ -163,13 +163,30 @@
 								<p style="margin: 0px;">Grand Total $: <span style="float: right;"><%=number_to_currency(@order.total)%></span></p>
 								<p style="margin: 0px;">Grand Total R: <span style="float: right;"><%=number_to_currency(@order.total * Constant.exchange_rate, unit: "៛", precision: 0)%></span></p>
 								<hr style="border: 1px solid #000; margin-top: 10px;" />
-								<%if @order.cash != 0.0%>
+								<%if @order.cash != 0.0 && @order.cash_in_riel != 0.0 %>
 									<p style="margin: 0px;">Receive In $: <span style="float: right;">
-										<%= number_to_currency (@order.cash), precision: 2 %>
+										<%= number_to_currency(@order.cash + (@order.cash_in_riel / 4100)) %>
 									</p>
 									<p style="margin: 0px;">Change In $: <span style="float: right;">
-										<%= number_to_currency ( @order.cash - @order.total), precision: 2 %>
+										<%= number_to_currency(@order.cash + (@order.cash_in_riel / 4100) - @order.total, precision: 2) %>
 									</p>
+								<%else%>
+									<%if @order.cash_in_riel != 0.0%>
+										<p style="margin: 0px;">Receive In $: <span style="float: right;">
+											<%= number_to_currency (@order.cash_in_riel), precision: 0 %>
+										</p>
+										<p style="margin: 0px;">Change In $: <span style="float: right;">
+											<%=  number_to_currency((@order.cash_in_riel / 4000) - @order.total, precision: 2)%>
+										</p>
+									<%end%>
+									<%if @order.cash != 0.0%>
+										<p style="margin: 0px;">Receive In $: <span style="float: right;">
+											<%= number_to_currency (@order.cash), precision: 2 %>
+										</p>
+										<p style="margin: 0px;">Change In $: <span style="float: right;">
+											<%= number_to_currency (@order.cash - @order.total), precision: 2 %>
+										</p>
+									<%end%>
 								<%end%>
 							</div>
 							<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
