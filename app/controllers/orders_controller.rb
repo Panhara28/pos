@@ -7,9 +7,9 @@ class OrdersController < DashboardsController
     #   @orders = Order.where('is_paid=? AND order_status=?', false, "order").order('id desc')
     # end 
     if params[:state] == "ordered"
-      @orders = Order.where('is_paid=? AND order_status=?', false, "order").order('created_at desc')
+      @orders = Order.where('is_paid=? AND order_status=?', false, "order").order('created_at desc').limit(20)
     else
-      @orders = Order.where('is_paid=? AND order_status=?', true, "completed").order('created_at desc')
+      @orders = Order.where('is_paid=? AND order_status=?', true, "completed").order('created_at desc').limit(20)
     end
   end
 
