@@ -3,7 +3,7 @@ class Admin::OrdersController < DashboardsController
   before_action :authenticate_admin!
   layout "dashboards"
   def index
-    @orders = Order.where(is_paid: true).order(id: :desc)
+    @orders = Order.where(is_paid: true).order(created_at: :desc).limit(30)
   end
 
   def show
@@ -15,20 +15,20 @@ class Admin::OrdersController < DashboardsController
   end
 
   def create
-    # @order = current_admin.orders.build(order_params)
-    # if @order.save
-    #   respond_to do |format|
-    #     flash.now[:notice] = "Successful Created"
-    #     format.html { redirect_to orders_path }
-    #     format.js
-    #   end
-    # else
-    #   respond_to do |format|
-    #     flash.now[:alert] = "Please fill the field blank or order Duplicated"
-    #     format.html { redirect_to orders_path }
-    #     format.js { render template: "/orders/order_error.js.erb" }
-    #   end
-    # end
+    @order = current_admin.orders.build(order_params)
+    if @order.save
+      respond_to do |format|
+        flash.now[:notice] = "Successful Created"
+        format.html { redirect_to orders_path }
+        format.js
+      end
+    else
+      respond_to do |format|
+        flash.now[:alert] = "Please fill the field blank or order Duplicated"
+        format.html { redirect_to orders_path }
+        format.js { render template: "/orders/order_error.js.erb" }
+      end
+    end
   end
 
   def edit
