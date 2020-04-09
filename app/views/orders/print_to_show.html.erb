@@ -106,7 +106,19 @@
 								<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Invoice No: <%= '%05d' % @order.id %></span></p>
 								<br>
 								<div style="margin-bottom: 5px;"></div>
-								<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Table No: <%=@order.table_number.split(" ")[0]%> <%=@order.table_number.split(" ")[1]%></span></p>
+								<%if @order.delivery.present?%>
+									<p style=" margin: 0px;">
+										<span style="float: right; margin-right: 10px;">
+											Delivery: <%=@order.delivery.company%>
+										</span>
+									</p>
+								<%else%>
+									<p style=" margin: 0px;">
+										<span style="float: right; margin-right: 10px;">
+											Table No: <%=@order.table_number.split(" ")[0]%> <%=@order.table_number.split(" ")[1]%>
+										</span>
+									</p>
+								<%end%>
 								<br>
 								<div style="margin-bottom: 5px;"></div>
 								<p style=" margin: 0px;"><span style="float: right; margin-right: 10px;">Cashier: <%=@order.user.username.capitalize%></span></p>
