@@ -25,11 +25,11 @@ class SalesController < ApplicationController
     end
 
     @order_items = Order.unpaid_order.find(session["order_id#{current_user.id}"]).order_items if session["order_id#{current_user.id}"].present?
-    @products = Category.find(session["category_id#{current_user.id}"]).products if session["category_id#{current_user.id}"].present?
+    @products = Category.find(session["category_id#{current_user.id}"]).products.where(status: true).order('product_name') if session["category_id#{current_user.id}"].present?
   end
 
   def product
-    @products = Category.find(params[:category_id]).products.order('product_name')
+    @products = Category.find(params[:category_id]).products.where(status: true).order('product_name')
     session["category_id#{current_user.id}"] = params[:category_id] if params[:category_id].present?
   end
 
