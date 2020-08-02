@@ -40,17 +40,11 @@ class Admin::UsersController < DashboardsController
       no_requried_password
       @user = User.find(params[:id])
       if @user.update(user_params)
-        respond_to do |format|
-          flash.now[:notice] = "Successful Updated"
-          format.html { redirect_to admin_users_path }
-          format.js
-        end
+        flash[:notice] = "Successful Updated"
+        redirect_to admin_users_path 
       else
-        respond_to do |format|
-          flash.now[:alert] = "Please fill the field blank or user Duplicated"
-          format.html { redirect_to admin_users_path }
-          format.js { render template: "admin/users/user_error.js.erb" }
-        end
+        flash[:alert] = "Please fill the field blank or user Duplicated"
+        redirect_to admin_users_path
       end
     end
   
@@ -85,7 +79,7 @@ class Admin::UsersController < DashboardsController
       end
   
       def user_params
-        params.required(:user).permit(:username, :email, :password, :password_confirmation, :role, :first_name, :last_name, :image)
+        params.required(:user).permit(:username, :email, :password, :password_confirmation, :role, :first_name, :last_name, :image, :is_active)
       end
 
 end

@@ -86,7 +86,7 @@
         <div class="pull-left">
           <i class="ti-clipboard mr-20"></i>
           <span class="right-nav-text">
-            <%=t('.invoices')%> (<%= "#{ Order.where(order_status: "completed").count}" %>)
+            <%=t('.invoices')%> (<%= "#{ Order.where('is_paid=? AND order_status=?', true, "completed").order('created_at desc').limit(20).count}" %>)
           </span>
         </div>
         <div class="clearfix"></div>

@@ -28,8 +28,8 @@ Rails.application.routes.draw do
     resources :sales, only: [:index, :show]
     resources :cash_drawers
     
-    devise_for :users
-    devise_for :admins, :controllers => { :registrations => :registrations }
+    devise_for :users, :controllers => { sessions: 'users/sessions' }
+    devise_for :admins, :controllers => { :registrations => :registrations, sessions: 'admin/admins/sessions' }
 
     namespace :admin do
       get '/', to: 'dashboards#index', as: 'dashboards'

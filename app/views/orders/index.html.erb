@@ -29,6 +29,7 @@
                         <th>Status</th>
                         <th>Total</th>
                         <th>Ordered At</th>
+                        <th>Delivery</th>
                         <th>Time</th>
                         <th style="text-align: center;"></th>
                       </tr>
@@ -58,6 +59,11 @@
                           <td><%=order.order_status%></td>
                           <td><%=number_to_currency(order.total)%></td>
                           <td><%=order.created_at%></td>
+                          <%if order.delivery.present?%>
+                            <td><%=order.delivery.company%></td>
+                          <%else%>
+                            <td>No delivery</td>
+                          <%end%>
                           <td><%=order.order_time.strftime("%I:%M %p")%></td>
                           <td class="text-nowrap" style="text-align: right;">
                             <%= link_to print_to_kitchen_path(order), class: "mr-25", data: { turbolinks: false }  do %>

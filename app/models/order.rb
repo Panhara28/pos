@@ -14,6 +14,7 @@ class Order < ApplicationRecord
   ]
 
   belongs_to :user
+  belongs_to :admin, optional: true
 
   belongs_to :customer
 
@@ -29,7 +30,6 @@ class Order < ApplicationRecord
 
   scope :paid_order, -> { where(is_paid: true) }
 
-  belongs_to :admin, optional: true
   before_save :update_subtotal
 
   before_update :update_chash_in

@@ -37,12 +37,7 @@ class Admin::AdminsController < DashboardsController
   end
 
   def edit
-    if current_admin.id.to_s === params[:id].to_s
-      @admin = Admin.find(params[:id])
-    else
-      redirect_to admin_admins_path
-      flash[:alert] = "Access Denied"
-    end
+    @admin = Admin.find(params[:id])
   end
 
   def update
@@ -83,7 +78,7 @@ class Admin::AdminsController < DashboardsController
     end
 
     def admin_params
-      params.required(:admin).permit(:username, :email, :password, :password_confirmation, :role, :first_name, :last_name, :image)
+      params.required(:admin).permit(:username, :email, :password, :password_confirmation, :role, :first_name, :last_name, :image, :is_active)
     end
 
 end

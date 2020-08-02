@@ -26,6 +26,10 @@ class Admin < ApplicationRecord
 
   validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
 
+  def active_for_authentication?
+    super and self.is_active?
+  end
+
   def login
     @login || self.username || self.email
   end
