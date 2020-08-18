@@ -10,7 +10,7 @@ gem 'shrine'
 gem 'aws-sdk-s3'
 #My Rubygems
 gem 'devise'
-
+gem 'bigdecimal', '~> 1.4'
 gem 'cocoon', '~> 1.2.0'
 
 gem 'paperclip'

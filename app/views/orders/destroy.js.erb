@@ -1,2 +1,2 @@
 $('.delete_order_<%=@order.id%>').remove();
-$(".session_order_count").html("Tables (<%= Order.where(order_status: "order").count %>)")
+$(".session_order_count").html("Tables (<%= "#{ Order.where("is_paid=? AND order_status=? AND order_date=?", false, "order",DateTime.now.to_date).count}" %>)")

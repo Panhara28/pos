@@ -2,6 +2,6 @@
   $(".order-item").html("<%= j render :partial => 'order_item_row', :locals => { :order_items => @order_items}%>");
 <%else%>
   $("#send_to_order_succcess").html("<%= custom_flash_message%>");
-  $(".session_order_count").html("Orders (<%= Order.where(order_status: "order").count %>)")
+  $(".session_order_count").html("Orders (<%= "#{ Order.where("is_paid=? AND order_status=? AND order_date=?", false, "order",DateTime.now.to_date).count}" %>)")
   $(".order-item").html("");
 <%end%>

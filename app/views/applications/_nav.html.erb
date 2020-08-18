@@ -75,7 +75,7 @@
         <div class="pull-left">
           <i class=" ti-receipt mr-20"></i>
           <span class="right-nav-text session_order_count">
-            <%=t('.orders')%> (<%= "#{ Order.where(order_status: "order").count}" %>)
+            <%=t('.orders')%> (<%= "#{ Order.where("is_paid=? AND order_status=? AND order_date=?", false, "order",DateTime.now.to_date).count}" %>)
           </span>
         </div>
         <div class="clearfix"></div>
@@ -86,7 +86,7 @@
         <div class="pull-left">
           <i class="ti-clipboard mr-20"></i>
           <span class="right-nav-text">
-            <%=t('.invoices')%> (<%= "#{ Order.where(order_status: "completed").count}" %>)
+            <%=t('.invoices')%> (<%= "#{ Order.where('is_paid=? AND order_status=? AND order_date=?', true, "completed",DateTime.now.to_date).count}" %>)
           </span>
         </div>
         <div class="clearfix"></div>
