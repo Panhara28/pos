@@ -135,7 +135,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<%@order.order_items.each do |order|%>
+									<%@order.order_items.where(print_status: false).each do |order|%>
 										<tr style="border-top: 1px solid black; border-bottom: 1px solid black;">
 											<td class="description"><%=order.product.product_name%></td>
 											<td class="quantity"><%=order.quantity%></td>

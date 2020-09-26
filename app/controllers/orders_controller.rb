@@ -83,6 +83,11 @@ class OrdersController < DashboardsController
     @order = Order.find(params[:id])
   end
 
+  def update_print_status
+    @order = Order.find(params[:id])
+
+  end
+
   def print_to_show
     @order = Order.find(params[:id])
 
